@@ -56,7 +56,7 @@
     
     <table width="100%" style="font-weight:bold">
       <tr >
-        <td align="right" width="70%"> السادة/ــــــــــــــــــــــــــــــ</td>
+        <td align="right" width="70%"> السادة/${record.custrecord_ino_pms_lp_tenant.companyname}</td>
         <td align="center" width="30%">المحترمين </td>
       </tr>
     </table>
@@ -101,6 +101,15 @@
             ${months[monthIndex]}
          </td>
       </tr>
+
+
+      <tr>
+        <td align="right" style="border-bottom:2px;border-left:2px;border-color:gray" width="30%">مزايا اضافية </td>
+        <td align="center" style="border-bottom:2px;border-color:gray" width="70%">
+          ${record.custrecord_ino_pms_lp_comments}
+        </td>
+      </tr>
+      
       <tr>
         <td align="right" style="border-left:2px;border-color:gray" width="30%"> فترة السماح </td>
         <td align="center" style="border-color:gray" width="70%">
@@ -115,6 +124,9 @@
          </#if>
         </td>
       </tr>
+
+
+           
     </table>
 
     <p lang="ar" align="right" style="text-decoration:underline ; font-weight:bold"> شروط عامة:</p>
@@ -122,7 +134,7 @@
       <li>العرض ساري لمدة  أسبوع من تاريخه.</li>
       <li>المستأجر ملتزم بسداد جميع فواتير الخدمات الخاصة بالوحدة المستأجرة مثل الكهرباء، المياه، و الهاتف...</li>
       <li>المستأجر ملتزم بعدم تغير النشاط بالوحدة المذكورة بعقد الإيجار.</li>
-      <li>المستأجر مسئول عن عمل الديكورات و التجهيزات الداخلية للوحدة على أن تتفق تلك التصاميم و الديكورات مع الأنظمة السارية فى المملكة و قواعد الامن و السلامة الصادرة من الدفاع المدنى.</li>
+      <li>المستأجر مسؤول عن عمل الديكورات و التجهيزات الداخلية للوحدة على أن تتفق تلك التصاميم و الديكورات مع الأنظمة السارية فى المملكة و قواعد الامن و السلامة الصادرة من الدفاع المدنى.</li>
       <li>تطبق كافة الشروط و الأحكام و الرسوم و الضرائب المفروضة من الجهات الرسمية.</li>
     </ul>
 
@@ -133,8 +145,9 @@
       <span> 011-284-9912 الهاتف </span>
     </p>
 
-    <p style="padding-left: 30px ; font-weight:bold" align="left"> مدير إدارة التعاقدات </p>   
+    <p style="padding-left: 30px ; font-weight:bold" align="left"> مدير إدارة التعاقدات </p>
     <br/>
+    <p lang="ar" style="padding-left: 20px ; font-weight:bold" align="left"> م / محمد صالح القحطانى </p>  
     <br/>
     </body>
 </pdf>
