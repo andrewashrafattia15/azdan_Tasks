@@ -1,0 +1,340 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+  <link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+            <table class="header" style="width: 100%;"><tr>
+	<td rowspan="3"><#if companyInformation.logoUrl?length != 0><img src="https://6946228.app.netsuite.com/core/media/media.nl?id=5538&amp;c=6946228&amp;h=PRtySy-lprElj2X9uYeDGIAtL0V0bpb8T_KTdxKxVNLbu3Zz&amp;fcts=20211228234412&amp;whence=" style="float: left; width:100px; height:50px" /></#if></td>
+	<td align="center">
+      <#if record.custbody_az_trx_base64 != "">
+        <barcode codetype="qrcode" showtext="true" height="125" width="125" value="${record.custbody_az_trx_base64}"/>
+      </#if>
+    </td>
+	<td align="right" style="font-weight: bold;"><span class="title">فاتورة ضريبية</span><br /><span class="title">TAX INVOICE</span></td>
+	</tr></table>
+        </macro>
+      <macro id="nlfooter">
+               <#if subsidiary.id == '4' && record.csegbusinessunit.id == "12" >
+           <table width="100%">
+              <tr>
+                    <td  width="13%" style="font-size:15px; vertical-align: middle; padding-right: 5px;"> Signature : </td>
+                    <td  width="87%" style="vertical-align: middle;">
+                                <img src="https://6946228-sb1.app.netsuite.com/core/media/media.nl?id=7702568&amp;c=6946228_SB1&amp;h=mGv52H71OpWj0LWmY-wz6X4sEpceD5op7nBnpZbHi2_cRThT"
+                                  style="height:60px; width:60px;"/>
+                    </td>
+              </tr>
+              <tr>
+                 <td colspan="2" style="font-size:15px; text-align: left; padding: 3px;">
+                    Title : Director KSA Schools &amp; B2C
+                 </td>
+              </tr>
+           </table>
+          <#else>
+               <table class="header" style="width: 100%;"><tr>
+	<td rowspan="3"><#if companyInformation.logoUrl?length != 0><img src="https://6946228.app.netsuite.com/core/media/media.nl?id=5538&amp;c=6946228&amp;h=PRtySy-lprElj2X9uYeDGIAtL0V0bpb8T_KTdxKxVNLbu3Zz&amp;fcts=20211228234412&amp;whence=" style="float: left; width:100px; height:50px" /></#if></td>
+	<td align="center">
+      <#if record.custbody_az_trx_base64 != "">
+        <barcode codetype="qrcode" showtext="true" height="125" width="125" value="${record.custbody_az_trx_base64}"/>
+      </#if>
+    </td>
+	<td align="right" style="font-weight: bold;"><span class="title">فاتورة ضريبية</span><br /><span class="title">TAX INVOICE</span></td>
+	</tr></table>
+         </#if>
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+			<#if .locale == "zh_CN">
+				font-family: NotoSans, NotoSansCJKsc, sans-serif;
+			<#elseif .locale == "zh_TW">
+				font-family: NotoSans, NotoSansCJKtc, sans-serif;
+			<#elseif .locale == "ja_JP">
+				font-family: NotoSans, NotoSansCJKjp, sans-serif;
+			<#elseif .locale == "ko_KR">
+				font-family: NotoSans, NotoSansCJKkr, sans-serif;
+			<#elseif .locale == "th_TH">
+				font-family: NotoSans, NotoSansThai, sans-serif;
+			<#else>
+				font-family: NotoSans, sans-serif;
+  				font-family: NotoSansArabic, sans-serif;
+			</#if>
+			}
+			table {
+				font-size: 9pt;
+				table-layout: fixed;
+			}
+			th {
+				font-weight: bold;
+				font-size: 8pt;
+				vertical-align: middle;
+				padding: 5px 6px 3px;
+				background-color: #e3e3e3;
+				color: #333333;
+			}
+			td {
+				padding: 4px 6px;
+			}
+			td p { align:left }
+			b {
+				font-weight: bold;
+				color: #333333;
+			}
+			table.header td {
+				padding: 0;
+				font-size: 10pt;
+			}
+			table.footer td {
+				padding: 0;
+				font-size: 8pt;
+			}
+			table.itemtable th {
+				padding-bottom: 10px;
+				padding-top: 10px;
+			}
+			table.body td {
+				padding-top: 2px;
+			}
+			table.total {
+				page-break-inside: avoid;
+			}
+			span.title {
+				font-size: 16pt;
+			}
+			span.tabletitle {
+				font-size: 16pt;
+			}
+			span.transactionheader {
+				font-size: 10pt;
+			}
+			span.number {
+				font-size: 16pt;
+			}
+			hr {
+				width: 100%;
+				color: #d3d3d3;
+				background-color: #d3d3d3;
+				height: 1px;
+			}
+      		.text_right{
+        		padding : 0;
+              	margin : 0;
+              	text-align: right;
+      		}
+     	   .text_center{
+        		padding : 0;
+              	margin : 0;
+      		}
+</style>
+</head>
+<body header="nlheader" header-height="6%" footer="nlfooter" footer-height="100pt" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+    <table style="width: 100%;">
+      <tr>
+		<td align="left" style="width: 45%;">
+          <span style="font-weight: bold;">Noon Education for IT Co</span><br />
+          <span>7775 Prince Muhammad Ibn Saad Ibn</span><br />
+          <span>Abdulazizi, Riyadh</span><br />
+          <span>13515, Saudi Arabia</span><br />
+          <span>accounting@noonacademy.com</span><br />
+          <span>www.noonacademy.com</span><br />
+          <span>VAT Reg. No. 302007730300003</span>
+        </td>
+
+		<td style="width: 10%;">&nbsp;</td>
+        
+		<td align="right" style="font-family: NotoSansArabic, sans-serif; width: 45%;">
+          <p class="text_right" style="font-weight: bold;">شركة نون التعليمية لتقنية المعلومات</p>
+          <p class="text_right"><span>الامير محمد بن سعد بن</span><span> ٥۷۷۷</span></p>
+          <p class="text_right">عبدالعزيز ، الرياض</p>
+          <p class="text_right"><span>المملكة العربية السعودية,</span><span> ۱۳٥۱٥</span></p>
+          <p class="text_right">accounting@noonacademy.com</p>
+          <p class="text_right">www.noonacademy.com</p>
+          <p class="text_right">الرقم الضريبي# 302007730300003</p>
+        </td>
+	</tr>
+      <tr>
+      <td></td>
+      </tr>
+	<tr>
+	  <td align="left" style="width: 45%;">
+      	<span style="font-weight: bold;">Customer Name:</span><br />
+      	<span style="font-weight: bold;">${record.entity}</span><br />
+      	<span>${record.entity.address}</span><br />
+      	<span>VAT Reg. No ${record.entity.vatregnumber}</span>
+      </td>
+      
+	<td style="width: 10%;">&nbsp;</td>
+      
+  		
+	<td align="right" lang="ar" style="font-family: NotoSansArabic, sans-serif; width: 45%;">
+      <p class="text_right" style="font-weight: bold;">اسم العميل:</p>
+      <p class="text_right" style="font-weight: bold;">${record.entity.custentity_az_customer_arabicname}</p>
+      <p class="text_right">${record.entity.custentity_az_customer_addressar}</p>
+      <p class="text_right">الرقم الضريبي#
+         <#if record.custpage_custrecord_to_print?has_content><#assign customrecord = record.custpage_custrecord_to_print?eval /><#list customrecord as customrecord_line>
+         ${customrecord_line.customerVatReg}
+         </#list></#if>
+      </p>
+     </td>
+   
+	</tr>
+      
+	<tr>
+	  <td align="left">
+        <span>Invoice No: ${record.tranid}</span><br />
+        <span>Invoice Date: ${record.trandate}</span><br />
+        <span>Due Date: ${record.duedate}</span><br />
+        <span>Billing Period: ${record.postingperiod}</span>
+      </td>
+      
+	  <td>&nbsp;</td>
+	  <td align="right" lang="ar" style="font-family: NotoSansArabic, sans-serif;">
+        <p class="text_right">رقم الفاتورة: 
+          <#if record.custpage_custrecord_to_print?has_content><#assign customrecord = record.custpage_custrecord_to_print?eval /><#list customrecord as customrecord_line>
+          ${customrecord_line.invoiceNo}
+          </#list></#if>
+        </p>
+        <p class="text_right">تاريخ الاصدار: 
+          <#if record.custpage_custrecord_to_print?has_content><#assign customrecord = record.custpage_custrecord_to_print?eval /><#list customrecord as customrecord_line>
+          ${customrecord_line.date}
+          </#list></#if>
+        </p>
+        <p class="text_right">تاريخ الاستحقاق: 
+          <#if record.custpage_custrecord_to_print?has_content><#assign customrecord = record.custpage_custrecord_to_print?eval /><#list customrecord as customrecord_line>
+          ${customrecord_line.dueDate}
+          </#list></#if>
+        </p>
+        <p class="text_right">فترة الفاتورة: 
+          ${record.postingperiod}
+        </p>
+      </td>
+	</tr>
+  
+  </table>
+
+  <table align="center" style="width: 100%;  margin-bottom:20px; border: 1px solid; ">
+    
+     <tr style="background-color: #AEAAAA; color: #FFFFFF; border-top: 1px solid;">
+		<td align="center" style="width: 9%;">
+          <p class="text_center">Item</p>
+          <p class="text_center" style="font-family: NotoSansArabic, sans-serif;">الوحدة</p>
+        </td>
+		<td align="center" style="border-left: 1px solid; width: 7%;">
+          <p class="text_center">QTY</p>
+          <p class="text_center" style="font-family: NotoSansArabic, sans-serif;">الكمية</p>
+        </td>
+		<td align="center" style="border-left: 1px solid; width: 27%;">
+          <p class="text_center">Description</p>
+          <p class="text_center" style="font-family: NotoSansArabic, sans-serif;">وصف الخدمة</p>
+        </td>
+      	<td align="center" style="border-left: 1px solid; width: 11%;"><p class="text_center">Rate</p>
+         <p class="text_center" style="font-family: NotoSansArabic, sans-serif;">سعر الوحدة</p>
+         <p class="text_center" style="font-family: NotoSansArabic, sans-serif;">(SAR)</p>
+      	</td>
+        <td align="center" style="border-left: 1px solid; width: 11%;">
+          <p class="text_center">Amount</p>
+          <p class="text_center" align="center" style="font-family: NotoSansArabic, sans-serif;">المبلغ</p>
+          <p class="text_center" style="font-family: NotoSansArabic, sans-serif;">(SAR)</p>
+      	</td>
+		<td align="center" style="border-left: 1px solid; width: 11%;">
+          <p class="text_center">VAT Rate</p>
+          <p class="text_center" style="font-family: NotoSansArabic, sans-serif;">نسبة الضريبة</p>
+        </td>
+		<td align="center" style="border-left: 1px solid; width: 12%;">
+          <p class="text_center">VAT Amt.</p>
+          <p class="text_center" style="font-family: NotoSansArabic, sans-serif;">قيمة الضريبة</p>
+      	  <p class="text_center" style="font-family: NotoSansArabic, sans-serif;">(SAR)</p>
+      	</td>
+		<td align="center" style="border-left: 1px solid; width: 12%;">
+          <p class="text_center">Gross Amt.</p>
+          <p class="text_center" style="font-family: NotoSansArabic, sans-serif;">اجمالي المبلغ</p>
+      	  <p class="text_center" style="font-family: NotoSansArabic, sans-serif;">(SAR)</p>
+      	</td>
+	</tr>
+    
+  <#if record.custpage_custrecord_to_print_lines?has_content><#assign customrecord2 = record.custpage_custrecord_to_print_lines?eval /><#list customrecord2 as customrecord_line2>
+	 <tr style="border-top: 1px solid; "> 
+       <td align="center" style="border-right: 1px solid; font-family: NotoSansArabic, sans-serif">
+         <P>${customrecord_line2.itemID}</P>
+         <#if customrecord_line2.itemIDAR != "">
+         <p class="text_right"> ${customrecord_line2.itemIDAR}</p>
+         </#if>
+       </td>
+	   <td align="center" style="border-right: 1px solid;">${customrecord_line2.qty}</td>
+       <td align="center" style="border-right: 1px solid; font-family: NotoSansArabic, sans-serif;">
+         <P>${customrecord_line2.description}</P>
+         <#if customrecord_line2.descriptionAR != "">
+         <p class="text_right"> ${customrecord_line2.descriptionAR}</p>
+         </#if>
+	   </td>
+       <td align="center" style="border-right: 1px solid;">${customrecord_line2.rate}</td>
+       <td align="center" style="border-right: 1px solid;">${customrecord_line2.amount}</td>
+	   <td align="center" style="border-right: 1px solid;">${customrecord_line2.taxRate}</td>
+       <td align="center" style="border-right: 1px solid;">${customrecord_line2.taxAmount}</td>
+       <td align="center" style="">${customrecord_line2.grossAmount}</td>
+	</tr>   
+  </#list></#if>
+    
+  </table>
+  
+  <table style="width: 100%;  margin-bottom:20px; margin-top:20px;">
+      
+	<tr>
+     <td align="right" style="font-family: NotoSansArabic, sans-serif;width: 71%;">(ريال سعودي) اجمالي المبلغ الخاضع للضريبة</td>
+     <td align="left" style="width: 10%;">Subtotal</td> 
+     <td align="left" style="width: 12%;">
+       <#if record.custpage_custrecord_to_print?has_content><#assign customrecord = record.custpage_custrecord_to_print?eval /><#list customrecord as customrecord_line>
+         ${customrecord_line.subTotal}
+       </#list></#if>
+     </td>
+     <td align="left">(SAR)</td>
+    </tr>
+    
+    <tr>
+     <td align="right" style="font-family: NotoSansArabic, sans-serif;">(ريال سعودي) مجموع الخصومات</td>
+     <td align="left" style="">Discount</td> 
+     <td align="left" style="">
+       <#if record.custpage_custrecord_to_print?has_content><#assign customrecord = record.custpage_custrecord_to_print?eval /><#list customrecord as customrecord_line>
+         ${customrecord_line.dicount}
+       </#list></#if>
+     </td>
+     <td align="left">(SAR)</td>
+    </tr>
+      
+   <tr>
+     <td align="right" style="font-family: NotoSansArabic, sans-serif;">(ريال سعودي) اجمالي ضريبية القيمة المضافة</td>
+     <td align="left" style="">VAT Total</td> 
+     <td align="left" style="">
+       <#if record.custpage_custrecord_to_print?has_content><#assign customrecord = record.custpage_custrecord_to_print?eval /><#list customrecord as customrecord_line>
+         ${customrecord_line.taxTotal}
+       </#list></#if>
+     </td>
+     <td align="left">(SAR)</td>
+    </tr>
+      
+    <tr>
+     <td align="right" style="font-family: NotoSansArabic, sans-serif;">(ريال سعودي) اجمالي المبلغ المستحق</td>
+     <td align="left" style="">Total</td> 
+     <td align="left" style="">
+       <#if record.custpage_custrecord_to_print?has_content><#assign customrecord = record.custpage_custrecord_to_print?eval /><#list customrecord as customrecord_line>
+         ${customrecord_line.total}
+       </#list></#if>
+     </td>
+     <td align="left">(SAR)</td>
+    </tr>
+      
+    </table>
+
+</body>
+</pdf>

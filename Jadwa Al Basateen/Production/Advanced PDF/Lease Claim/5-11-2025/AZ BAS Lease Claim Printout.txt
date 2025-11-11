@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+  <link name="NotoSansArabic" type="font" subtype="truetype" src="${nsfont.NotoSansArabic_Regular}"
+      src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" />
+   <style type="font">* {
+				font-family: NotoSans, sans-serif;
+  				font-family: NotoSansArabic, sans-serif;
+	}
+    *{
+    font-size:11px
+    }
+  </style>
+</head>
+<body padding="0.5in 0.5in 0.5in 0.5in" size="A4">
+    <#assign centralData = {}>
+    <#if record.custpage_custrecord_to_print?has_content>
+      <#assign centralData = record.custpage_custrecord_to_print?eval/>
+    </#if>
+    <img style="width:130px; height:90px; align:center;" src="https://9193738-sb1.app.netsuite.com/core/media/media.nl?id=3082&amp;c=9193738_SB1&amp;h=zHeou9uRe4hLYAe_AHfVbw4KZS7cfgT7NQ1HfMdI1zQAKldl" />
+    <table style="width:100% ; padding-top:30px">
+      <tr>
+        <td style="border-top:2px; border-bottom:2px;border-left:2px; border-right:2px; align:center; background-color: #eef7ee;" colspan="5"><b>FINACIAL CLAIM</b></td>
+      </tr>
+      <tr>
+        <td colspan="4" > <b>Claim No:</b> ${record.custrecord_ino_pms_lclaim_claim_number} </td>
+        <td align="left" > <b>Date: ${record.custrecord_ino_pms_lclaim_date?string("EEEE, MMMM d, yyyy")}</b> </td>
+      </tr>
+    </table>
+  
+    <table style="width:100%;">
+       <tr>
+          <td style="border-top:2px; border-bottom:2px;border-left:2px; border-right:2px; align:center; background-color: #eef7ee;" colspan="5"><b>Billed To</b></td>
+       </tr>
+       <tr>
+         <td colspan="4">
+           <b>Client Name: 
+             <#if record.custrecord_ino_pms_lclaim_tenant.isperson?string("T", "F") == "T">
+               ${record.custrecord_ino_pms_lclaim_tenant.firstname!""} ${record.custrecord_ino_pms_lclaim_tenant.middlename!""} ${record.custrecord_ino_pms_lclaim_tenant.lastname!""}
+             <#else>
+               ${record.custrecord_ino_pms_lclaim_tenant.companyname!""}
+             </#if>
+           </b>
+         </td>
+         <td align="left" >
+            <b>Client CR No:  ${record.custrecord_ino_pms_lclaim_tenant.custentity_ino_pms_commercial_number!""} </b>
+         </td>
+       </tr>
+    </table>
+
+    <table style="width:100%">
+      <tr>
+        <td style="border-top:2px; border-bottom:2px;border-left:2px; border-right:2px; align:center; background-color: #eef7ee;" colspan="5"><b>Deal Details</b></td>
+      </tr>
+      <tr>
+        <td ><b>Property</b></td>
+        <td colspan="4" style="align:left"> ${record.custrecord_ino_pms_lclaim_property} </td>
+      </tr>
+      <tr>
+        <td ><b>Unit</b></td>
+        <td colspan="4" style="align:left"> ${(centralData.units![])?join(", ")}</td>
+      </tr>
+      <tr>
+        <td ><b>Contract Period</b></td>
+        <td colspan="4" style="align:left"> ${record.custrecord_ino_pms_lclaim_ten_contract.custrecord_ino_pms_tc_effective_sd}-${record.custrecord_ino_pms_lclaim_ten_contract.custrecord_ino_pms_tc_effective_ed} </td>
+      </tr>
+      <tr>
+        <td ><b>Unit Area (sqm)</b></td>
+          <td colspan="4" style="align:left">${centralData.totalGrossArea!""} </td>
+      </tr>
+      <tr>
+        <td ><b>Base Rent (SAR/sqm/year)</b></td>
+        <td colspan="4" style="align:left"> 
+           <#assign rateStr = record.custrecord_ino_pms_lclaim_ten_contract.custrecord_ino_pms_tc_rate?replace("[^0-9,٫]", "", "r")?replace("[٫]", ".", "r")>
+           ${rateStr?has_content?then(rateStr?number?string["#,###.00"], "0.00")}
+        </td>
+      </tr>
+      <tr>
+        <td ><b>Service Charge (%)</b></td>
+        <td colspan="4" style="align:left"> ${centralData.serviceCharge!"0"}  </td>
+      </tr>
+    </table>
+
+
+         <table style="width:100%">
+             <tr>
+             <td style="border-top:2px; border-bottom:2px;border-left:2px; border-right:2px; align:center; background-color: #eef7ee;" colspan="5">
+                  <b>Financial Claim Breakdown</b>
+             </td>
+             </tr>
+             <tr>
+                <td colspan="2" style="border-left:1px solid black; border-bottom:1px solid black; border-right:1px solid black; align:center"><b>Item</b></td>
+                <td  style="border-bottom:1px solid black; border-right:1px solid black; align:center"> <b>Description</b></td>
+                <td  style="border-bottom:1px solid black; border-right:1px solid black; align:center"> <b>Amount - Sr</b></td>
+                <td  style="border-bottom:1px solid black; border-right:1px solid black; align:center"> <b>Vat (15%)</b></td></tr>
+
+    <#assign allocationList = {}>
+    <#if record.custpage_custsecrecord_to_print?has_content>
+      <#assign allocationList = record.custpage_custsecrecord_to_print?eval/>
+    </#if>
+    <#if allocationList.allocationData?? && (allocationList.allocationData?size > 0)>
+      <#list allocationList.allocationData as row>
+        <tr>
+           <td colspan="2" style="border-left:1px solid black; border-bottom:1px solid black; border-right:1px solid black; align:left">${row.chargeType!''}</td>
+           <td  style="border-bottom:1px solid black; border-right:1px solid black; vertical-align:middle;align:center">${row.description!''}</td>
+           <td  style="border-bottom:1px solid black; border-right:1px solid black; vertical-align:middle; align:right">${row.amount?number?string["#,##0.00"]!''} </td>
+           <td  style="border-bottom:1px solid black; border-right:1px solid black; vertical-align:middle;align:right"> ${row.vat?number?string["#,##0.00"]!''}</td>
+        </tr>
+      </#list>
+  </#if>
+        
+      <tr>
+        <td colspan="2" style="align:center"> </td>
+        <td style=" margin-left:-1px; vertical-align:middle;border-left:1px solid black; border-bottom:1px solid black; border-right:1px solid black; align:right"><b>Subtotal:</b></td>
+        <td style=" vertical-align:middle; border-bottom:1px solid black; border-right:1px solid black; align:right"><b>${(centralData.amountSRTotal?string["#,##0.00"])!"0"}</b></td>
+        <td style=" vertical-align:middle; border-bottom:1px solid black; border-right:1px solid black; align:right"><b>${(centralData.vatTotal?string["#,##0.00"])!"0"}</b></td>
+      </tr>
+      <tr>
+        <td colspan="2" style="align:center"> </td>
+        <td style=" margin-left:-1px; border-left:1px solid black; border-bottom:1px solid black; border-right:1px solid black; align:right"><b>Grand Total (Incl. VAT):</b></td>
+        <td colspan="2" style="vertical-align:middle; border-bottom:1px solid black; border-right:1px solid black; align:center"><b>${((centralData.amountSRTotal!0) + (centralData.vatTotal!0))?string["#,##0.00"]}</b></td>
+      </tr>
+    </table>
+
+    <table style="width:100%; padding-bottom:5px; padding-top:5px">
+      <tr>
+        <td style="border-top:2px; border-bottom:2px;border-left:2px; border-right:2px; align:center; background-color: #eef7ee;" colspan="5"><b>Payment Instructions</b></td>
+      </tr>
+      <tr>
+        <td colspan="2" style="border-left:1px; border-bottom:1px; border-right:1px"><b>Payee</b></td>
+        <td colspan="3" style="border-bottom:1px; border-right:1px">${record.custrecord_ino_pms_lclaim_subsidiary}</td>
+      </tr>
+      <tr>
+        <td colspan="2" style="border-left:1px; border-bottom:1px; border-right:1px"><b>Bank</b></td>
+        <td colspan="3" style="border-bottom:1px; border-right:1px">${record.custrecord_ino_pms_lclaim_bank_account?replace(".*:\\s*", "", "r")}</td>
+      </tr>
+      <tr>
+        <td colspan="2" style="border-left:1px; border-bottom:1px; border-right:1px"><b>IBAN</b></td>
+        <td colspan="3" style="border-bottom:1px; border-right:1px">${centralData.iBanNum!" "}</td>
+      </tr>
+      <tr>
+        <td colspan="2" style="border-left:1px; border-bottom:1px; border-right:1px"><b>Payment Terms</b></td>
+        <td colspan="3" style="border-bottom:1px; border-right:1px">${record.custrecord_az_bas_lclaim_payment_terms}</td>
+      </tr>
+      <tr>
+        <td colspan="2" style="border-left:1px; border-bottom:1px; border-right:1px"><b>Transfer Reference</b></td>
+        <td colspan="3" style="border-bottom:1px; border-right:1px">Please include Claim No. in the transfer reference</td>
+      </tr>
+    </table>
+
+    <table style="width:100%">
+      <tr>
+        <td style="border-top:2px; border-bottom:2px;border-left:2px; border-right:2px; align:center; background-color: #eef7ee;" colspan="5"><b>Notes &amp; Contact</b></td>
+      </tr>
+      <tr>
+        <td  colspan="4"><b>For queries, please contact:</b></td>
+        <td  colspan="1" style="text-decoration:underline;color:blue">m.alhamad@albasateen.sa</td>
+      </tr>
+      <tr>
+        <td  colspan="4"></td>
+        <td  colspan="1">[Mosa Alhamad, +9665300006556]</td>
+      </tr>  
+    </table>
+    <p style="align:center"> CR: 1010439489 | VAT TIN: 3119058443 | Address: [Diriyah, Riyadh, Saudi Arabia]</p>
+</body>
+</pdf>

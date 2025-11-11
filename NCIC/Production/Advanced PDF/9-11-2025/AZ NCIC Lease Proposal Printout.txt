@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+  <head>
+    <link name="NotoSansArabic" type="font" subtype="truetype" 
+        src="${nsfont.NotoSansArabic_Regular}"
+        src-bold="${nsfont.NotoSansArabic_Bold}" />
+    <style>
+      *{
+        font-family: NotoSansArabic, sans-serif;
+        font-size: 11pt; 
+        direction: rtl;
+      }
+    </style>
+    <macrolist>
+      <macro id="Footer" >
+        <#assign centralData = {}>
+         <#if record.custpage_custrecord_to_print?has_content>
+           <#assign centralData = record.custpage_custrecord_to_print?eval >
+        </#if>
+
+        <p align="center" style="font-size: 9pt;"> ${centralData.legalName!" "}</p>
+        <p lang="ar" align="center" style="font-size: 9pt;line-height:15px"> 
+          سجل تجاري رقم ${centralData.regNum ! "   "} - عضوية رقم (${centralData.state ! "   "}) ص.ب.  ${centralData.mainAddress!""}
+        </p>
+      </macro>
+    </macrolist>
+  </head>
+  
+  <body footer="Footer" footer-height="40pt" padding="0.5in" size="A4">
+    <#assign years = ["سنة", "سنتين", "ثلاث سنوات", "أربع سنوات", "خمس سنوات", "ست سنوات", "سبع سنوات", "ثمان سنوات", "تسع سنوات", "عشر سنوات", "إحدى عشر سنة", "إثنى عشر سنة"]>
+    <#assign months = ["شهر", "شهرين", "ثلاثة أشهر", "أربعة أشهر", "خمسة أشهر", "ستة أشهر", "سبعة أشهر", "ثمانية أشهر", "تسعة أشهر", "عشرة أشهر", "إحدى عشر شهر", "إثنى عشر شهر"]>
+    <#assign days = ["يوم", "يومين", "ثلاثة أيام", "أربعة أيام", "خمسة أيام", "ستة أيام", "سبعة أيام", "ثمانية أيام", "تسعة أيام", "عشرة أيام", "إحدى عشر يوم", "إثنى عشر يوم"]>
+
+    <table width="100%">
+      <tr>
+        <td align="right"><img width="150pt" height="40pt" src="https://11479319.app.netsuite.com/core/media/media.nl?id=1532&amp;c=11479319&amp;h=hTBiw7BKl-m85khRR2JhApwImyJnHQzuSS9ofaiA_XPFV3oN"/></td>
+        <td>
+          <p style="line-height:20px"> 
+            التاريخ : ${centralData.hijriDate!" "}<br/>
+            الموافق : 
+            <#assign dateString = record.custrecord_ino_pms_lp_date?string("d-M-yyyy")!"" >
+            <#assign dateObject = dateString?date("d-M-yyyy")!null >
+              <#if dateObject?has_content>
+                ${dateObject?string("yyyy/M/d")}
+              <#else>
+                ${""}
+            </#if> م<br/>
+            ${record.name} : الرقم التسلسلى  
+          </p>
+        </td>
+      </tr>
+    </table>
+    
+    <p align="center" style="font-weight:bold; font-size:20px ; text-decoration:underline" >عرض سعر</p>
+    
+    <table width="100%" style="font-weight:bold">
+      <tr >
+        <td align="right" width="70%"> السادة/ــــــــــــــــــــــــــــــ</td>
+        <td align="center" width="30%">المحترمين </td>
+      </tr>
+    </table>
+
+    <p align="right">
+       ، السلام عليكم و رحمة الله و بركاته
+    </p>
+    <p lang="ar">  إشارة إلى رغبتكم فى إستئجار الوحدة رقم (${centralData.unitMasterString!""}) ، فى مركز ${record.custrecord_ino_pms_lp_property.custrecord_ino_re_prop_desc_localized} ، فإننا نقدم لكم العرض التالى :-  </p>
+
+    <table lang="ar" border="2px" style="border-color:gray" width="100%">
+      <tr>
+        <td align="center" style="border-bottom:2px;border-left:2px;border-color:gray" width="30%"> البيان </td>
+        <td align="center" style="border-bottom:2px;border-color:gray" width="70%"> الوحدة </td>
+      </tr>
+      <tr>
+        <td align="right" style="border-bottom:2px;border-left:2px;border-color:gray" width="30%"> رقم الوحدة </td>
+        <td align="center" style="border-bottom:2px;border-color:gray" width="70%"> ${record.custrecord_ino_pms_lp_number_of_unit} </td>
+      </tr>
+      <tr>
+        <td align="right" style="border-bottom:2px;border-left:2px;border-color:gray" width="30%"> المساحة </td>
+        <td align="center" style="border-bottom:2px;border-color:gray" width="70%"> ${record.custrecord_ino_pms_lp_total_are} م2 </td>
+      </tr>
+      <tr>
+        <td align="right" style="border-bottom:2px;border-left:2px;border-color:gray" width="30%"> الإيجار السنوى </td>
+        <td align="center" style="border-bottom:2px;border-color:gray" width="70%" > ${record.custrecord_ino_pms_lp_annual_rent?replace("[^0-9,٫]", "", "r")?replace("[٫]", ".", "r")?number?string["#,###.00"]} ريال سعودى شامل الخدمات غير شامل الضريبة </td>
+      </tr>
+      <tr>
+        <td align="right" style="border-bottom:2px;border-left:2px;border-color:gray" width="30%"> التأمين </td>
+        <td align="center" style="border-bottom:2px;border-color:gray" width="70%"> ${record.custrecord_ino_pms_lp_security_deposit?replace("[^0-9,٫]", "", "r")?replace("[٫]", ".", "r")?number?string["#,###.00"]} ريال سعودى (تدفع مرة واحدة عند توقيع العقد) </td>
+      </tr>
+      <tr>
+        <td align="right" style="border-bottom:2px;border-left:2px;border-color:gray" width="30%"> فترة العقد </td>
+        <td align="center" style="border-bottom:2px;border-color:gray" width="70%">
+          <#assign year = (record.custrecord_ino_pms_lp_term/12)-1!"">
+          ${years[year]!" "} ميلادية
+        </td>
+      </tr>
+      <tr>
+        <td align="right" style="border-bottom:2px;border-left:2px;border-color:gray" width="30%"> آلية السداد </td>
+        <td align="center" style="border-bottom:2px;border-color:gray" width="70%"> كل 
+          <#assign monthIndex = (record.custrecord_ino_pms_lp_charges_sche.custrecord_ino_pms_cs_month_billing_freq?number - 1)>
+            ${months[monthIndex]}
+         </td>
+      </tr>
+      <tr>
+        <td align="right" style="border-left:2px;border-color:gray" width="30%"> فترة السماح </td>
+        <td align="center" style="border-color:gray" width="70%">
+          <#if record.custrecord_ino_pms_lp_grace_per_option == "Month">
+            <#assign monthIndex = (record.custrecord_ino_pms_lp_gross_period?replace(",", "")?number - 1)!'0'>
+            ${months[monthIndex]} ميلادي
+         <#elseif record.custrecord_ino_pms_lp_grace_per_option == "Day">
+            <#assign dayIndex = (record.custrecord_ino_pms_lp_gross_period?replace(",", "")?number - 1)!0>
+            ${days[dayIndex]! "يوم"} ميلادي
+         <#else>
+            0
+         </#if>
+        </td>
+      </tr>
+    </table>
+
+    <p lang="ar" align="right" style="text-decoration:underline ; font-weight:bold"> شروط عامة:</p>
+    <ul lang="ar" style="list-style-type: square; margin-right: 20px; line-height:20px">
+      <li>العرض ساري لمدة  أسبوع من تاريخه.</li>
+      <li>المستأجر ملتزم بسداد جميع فواتير الخدمات الخاصة بالوحدة المستأجرة مثل الكهرباء، المياه، و الهاتف...</li>
+      <li>المستأجر ملتزم بعدم تغير النشاط بالوحدة المذكورة بعقد الإيجار.</li>
+      <li>المستأجر مسئول عن عمل الديكورات و التجهيزات الداخلية للوحدة على أن تتفق تلك التصاميم و الديكورات مع الأنظمة السارية فى المملكة و قواعد الامن و السلامة الصادرة من الدفاع المدنى.</li>
+      <li>تطبق كافة الشروط و الأحكام و الرسوم و الضرائب المفروضة من الجهات الرسمية.</li>
+    </ul>
+
+    <p lang="ar" align="right" style="text-decoration:underline ; font-weight:bold">للإستفسار:</p>
+    <p align="right">
+      <span> ops@ncicom.com البريد الإلكترونى </span>
+      <span>&amp;</span>
+      <span> 011-284-9912 الهاتف </span>
+    </p>
+
+    <p style="padding-left: 30px ; font-weight:bold" align="left"> مدير إدارة التعاقدات </p>   
+    <br/>
+    <br/>
+    </body>
+</pdf>

@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+  <link name="NotoSansArabic" type="font" subtype="truetype" src="${nsfont.NotoSansArabic_Regular}"
+      src-bold="${nsfont.NotoSansArabic_Bold}" />
+  <style type="font">* {
+				font-family: NotoSans, sans-serif;
+  				font-family: NotoSansArabic, sans-serif;
+                font-size:11px
+	}
+    body {
+    line-height:11; 
+   }
+
+  </style>
+    <macrolist>
+        <!-- Header Macro -->
+        <macro id="Header">
+            <table width="100%" >
+                <tr>
+                    <#if record.custrecord_ino_pms_lp_property=="Palm View">
+                        <td align="left" >
+                            <img width="100px" height="40px" src="https://9193738-sb1.app.netsuite.com/core/media/media.nl?id=3080&amp;c=9193738_SB1&amp;h=zQ0WvUbJr9gpXgMNeD8t8Vjtmh4A_IeaYMwbIgtYehoe9Szl" />
+                        </td>
+                    <#elseif record.custrecord_ino_pms_lp_property=="Al Basateen Offices">
+                        <td align="left">
+                            <img width="200px" height="40px" src="https://9193738-sb1.app.netsuite.com/core/media/media.nl?id=3077&amp;c=9193738_SB1&amp;h=VNpBw5LZM_FKNMFr-7ksq3MdOWnPE597qI8Q5wZ45b5m_ipT" />
+                        </td>
+                    </#if>
+                    <td  align="right"  >
+                        <img width="110px" height="70px" src="https://9193738-sb1.app.netsuite.com/core/media/media.nl?id=3082&amp;c=9193738_SB1&amp;h=zHeou9uRe4hLYAe_AHfVbw4KZS7cfgT7NQ1HfMdI1zQAKldl"/>
+                    </td>
+                </tr>
+            </table>
+        </macro>
+
+        <!-- Footer Macro -->
+<macro id="Footer">
+    <table width="100%">
+        <#if record.custrecord_ino_pms_lp_property == "Palm View">
+            <tr>
+                <td align="left" style="padding-top:2pt; padding-bottom:2pt;">
+                    <span style="font-size:8pt; font-weight:bold;">Jadwa Al-Basateen Real Estate Co. - Riyadh</span>
+                </td>
+                <td align="center" style="padding-top:2pt; padding-bottom:2pt;"></td>
+                <td align="right" style="padding-top:2pt; padding-bottom:2pt;">
+                    <span style="font-size:8pt; font-weight:bold;">شركة جدوى البساتين للعقارات – الرياض</span>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" style="padding-top:2pt; padding-bottom:2pt;">
+                    <span style="font-size:8pt; font-weight:bold;">Al Diriyah – King Khaled Road Zip Code 13714</span>
+                </td>
+                <td align="center" style="padding-top:2pt; padding-bottom:2pt;">
+                    <span style="font-size:8pt; font-weight:bold;">albasateen.sa</span>
+                </td>
+                <td align="right" style="padding-top:2pt; padding-bottom:2pt;">
+                    <span style="font-size:8pt; font-weight:bold;">الرمز البريدي 13714 الدرعية – طريق الـملك خالد</span>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" style="padding-top:2pt; padding-bottom:2pt;">
+                    <span style="font-size:8pt; font-weight:bold;">C.R 1010438489</span>
+                </td>
+                <td align="center" style="padding-top:2pt; padding-bottom:2pt;">
+                    <span style="font-size:8pt; font-weight:bold;">920003749</span>
+                </td>
+                <td align="right" style="padding-top:2pt; padding-bottom:2pt;">
+                    <span style="font-size:8pt; font-weight:bold;">س.ت 1010438489</span>
+                </td>
+            </tr>
+        <#elseif record.custrecord_ino_pms_lp_property == "Al Basateen Offices">
+            <tr>
+                <td align="left" style="padding-top:2pt; padding-bottom:2pt;">
+                    <span style="font-size:8pt; font-weight:bold;">Basateen Al Wadi Real Estate Co. - Riyadh</span>
+                </td>
+                <td align="center" style="padding-top:2pt; padding-bottom:2pt;"></td>
+                <td align="right" style="padding-top:2pt; padding-bottom:2pt;">
+                    <span style="font-size:8pt; font-weight:bold;">شركة بساتين الوادي العقارية – الرياض</span>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" style="padding-top:2pt; padding-bottom:2pt;">
+                    <span style="font-size:8pt; font-weight:bold;">Al Diriyah – King Khaled Road Zip Code 13714</span>
+                </td>
+                <td align="center" style="padding-top:2pt; padding-bottom:2pt;">
+                    <span style="font-size:8pt; font-weight:bold;">albasateen.sa</span>
+                </td>
+                <td align="right" style="padding-top:2pt; padding-bottom:2pt;">
+                    <span style="font-size:8pt; font-weight:bold;">الرمز البريدي 13714 الدرعية – طريق الـملك خالد</span>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" style="padding-top:2pt; padding-bottom:2pt;">
+                    <span style="font-size:8pt; font-weight:bold;">C.R 1010950551</span>
+                </td>
+                <td align="center" style="padding-top:2pt; padding-bottom:2pt;">
+                    <span style="font-size:8pt; font-weight:bold;">920003749</span>
+                </td>
+                <td align="right" style="padding-top:2pt; padding-bottom:2pt;">
+                    <span style="font-size:8pt; font-weight:bold;">س.ت 1010950551</span>
+                </td>
+            </tr>
+        </#if>
+    </table>
+</macro>
+
+
+    </macrolist>
+</head>
+
+<body header="Header" header-height="60pt" footer="Footer" footer-height="40pt" padding="0.5in" size="A4">
+    <#assign centralData = {}>
+    <#if record.custpage_custrecord_to_print?has_content>
+      <#assign centralData = record.custpage_custrecord_to_print?eval/>
+    </#if>
+   <p align="right" style="font-size:9px">Date ${record.custrecord_ino_pms_lp_date} </p>
+   <br/>
+   <p align="right">
+      <#if record.custrecord_ino_pms_lp_tenant.isperson?string("T", "F") == "T">
+        <span style="text-decoration:underline"> ${record.custrecord_ino_pms_lp_tenant.firstname!""} ${record.custrecord_ino_pms_lp_tenant.middlename!""} ${record.custrecord_ino_pms_lp_tenant.lastname!""} </span>
+      <#else>
+        <span style="text-decoration:underline"> ${record.custrecord_ino_pms_lp_tenant.companyname!""} </span>
+      </#if>
+     <span> / السادة </span>
+   </p>
+   <table width="100%">
+     <tr>
+       <td width="35%" align="left" style="text-align:left">
+         <#if record.custrecord_ino_pms_lp_property=="Palm View">
+         JADWA ALBASATEEN  
+         <#elseif record.custrecord_ino_pms_lp_property=="Al Basateen Offices">
+         BASATEEN AL WADI 
+         </#if>
+         Real Estate is pleased to present this leasing offer for your review and confirmation.
+         This offer is valid for ${record.custrecord_az_bas_lp_valid_for} days only from the date of issuance and will be automatically canceled
+         if not accepted within this period.
+       </td>
+       <td width="40%" align="right" >
+         <p align="right">
+           تتشرف شركة 
+           <#if record.custrecord_ino_pms_lp_property=="Palm View">
+                  جدوى البساتين للعقارات 
+           <#elseif record.custrecord_ino_pms_lp_property=="Al Basateen Offices">
+                  بساتين الوادي العقارية
+           </#if>
+           بتقديم هذا العرض الخاص لتأجير الوحدة المحددة أدناه هذا العرض صالح لمدة ${record.custrecord_az_bas_lp_valid_for} أيام فقط من تاريخ إصداره ، و يتم إلغاؤه تلقائيًا فى حال عدم الموافقة خلال هذه الفترة 
+          </p>
+       </td>
+     </tr>
+     <tr>
+       <td align="left">
+         This proposal is subject to final approval from the leasing and sales committee of 
+         <#if record.custrecord_ino_pms_lp_property=="Palm View">
+                  JADWA ALBASSATEEN REAL ESTATE COMPANY.
+         <#elseif record.custrecord_ino_pms_lp_property=="Al Basateen Offices">
+                  BASSATEEN AL WADI REAL ESTATE COMPANY.
+         </#if>
+       </td>
+       <td align="right">
+         <p align="right">
+          
+          <#if record.custrecord_ino_pms_lp_property=="Palm View">
+                 هذا العرض خاضع للموافقة النهائية من لجنة التأجير والمبيعات الخاصة بشركة جدوى البساتين للعقارات
+         <#elseif record.custrecord_ino_pms_lp_property=="Al Basateen Offices">
+                  هذا العرض خاضع للموافقة النهائية من لجنة التأجير والمبيعات الخاصة بشركة بساتين الوادي العقارية
+         </#if>
+          </p>
+       </td>
+     </tr>
+   </table>
+
+        <!-- Client Details Table -->
+   <table width="100%" style="padding-top:10px">
+     <tr>
+       <td colspan="3" align="center"> <b>Client Details:</b> </td>
+       <td colspan="3" align="center"> <b>:معلومات العميل</b> </td>
+     </tr>
+     <tr>
+       <td align="left" style="border-left:1px; border-top:1px; border-right:1px; border-bottom:1px">Client Name</td>
+       <#if record.custrecord_ino_pms_lp_tenant.isperson?string("T", "F") == "T">
+        <td colspan="4" align="center"  style="border-top:1px; border-right:1px; border-bottom:1px"> ${record.custrecord_ino_pms_lp_tenant.firstname!""} ${record.custrecord_ino_pms_lp_tenant.middlename!""} ${record.custrecord_ino_pms_lp_tenant.lastname!""} </td>
+      <#else>
+        <td colspan="4" align="center" style="border-top:1px; border-right:1px; border-bottom:1px"> ${record.custrecord_ino_pms_lp_tenant.companyname!""} </td>
+      </#if>
+       <td align="right" style="border-top:1px; border-right:1px; border-bottom:1px">اسم العميل</td>
+     </tr>
+     <tr>
+       <td align="left" style="border-left:1px;  border-right:1px; border-bottom:1px">Shop/Brand Name</td>
+       <td colspan="4" align="center"  style=" border-right:1px; border-bottom:1px"> ${record.custrecord_ino_pms_lp_tenant.custentity_az_bas_shop_brand_name!""} </td>
+       <td align="right" style=" border-right:1px; border-bottom:1px">العلامة التجاري </td>
+     </tr>
+     <tr>
+       <td align="left" style="border-left:1px;  border-right:1px; border-bottom:1px">Business Activities</td>
+       <td colspan="4" align="center"  style=" border-right:1px; border-bottom:1px"> ${record.custrecord_ino_pms_lp_tenant.category!""} </td>
+       <td align="right" style="border-right:1px; border-bottom:1px">النشاط التجاري </td>
+     </tr>
+     <tr>
+       <td align="left" style="border-left:1px;  border-right:1px; border-bottom:1px">Client representative</td>
+       <td colspan="4" align="center"  style=" border-right:1px; border-bottom:1px"> ${record.custrecord_az_bas_lp_client_represent!""} </td>
+       <td align="right" style="border-right:1px; border-bottom:1px">ممثل العميل </td>
+     </tr>
+     <tr>
+       <td align="left" style="border-left:1px;  border-right:1px; border-bottom:1px">Mobile number: </td>
+       <td colspan="4" align="center"  style=" border-right:1px; border-bottom:1px"> ${record.custrecord_ino_pms_lp_tenant.phone!""} </td>
+       <td align="right" style="border-right:1px; border-bottom:1px"> :رقم الجوال  </td>
+     </tr>
+   </table>
+        
+        <!-- Technical Details Table -->
+   <table width="100%" style="padding-top:30px">
+     <tr>
+       <td colspan="2" align="left"> <b>Technical Details:</b> </td>
+       <td colspan="2" align="right"> <b> :التفاصيل الفنية  </b></td>
+     </tr>
+     <tr>
+       <td align="left">-</td>
+       <td  align="left">The unit will be delivered as follows:</td>
+       <td  align="right">:سيتم تسليم الوحدة بالمواصفات ادناه</td>
+       <td align="right">-</td>
+     </tr>
+     <tr>
+       <td align="left">1.</td>
+       <td  align="left">Ready for leasing in its basic structure ("shell and core").</td>
+       <td  align="right">.جاهزة للتأجير على الحالة الأساسية (عظم)</td>
+       <td align="right">.1</td>
+     </tr>
+     <tr>
+       <td align="left">2.</td>
+       <td  align="left">A water and sewage point connected to the main network.</td>
+       <td align="right">.نقطة مياه وصرف صحي متصلة بالشبكة الرئيسية</td>
+       <td align="right">.2</td>
+     </tr>
+     <tr>
+       <td align="left">3.</td>
+       <td  align="left">An electrical network capable of operating the agreed activities.</td>
+       <td  align="right">.شبكة كهرباء قادرة على تشغيل الأنشطة المتفق عليها</td>
+       <td align="right">.3</td>
+     </tr>
+     <tr>
+       <td align="left">4.</td>
+       <td  align="left">A fire protection system according to Civil Defense requirements.</td>
+       <td  align="right">.نظام مكافحة الحرائق وفق متطلبات الدفاع المدني</td>
+       <td align="right">.4</td>
+     </tr>
+   </table>
+
+        <!-- Public Services Table -->
+     <table width="100%" style="padding-top:20px">
+     <tr>
+       <td colspan="2" align="left"><b> Public Services: </b></td>
+       <td colspan="2" align="right"><b>:الخدمات العامة  </b> </td>
+     </tr>
+     <tr>
+       <td align="left">1-</td>
+       <td align="left">24/7 security guards.</td>
+       <td align="right">.حراس أمن على مدار الساعة</td>
+       <td align="right">-1</td>
+     </tr>
+     <tr>
+       <td align="left">2.</td>
+       <td align="left">Cleaning and maintenance of public facilities and building facades.</td>
+       <td align="right">.نظافة وصيانة المرافق العامة و واجهات المباني</td>
+       <td align="right">.2</td>
+     </tr>
+     <tr>
+     <td align="left">3.</td>
+     <td align="left">
+      Maintenance of elevators 
+        ( ${centralData.numOfElevators!'0'} ).
+     </td>
+     <td align="right">
+         .( ${centralData.numOfElevators!'0'} ) صيانة المصاعد عدد
+        </td>
+        <td align="right">.3</td>
+     </tr>
+     <tr>
+       <td align="left">4.</td>
+       <td align="left">Cleaning and maintenance of green and water surfaces.</td>
+       <td align="right">.نظافة وصيانة المسطحات الخضراء والمائية</td>
+       <td align="right">.4</td>
+     </tr>
+     <tr>
+       <td align="left">5.</td>
+       <td align="left">Maintenance of exterior lighting.</td>
+       <td align="right">.صيانة الإنارات الخارجية</td>
+       <td align="right">.5</td>
+     </tr>
+     <tr>
+       <td align="left">6.</td>
+       <td align="left">A specialized company for managing parking lots.</td>
+       <td align="right">.شركة متخصصة لإدارة المواقف</td>
+       <td align="right">.6</td>
+     </tr>
+      <tr>
+       <td align="left">7.</td>
+       <td align="left">Free car wash service.</td>
+       <td align="right">.خدمة غسيل السيارات المجانية</td>
+       <td align="right">.7</td>
+     </tr>
+      <tr>
+       <td align="left">8.</td>
+       <td align="left">VIP valet parking service.</td>
+       <td align="right">.خدمة صف السيارات لكبار الشخصيات</td>
+       <td align="right">.8</td>
+     </tr>
+      <tr>
+       <td align="left">9.</td>
+       <td align="left">Free shuttle service to metro stations. </td>
+       <td align="right">.النقل الترددي المجاني لمحطات المترو </td>
+       <td align="right">.9</td>
+     </tr>
+      <tr>
+       <td align="left">10.</td>
+       <td align="left">GYM ( Male &amp; Female ).</td>
+       <td align="right">.نادي رياضي ( رجالي و نسائي )</td>
+       <td align="right">.10</td>
+     </tr>
+   </table>   
+
+   <br/>
+   <br/>
+<!-- Financial Figures Table -->
+
+<table width="100%" style="padding-top:30px">
+  <tr>
+    <td colspan="2" align="center"><b> Financial Figures: </b></td>
+    <td colspan="2" align="center"><b> :المعلومات المالية </b></td>
+  </tr>
+
+  <tr>
+    <td align="left" style="border-left:1px; border-top:1px; border-right:1px; border-bottom:1px">Building No</td>
+    <td colspan="2" align="center" style="border-top:1px; border-right:1px; border-bottom:1px">
+      ${centralData.buildingNum!'0'}
+    </td>
+    <td align="right" style="border-top:1px; border-right:1px; border-bottom:1px">رقم المبنى</td>
+  </tr>
+
+  <tr>
+    <td align="left" style="border-left:1px; border-right:1px; border-bottom:1px">Area (M2)</td>
+    <td colspan="2" align="center" style="border-right:1px; border-bottom:1px">
+      ${record.custrecord_ino_pms_lp_total_are!""}
+    </td>
+    <td align="right" style="border-right:1px; border-bottom:1px">المساحة (م2)</td>
+  </tr>
+
+  <tr>
+    <td align="left" style="border-left:1px; border-right:1px; border-bottom:1px">Parking</td>
+    <td colspan="2" align="center" style="border-right:1px; border-bottom:1px">
+      موقف ضمن العقد ${centralData.parkingSpaces!'0'}
+    </td>
+    <td align="right" style="border-right:1px; border-bottom:1px">المواقف</td>
+  </tr>
+
+  <tr>
+    <td align="left" style="border-left:1px; border-right:1px; border-bottom:1px">Annual rent Per Sqm</td>
+
+<#if record.custrecord_ino_pms_lp_tenant.custentity_az_bas_governmental_client == true>
+  <td colspan="2" align="center" style="border-right:1px solid #000; border-bottom:1px solid #000;">
+    عدد السنوات : سعر الايجار السنوي + الخدمات * المساحة = إجمالي الايجار السنوي
+    <#assign yearsCount = record.custrecord_ino_pms_lp_term / 12>
+    <#assign yearsList = [
+            "الأولى",
+            "الثانية",
+            "الثالثة",
+            "الرابعة",
+            "الخامسة",
+            "السادسة",
+            "السابعة",
+            "الثامنة",
+            "التاسعة",
+            "العاشرة",
+            "الحادية عشر",
+            "الثانية عشر",
+            "الثالثة عشر",
+            "الرابعة عشر",
+            "الخامسة عشر",
+            "السادسة عشر",
+            "السابعة عشر",
+            "الثامنة عشر",
+            "التاسعة عشر",
+            "العشرون"
+          ]>
+    <#list 0..(yearsCount-1) as i>
+      <p style="direction: rtl; text-align: right; margin: 4px 0;">
+        <span style="margin-right: 6px;">
+           ${(record.custrecord_ino_pms_lp_rate*record.custrecord_ino_pms_lp_total_are)+centralData.ratedRent} = ${centralData.ratedRent!'0'} + ${record.custrecord_ino_pms_lp_total_are!'0'} * ${record.custrecord_ino_pms_lp_rate?replace("[^0-9,٫]", "", "r")?replace("[٫]", ".", "r")?number?string["#,###.00"]!'0'}
+        </span>
+        <span>
+          :
+          السنة ${yearsList[i]}
+        </span>
+      </p>
+    </#list>
+      <p>
+        إجمالى عقد الإيجار لمدة ${yearsCount} سنوات : ${(((record.custrecord_ino_pms_lp_rate * record.custrecord_ino_pms_lp_total_are) + centralData.ratedRent) * yearsCount)?string["#,##0.####"]}
+      </p>
+  </td>
+    <#else>
+      <td colspan="2" align="center" style="border-right:1px; border-bottom:1px">
+        سعر الايجار السنوي * المساحة + الخدمات 10% = اجمالي الايجار السنوي 
+        <p align="center">
+          ${((centralData.grandAnnualRent)?string["#,##0.####"])!'0'}
+        </p>
+      </td>
+    </#if>
+
+    <td align="right" style="border-right:1px; border-bottom:1px">سعر المتر التأجيري السنوي</td>
+  </tr>
+
+  <tr>
+    <td align="left" style="border-left:1px; border-right:1px; border-bottom:1px">Commissions 2.5%</td>
+    <td colspan="2" align="center" style="border-right:1px; border-bottom:1px;">
+    عمولة السعى للسنة الأولى فقط :    ${record.custrecord_ino_pms_lp_annual_rent * 0.025}
+    </td>
+    <td align="right" style="border-right:1px; border-bottom:1px">%عمولة السعي 2.5</td>
+  </tr>
+</table>
+
+
+                <!-- Contract Terms Table -->
+   <table width="100%" style="padding-top:30px">
+     <tr>
+       <td colspan="3" align="center"> <b>Contract Terms: </b></td>
+       <td colspan="3" align="center"> <b>:شروط العقد </b></td>
+     </tr>
+     <tr>
+       <td align="left" style="border-left:1px; border-top:1px; border-right:1px; border-bottom:1px">Contract Duration</td>
+       <td colspan="4" align="center" style="border-top:1px; border-right:1px; border-bottom:1px">${record.custrecord_ino_pms_lp_term / 12}</td>
+       <td align="right" style="border-top:1px; border-right:1px; border-bottom:1px">مدة العقد</td>
+     </tr>
+     <tr>
+       <td align="left" style="border-left:1px;  border-right:1px; border-bottom:1px">Fit out Period (Days):</td>
+       <td colspan="4" align="center"  style=" border-right:1px; border-bottom:1px">
+       <#if record.custrecord_ino_pms_lp_grace_per_option == "Month">
+         ${record.custrecord_ino_pms_lp_gross_period?number*30}
+       <#else>
+         ${record.custrecord_ino_pms_lp_gross_period}
+       </#if>
+       </td>
+       <td align="right" style=" border-right:1px; border-bottom:1px">:فترة التجهيز (أيام)  </td>
+     </tr>
+     <tr>
+       <td align="left" style="border-left:1px;  border-right:1px; border-bottom:1px">Expected Handover Date:</td>
+       <td colspan="4" align="center"  style=" border-right:1px; border-bottom:1px"> ${record.custrecord_ino_pms_lp_start_date} </td>
+       <td align="right" style="border-right:1px; border-bottom:1px">:تاريخ التسليم المتوقع </td>
+     </tr>
+     <tr>
+       <td align="left" style="border-left:1px;  border-right:1px; border-bottom:1px">Lease Start Date:</td>
+       <td colspan="4" align="center"  style=" border-right:1px; border-bottom:1px"> ${record.custrecord_ino_pms_lp_effective_sd} </td>
+       <td align="right" style="border-right:1px; border-bottom:1px">موعد بداية الإيجار</td>
+     </tr>
+     <tr>
+       <td align="left" style="border-left:1px;  border-right:1px; border-bottom:1px">Terms Of Payments:</td>
+       <td colspan="4" align="center" style="border-right:1px; border-bottom:1px;">
+         <#if record.custrecord_ino_pms_lp_property=="Palm View">
+                  ${record.custrecord_az_bas_lp_terms_of_payments}
+         <#elseif record.custrecord_ino_pms_lp_property=="Al Basateen Offices">
+                  دفعة واحدة
+          </#if>
+        </td>
+       <td align="right" style="border-right:1px; border-bottom:1px">:طريقة الدفع</td>
+     </tr>
+   </table>
+
+          <!-- Additional Conditions Table -->
+     <table width="100%" style="padding-top:20px">
+     <tr>
+       <td colspan="2" align="center"><b> Additional Conditions:</b>  </td>
+       <td colspan="2" align="center"><b>:شروط إضافية  </b></td>
+     </tr>
+     <tr>
+       <td align="left" width="3%">1-</td>
+       <td align="left" width="47%">Prices Exclude VAT.</td>
+       <td align="right" width="47%" style="text-decoration:underline">الأسعار لا تشمل ضريبة القيمة المضافة</td>
+       <td align="right" width="3%">-1</td>
+     </tr>
+     <tr>
+       <td align="left" width="3%">2.</td>
+       <td align="left" width="47%"><p align="left">Unit areas are subject to minor changes based on the final survey upon delivery.</p></td>
+       <td align="right" width="47%" style="text-decoration:underline"><p align="right"> المساحات قد تخضع لتغييرات طفيفة بناءً على الرفع المساحي النهائي عند التسليم </p></td>
+       <td align="right" width="3%">.2</td>
+     </tr>
+     <tr>
+       <td align="left" width="3%">3.</td>
+       <td align="left" width="47%"><p align="left">Utility bills (e.g., water and electricity) are the tenant's responsibility.</p></td>
+       <td align="right"  width="47%" style="text-decoration:underline"><p align="right"> جميع الالتزامات المالية (مثل فواتير المياه والكهرباء) يتحملها المستأجر </p></td>
+       <td align="right" width="3%">.3</td>
+     </tr>
+     <tr>
+       <td align="left" width="3%">4.</td>
+       <td align="left" width="47%"> <p align="left"> The contract shall be documented either through the 'Ejar' platform operated by the Ministry of Housing,
+         or via the State Properties General Authority's system for government entities.</p></td>
+        <td align="right" width="47%" style="text-decoration:underline"><p align="right"> توثيق العقد يتم عبر منصة "إيجار" التابعة لوزارة الإسكان او عن طريق عقد عقارات الدولة للجهات الحكومية </p></td>
+       <td align="right" width="3%">.4</td>
+     </tr>
+   </table>
+
+                   <!-- Required Documents Table -->
+     <table width="100%" style="padding-top:20px">
+     <tr>
+       <td colspan="2" align="left"> <b>Required Documents from the Tenant: </b></td>
+       <td colspan="2" align="right" style="text-decoration:underline"><b>:المستندات المطلوبة من المستأجر</b></td>
+     </tr>
+     <tr >
+       <td align="left" width="3%" >.</td>
+       <td align="left" width="47%" >Commercial registration certificate.</td>
+       <td align="right" style="text-decoration:underline " width="47%" >.السجل التجاري</td>
+       <td align="right" width="3%" >.</td>
+     </tr>
+     <tr>
+       <td align="left">.</td>
+       <td  align="left">Authorized representative ID.</td>
+       <td  align="right" style="text-decoration:underline">.هوية المفوض</td>
+       <td align="right">.</td>
+     </tr>
+     <tr>
+       <td align="left">.</td>
+       <td align="left">Valid power of attorney.</td>
+       <td align="right" style="text-decoration:underline">.وكالة شرعية صالحة</td>
+       <td align="right">.</td>
+     </tr>
+     <tr>
+       <td align="left">.</td>
+       <td  align="left">VAT registration certificate.</td>
+        <td  align="right" style="text-decoration:underline">.شهادة تسجيل ضريبة القيمة المضافة</td>
+       <td align="right">.</td>
+     </tr>
+      <tr>
+       <td align="left">.</td>
+       <td  align="left">National address certificate</td>
+        <td  align="right" style="text-decoration:underline">.العنوان الوطني</td>
+       <td align="right">.</td>
+     </tr>
+   </table>
+
+                            <!-- Notes Table -->
+     <table width="100%" style="padding-top:30px">
+     <tr>
+       <td colspan="2" align="left"><b> Notes: </b></td>
+       <td colspan="2" align="right" style="text-decoration:underline"><b>:ملاحظات</b></td>
+     </tr>
+     <tr>
+       <td width="3%" align="left">.</td>
+       <td width="30%" align="left">
+        This offer shall be binding on both parties as of the date of their signature hereon during the acceptance period ,
+         and the second party undertake to complete the procedures for notarizing the contract on the official platform designated for.
+       </td>
+       <td width="40%" align="right" style="text-decoration:underline">
+         <p align="right">
+        يعد هذا العرض ملزماً للطرفين من تاريخ توقيعهم عليه خلال فترة صلاحية العرض  
+        ويلتزم  الطرف الثاني ياستكمال إجراءات توثيق العقد في المنصة الرسمية المخصصة لذلك 
+           </p>
+       </td>
+       <td width="3%" align="right">.</td>
+     </tr>
+   </table>
+
+                            <!-- Tenant Acknowledgment Table -->
+     <table width="100%" style="padding-top:20px ">
+     <tr >
+       <td colspan="2" align="left"> <b>Tenant Acknowledgment: </b></td>
+       <td colspan="2" align="right" style="text-decoration:underline"><b>:إقرار المستأجر</b></td>
+     </tr>
+     <tr >
+       <td align="left" width="3%">. </td>
+       <td align="left" width="47%">Name: </td>
+       <td align="right" width="47%" style="text-decoration:underline">: الاسم</td>
+       <td align="right" width="3%">.</td>
+     </tr>
+     <tr >
+       <td align="left" width="3%">.</td>
+       <td align="left" width="47%">Signature: </td>
+       <td align="right" width="47%" style="text-decoration:underline">:التوقيع </td>
+       <td align="right" width="3%">.</td>
+     </tr>
+     <tr >
+       <td align="left" width="3%">.</td>
+       <td align="left" width="47%">Date: </td>
+       <td align="right" width="47%" style="text-decoration:underline">:التاريخ </td>
+       <td align="right" width="3%">.</td>
+     </tr>
+   </table>
+
+           <!-- Ending Table -->
+     <table width="100%" style="padding-top:20px">
+     <tr>
+       <td colspan="3" align="left"> We hope to receive your confirmation reply as the soonest </td>
+       <td colspan="3" align="right" style="text-decoration:underline">آملين أن نتلقى تأكيدكم على العرض في اقرب وقت ممكن </td>
+     </tr>
+     <tr>
+       <td colspan="3" align="left"> Kind Regards, </td>
+       <td colspan="3" align="right" style="text-decoration:underline">.تفضلوا بقبول وافر التحية والتقدير</td>
+     </tr>
+   </table>
+
+         <!-- Department Table -->
+   <table width="100%" style="padding-top:20px">
+     <tr>
+       <td colspan="3" align="left"> Leasing &amp; Sales department </td>
+       <td colspan="3" align="right" style="text-decoration:underline">إدارة التأجير والمبيعات</td>
+     </tr>
+   </table>
+
+    <table width="100%" style="padding-top:20px">
+                <tr>
+                    <#if record.custrecord_ino_pms_lp_property=="Palm View">
+                        <td align="left"> Jadwa Albasateen Real Estate Co. </td>
+                        <td align="right" style="text-decoration:underline"> شركة جدوى البساتين للعقارات </td>
+                    <#elseif record.custrecord_ino_pms_lp_property=="Al Basateen Offices">
+                        <td align="left"> Basateen Al Wadi Real Estate Co </td>
+                        <td align="right" style="text-decoration:underline"> شركة بساتين الوادي العقارية</td>
+                    </#if>
+                </tr>
+     </table>
+</body>
+</pdf>
