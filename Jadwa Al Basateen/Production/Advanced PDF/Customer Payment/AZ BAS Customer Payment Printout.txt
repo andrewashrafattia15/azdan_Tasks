@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+    <link name="NotoSansArabic" type="font" subtype="truetype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+
+    <macrolist>
+        <macro id="nlheader">
+            <table align="right" class="header" style="width: 100%;">
+              <tr>
+                <#if subsidiary.logo@url != "" >
+                <td  align="right" style="width: 30%; padding-top: -25px"> <img src="${subsidiary.logo@url}" style="float: left; width:150px; height:75px" /></td>
+                <#else>
+                <td align="right" style="width: 30%; padding-top: -25px"></td>
+                </#if>
+              </tr>
+            </table>
+        </macro>
+    </macrolist>
+    <style>
+			* {
+            font-family: "NotoSansArabic", sans-serif;
+              line-height: 20px;
+			}
+			
+        </style>
+</head>
+                  
+<body header="nlheader" header-height="30pt" footer="nlfooter" footer-height="10pt"  size="A4">
+  
+  <#assign data={}>
+  <#if record.custpage_custrecord_to_print?has_content>
+    <#assign data = record.custpage_custrecord_to_print?eval>
+  </#if>
+  
+  <table  style="margin-right:50px; padding-top:40px ; border-bottom:1px solid #bfbfbf" lang="ar" width="100%">
+    <tr>
+      <td width="60%" style=" font-weight:bold ; font-size: 18px">سند قبض</td>
+      <td width="40%" align="right" style=" background-color: #e3e3e3 ;font-size: 11px">${data.subname!" "} </td>
+    </tr>
+    <tr style=" margin-bottom:1px ; border-bottom:1px solid #bfbfbf">
+      <td width="60%" style="color: #bfbfbf ;margin-top:10px; margin-bottom:10px">${record.tranid}</td>
+      <td width="40%" ></td>
+    </tr>
+  </table>
+
+  <table align="right" style="margin-right:50px;font-size: 11px; padding-top:20px" lang="ar" width="100%">
+    <tr align="right" style="border-top:1px solid #bfbfbf;">
+      <td width="30%" style="border-right:1px solid #bfbfbf; background-color: #e3e3e3">تاريخ</td>
+      <td width="20%" style="border-bottom:1px solid #bfbfbf;">${record.trandate}</td>
+      <td width="30%" style="border-bottom:1px solid #bfbfbf; background-color: #e3e3e3">مجموع</td>
+      <td width="20%" style="border-bottom:1px solid #bfbfbf;border-left:1px solid #bfbfbf;">${(record.payment?replace("[^0-9,٫.]", "", "r")?replace("[,٫]", ".")?number?string["#,##0.00"])}</td>
+    </tr>
+    <tr align="right" >
+      <td width="30%" style="border-right:1px solid #bfbfbf; background-color: #e3e3e3">استلمنا من</td>
+      <td width="20%" style="border-bottom:1px dashed #bfbfbf;">${record.customer.custentity_az_bas_customer_name}</td>
+      <td width="30%" style="border-bottom:1px dashed #bfbfbf;" ></td>
+      <td width="20%" style="border-left:1px solid #bfbfbf;border-bottom:1px dashed #bfbfbf;"></td>
+    </tr>
+    <tr align="right">
+      <td width="30%" style="border-right:1px solid #bfbfbf; background-color: #e3e3e3">مبلغ و قدره</td>
+      <td width="20%" style="">${data.paymentAmountInArabic!""}</td>
+      <td width="30%" style="" ></td>
+      <td width="20%" style="border-left:1px solid #bfbfbf;"></td>
+    </tr>
+    <tr align="right" style="border-bottom:1px solid #bfbfbf;">
+      <td width="30%" style="border-right:1px solid #bfbfbf; background-color: #e3e3e3">و ذلك عن</td>
+      <td width="20%" style="border-top:1px dashed #bfbfbf;">${data.referenceNum!""} </td>
+      <td width="30%" style="border-top:1px dashed #bfbfbf; background-color: #e3e3e3">نقد/شيك/حوالة</td>
+      <td width="20%" style="border-top:1px dashed #bfbfbf;border-left:1px solid #bfbfbf;">${record.paymentmethod}</td>
+    </tr>
+  </table>
+
+  <table style=" margin-right:36px; width:100%; margin-top:40px; direction:rtl;border-collapse:separate; border-spacing:30px;">
+  <tr >
+    <td >
+      <table width="100%">
+        <tr>
+          <td align="center" style="width:30%; border:1px solid #e3e3e3; height:90px; vertical-align:top;"> <span style="padding-top:4px;text-decoration:underline">المستلم</span> </td>
+        </tr>
+      </table>
+    </td>
+    <td >
+      <table width="100%">
+        <tr>
+          <td align="center" style="width:30%; border:1px solid #e3e3e3; height:90px; vertical-align:top;"><span style="padding-top:4px;text-decoration:underline">المحاسب</span></td>
+        </tr>
+      </table>
+    </td>
+    <td >
+      <table width="100%">
+        <tr>
+          <td align="center" style="width:30%; border:1px solid #e3e3e3; height:90px; vertical-align:top;"><span style="padding-top:4px;text-decoration:underline">المدير</span></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</pdf>

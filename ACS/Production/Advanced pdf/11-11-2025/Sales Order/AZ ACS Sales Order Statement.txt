@@ -1,0 +1,249 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+            <table style="width: 100%;font-size: 10pt;"><tr>
+             <td colspan="15" align="center">  <img 
+  src="https://11217402.app.netsuite.com/core/media/media.nl?id=2507&amp;c=11217402&amp;h=80QTwdmw8iqhwA-43iGmp8497RddNbr9ORHBxgjVuxeofPy3" 
+  width="415" 
+  height="100" />
+</td>
+	</tr>
+	</table>
+        </macro>
+        <macro id="nlfooter">
+            <table style="width: 100%; font-size: 8pt;"><tr>
+	
+	<td align="right" style="padding: 0;"><pagenumber/> of <totalpages/></td>
+	</tr></table>
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+		</#if>
+		}
+		table {
+			font-size: 9pt;
+			table-layout: fixed;
+		}
+        th {
+            font-weight: bold;
+            font-size: 8pt;
+            vertical-align: middle;
+            padding: 5px 6px 3px;
+            background-color: #e3e3e3;
+            color: #333333;
+        }
+        td {
+            padding: 4px 6px;
+        }
+		td p { align:left }
+</style>
+</head>
+<body header="nlheader" header-height="13.5%" footer="nlfooter" footer-height="20pt" padding="0.2in 0.5in 0.5in 0.5in" size="Letter">
+
+    <table align="center"><tr><td  align="center" style="font-weight: bold;font-size:15 pt;" ><u>VAT Tuition Invoice</u></td></tr>
+
+  </table>
+
+  <table>
+    <tr>
+	<td align="left" style="font-size: 9pt; font-weight: bold; ">Parent:</td>
+   <td align="left" style="font-size: 9pt;">${record.entity.companyname}</td>
+   	<td align="left" style="font-size: 9pt; font-weight: bold; ">Order No.:</td>
+      	<td align="left" style="font-size: 9pt;">${record.tranid}</td>
+      </tr>
+      <tr>
+	<td align="left" style="font-size: 9pt; font-weight: bold; ">Student:</td>
+<td align="left" style="font-size: 9pt;">
+<#if record.custbody_az_acs_student??>
+    ${record.custbody_az_acs_student?split(":")?last?trim}
+</#if>
+</td>
+	
+
+        <td align="left" style="font-size: 9pt; font-weight: bold; ">Date:</td>
+      	<td align="left" style="font-size: 9pt;">${record.trandate}</td>
+      </tr>
+
+
+        <tr>
+     	<td align="left" style="font-size: 9pt; font-weight: bold; ">Academic Grade:</td>
+      	<td align="left" style="font-size: 9pt;">${record.custbody_az_acs_academic_grade}</td>
+          <td align="left" style="font-size: 9pt; font-weight: bold; ">TRN:</td>
+      	<td colspan="3" align="left" style="font-size: 9pt;">${subsidiary.federalidnumber}</td> 
+
+      </tr>
+</table>
+
+<div style="width: 100%; height: 2px; background-color: black; margin: 10px 0;"></div>
+          
+<#if record.item?has_content>
+<table style="width: 100%; margin-top: 10px; border: 1px solid black; border-collapse: collapse;">
+    <!-- Start items -->
+    <#list record.item as item>
+        <#if item_index == 0>
+            <thead>
+                <tr style="font-weight: bold; border: 1px solid black;">
+                    <th colspan="2" style="padding: 10px 6px; border-right: 1px solid black; border-bottom: 1px solid black; text-align: center;">Service</th>
+                    <th colspan="5" style="border-right: 1px solid black; border-bottom: 1px solid black; text-align: center;">Service Description</th>
+<th colspan="2" style="padding: 10px 6px; border-bottom: 1px solid black; text-align: center; width: 100px;">Amount</th>
+                <th colspan="1" style="padding: 10px 6px; border-left: 1px solid black; border-right: 0.5px solid black; border-bottom: 1px solid black; text-align: center;">VAT %</th>
+
+
+
+
+                </tr>
+            </thead>
+        </#if>
+    <#if item.custcol_az_acs_reservation_item?string != "T">
+            <tr style="border: 1px solid black;">
+      <td colspan="2" style="border-right: 1px solid black; border-bottom: 1px solid black; text-align: center;">${item.item}</td> 
+         <td colspan="5" style="border-right: 1px solid black; border-bottom: 1px solid black; line-height: 150%;">${item.description}</td>
+<td colspan="2" style="border-bottom: 1px solid black; text-align: right; width: 100px;">${item.amount}</td>
+           <td colspan="1" style="border-left: 1px solid black; border-right: 0.5px solid black; border-bottom: 1px solid black; text-align: right;">0%</td>
+
+
+
+
+             
+            </tr>
+                  </#if>
+
+<#assign reservationPaid = 0 />
+<#list record.item as line>
+  <#if line.item?has_content && line.item == 'Paid Reservation'>
+    <#assign cleanAmount = line.amount?replace("AED", "")?replace(",", "")?trim />
+    <#assign reservationPaid = cleanAmount?number />
+  </#if>
+</#list>
+                 
+    </#list> <!-- End items -->
+       <tr style="border: 0.5px solid black; background-color: #d9d9d9;">
+  <td colspan="9" style="border-bottom: 0.5px solid black; text-align: right;"><strong>Total Annual Fees</strong></td>
+  
+  <td style=" border-bottom: 0.5px solid black; text-align: right; white-space: nowrap; width: 150px; padding-left: -20px;">
+  <strong>AED${(record.total + (-reservationPaid))?string["#,##0.00"]}</strong>
+</td>
+
+</tr>
+
+
+
+</table>
+      <p></p>
+
+</#if>
+
+      
+<table style="page-break-inside: avoid; width: 100%; margin-top: 10px;">
+  <tr>
+	<td colspan="2">&nbsp;</td>
+	<td align="left" style="font-weight: bold; border-right:1; border-top:1; border-left:1;">Total Annual Fees</td>
+	<td align="right" style="border-top:1; border-right:1;">AED${(record.subtotal+(-reservationPaid))?string["#,##0.00"]}</td>
+	</tr>
+  
+
+  <tr>
+	<td colspan="2">&nbsp;</td>
+	<td align="left" style="font-weight: bold; border-right:1; border-top:1; border-left:1;">Less: Reservation Paid</td>
+	<td align="right" style="border-top:1; border-right:1;">AED${reservationPaid?string(",##0.00")}</td>
+	</tr>
+
+    <tr>
+	<td colspan="2">&nbsp;</td>
+	<td align="left"  style="font-weight: bold; border-right:1; border-top:1; border-left:1;" >Less: Payments Received</td>
+	<td align="right" style="border-top:1; border-right:1;;font-weight: ;">-${record.custbody_az_acs_so_paid_amount}</td>
+	</tr>
+      <tr>
+	<td colspan="2">&nbsp;</td>
+	<td align="left"  style="font-weight: bold; border-right:1; border-top:1; border-left:1; border-bottom:1;" >Outstanding Balance</td>
+	<td align="right" style="border-top:1; border-right:1;  border-bottom:1;font-weight: bold;">AED${(record.subtotal - record.custbody_az_acs_so_paid_amount)?string("0,000.00")}</td>
+	</tr>
+  <tr></tr></table>
+
+      <table align="center"><tr><td  align="center" style="font-weight: bold;font-size:15 pt;" ><p></p><u>Payments Statement</u></td></tr>
+  </table>
+          
+<table border="1" cellspacing="0" cellpadding="3" style="width: 100%; border-collapse: collapse; font-size: 8pt;">
+  
+    <tr style="background-color: #d9d9d9; font-weight: bold;">
+        <td style="width: 12%; padding: 10px; border-bottom: 0.5px solid black;">Name</td>
+        <td style="width: 40%; padding: 5px; border-bottom: 0.5px solid black;border-left: 0.5px solid black;">Description</td>
+        <td style="width: 8%; padding: 5px; border-bottom: 0.5px solid black;border-left: 0.5px solid black;">Amount</td>
+       <td style="width: 7%; padding: 5px; border-bottom: 0.5px solid black;border-left: 0.5px solid black;">Status</td>
+      <td style="width: 10%; padding: 5px; border-bottom: 0.5px solid black;border-left: 0.5px solid black;">Outstanding</td>
+      <td style="width: 10%; padding: 5px; border-bottom: 0.5px solid black;border-left: 0.5px solid black;">Date</td>
+    </tr>
+
+    <#if record.custpage_custrecord_to_print?has_content>
+      <#assign customrecord = record.custpage_custrecord_to_print?eval/>
+        <#list customrecord as item>
+          <tr>
+            <td style ="border-bottom: 0.5px solid black;">${item.name}</td>
+            <td style ="border-bottom: 0.5px solid black; border-left: 0.5px solid black;">${item.description}</td>
+            <td style ="border-bottom: 0.5px solid black; border-left: 0.5px solid black;">${item.totalAmount?number?string(",##0.00")}</td>
+            <td style ="border-bottom: 0.5px solid black; border-left: 0.5px solid black;">${item.status}</td>
+            <td style ="border-bottom: 0.5px solid black; border-left: 0.5px solid black;">${item.outStandingAmount?number?string(",##0.00")}</td>
+            <td style ="border-bottom: 0.5px solid black; border-left: 0.5px solid black;">${item.date}</td>
+          </tr>
+          </#list>
+          </#if>
+  
+</table>
+
+
+<div style="font-size: 12px;">
+  <p style="font-weight: bold; margin-top: 15px;">Payment Instructions:</p>
+  <p>Payment can be made by any of the following methods:</p>
+  <ul>
+      <li>Cash Payment - UAE Dirhams only</li>
+      <li>Dirham Check - payable to ACS drawn on one of the local (UAE) banks</li>
+      <li>Dollar Check - payable to ACS drawn on a U.S. bank (3.65 AED = $1.00)</li>
+      <li>Dirham Wire Transfer - To the American Community School of Abu Dhabi via our bank, First Abu Dhabi Bank</li>
+      
+  </ul>
+          <table style="margin-left: 20px; font-size: 12px; line-height: 1.2;">
+          <tr><td style="padding: 5px 0;">Account No.: 1481203128007056</td></tr>
+          <tr><td style="padding: 5px 0;">IBAN: AES060351481203128007056</td></tr>
+          <tr><td style="padding: 5px 0;">Swift Code: NBADAEAABAT</td></tr>
+          <tr><td style="padding: 5px 0;">First Abu Dhabi Bank</td></tr>
+          <tr><td style="padding: 5px 0;">Bateen Branch, P.O. Box 7644, Abu Dhabi, UAE</td></tr>
+          <tr><td style="padding: 5px 0;">AMERICAN COMMUNITY SCHOOL BLDG CONS</td></tr>
+</table>
+
+
+  
+  <p style="font-weight: bold; font-style: italic; color: red; margin-top: 15px;">
+      Please note: If your family has a student who will be entering ACS for the first time next year - 
+      the capital fee of <b>27,000 AED</b> per new student is approved from the regulatory authority.
+  </p>
+</div>
+
+
+</body>
+</pdf>

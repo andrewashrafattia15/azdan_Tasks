@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+            <table style="width: 100%; font-size: 10pt;"><tr>
+             <td colspan="3">  <img src="https://11217402.app.netsuite.com/core/media/media.nl?id=428&amp;c=11217402&amp;h=hlUMTgPz7geJelkLWmW1SbO9a-WHmDxqbY6zAclqO8di4LFC" /></td>
+			 <td colspan="2" align="right" style="font-size:10pt;vertical-align: middle;"></td>
+			</tr>
+			</table>
+        </macro>
+        
+    </macrolist>
+    <style type="text/css">
+		* {
+			<#if .locale == "zh_CN">
+				font-family: NotoSans, NotoSansCJKsc, sans-serif;
+			<#elseif .locale == "zh_TW">
+				font-family: NotoSans, NotoSansCJKtc, sans-serif;
+			<#elseif .locale == "ja_JP">
+				font-family: NotoSans, NotoSansCJKjp, sans-serif;
+			<#elseif .locale == "ko_KR">
+				font-family: NotoSans, NotoSansCJKkr, sans-serif;
+			<#elseif .locale == "th_TH">
+				font-family: NotoSans, NotoSansThai, sans-serif;
+			<#else>
+				font-family: NotoSans, sans-serif;
+			</#if>
+		}
+		table {
+			font-size: 9pt;
+			table-layout: fixed;
+		}
+        th {
+            font-weight: bold;
+            font-size: 8pt;
+            vertical-align: middle;
+            padding: 5px 6px 3px;
+            background-color: #e3e3e3;
+            color: #333333;
+        }
+        td {
+            padding: 4px 6px;
+        }
+		td p { align:left }
+	</style>
+</head>
+<body header="nlheader" header-height="20%" footer="nlfooter" footer-height="20pt" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+
+<!-- Title -->
+<table align="center">
+	<tr>
+		<td align="center" style="font-weight: bold;font-size:15pt;"><u>Customer Statement</u></td>
+	</tr>
+</table>
+
+<!-- General Info -->
+<table style="margin-left: 350pt; top: 20; width: 600pt; font-size: 9pt;">
+	<tr>
+		<td align="left" ><b>Receipt Name : </b>${record.custrecord_az_acs_receipt_name}</td>
+	</tr>
+	<tr>
+		<td align="left"><b>Payment Mode : </b>${record.custrecord_az_acs_cr_payment_method}</td>
+	</tr>
+	<tr>
+		<td align="left" ><b>Date: </b>${record.custrecord_az_acs_cr_date}</td>
+	</tr>
+</table>
+
+<!-- Total Amount -->
+<table border="1" style="margin-left: 5pt; top: -20; width: 200pt; font-size: 9pt;">
+	<tr>
+		<td align="left" style="font-size: 9pt; font-weight: bold;">Total Amount:</td>
+		<td align="left" style="font-size: 9pt;">${record.custrecord_az_acs_cr_received_amt}</td>
+	</tr>
+</table>
+
+<!-- Other Info -->
+<table>
+	<tr>
+      <td align="Right" style="font-size: 9pt; "><b>TRN: </b>  100390871000003 </td>
+    </tr>
+	<tr>
+      <td align="left" style="font-size: 9pt;"><b>Customer Receipt: </b>  ${record.name}</td>
+    </tr>
+</table>
+
+<div style="width: 100%; height: 2px; background-color: black; margin: 10px 0;"></div>
+
+<#assign rawData = record.custpage_custrecord_to_print?trim!"" />
+<#attempt>
+    <#assign data = (rawData?length > 0)?then(rawData?eval, {})>
+<#recover>
+    <#assign data = {}> <!-- fallback if ?eval fails -->
+</#attempt>
+<#assign itemList = data.recieptAllocations![]>
+<#assign totalAmtToPay = data.totalAmtToPay!0>
+  
+<!-- Item Table -->
+
+<table style="width: 100%; margin-top: 10px;">
+	<thead>
+		<tr style="font-weight: bold;">
+			<th width="30%" colspan="2" style="padding: 10px 6px;border-left: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black; text-align: center;">Student Name</th>
+			<th width="20%" colspan="2" style=" border-top: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black;  text-align: center;">Description</th>
+			<th width="30%" style="border-top: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black; text-align: center;">Transaction #</th>
+			<th width="20%" style="border-top: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black; text-align: center;">Amount</th>
+		</tr>
+	</thead>
+	
+    <tbody>
+        <#if itemList?has_content>
+            <#list itemList as item>
+                <tr>
+                    <td width="30%" colspan="2" style="padding: 6px; border-left: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black; text-align: center;">
+                        ${item.studentName!""}
+                    </td>
+                    <td width="20%" colspan="2" style="padding: 6px; border-bottom: 1px solid black; border-right: 1px solid black;  text-align: center;">
+                        ${item.description!""}
+                    </td>
+                    <td width="30%" style="padding: 6px; border-bottom: 1px solid black; border-right: 1px solid black; text-align: right;">
+                        ${item.transNum!""}
+                    </td>
+                    <td width="20%" style="padding: 6px; border-bottom: 1px solid black; border-right: 1px solid black; text-align: right;">
+                        ${item.amtToPay!"0"}
+                    </td>
+                </tr>
+            </#list>
+        </#if>
+	<!-- Total Receipt Amount Row -->
+    
+	<tr style="font-weight: bold; background-color: #e3e3e3;">
+		<td colspan="5" style="border-left: 1px solid black;border-bottom: 1px solid black; border-right: 1px solid black; text-align: right; padding: 6px;">Total Receipt Amount:</td>
+		<td style="text-align: right; padding: 6px;border-bottom: 1px solid black; border-right: 1px solid black;">${totalAmtToPay}</td>
+	</tr>
+	</tbody>
+</table>
+</body>
+</pdf>
