@@ -81,16 +81,18 @@ define(['N/record','N/search','N/ui/serverWidget'], function ( record,search,ser
     };
 
     const numberToArabicWords = (currency,amount) => {
-        const ones = ["", "واحد", "اثنان", "ثلاثة", "أربعة", "خمسة", "ستة", "سبعة", "ثمانية", "تسعة"];
-        const teens = ["عشرة", "أحد عشر", "اثنا عشر", "ثلاثة عشر", "أربعة عشر", "خمسة عشر", "ستة عشر", "سبعة عشر", "ثمانية عشر", "تسعة عشر"];
-        const tens = ["", "", "عشرون", "ثلاثون", "أربعون", "خمسون", "ستون", "سبعون", "ثمانون", "تسعون"];
-        const thousands = ["", "ألف", "مليون", "مليار"];
-
-        const convert_hundreds = (num) => {
-            let result = "";
-            if (num > 99) {
-                let hundreds = Math.floor(num / 100);
-                if (hundreds === 1) result += "مائة";
+        try {
+            
+            const ones = ["", "واحد", "اثنان", "ثلاثة", "أربعة", "خمسة", "ستة", "سبعة", "ثمانية", "تسعة"];
+            const teens = ["عشرة", "أحد عشر", "اثنا عشر", "ثلاثة عشر", "أربعة عشر", "خمسة عشر", "ستة عشر", "سبعة عشر", "ثمانية عشر", "تسعة عشر"];
+            const tens = ["", "", "عشرون", "ثلاثون", "أربعون", "خمسون", "ستون", "سبعون", "ثمانون", "تسعون"];
+            const thousands = ["", "ألف", "مليون", "مليار"];
+            
+            const convert_hundreds = (num) => {
+                let result = "";
+                if (num > 99) {
+                    let hundreds = Math.floor(num / 100);
+                    if (hundreds === 1) result += "مائة";
                 else if (hundreds === 2) result += "مائتان";
                 else if (hundreds < 10) result += ones[hundreds] + " مائة";
                 num %= 100;
@@ -108,7 +110,7 @@ define(['N/record','N/search','N/ui/serverWidget'], function ( record,search,ser
             }
             return result.trim();
         }
-
+        
         const convert_number = (num) => {
             if (num === 0) return "صفر";
             let parts = [];
@@ -127,49 +129,54 @@ define(['N/record','N/search','N/ui/serverWidget'], function ( record,search,ser
             }
             return parts.join(" و");
         }
-
+        
         let integerPart = Math.floor(amount);
         let decimalPart = Math.round((amount - integerPart) * 100);
-
+        
         let words = convert_number(integerPart) + " " ;
-
+        
         if(currency == "SAR"){
             words += " ريالاً";
             if (decimalPart > 0) {
-            words += " و" + convert_number(decimalPart) + " هللة فقط لا غير";
+                words += " و" + convert_number(decimalPart) + " هللة فقط لا غير";
             }   
         }
         else if(currency == "USD"){
             let words = convert_number(integerPart) + " دولاراً";
             if (decimalPart > 0) {
-            words += " و" + convert_number(decimalPart) + " سنتاً فقط لا غير";
+                words += " و" + convert_number(decimalPart) + " سنتاً فقط لا غير";
             }  
         }
         else if(currency == "AED"){
             let words = convert_number(integerPart) + " درهماً";
             if (decimalPart > 0) {
-            words += " و" + convert_number(decimalPart) + " فلساً فقط لا غير";
+                words += " و" + convert_number(decimalPart) + " فلساً فقط لا غير";
             }  
         }
         return words;
+        } catch (errorNumberToArabicWords) {
+            log.debug("errorNumberToArabicWords",errorNumberToArabicWords);
+        }
     }
 
     const numberToEnglishWords = (currency,amount) => {
-        const ones = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
-        const teens = ["Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
-        const tens = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
-        const thousands = ["", "Thousand", "Million", "Billion"];
-
+        try {
+            
+            const ones = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
+            const teens = ["Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
+            const tens = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
+            const thousands = ["", "Thousand", "Million", "Billion"];
+            
         const convert_hundreds = (num) => {
             let result = "";
-
+            
             if (num > 99) {
                 let hundred = Math.floor(num / 100);
                 result += ones[hundred] + " Hundred";
                 num %= 100;
                 if (num > 0) result += " and ";
             }
-
+            
             if (num >= 10 && num < 20) {
                 result += teens[num - 10];
             } else if (num >= 20) {
@@ -180,15 +187,15 @@ define(['N/record','N/search','N/ui/serverWidget'], function ( record,search,ser
             } else if (num > 0) {
                 result += ones[num];
             }
-
+            
             return result.trim();
         }
-
+        
         const convert_number = (num) => {
             if (num === 0) return "zero";
             let parts = [];
             let i = 0;
-
+            
             while (num > 0) {
                 let n = num % 1000;
                 if (n > 0) {
@@ -199,46 +206,50 @@ define(['N/record','N/search','N/ui/serverWidget'], function ( record,search,ser
                 num = Math.floor(num / 1000);
                 i++;
             }
-
+            
             return parts.join(", ");
         }
-
+        
         let integerPart = Math.floor(amount);
         let decimalPart = Math.round((amount - integerPart) * 100);
-
-
+        
+        
         let words = convert_number(integerPart) + " ";
         if(currency == "SAR"){
             words += "Riyal";
             if (decimalPart > 0) {
-            words += " and " + convert_number(decimalPart) + " Halala only";
+                words += " and " + convert_number(decimalPart) + " Halala only";
             }   
         }
         else if(currency == "USD"){
             words += "Dollar";
             if (decimalPart > 0) {
-             words += " and " + convert_number(decimalPart) + " Cent only";
+                words += " and " + convert_number(decimalPart) + " Cent only";
             }  
         }
         else if(currency == "AED"){
             words += " Dirham";
             if (decimalPart > 0) {
-            words += " and " + convert_number(decimalPart) + " Fils only";
+                words += " and " + convert_number(decimalPart) + " Fils only";
             }  
         }
         return words;
+        } catch (errorNumberToEnglishWords) {
+            log.debug("errorNumberToEnglishWords",errorNumberToEnglishWords);
+        }
     }
 
 
 
     const setData = (subname,referenceNum, paymentAmountInEnglish , paymentAmountInArabic,context) => {
-
+        try {
+            
             const custrecord = context.form.addField({
                 id: 'custpage_custrecord_to_print',
                 type: serverWidget.FieldType.LONGTEXT,
                 label: 'Text'
             });
-
+            
             
             const data = {
                 subname:subname,
@@ -249,9 +260,12 @@ define(['N/record','N/search','N/ui/serverWidget'], function ( record,search,ser
             
             custrecord.defaultValue = JSON.stringify(data);
             
+            } catch (errorSetData) {
+                log.debug("errorSetData",errorSetData)
+            }
         };
-
-
+        
+        
         return {
             beforeLoad: beforeLoad
         };
