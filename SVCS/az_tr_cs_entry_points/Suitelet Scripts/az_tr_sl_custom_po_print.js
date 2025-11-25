@@ -3,59 +3,59 @@
  * @NScriptType Suitelet
  */
 define(['N/record', 'N/render', 'N/log'],
-function (record, render, log) {
+ (record, render, log) => {
 
-    function onRequest(context) {
+    const onRequest = (context) => {
         try {
-            var request = context.request;
-            var response = context.response;
+            const request = context.request;
+            const response = context.response;
 
             // Get Purchase Order internal ID from URL
-            var poId = request.parameters.poId;
+            const poId = request.parameters.poId;
             if (!poId) {
                 response.write('Missing Purchase Order ID');
                 return;
             }
 
             // Load the PO record
-            var poRecord = record.load({
+            const poRecord = record.load({
                 type: record.Type.PURCHASE_ORDER,
                 id: poId
             });
 
             // Get Vendor ID
-            var vendorId = poRecord.getValue('entity');
+            const vendorId = poRecord.getValue('entity');
             if (!vendorId) {
                 response.write('No Vendor found on PO');
                 return;
             }
 
             // Load Vendor
-            var vendorRec = record.load({
+            const vendorRec = record.load({
                 type: record.Type.VENDOR,
                 id: vendorId
             });
 
             // Get Approver
-            var approverId = vendorRec.getValue('custentity_ra_approver');
+            const approverId = vendorRec.getValue('custentity_ra_approver');
             if (!approverId) {
                 response.write('No Resource Allocation Approver found');
                 return;
             }
 
             // Load Approver (Employee)
-            var approverRec = record.load({
+            let approverRec = record.load({
                 type: record.Type.EMPLOYEE,
                 id: approverId
             });
 
-            var approverName = approverRec.getValue('firstname') || '';
-            var approverEmail = approverRec.getValue('email') || '';
+            let approverName = approverRec.getValue('firstname') || '';
+            let approverEmail = approverRec.getValue('email') || '';
 
             log.debug('Approver Info', { approverName, approverEmail });
 
             // Create renderer using your template
-            var renderer = render.create();
+            let renderer = render.create();
             renderer.setTemplateByScriptId('CUSTTMPL_AZ_SVCS_AA_PURCHASE_ORDER');
             renderer.addRecord('record', poRecord);
 
@@ -70,7 +70,7 @@ function (record, render, log) {
             });
 
             // Render and output PDF directly
-            var pdfFile = renderer.renderAsPdf();
+            let pdfFile = renderer.renderAsPdf();
             response.writeFile(pdfFile, true);
 
         } catch (e) {

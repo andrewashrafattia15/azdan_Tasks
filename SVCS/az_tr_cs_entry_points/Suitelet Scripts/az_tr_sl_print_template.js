@@ -162,8 +162,8 @@ define(['N/search', 'N/render', 'N/log'], (search, render, log) => {
         try {
             // ---------- HEADER SECTION ----------
             template +=
-                '<table>' +
-                '<tr>' +
+                '<table>' 
+                '<tr>' 
                 '<td><b>PO Number:</b> ' + (header.tranid || '') + '</td>' +
                 '<td><b>Vendor:</b> ' + (header.entity || '') + '</td>' +
                 '</tr>' +
