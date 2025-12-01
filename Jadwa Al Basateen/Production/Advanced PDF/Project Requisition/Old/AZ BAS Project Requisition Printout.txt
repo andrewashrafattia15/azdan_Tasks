@@ -1,0 +1,188 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+  <macrolist>
+        <macro id="nlheader">
+
+               <table class="header" style="width: 100%;  ">
+                <tr style="border-top:1px solid black;">
+                  <td align="left" style="width:30%;border-left:1px solid black"></td>
+                  <td align="center" style="width:40%; font-weight:bold; font-size:16pt;padding-top:20px"> Project Requisition </td>
+                  <td align="right" style="width: 15%"> <img src="https://9193738.app.netsuite.com/core/media/media.nl?id=105&amp;c=9193738&amp;h=oyoAoG1NfPysBL6CCOfz7umyHuDaZt1cExjc-Bx57FKQOxK0" 
+                                                          style="width: 90px; height: 70px; padding-top:10px"  /></td>
+                  <td align="right" style="width: 15%; border-right:1px solid black"> <img src="https://9193738.app.netsuite.com/core/media/media.nl?id=103&amp;c=9193738&amp;h=WamSTaRaaeW76AXbA8M08qyVpEO8a5WQey86b70R018refci" 
+                                                          style="width: 70px; height: 70px;padding-top:10px " /> </td>
+                  
+                               
+                </tr> 
+
+               
+               <tr style="border-bottom:1px solid black">
+                  <td align="left" style="width: 30%;border-left:1px solid black"> </td>
+                  <td align="center" style="width:40%; font-weight:bold;padding-top:-30px;"> P.R No</td>
+                  <td align="right" style="width: 15%"> ${record.custrecord_ino_pm_pr_doc_no}</td>
+                 
+                  <td align="right" style="width: 15%; border-right:1px solid black"> </td>                  
+               </tr> 
+             
+            </table>
+      
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+		</#if>
+	
+</style>
+</head>
+<body  header="nlheader" header-height="10%" padding="0.8in 0.8in 0.8in 0.8in" size="A4">
+    <table style="width:100%;font-size:9pt">
+      <tr style="padding-top:-14px">
+        <td style="width:27%;border-bottom:1px solid black; border-left:1px solid black; border-right:1px solid black;"> Department:</td>
+        <td style="width:30%;border-bottom:1px solid black; border-right:1px solid black;"> ${record.custrecord_ino_pm_pr_department}</td>
+        <td style="width:23%;border-bottom:1px solid black; border-right:1px solid black;"> Date:</td>
+        <td style="width:20%;border-bottom:1px solid black; border-right:1px solid black;"> ${record.custrecord_ino_pm_pr_date}</td>
+      </tr>
+      <tr>
+        <td style="border-bottom:1px solid black; border-left:1px solid black; border-right:1px solid black;"> Project Name:</td>
+        <td style="border-bottom:1px solid black; border-right:1px solid black;"> ${record.custrecord_ino_pm_pr_project}</td>
+        <td style="border-right:1px solid black;padding-left:px;"> Expected Delivery Date:</td>
+        <td style=" border-right:1px solid black;"> ${record.custrecord_ino_pm_pr_expected_start}</td>
+      </tr>
+
+    <tr>
+      <td style="border-bottom:1px solid black; border-left:1px solid black; border-right:1px solid black;"> Project Code: </td>
+      <td style="border-bottom:1px solid black; border-right:1px solid black;"> ${record.custrecord_ino_pm_pr_project.custrecord_ino_pm_prj_code}</td>
+      <td style="border-bottom:1px solid black; border-right:1px solid black;"> </td>
+      <td style="border-bottom:1px solid black; border-right:1px solid black;"> </td>
+    </tr>
+    </table>
+
+   <table style="width:100%;" >
+     <tr style="width:100%;border-bottom:1px solid black;">
+       <td style="width:10%; text-decoration:underline;padding-top:3px; padding-bottom:3px;border-left: 1 px solid black; "> Subject: </td>
+       <td style="padding-top:3px; padding-bottom:3px;border-right: 1px solid black"> ${record.custrecord_ino_pm_pr_memo}</td>
+    </tr>
+</table>  
+
+    <table style="width:100%;font-size:9pt">
+    <tr style="font-weight:bold">
+      <td align="center" style="width:10%; border-right:1px solid black;border-left:1px solid black ; padding-top:10px"> Item  </td>
+      <td align="center" style="width:35%; border-right:1px solid black; padding-top:10px"> Material/Service Description </td>
+      <td align="center" style="width:10%; border-right:1px solid black; padding-top:10px">Unit</td>
+      <td align="center" style="width:15%; border-right:1px solid black; padding-top:10px">Quantity</td>
+      <td align="center" style="width:15%; border-right:1px solid black; padding-top:10px"> Estimated  </td>
+      <td align="center" style="width:10%; border-right:1 px solid black;padding-top:10px;" > Total </td>
+    </tr>
+    <tr style="font-weight:bold">
+      <td align="center" style=" border-right:1px solid black;border-bottom:1 px solid black;border-left:1px solid black ; padding-top:px"> No.</td>
+      <td align="center" style=" border-right:1px solid black;border-bottom:1 px solid black; padding-top:px"> </td>
+      <td align="center" style=" border-right:1px solid black;border-bottom:1 px solid black; padding-top:px"></td>
+      <td align="center" style=" border-right:1px solid black;border-bottom:1 px solid black; padding-top:px"></td>
+      <td align="center" style=" border-right:1px solid black;border-bottom:1 px solid black; padding-top:px">  Unit Price</td>
+      <td align="center" style=" border-bottom:1 px solid black; border-right:1 px solid black;padding-top:px;" >  Amount</td>
+    </tr>
+
+    <#if record.custpage_requisition_items?has_content>
+    <#assign fieldPrint = record.custpage_requisition_items?eval/>
+    <#list fieldPrint as item>
+    <tr>
+      <td align="center" style="border-left:1 px solid black; border-right:1px solid black;border-bottom:1px solid black;">${item?counter}</td>
+      <td align="left" style=" border-right:1px solid black;border-bottom:1px solid black;">${item.item_name}</td>
+      <td align="center" style=" border-right:1px solid black;border-bottom:1px solid black;">${item.uom}</td>
+      <td align="center" style=" border-right:1px solid black;border-bottom:1px solid black;">${item.quantity}</td>
+      <td align="right" style=" border-right:1px solid black;border-bottom:1px solid black;">${item.estimated_unit_price?string(",##0.00")}</td>
+      <td align="right" style=" border-right:1px solid black;border-bottom:1px solid black;">${item.amount?string(",##0.00")}</td>
+    </tr>
+    </#list>
+    </#if>
+    <tr>
+      <td align="center" style="border-left:1 px solid black;border-bottom:1px solid black;"> </td>
+      <td align="center" style=" border-bottom:1px solid black;"></td>
+      <td align="center" style=" border-bottom:1px solid black;"></td>
+      <td align="center" style=" border-bottom:1px solid black;"></td>
+      <td align="right" style=" border-right:1px solid black;border-bottom:1px solid black;font-weight:bold;"> SUBTOTAL</td>
+      <#if record.custpage_subtotal?has_content>
+        <#assign subtotal = record.custpage_subtotal?eval/>
+      <td align="right" style=" border-right:1px solid black;border-bottom:1px solid black;">${subtotal?string(",##0.00")}</td>
+      <#else>
+        <td align="center" style=" border-right:1px solid black;border-bottom:1px solid black;"></td>
+      </#if>
+    </tr>
+
+    <tr>
+      <td align="center" style="border-left:1 px solid black;border-bottom:1px solid black;"> </td>
+      <td align="center" style=" border-bottom:1px solid black;"></td>
+      <td align="center" style=" border-bottom:1px solid black;"></td>
+      <td align="center" style=" border-bottom:1px solid black;"></td>
+      <td align="right" style=" border-right:1px solid black;border-bottom:1px solid black;font-weight:bold;"> VAT</td>
+      <#if record.custrecord_az_bas_pr_tax_schedule.internalid == "1">
+      <td align="center" style=" border-right:1px solid black;border-bottom:1px solid black;">15%</td>
+      <#else>
+        <td align="center" style=" border-right:1px solid black;border-bottom:1px solid black;">0%</td>
+      </#if>
+    </tr>
+
+   <tr>
+      <td align="center" style="border-left:1 px solid black;"> </td>
+      <td align="center" style=" "></td>
+      <td align="center" style=" "></td>
+      <td align="center" style=" "></td>
+      <td align="right" style=" border-right:1px solid black;font-weight:bold;"> TOTAL</td>
+      <#if record.custrecord_az_bas_pr_tax_schedule.internalid == "1">
+      <#if record.custpage_subtotal?has_content>
+        <#assign subtotal = record.custpage_subtotal?eval/>
+        <#assign vat = subtotal * 0.15>
+        <#assign total = vat + subtotal>
+      <td align="right" style=" border-right:1px solid black;">${total?string(",##0.00")}</td>
+      </#if>
+      <#else>
+      <#if record.custpage_subtotal?has_content>
+        <#assign subtotal = record.custpage_subtotal?eval/>
+      <td align="right" style=" border-right:1px solid black;">${subtotal?string(",##0.00")}</td>
+      </#if>
+      </#if>
+  </tr>
+</table>
+   <table style="width:100%;border:1px solid black;font-size:11pt" >
+     <tr style="width:100%;padding-bottom:px">
+       <td style="text-decoration:underline;padding-top:3px;font-weight:bold; "> Special Terms and Conditions: </td>
+    </tr>
+     <tr style="padding-bottom:70px; font-size:9pt">
+       <td> ${record.custrecord_az_bas_pr_special_terms_cond}</td>
+     </tr>
+</table> 
+
+<table style="width:100%;border-left:1px solid black;border-right:1px solid black; border-bottom:1px font-size:9pt" >
+     <tr style="width:100%;padding-bottom:50px">
+       <td align="left" style="padding-top:30px; padding-left:100px "> Requestor </td>
+       <td align="right" style="padding-top:30px; padding-right:80px "> Direct Manager </td>
+    </tr>
+</table> 
+
+</body>
+</pdf>

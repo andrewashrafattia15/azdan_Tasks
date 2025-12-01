@@ -20,27 +20,23 @@
             <table class="header" style="width: 100%;">
                 <tr>
                   <td style="width: 15%"> <img src="https://9193738.app.netsuite.com/core/media/media.nl?id=105&amp;c=9193738&amp;h=oyoAoG1NfPysBL6CCOfz7umyHuDaZt1cExjc-Bx57FKQOxK0" 
-                                                          style="width: 100px; height: 50px;padding-top:-20px  "  /></td>
-                  <#if record.approvalstatus == 'Pending Approval'>
+                                                          style="width: 100px; height: 50px;padding-top:-20px"  /></td>
+                  <#if record.custrecord_ino_pm_contract_status == 'Pending Approval'>
                   <td align="left" style="width: 15%"> <img src="https://9193738.app.netsuite.com/core/media/media.nl?id=103&amp;c=9193738&amp;h=WamSTaRaaeW76AXbA8M08qyVpEO8a5WQey86b70R018refci" 
-                                                          style="width: 70px; height: 50px;padding-top:-20px; padding-left:-30px" /> </td>
+                                                          style="width: 70px; height: 50px;padding-top:-20px; margin-left:-30px" /> </td>
                   <#else>
                   <td align="left" style="width: 15%"> <img src="https://9193738.app.netsuite.com/core/media/media.nl?id=103&amp;c=9193738&amp;h=WamSTaRaaeW76AXbA8M08qyVpEO8a5WQey86b70R018refci" 
-                                                          style="width: 70px; height: 50px;padding-top:-20px; padding-left:-60px" /> </td>
+                                                          style="width: 70px; height: 50px;padding-top:-20px; margin-left:-50px" /> </td>
                   </#if>
-                  <td align="center" style="width:40%; font-weight:bold; font-size:16pt"> PURCHASE ORDER </td>                 
-                      <#if record.approvalstatus =='Approved' >
-                  <td align="center" style="font-weight:bold;color:white;border-top:1px solid green;border-left:1px solid green; border-right:1px solid green;border-bottom:1px solid green;background-color:green;padding-top:10px">  ${record.approvalstatus}</td>    
-                  <#else>
-                   <td align="right" style="color:red;padding-top:20px"> ${record.approvalstatus}</td>  
-                  </#if>
+                  <td align="center" style="width:40%; font-weight:bold; font-size:16pt"> Project Contract </td>
+                  <td align="right" style="color:red;padding-top:20px"> ${record.custrecord_ino_pm_contract_status}</td>                  
                 </tr> 
 
                
                <tr>
                   <td style="width: 15%"> </td>
                   <td align="left" style="width: 15%"> </td>
-                  <td align="center" style="width:40%; font-weight:bold;color:red"> ${record.tranid} </td>
+                  <td align="center" style="width:40%; font-weight:bold;color:red"> ${record.name} </td>
                   <td align="right" style=""> </td>                  
                </tr> 
              
@@ -50,7 +46,7 @@
         </macro>
         <macro id="nlfooter">
                
-                <table class="footer" style="width: 100%;font-size:9pt; color:#afaaac; padding-top:-10px ">
+                <table class="footer" style="width: 100%;font-size:9pt; color:#afaaac; padding-top:10px ">
                 <tr style=" ">
                     <td align="left" style="width: 40%; "> <Strong> Jadwa Al-Basateen Real Estate Co.</Strong> - Riyadh       </td>
                     <td align="center" style="width:20%"> </td>
@@ -104,112 +100,121 @@
   </style>
 </head>
 <body header="nlheader" header-height="10%" footer="nlfooter" footer-height="3%" padding="0.5in 0.5in 0.5in 0.5in" size="A4">
-  
-  <#if record.custpage_custrecord_to_print?has_content>
-   <#assign data = record.custpage_custrecord_to_print?eval!""> 
-  </#if>
-     
-<table style="width:100%;padding-top:-20px ; font-size: 11px" >
+<table style="width:100%;padding-top:-20px ; font-size:11px" >
   <tr style="width:100%;border-top:1px solid black ">
-    <td style="width: 25%; font-weight:bold;border-left: 1 px solid black"> Buyer:</td>
-    <td style="width: 25%;"></td>
-    <td style="width: 25%;font-weight:bold;border-left: 1 px solid black"> To/Vendor:</td>
-    <td style="width: 25%;border-right: 1px solid black;"></td>
+    <td style="width: 60%; font-weight:bold;border-left: 1 px solid black"> Buyer:</td>
+    <td style="width: 0%;"></td>
+    <td style="width: 40%;font-weight:bold;border-left: 1 px solid black"> To/Vendor:</td>
+    <td style="width: 0%;border-right: 1px solid black;"></td>
   </tr>
 
   <tr>
     <td style="border-left: 1 px solid black"> Company</td>
-    <td style="font-weight:bold; padding-left: -100px"> : ${record.subsidiary} </td>
+    <td style="font-weight:bold; padding-left: -230px; font-size: 9pt"> : ${record.custrecord_ino_pm_contract_subsidiary} </td>
     <td style="border-left: 1 px solid black">Company</td>
-    <td style="font-weight:bold;border-right: 1px solid black; padding-left: -100px"> : ${record.entity.companyname} </td>
+    <td style="font-weight:bold;border-right: 1px solid black; padding-left: -80px; font-size: 9pt">: ${record.custrecord_ino_pm_contract_vendor} </td>
   </tr>
 
   <tr>
     <td style="border-left: 1 px solid black"> VAT</td>
-    <td style="font-weight:bold; padding-left: -100px"> : ${subsidiary.federalidnumber}</td>
+    <td style="font-weight:bold; padding-left: -230px"> :</td>
     <td style="border-left: 1 px solid black">Address</td>
-    <td style="font-weight:bold;border-right: 1px solid black; padding-left: -100px"> : ${record.entity.address} </td>
+    <td style="font-weight:bold;border-right: 1px solid black; padding-left: -80px;"> :</td>
   </tr>
 
   <tr>
     <td style="border-left: 1 px solid black"> Project</td>
-    <td style="font-weight:bold; padding-left: -100px">: ${record.custbody_az_bas_property} </td>
+    <td style="font-weight:bold; padding-left: -230px; font-size: 9pt"> : ${record.custrecord_ino_pm_contract_projectmaster}</td>
     <td style="border-left: 1 px solid black">VAT </td>
-    <td style="font-weight:bold;border-right: 1px solid black; padding-left: -100px"> : ${record.entity.vatregnumber}</td>
+    <td style="font-weight:bold;border-right: 1px solid black; padding-left: -80px; font-size: 9pt"> : ${record.custrecord_ino_pm_contract_vendor.vatregnumber}</td>
   </tr>
 
   <tr>
-    <td style="border-left: 1 px solid black"> MSR  </td>
-    <td style="font-weight:bold; padding-left: -100px"> : ${record.item[0].linkedorder} </td>
+    <td style="border-left: 1 px solid black">  </td>
+    <td style="font-weight:bold"> </td>
     <td style="border-left: 1 px solid black">Attention </td>
-    <td style="font-weight:bold;border-right: 1px solid black; padding-left: -100px"> : ${(data.primaryContact)!' '}</td>
+    <#if record.custpage_custrecord_to_print?has_content>
+    <td style="font-weight:bold;border-right: 1px solid black; padding-left: -80px; font-size: 9pt"> : ${record.custpage_custrecord_to_print?replace('"', '')} </td>
+    <#else>
+    <td style="font-weight:bold;border-right: 1px solid black; padding-left: -80px;"> : </td>
+    </#if>
   </tr>
 
-  <tr>
+  <tr style="">
     <td style="border-left: 1 px solid black" > Date </td>
-    <td style="font-weight:bold; padding-left: -100px"> : ${record.trandate?string("EEEE, MMMM d, yyyy")}</td>
-    <td style="border-left: 1 px solid black"> Tel</td>
-    <td style="font-weight:bold;border-right: 1px solid black; padding-left: -100px"> : ${record.entity.altphone} </td>
+    <td style="font-weight:bold; padding-left: -230px; font-size: 9pt"> : ${record.custrecord_ino_pm_contract_date?string("EEEE, MMMM d, yyyy")}</td>
+    <td style="border-left: 1 px solid black; width: 110px">Your Reference </td>
+    <#if record.custrecord_ino_pm_contract_award_meth == 'Bidding Process'>
+    <td style="font-weight:bold;border-right: 1px solid black; padding-left: -80px; font-size: 9pt"> : ${record.custrecord_ino_pm_contract_bidding}</td>
+    <#else>
+    <td style="font-weight:bold;border-right: 1px solid black; padding-left: -80px;"> :</td>
+    </#if>
   </tr>
 
   <tr>
     <td style="border-left: 1 px solid black"> Currency </td>
-    <td style= "font-weight:bold; padding-left: -100px"> : ${record.currency}</td>
-    <td style="border-left: 1 px solid black"> Fax</td>
-    <td style="font-weight:bold;border-right: 1px solid black; padding-left: -100px"> : ${record.entity.fax} </td>
+    <td style= "font-weight:bold; padding-left: -230px; font-size: 9pt"> : ${record.custrecord_ino_pm_contract_currency}</td>
+    <td style="border-left: 1 px solid black">Tel </td>
+    <td style="font-weight:bold;border-right: 1px solid black; padding-left: -80px;"> : ${record.custrecord_ino_pm_contract_vendor.altphone}</td>
   </tr>
-Fax
+
   <tr>
     <td style="border-left: 1 px solid black"> Tel</td>
-    <td style= "font-weight:bold; padding-left: -100px"> : 920003749</td>
-    <td style="border-left: 1 px solid black"> Mobile</td>
-    <td style="font-weight:bold;border-right: 1px solid black; padding-left: -100px"> : ${record.entity.phone} </td>
+    <td style= "font-weight:bold; padding-left: -230px; font-size: 9pt"> : 920003749</td>
+    <td style="border-left: 1 px solid black">Fax </td>
+    <td style="font-weight:bold;border-right: 1px solid black; padding-left: -80px; font-size: 9pt"> : ${record.custrecord_ino_pm_contract_vendor.fax} </td>
   </tr>
 
   <tr>
     <td  style="border-left: 1 px solid black"> </td>
     <td style= "font-weight:bold"> </td>
-    <td style="border-left: 1 px solid black"> Email</td>
-    <td style="font-weight:bold;border-right: 1px solid black; padding-left: -100px"> : ${record.entity.email}  </td>
+    <td style="border-left: 1 px solid black">Mobile </td>
+    <td style="font-weight:bold;border-right: 1px solid black; padding-left: -80px; font-size: 9pt"> : ${record.custrecord_ino_pm_contract_vendor.phone} </td>
   </tr>
 
  <tr>
     <td  style="border-left: 1 px solid black"> </td>
     <td style= "font-weight:bold"> </td>
-    <td style="border-left: 1 px solid black"> </td>
-    <td style="font-weight:bold;border-right: 1px solid black">  </td>
+    <td style="border-left: 1 px solid black">Email </td>
+    <td style="font-weight:bold;border-right: 1px solid black; font-size: 9pt; padding-left: -80px;"> : ${record.custrecord_ino_pm_contract_vendor.email} </td>
   </tr>
 </table>
 
 <table style="width:100%;" >
   <tr style="width:100%;border-top:1px solid black;border-bottom:1px solid black;">
-    <td style="width:10%;text-decoration:underline;padding-top:3px; padding-bottom:3px;"> Subject:  </td>
-    <td align="left" style="width:90%;padding-left: px "> ${record.memo}</td>    
+    <td style="width:10%; text-decoration:underline;padding-top:3px; padding-bottom:3px"> Subject: </td>
+       <td style="padding-top:5px; padding-bottom:3px;font-size:14px"> ${record.custrecord_ino_pm_contract_memo}</td>
   </tr>
 </table>  
 
-  <table style="width:100% ; font-size:11px">
+  <table style="width:100%;font-size:11px">
     <tr style="font-weight:bold">
-      <td align="center" style="width:7%; border-right:1px solid black;border-bottom:1 px solid black;border-left:1px solid black ;"> Item No.</td>
-      <td align="center" style="width:42%; border-right:1px solid black;border-bottom:1 px solid black;"> Material/Service Description </td>
-      <td align="center" style="width:10%; border-right:1px solid black;border-bottom:1 px solid black;">Unit</td>
-      <td align="center" style="width:5%; border-right:1px solid black;border-bottom:1 px solid black;">Quantity</td>
-      <td align="center" style="width:15%; border-right:1px solid black;border-bottom:1 px solid black;">Unit Price</td>
-      <td align="center" style="width:10%;border-bottom:1 px solid black; border-right:1 px solid black;" > Amount</td>
+      <td align="center" style="width:10%; border-right:1px solid black;border-bottom:1 px solid black;border-left:1px solid black "> Item No.</td>
+      <td align="center" style="width:48%; border-right:1px solid black;border-bottom:1 px solid black"> Material/Service Description </td>
+      <td align="center" style="width:10%; border-right:1px solid black;border-bottom:1 px solid black">Unit</td>
+      <td align="center" style="width:10%; border-right:1px solid black;border-bottom:1 px solid black">Quantity</td>
+      <td align="center" style="width:12%; border-right:1px solid black;border-bottom:1 px solid black">Unit Price</td>
+      <td align="center" style="width:10%;border-bottom:1 px solid black; border-right:1 px solid blac;" > Amount</td>
     </tr>
-    <#if record.item?has_content>
-     <#list record.item as item>
-       <#assign SN =item_index +1/>
+
+    <#assign totalAmount = 0>
+    <#if record.custpage_contract_boq?has_content>
+      <#assign BOQlist = record.custpage_contract_boq?eval_json!" ">
+        
+      <#list BOQlist as line>
+        <#assign SN =line_index +1/>
+        <#assign lineTotal = (line.qty?number * line.rate?number)>
+        <#assign totalAmount += lineTotal>
     <tr>
-      <td align="center" style="border-left:1 px solid black; border-right:1px solid black;border-bottom:1px solid black;"> ${SN} </td>
-      <td align="left" style=" border-right:1px solid black;border-bottom:1px solid black;font-size:9pt">${item.description}</td>
-      <td align="center" style=" border-right:1px solid black;border-bottom:1px solid black;">${item.units}</td>
-      <td align="center" style=" border-right:1px solid black;border-bottom:1px solid black;">${item.quantity}</td>
-      <td align="right" style=" border-right:1px solid black;border-bottom:1px solid black;">${item.rate?string(",##0.00")}</td>
-      <td align="right" style=" border-right:1px solid black;border-bottom:1px solid black;">${item.amount?string(",##0.00")}</td>
+      <td align="center" style="border-left:1 px solid black; border-right:1px solid black;border-bottom:1px solid black; font-size: 9pt"> ${SN} </td>
+      <td align="left" style=" border-right:1px solid black;border-bottom:1px solid black; font-size: 9pt">${line.item}</td>
+      <td align="center" style=" border-right:1px solid black;border-bottom:1px solid black; font-size: 9pt">${line.uom}</td>
+      <td align="center" style=" border-right:1px solid black;border-bottom:1px solid black; font-size: 9pt">${line.qty}</td>
+      <td align="right" style=" border-right:1px solid black;border-bottom:1px solid black; font-size: 9pt">${(line.rate?number)?string(",##0.00")}</td>
+      <td align="right" style=" border-right:1px solid black;border-bottom:1px solid black; font-size: 9pt">${(line.qty?number * line.rate?number)?string["#,##0.00"]}</td>
     </tr>
-    </#list>
-  </#if>
+      </#list>
+    </#if>
 
     <tr>
       <td align="center" style="border-left:1 px solid black;border-bottom:1px solid black;"> </td>
@@ -217,7 +222,7 @@ Fax
       <td align="center" style=" border-bottom:1px solid black;"></td>
       <td align="center" style=" border-bottom:1px solid black;"></td>
       <td align="right" style=" border-right:1px solid black;border-bottom:1px solid black;font-weight:bold;"> SUBTOTAL</td>
-      <td align="right" style=" border-right:1px solid black;border-bottom:1px solid black;">${record.subtotal?string(",##0.00")}</td>
+      <td align="right" style=" border-right:1px solid black;border-bottom:1px solid black; font-size: 9pt">${totalAmount?string(",##0.00")}</td>
     </tr>
 
     <tr>
@@ -225,8 +230,10 @@ Fax
       <td align="center" style=" border-bottom:1px solid black;"></td>
       <td align="center" style=" border-bottom:1px solid black;"></td>
       <td align="center" style=" border-bottom:1px solid black;"></td>
-      <td align="right" style=" border-right:1px solid black;border-bottom:1px solid black;font-weight:bold;"> VAT </td>
-      <td align="right" style=" border-right:1px solid black;border-bottom:1px solid black;">${record.taxtotal?string(",##0.00")}</td>
+      <td align="right" style=" border-right:1px solid black;border-bottom:1px solid black;font-weight:bold;"> VAT</td>
+      <#if record.custpage_contract_boq_tax_rate?has_content>
+      <td align="center" style=" border-right:1px solid black;border-bottom:1px solid black; font-size: 9pt">${record.custpage_contract_boq_tax_rate}</td>
+      </#if>
     </tr>
 
    <tr>
@@ -234,32 +241,43 @@ Fax
       <td align="center" style=" border-bottom:1px solid black;"></td>
       <td align="center" style=" border-bottom:1px solid black;"></td>
       <td align="center" style=" border-bottom:1px solid black;"></td>
-      <td align="right" style=" border-right:1px solid black;border-bottom:1px solid black;font-weight:bold;"> TOTAL </td>
-      <td align="right" style=" border-right:1px solid black;border-bottom:1px solid black;">${record.total?string(",##0.00")}</td>
+      <td align="right" style=" border-right:1px solid black;border-bottom:1px solid black;font-weight:bold;"> TOTAL</td>
+     
+      <#assign rawTaxRate = record.custpage_contract_boq_tax_rate?string>
+      <#if rawTaxRate?matches("^[0-9.]+%$")>
+      <#assign taxRate = (rawTaxRate?replace("%", "")?number / 100)>
+      <#else>
+      <#assign taxRate = 0>
+      </#if>
+      <td align="right" style="border-right:1px solid black;border-bottom:1px solid black; font-size: 9pt">
+        ${((totalAmount?number * taxRate) + totalAmount?number)?string["#,##0.00"]}
+      </td>
     </tr>
 
     <tr>
-      <td colspan="3" align="left" style="border-left:1 px solid black;border-bottom:1px solid black;font-weight:bold">${data.totalInWords!' '} ${record.currency}</td>
+      <td colspan="3" align="left" style="border-left:1 px solid black;border-bottom:1px solid black;font-weight:bold">${record.custpage_total_in_English!' '} ${record.custrecord_ino_pm_contract_currency}</td>
       <td align="center" style=" border-bottom:1px solid black;"></td>
       <td align="center" style=" border-bottom:1px solid black;"> </td>
       <td align="center" style=" border-right:1px solid black;border-bottom:1px solid black;"></td>
     </tr>
   </table>
 
-  <table style="width:100%; margin-top:10px;font-size:9pt;">
+  <table style="width:100%; margin-top:10px;font-size:11px;">
 
-   <#if data.termsAndConditions??>
-    <#list data.termsAndConditions as term>
-        <tr>
-            <td style="font-weight:bold;text-decoration:underline;padding-top:10px ">${term.termType!""}</td>
-        </tr>
-        <tr>
-            <td> ${term.description!" "}</td>
-        </tr>
-    </#list>
-   </#if>  
+    <#if record.custpage_terms_conditions?has_content>
+      <#assign termsList = record.custpage_terms_conditions?eval!" ">
+      <#list termsList as data>
+    <tr>
+      <td style="font-weight:bold;text-decoration:underline;padding-top:10px ">${data.termType} :</td>
+    </tr>
+    <tr>
+      <td> ${data.description} </td>
+    </tr>
+        </#list>
+    </#if>
+     
    <tr>
-      <td style="font-weight:bold;text-decoration:underline;padding-top:10px "> General Note:</td>
+      <td style="font-weight:bold;text-decoration:underline;padding-top:10px ">General Note:</td>
    </tr>  
     
    <tr>

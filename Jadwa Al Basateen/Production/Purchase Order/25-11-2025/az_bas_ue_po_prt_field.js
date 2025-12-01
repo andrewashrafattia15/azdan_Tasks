@@ -17,7 +17,7 @@ define(['N/search','N/ui/serverWidget'], function (search,serverWidget) {
                 const total = record.getValue("total");
 
                 const primaryContact = getPrimaryContact(vendorId);
-                const termsAndConditions = getTermsConditions(MyRecId,recType);
+                const termsAndConditions = getTermsConditions(MyRecId);
                 const totalInWords = numberToEnglishWords(total);
 
                 setData(primaryContact,termsAndConditions,totalInWords,context);
