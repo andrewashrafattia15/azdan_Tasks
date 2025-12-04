@@ -1,0 +1,338 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+   <link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false" />
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+   <macrolist>
+        <macro id="nlheader">
+            <table class="header" style="width: 100%;">
+                <tr>
+                  <td style="width: 15%"> <img src="https://9193738.app.netsuite.com/core/media/media.nl?id=105&amp;c=9193738&amp;h=oyoAoG1NfPysBL6CCOfz7umyHuDaZt1cExjc-Bx57FKQOxK0" 
+                                                          style="width: 100px; height: 50px;padding-top:-20px"  /></td>
+                  <#if record.custrecord_ino_pm_contract_status == 'Pending Approval'>
+                  <td align="left" style="width: 15%"> <img src="https://9193738.app.netsuite.com/core/media/media.nl?id=103&amp;c=9193738&amp;h=WamSTaRaaeW76AXbA8M08qyVpEO8a5WQey86b70R018refci" 
+                                                          style="width: 70px; height: 50px;padding-top:-20px; margin-left:-30px" /> </td>
+                  <#else>
+                  <td align="left" style="width: 15%"> <img src="https://9193738.app.netsuite.com/core/media/media.nl?id=103&amp;c=9193738&amp;h=WamSTaRaaeW76AXbA8M08qyVpEO8a5WQey86b70R018refci" 
+                                                          style="width: 70px; height: 50px;padding-top:-20px; margin-left:-50px" /> </td>
+                  </#if>
+                  <td align="center" style="width:40%; font-weight:bold; font-size:16pt"> Project Contract </td>
+                  <td align="right" style="color:red;padding-top:20px"> ${record.custrecord_ino_pm_contract_status}</td>                  
+                </tr> 
+
+               
+               <tr>
+                  <td style="width: 15%"> </td>
+                  <td align="left" style="width: 15%"> </td>
+                  <td align="center" style="width:40%; font-weight:bold;color:red"> ${record.name} </td>
+                  <td align="right" style=""> </td>                  
+               </tr> 
+             
+            </table>
+       
+          
+        </macro>
+        <macro id="nlfooter">
+               
+                <table class="footer" style="width: 100%;font-size:9pt; color:#afaaac; padding-top:10px ">
+                <tr style=" ">
+                    <td align="left" style="width: 40%; "> <Strong> Jadwa Al-Basateen Real Estate Co.</Strong> - Riyadh       </td>
+                    <td align="center" style="width:20%"> </td>
+                    <td align="right" style="width:40%;  ">   الرياض - <strong>  شركة جدوي البساتين للعقارات </strong></td>
+                </tr>  
+
+              <tr style=" ">
+                    <td align="left" style="width: 40%; "> Al Diriyah - King Khaled Road <Strong> Zip Code</Strong>   13714    </td>
+                    <td align="center" style="width:20%"> albasateen.com.sa </td>
+                    <td align="right" style="width:40%;  "> 13714 <strong>  الرمز البريدي </strong> الدرعية - طريق الملك خالد</td>
+                </tr>  
+
+                <tr style=" ">
+                    <td align="left" style="width: 40%; "><Strong> C.R</Strong> 1010438489    </td>
+                    <td align="center" style="width:20%"> 920003749 </td>
+                    <td align="right" style="width:40%;  "> 1010438489  <strong> س.ت </strong>    </td>
+                </tr> 
+            </table>
+           
+        </macro>
+    </macrolist>
+   <style type="text/css">* {
+            <#if .locale == "zh_CN">
+                font-family: NotoSans, NotoSansCJKsc, sans-serif;
+            <#elseif .locale == "zh_TW">
+                font-family: NotoSans, NotoSansCJKtc, sans-serif;
+            <#elseif .locale == "ja_JP">
+                font-family: NotoSans, NotoSansCJKjp, sans-serif;
+            <#elseif .locale == "ko_KR">
+                font-family: NotoSans, NotoSansCJKkr, sans-serif;
+            <#elseif .locale == "th_TH">
+                font-family: NotoSans, NotoSansThai, sans-serif;
+            <#else>
+                font-family: NotoSans, sans-serif;
+                  font-family: NotoSansArabic, sans-serif;
+            </#if>
+            }
+      .arabic {
+        font-family: arabic-font;
+        position: right;
+        font-size: 8px;
+        line-height: 75%;
+      }
+
+        .english {
+        font-family: english-font;
+        position: left;
+        font-size: 8px;
+        line-height: 110%
+      }
+  </style>
+</head>
+<body header="nlheader" header-height="10%" footer="nlfooter" footer-height="3%" padding="0.5in 0.5in 0.5in 0.5in" size="A4">
+<table style="width:100%;padding-top:-20px ; font-size:11px" >
+  <tr style="width:100%;border-top:1px solid black ">
+    <td style="width: 50%; font-weight:bold;border-left: 1 px solid black"> Buyer:</td>
+    <td style="width: 0%;"></td>
+    <td style="width: 50%;font-weight:bold;border-left: 1 px solid black"> To/Vendor:</td>
+    <td style="width: 0%;border-right: 1px solid black;"></td>
+  </tr>
+
+  <tr>
+    <td style="border-left: 1 px solid black"> Company</td>
+    <td style="font-weight:bold; padding-left: -190px; font-size: 9pt"> : ${record.custrecord_ino_pm_contract_subsidiary} </td>
+    <td style="border-left: 1 px solid black">Company</td>
+    <td style="font-weight:bold;border-right: 1px solid black; padding-left: -200px; font-size: 9pt">: ${record.custrecord_ino_pm_contract_vendor} </td>
+  </tr>
+
+  <tr>
+    <td style="border-left: 1 px solid black"> VAT</td>
+    <td style="font-weight:bold; padding-left: -190px"> :</td>
+    <td style="border-left: 1 px solid black">Address</td>
+    <td style="font-weight:bold;border-right: 1px solid black; padding-left: -200px;"> :</td>
+  </tr>
+
+  <tr>
+    <td style="border-left: 1 px solid black"> Project</td>
+    <td style="font-weight:bold; padding-left: -190px; font-size: 9pt"> : ${record.custrecord_ino_pm_contract_projectmaster}</td>
+    <td style="border-left: 1 px solid black">VAT </td>
+    <td style="font-weight:bold;border-right: 1px solid black; padding-left: -200px; font-size: 9pt"> : ${record.custrecord_ino_pm_contract_vendor.vatregnumber}</td>
+  </tr>
+
+  <tr>
+    <td style="border-left: 1 px solid black">  </td>
+    <td style="font-weight:bold"> </td>
+    <td style="border-left: 1 px solid black">Attention </td>
+    <#if record.custpage_custrecord_to_print?has_content>
+    <td style="font-weight:bold;border-right: 1px solid black; padding-left: -200px; font-size: 9pt"> : ${record.custpage_custrecord_to_print?replace('"', '')} </td>
+    <#else>
+    <td style="font-weight:bold;border-right: 1px solid black; padding-left: -200px;"> : </td>
+    </#if>
+  </tr>
+
+  <tr style="">
+    <td style="border-left: 1 px solid black" > Date </td>
+    <td style="font-weight:bold; padding-left: -190px; font-size: 9pt"> : ${record.custrecord_ino_pm_contract_date?string("EEEE, MMMM d, yyyy")}</td>
+    <td style="border-left: 1 px solid black; width: 110px">Your Reference </td>
+    <#if record.custrecord_ino_pm_contract_award_meth == 'Bidding Process'>
+    <td style="font-weight:bold;border-right: 1px solid black; padding-left: -200px; font-size: 9pt"> : ${record.custrecord_ino_pm_contract_bidding}</td>
+    <#else>
+    <td style="font-weight:bold;border-right: 1px solid black; padding-left: -200px;"> :</td>
+    </#if>
+  </tr>
+
+  <tr>
+    <td style="border-left: 1 px solid black"> Currency </td>
+    <td style= "font-weight:bold; padding-left: -190px; font-size: 9pt"> : ${record.custrecord_ino_pm_contract_currency}</td>
+    <td style="border-left: 1 px solid black">Tel </td>
+    <td style="font-weight:bold;border-right: 1px solid black; padding-left: -200px;"> : ${record.custrecord_ino_pm_contract_vendor.altphone}</td>
+  </tr>
+
+  <tr>
+    <td style="border-left: 1 px solid black"> Tel</td>
+    <td style= "font-weight:bold; padding-left: -190px; font-size: 9pt"> : 920003749</td>
+    <td style="border-left: 1 px solid black">Fax </td>
+    <td style="font-weight:bold;border-right: 1px solid black; padding-left: -200px; font-size: 9pt"> : ${record.custrecord_ino_pm_contract_vendor.fax} </td>
+  </tr>
+
+  <tr>
+    <td  style="border-left: 1 px solid black"> </td>
+    <td style= "font-weight:bold"> </td>
+    <td style="border-left: 1 px solid black">Mobile </td>
+    <td style="font-weight:bold;border-right: 1px solid black; padding-left: -200px; font-size: 9pt"> : ${record.custrecord_ino_pm_contract_vendor.phone} </td>
+  </tr>
+
+ <tr>
+    <td  style="border-left: 1 px solid black"> </td>
+    <td style= "font-weight:bold"> </td>
+    <td style="border-left: 1 px solid black">Email </td>
+    <td style="font-weight:bold;border-right: 1px solid black; font-size: 9pt; padding-left: -200px;"> : ${record.custrecord_ino_pm_contract_vendor.email} </td>
+  </tr>
+</table>
+
+<table style="width:100%;" >
+  <tr style="width:100%;border-top:1px solid black;border-bottom:1px solid black;">
+    <td style="width:10%; text-decoration:underline;padding-top:3px; padding-bottom:3px"> Subject: </td>
+       <td style="padding-top:5px; padding-bottom:3px;font-size:14px"> ${record.custrecord_ino_pm_contract_memo}</td>
+  </tr>
+</table>  
+
+  <table style="width:100%;font-size:11px">
+    <tr style="font-weight:bold">
+      <td align="center" style="width:10%; border-right:1px solid black;border-bottom:1 px solid black;border-left:1px solid black "> Item No.</td>
+      <td align="center" style="width:48%; border-right:1px solid black;border-bottom:1 px solid black"> Material/Service Description </td>
+      <td align="center" style="width:10%; border-right:1px solid black;border-bottom:1 px solid black">Unit</td>
+      <td align="center" style="width:10%; border-right:1px solid black;border-bottom:1 px solid black">Quantity</td>
+      <td align="center" style="width:12%; border-right:1px solid black;border-bottom:1 px solid black">Unit Price</td>
+      <td align="center" style="width:10%;border-bottom:1 px solid black; border-right:1 px solid blac;" > Amount</td>
+    </tr>
+
+    <#assign totalAmount = 0>
+    <#if record.custpage_contract_boq?has_content>
+      <#assign BOQlist = record.custpage_contract_boq?eval_json!" ">
+        
+      <#list BOQlist as line>
+        <#assign SN =line_index +1/>
+        <#assign lineTotal = (line.qty?number * line.rate?number)>
+        <#assign totalAmount += lineTotal>
+    <tr>
+      <td align="center" style="border-left:1 px solid black; border-right:1px solid black;border-bottom:1px solid black; font-size: 9pt"> ${SN} </td>
+      <td align="left" style=" border-right:1px solid black;border-bottom:1px solid black; font-size: 9pt">${line.description}</td>
+      <td align="center" style=" border-right:1px solid black;border-bottom:1px solid black; font-size: 9pt">${line.uom}</td>
+      <td align="center" style=" border-right:1px solid black;border-bottom:1px solid black; font-size: 9pt">${line.qty}</td>
+      <td align="right" style=" border-right:1px solid black;border-bottom:1px solid black; font-size: 9pt">${(line.rate?number)?string(",##0.00")}</td>
+      <td align="right" style=" border-right:1px solid black;border-bottom:1px solid black; font-size: 9pt">${(line.qty?number * line.rate?number)?string["#,##0.00"]}</td>
+    </tr>
+      </#list>
+    </#if>
+
+    <tr>
+      <td align="center" style="border-left:1 px solid black;border-bottom:1px solid black;"> </td>
+      <td align="center" style=" border-bottom:1px solid black;"></td>
+      <td align="center" style=" border-bottom:1px solid black;"></td>
+      <td align="center" style=" border-bottom:1px solid black;"></td>
+      <td align="right" style=" border-right:1px solid black;border-bottom:1px solid black;font-weight:bold;"> SUBTOTAL</td>
+      <td align="right" style=" border-right:1px solid black;border-bottom:1px solid black; font-size: 9pt">${totalAmount?string(",##0.00")}</td>
+    </tr>
+
+    <tr>
+      <td align="center" style="border-left:1 px solid black;border-bottom:1px solid black;"> </td>
+      <td align="center" style=" border-bottom:1px solid black;"></td>
+      <td align="center" style=" border-bottom:1px solid black;"></td>
+      <td align="center" style=" border-bottom:1px solid black;"></td>
+      <td align="right" style=" border-right:1px solid black;border-bottom:1px solid black;font-weight:bold;"> VAT</td>
+      <#if record.custpage_contract_boq_tax_rate?has_content>
+      <td align="center" style=" border-right:1px solid black;border-bottom:1px solid black; font-size: 9pt">${record.custpage_contract_boq_tax_rate}</td>
+      </#if>
+    </tr>
+
+   <tr>
+      <td align="center" style="border-left:1 px solid black;border-bottom:1px solid black;"> </td>
+      <td align="center" style=" border-bottom:1px solid black;"></td>
+      <td align="center" style=" border-bottom:1px solid black;"></td>
+      <td align="center" style=" border-bottom:1px solid black;"></td>
+      <td align="right" style=" border-right:1px solid black;border-bottom:1px solid black;font-weight:bold;"> TOTAL</td>
+     
+      <#assign rawTaxRate = record.custpage_contract_boq_tax_rate?string>
+      <#if rawTaxRate?matches("^[0-9.]+%$")>
+      <#assign taxRate = (rawTaxRate?replace("%", "")?number / 100)>
+      <#else>
+      <#assign taxRate = 0>
+      </#if>
+      <td align="right" style="border-right:1px solid black;border-bottom:1px solid black; font-size: 9pt">
+        ${((totalAmount?number * taxRate) + totalAmount?number)?string["#,##0.00"]}
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="3" align="left" style="border-left:1 px solid black;border-bottom:1px solid black;font-weight:bold">${record.custpage_total_in_English!' '} ${record.custrecord_ino_pm_contract_currency}</td>
+      <td align="center" style=" border-bottom:1px solid black;"></td>
+      <td align="center" style=" border-bottom:1px solid black;"> </td>
+      <td align="center" style=" border-right:1px solid black;border-bottom:1px solid black;"></td>
+    </tr>
+  </table>
+
+  <table style="width:100%; margin-top:10px;font-size:11px;">
+
+    <#if record.custpage_terms_conditions?has_content>
+      <#assign termsList = record.custpage_terms_conditions?eval!" ">
+      <#list termsList as data>
+    <tr>
+      <td style="font-weight:bold;text-decoration:underline;padding-top:10px ">${data.termType} :</td>
+    </tr>
+    <tr>
+      <td> ${data.description} </td>
+    </tr>
+        </#list>
+    </#if>
+     
+   <tr>
+      <td style="font-weight:bold;text-decoration:underline;padding-top:10px ">General Note:</td>
+   </tr>  
+    
+   <tr>
+     <td> 1. Copy of signed delivery note should always be submitted with your invoice - Contact Person at site. </td>
+   </tr>
+   
+   <tr>
+     <td> 2. Acknowledge Acceptance of this PO within 3 Days is Required. Otherwise it will be Considered as accepted by You.</td>
+   </tr>
+   
+   <tr>
+     <td> 3. Our P.O. number should always appear on your invoices.</td>
+   </tr>
+  
+   <tr>
+     <td>4. Delivery Note &amp; MTC Should be Submitted on Project while Delivering the Material.</td>
+   </tr>
+   
+  <tr>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td> With best regards,</td>
+  </tr>
+ 
+  <tr>
+    <td></td>
+  </tr>
+  
+  <tr>
+      <td></td>
+  </tr>
+
+    <tr>
+      <td align="center" style="font-weight:bold">This is an approved system-generated document; the company's stamp &amp; signature are not required.</td>
+    </tr>
+
+    <tr>
+      <td align="center" style="font-weight:bold;text-decoration:underline;padding-top:5px; padding-right: -30px "> Vendor Acceptance:</td>
+    </tr>
+
+    <tr>
+      <td align="center" style="padding-left:-85px;" > Name:</td>
+    </tr>
+
+     <tr>
+      <td align="center" style="padding-left:-48px;" > Sign &amp; Stamp:</td>
+    </tr>
+
+    <tr>
+      <td align="center" style="padding-left:-93px;" > Date:</td>
+    </tr>
+  </table>
+
+  
+</body>
+</pdf>
