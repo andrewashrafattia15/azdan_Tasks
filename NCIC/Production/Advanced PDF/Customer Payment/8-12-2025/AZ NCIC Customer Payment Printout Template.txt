@@ -1,0 +1,271 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+    <link name="NotoSans" type="font" subtype="truetype"
+          src="${nsfont.NotoSans_Regular}"
+          src-bold="${nsfont.NotoSans_Bold}"
+          src-italic="${nsfont.NotoSans_Italic}"
+          src-bolditalic="${nsfont.NotoSans_BoldItalic}"
+          bytes="2"/>
+
+  <link name="NotoSansArabic" type="font" subtype="truetype" src="${nsfont.NotoSansArabic_Regular}"
+      src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" />
+  <macrolist>
+      <macro id="Footer" >
+       <table width="100%">
+         <tr>
+           <td align="center" style="font-weight:bold"> <span> 1010385846 .س.ت - </span> <span> +966112849959 :فاكس - </span> <span> +المملكة العربية السعودية - تليفون: 966112849955 </span> </td>
+         </tr>
+         <tr>
+           <td align="center" style="font-weight:bold"> Kingdom of Saudi Arabia - Tel. : +966 11 2849955 - Fax: +966 11 2849959 - C.R. 1010385846 </td>
+         </tr>
+         <tr>
+           <td align="center" style="font-weight:bold"> <span> الرياض 12313 - الرقم الإضافى 3825 - </span> <span> الدور 21 - طريق الملك فهد  - </span> <span> برج الإبداع الوطنى 7906 </span> </td>
+         </tr>
+       </table>
+      </macro>
+    </macrolist>
+    <style>
+        * {
+          font-family: NotoSans, sans-serif;
+          font-family: "NotoSansArabic", sans-serif;
+        }
+
+        body {
+            font-size: 11px;
+        }
+
+        .checkbox {
+            border: 1px solid #000;
+            width: 10px;
+            height: 10px;
+            display: inline-block;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+
+<body footer="Footer" footer-height="40pt" padding="0.5in">
+
+<!-- HEADER -->
+   <#assign data = {}>
+         <#if record.custpage_custrecord_to_print?has_content>
+           <#assign data = record.custpage_custrecord_to_print?eval >
+        </#if>
+  <table width="100%">
+    <tr>
+      <#if record.subsidiary == "NCI">
+        <td align="center" ><img src="https://11479319.app.netsuite.com/core/media/media.nl?id=2740&amp;c=11479319&amp;h=CELCF61UEq2PqOV1RSxwVzuRh1cH07hKQr6Uq-YEq-X51kr3" style="float: center; width:350px; height:70px" /> </td>
+      <#else>
+        <td align="center" ><img src="https://11479319.app.netsuite.com/core/media/media.nl?id=1532&amp;c=11479319&amp;h=hTBiw7BKl-m85khRR2JhApwImyJnHQzuSS9ofaiA_XPFV3oN" style="float: center; width:350px; height:70px" /> </td>
+      </#if>
+    </tr>
+    <tr style="padding-top:20px">
+      <td align="center" style="font-weight:bold;">الرقم الضريبي : ${data.regNum!" "}</td>
+    </tr>
+  </table>
+
+<br/>
+
+<!-- TITLE -->
+<table width="100%">
+    <tr>
+        <td align="center" style="font-size:12;">
+            سند قبض
+        </td>
+    </tr>
+    <tr>
+        <td align="center" style="font-weight:bold;font-size:14;">
+              Receipt Voucher
+        </td>
+    </tr>
+</table>
+
+<br/>
+
+<!-- Dates and Currency -->
+<table width="100%">
+ <tr>
+   <td  align="center" style=" margin-left:10px;border-left:1px;border-top:1px;border-right:1px;border-bottom:1px;">التاريخ: ${data.hijriDate!""}</td>
+   <td width="50%"></td>
+   <td width="20%" align="center" style="margin-right:10px; border-left:1px;;border-top:1px;border-right:1px;border-bottom:1px;">${record.currency}</td>
+ </tr>
+<tr>
+   <td  align="center" style="margin-left:10px;border-left:1px;border-right:1px;border-bottom:1px;">الموافق: ${record.trandate?string("yyyy/MM/dd")} م</td>
+   <td width="50%"></td>
+   <td width="20%" align="center" style="margin-right:10px;border-left:1px;border-right:1px;border-bottom:1px;"> ${record.payment?replace("[^0-9.]", "", "r")?number?string["#,###.00"]!""}</td>
+ </tr>
+</table>
+
+<br/>
+
+
+<table width="100%">
+ <tr>
+   <td width="35%" align="left" style="border-left:1px;border-top:1px;border-bottom:1px;font-weight:bold">Recieved From Mr./Gents</td>
+   <td width="30%" colspan="2" align="center" style="border-top:1px;border-bottom:1px;">${record.customer}</td>
+   <td width="35%" align="right" style="border-top:1px;border-right:1px;border-bottom:1px;">من السيد / السادة</td>
+ </tr>
+</table>
+
+             
+<table width="100%">
+ <tr >
+   <td width="45%" align="left" style="border-left:1px;border-bottom:1px;font-weight:bold;direction:ltr;">The Amount : <span>${data.totalInEnglish!""}</span></td>
+   <td width="10%" colspan="2" style="border-bottom:1px;"></td>
+   <td width="45%" align="right" style="border-right:1px;border-bottom:1px;direction:rtl;"> <p align="right"> مبلغ و قدره : ${data.totalInArabic!""}  سعودى فقط لا غير </p></td> 
+ </tr>
+</table>
+             
+<table width="100%">
+ <tr>
+   <td  align="left" style="border-left:1px;border-bottom:1px;font-weight:bold"></td>
+   <td colspan="2" align="center" style="border-bottom:1px;"></td>
+   <td  align="right" style="border-right:1px;border-bottom:1px;"> </td>
+ </tr>
+</table>
+             
+<table width="100%">
+ <tr>
+   <#if record.paymentmethod == "Cash">
+       <td width="20%"  align="left" style="border-left:1px;border-bottom:1px;font-weight:bold">
+         <table width="100%">
+          <tr>
+            <td>
+                <img src="https://11479319.app.netsuite.com/core/media/media.nl?id=3127&amp;c=11479319&amp;h=wIfqQoyprDKrrJj5F3_RuP5yL_zJjGE-pIHDCSN4B6qm4Ueu" width="10" height="10" />
+            </td>
+            <td>  cash  </td>
+            <td>
+                <img src="https://11479319.app.netsuite.com/core/media/media.nl?id=3128&amp;c=11479319&amp;h=_PnKJSLSvA-Y0Li6JR4tH8h0v38imD1zpNRfnUZdnxwVCSnQ" width="10" height="10" />
+            </td>
+            <td>  cheque  </td>
+          </tr>
+         </table>
+       </td>
+       <td width="60%" align="center" style="border-bottom:1px;"></td>
+       <td width="20%" align="right" style="border-right:1px;border-bottom:1px;">
+        <table width="100%">
+          <tr>
+            <td> شيك رقم  </td>
+            <td>
+                <img src="https://11479319.app.netsuite.com/core/media/media.nl?id=3128&amp;c=11479319&amp;h=_PnKJSLSvA-Y0Li6JR4tH8h0v38imD1zpNRfnUZdnxwVCSnQ" width="10" height="10" />
+            </td>
+             <td> نقداً  </td>
+            <td>
+                <img src="https://11479319.app.netsuite.com/core/media/media.nl?id=3127&amp;c=11479319&amp;h=wIfqQoyprDKrrJj5F3_RuP5yL_zJjGE-pIHDCSN4B6qm4Ueu" width="10" height="10" />
+            </td>
+          </tr>
+          <tr>
+            <td> تحويل  </td>
+            <td>
+                <img src="https://11479319.app.netsuite.com/core/media/media.nl?id=3128&amp;c=11479319&amp;h=_PnKJSLSvA-Y0Li6JR4tH8h0v38imD1zpNRfnUZdnxwVCSnQ" width="10" height="10" />
+            </td>
+          </tr>
+         </table>
+       </td>
+   <#elseif record.paymentmethod == "Check">
+        <td width="20%" align="left" style="border-left:1px;border-bottom:1px;font-weight:bold">
+         <table width="100%">
+          <tr>
+            <td>
+                <img src="https://11479319.app.netsuite.com/core/media/media.nl?id=3128&amp;c=11479319&amp;h=_PnKJSLSvA-Y0Li6JR4tH8h0v38imD1zpNRfnUZdnxwVCSnQ" width="10" height="10" />
+            </td>
+            <td>  cash  </td>
+            <td>
+                <img src="https://11479319.app.netsuite.com/core/media/media.nl?id=3127&amp;c=11479319&amp;h=wIfqQoyprDKrrJj5F3_RuP5yL_zJjGE-pIHDCSN4B6qm4Ueu" width="10" height="10" />
+            </td>
+            <td>  cheque  </td>
+          </tr>
+         </table>
+       </td>
+       <td width="60%" align="center" style="border-bottom:1px;"></td>
+       <td width="20%" align="right" style="border-right:1px;border-bottom:1px;">
+        <table width="100%">
+          <tr>
+            <td> شيك رقم  </td>
+            <td>
+                <img src="https://11479319.app.netsuite.com/core/media/media.nl?id=3127&amp;c=11479319&amp;h=wIfqQoyprDKrrJj5F3_RuP5yL_zJjGE-pIHDCSN4B6qm4Ueu" width="10" height="10" />
+            </td>
+             <td> نقداً  </td>
+            <td>
+                <img src="https://11479319.app.netsuite.com/core/media/media.nl?id=3128&amp;c=11479319&amp;h=_PnKJSLSvA-Y0Li6JR4tH8h0v38imD1zpNRfnUZdnxwVCSnQ" width="10" height="10" />
+            </td>
+          </tr>
+          <tr>
+            <td> تحويل  </td>
+            <td>
+                <img src="https://11479319.app.netsuite.com/core/media/media.nl?id=3128&amp;c=11479319&amp;h=_PnKJSLSvA-Y0Li6JR4tH8h0v38imD1zpNRfnUZdnxwVCSnQ" width="10" height="10" />
+            </td>
+          </tr>
+         </table>
+       </td>
+   <#elseif record.paymentmethod == "Wire Transfer">
+        <td width="45%"  align="left" style="border-left:1px;border-bottom:1px;font-weight:bold">
+         <table width="100%">
+          <tr>
+            <td>
+                <img src="https://11479319.app.netsuite.com/core/media/media.nl?id=3128&amp;c=11479319&amp;h=_PnKJSLSvA-Y0Li6JR4tH8h0v38imD1zpNRfnUZdnxwVCSnQ" width="10" height="10" />
+            </td>
+            <td>  cash  </td>
+            <td>
+                <img src="https://11479319.app.netsuite.com/core/media/media.nl?id=3128&amp;c=11479319&amp;h=_PnKJSLSvA-Y0Li6JR4tH8h0v38imD1zpNRfnUZdnxwVCSnQ" width="10" height="10" />
+            </td>
+            <td>  cheque  </td>
+            <td>Drawn on the bank  </td>
+          </tr>
+         </table>
+       </td>
+       <td  width="10%" align="center" style="border-bottom:1px;"> ${record.custbody_az_ncic_drawn_on_bank}  </td>
+       <td width="45%"  align="right" style="border-right:1px;border-bottom:1px;">
+        <table width="100%">
+          <tr>
+            <td style="padding-right:10px;"> مسحوب على بنك </td>
+            <td style="padding-left:10px;"> شيك رقم </td>
+            <td>
+                 <img src="https://11479319.app.netsuite.com/core/media/media.nl?id=3128&amp;c=11479319&amp;h=_PnKJSLSvA-Y0Li6JR4tH8h0v38imD1zpNRfnUZdnxwVCSnQ" width="10" height="10" />
+            </td>
+             <td > نقداً  </td>
+            <td>
+                <img src="https://11479319.app.netsuite.com/core/media/media.nl?id=3128&amp;c=11479319&amp;h=_PnKJSLSvA-Y0Li6JR4tH8h0v38imD1zpNRfnUZdnxwVCSnQ" width="10" height="10" />
+            </td>
+          </tr>
+          <tr>
+            <td >  </td>
+            <td >  </td>
+            <td >  </td>
+            <td > تحويل  </td>
+            <td>
+                <img src="https://11479319.app.netsuite.com/core/media/media.nl?id=3127&amp;c=11479319&amp;h=wIfqQoyprDKrrJj5F3_RuP5yL_zJjGE-pIHDCSN4B6qm4Ueu" style="padding:1px" width="10" height="10" />
+            </td>
+          </tr>
+         </table>
+       </td>
+   </#if>
+ </tr>
+</table>
+<table width="100%">
+ <tr>
+   <td  align="left" style="border-left:1px;border-bottom:1px;font-weight:bold"> For </td>
+   <td colspan="2" align="center" style="border-bottom:1px;">${record.memo}</td>
+   <td  align="right" style="border-right:1px;border-bottom:1px;"> : وذلك عن  </td>
+ </tr>
+</table>
+<table width="100%">
+ <tr>
+   <td  align="left" style="border-left:1px;border-bottom:1px;font-weight:bold"> VAT File No </td>
+   <td colspan="2" align="center" style="border-bottom:1px;">${record.customer.vatregnumber}</td>
+   <td  align="right" style="border-right:1px;border-bottom:1px;"> : الرقم الضريبى للعميل  </td>
+ </tr>
+</table>
+<table width="100%">
+ <tr>
+   <td  align="left" style="border-left:1px;border-bottom:1px;font-weight:bold"> Recipient Name </td>
+   <td colspan="2" align="center" style="border-bottom:1px;">............................................................................................................</td>
+   <td  align="right" style="border-right:1px;border-bottom:1px;"> : المستلم  </td>
+ </tr>
+</table>
+
+</body>
+</pdf>

@@ -1,0 +1,189 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="footer">
+            
+<table class="footer" style="width: 100%;"><tr>
+<td align="center"><pagenumber/> of <totalpages/></td>
+</tr></table>
+
+        </macro>
+    </macrolist>
+    <style>
+    * {
+        <#if .locale == "zh_CN">
+            font-family: NotoSans, NotoSansCJKsc, sans-serif;
+        <#elseif .locale == "zh_TW">
+            font-family: NotoSans, NotoSansCJKtc, sans-serif;
+        <#elseif .locale == "ja_JP">
+            font-family: NotoSans, NotoSansCJKjp, sans-serif;
+        <#elseif .locale == "ko_KR">
+            font-family: NotoSans, NotoSansCJKkr, sans-serif;
+        <#elseif .locale == "th_TH">
+            font-family: NotoSans, NotoSansThai, sans-serif;
+        <#else>
+            font-family: NotoSans, sans-serif;
+        </#if>
+    }
+
+    span.title { font-size: 28pt; }
+    span.number { font-size: 16pt; }
+
+    table.main td, th {
+      border-bottom: 1px solid black;
+    }
+
+    th {
+        font-weight: bold;
+        padding: 5px 6px 3px;
+        background-color: #e3e3e3;
+    }
+td p { 
+        text-align: left; 
+    }
+    
+    
+    td {
+        word-wrap: break-word; 
+        word-break: normal;    
+        hyphens: manual;      
+    }
+    .nowrap {
+        white-space: normal;
+    }
+
+
+    .wrap-normal {
+        white-space: normal;
+        word-break: keep-all;
+        word-wrap: break-word;
+        line-height: 1.3;
+    }
+</style>
+</head>
+<body footer="footer" footer-height="0.5in" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+<table style="width: 100%;">
+    <tr >
+      <td >
+        <img src= "https://11479319.app.netsuite.com/core/media/media.nl?id=1532&amp;c=11479319&amp;h=hTBiw7BKl-m85khRR2JhApwImyJnHQzuSS9ofaiA_XPFV3oN" style="float: left; width:300px; height:90px" /> 
+        </td>
+        <td style="align:center;vertical-align:middle">
+          <table >
+            <tr>
+              <td style="align:center;vertical-align:middle" ><span class="title">${record@title}</span></td>
+            </tr>
+            <tr>
+              <td style="align:center;vertical-align:middle"><span class="number">#${record.tranid}</span></td>
+            </tr>
+            <tr>
+              <td style="align:center;vertical-align:middle"> ${record.trandate}</td>
+            </tr>
+          </table>   
+        </td>
+    </tr>
+</table>
+<br />
+<#assign show_subsidiary = record.subsidiary@label?has_content>
+
+  <table>
+        <tr>
+            <#if show_subsidiary> 
+                <#if record.line.linesubsidiary?has_content>
+                    <th width="10%" style="border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;border-left: 1px solid black;">Line Subsidiary</th>
+                <#else>
+                    <th width="10%" style="border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;border-left: 1px solid black;">Subsidiary</th>
+                </#if> 
+            </#if>
+               <th width="10%" style="border-bottom: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;">Currency</th>
+        </tr>
+        <tr>
+        <#if show_subsidiary> 
+            <#if record.line.linesubsidiary?has_content>
+                <td style="border-bottom: 1px solid black;border-right: 1px solid black;border-left: 1px solid black;">${record.line.linesubsidiary}</td>
+            <#else>
+                <td style="border-bottom: 1px solid black;border-right: 1px solid black;border-left: 1px solid black;">${record.subsidiary}</td>
+            </#if>
+        </#if>
+        <td style="border-bottom: 1px solid black;border-right: 1px solid black;">${record.currency}</td>
+        </tr>
+</table>
+<br/>
+<table class="main" style="width: 100%;font-size:11px">
+    <#assign credit_sum=0 debit_sum=0> 
+    <#list record.line as line> 
+
+<#assign rawAccount = (line.account!'')?trim>
+<#assign account_number = "">
+<#assign account_name = rawAccount>
+
+<#if rawAccount?matches("^\\d+.*")>
+
+    <#assign account_number = rawAccount?keep_before(" ")!rawAccount>
+
+    <#assign account_name = rawAccount?remove_beginning(account_number)?trim>
+
+    <#assign account_name = account_name?replace("^[-:]", "", "r")?trim>
+
+</#if>
+      <#if line_index==0>
+         <tr>
+            <th width="10%" style="border-left: 1px solid black;border-top: 1px solid black;border-right: 1px solid black;" ><p style="text-align: left;">Account Number</p></th>
+            <th width="10%" style="border-top: 1px solid black;border-right: 1px solid black;"><p style="text-align: left;">Account Name</p></th>
+            <th width="10%" style="border-top: 1px solid black;border-right: 1px solid black;">Debit</th>
+            <th width="10%" style="border-top: 1px solid black;border-right: 1px solid black;">Credit</th>
+            <th width="10%" style="border-top: 1px solid black;border-right: 1px solid black;">Memo</th>
+            <th width="10%" style="border-top: 1px solid black;border-right: 1px solid black;">Department</th>
+            <th width="10%" style="border-top: 1px solid black;border-right: 1px solid black;">Class</th>
+            <th width="10%" style="border-top: 1px solid black;border-right: 1px solid black;">Location</th>
+            <th width="10%" style="border-top: 1px solid black;border-right: 1px solid black;">Property</th>
+            <th width="10%" style="border-top: 1px solid black;border-right: 1px solid black;">Site</th>
+        </tr>
+      </#if>
+<tr>
+<td style="border-left: 1px solid black;border-right: 1px solid black;"><p style="text-align: left;">${account_number}</p></td>
+<td style="border-right: 1px solid black;"><p style="text-align: left;">${account_name}</p></td>
+        <#assign debitVal = (line.debit!'')?replace("[^0-9.]", "", "r")>
+        <td align="right" style="border-right: 1px solid black;">${debitVal?has_content?then(debitVal?number?string["#,###.00"], " ")}</td>
+
+        <#assign creditVal = (line.credit!'')?replace("[^0-9.]", "", "r")>
+        <td align="right" style="border-right: 1px solid black;">${creditVal?has_content?then(creditVal?number?string["#,###.00"], " ")}</td>
+
+          <td style="border-right: 1px solid black;"><p style="text-align: left; word-wrap: break-word;word-break: normal;hyphens: manual;">${line.memo}</p></td>
+          <td style="border-right: 1px solid black;"><p style="text-align: left;">${line.department}</p></td>
+          <td style="border-right: 1px solid black;"><p style="text-align: left;">${line.class}</p></td>
+          <td style="border-right: 1px solid black;"><p style="text-align: left;">${line.location}</p></td>     
+          <td style="border-right: 1px solid black;"><p style="text-align: left;">${line.property}</p></td> 
+          <td style="border-right: 1px solid black;"><p style="text-align: left;">${line.site}</p></td> 
+    </tr>
+    <#assign debit_sum = debit_sum + line.debit> 
+    <#assign credit_sum = credit_sum + line.credit> 
+    </#list>
+      <tr>
+        <th style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;</th>
+        <th style="border-right: 1px solid black;">&nbsp;</th>
+        <th align="right" style="border-right: 1px solid black;">${debit_sum}</th>
+        <th align="right" style="border-right: 1px solid black;">${credit_sum}</th>
+        <th style="border-right: 1px solid black;">&nbsp;</th>
+        <th style="border-right: 1px solid black;">&nbsp;</th>
+        <th style="border-right: 1px solid black;">&nbsp;</th>
+        <th style="border-right: 1px solid black;">&nbsp;</th>
+        <th style="border-right: 1px solid black;">&nbsp;</th>
+        <th style="border-right: 1px solid black;">&nbsp;</th>
+    </tr>
+</table>
+</body>
+</pdf>

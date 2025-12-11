@@ -1,0 +1,162 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<link name="NotoSansArabic" type="font" subtype="truetype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" />
+    <#assign data = {}>
+         <#if record.custpage_custrecord_to_print?has_content>
+           <#assign data = record.custpage_custrecord_to_print?eval >
+        </#if>
+    <macrolist>       
+        <macro id="nlfooter">
+            <table style="width: 100%;">
+                <tr>
+                    <td align="center" style="font-size:11px">${data.fullName!""}</td> 
+                </tr>
+                <tr>
+                    <td align="center" style="direction:rtl;font-size:11px">سجل تجاري رقم ${data.regNum!""} - عضوية رقم  ${data.state!""} </td>
+                </tr>
+                <tr>
+                    <td align="center" style="font-size:11px">${data.mainAddress!""} </td>
+                </tr>
+            </table>
+        </macro>
+    </macrolist>
+    <style>
+		* {
+            font-family: "NotoSansArabic", sans-serif;
+		}
+    </style>
+</head>
+<body  footer="nlfooter" footer-height="20px" padding="0.2in 0.5in 0.5in 0.5in" size="Letter">
+  <table width="100%">
+    <tr>
+      <td align="right" style="font-size:11px" margin-right="20%"> التاريخ : ${data.hijriDate!""}</td>
+      <#if record.subsidiary == "KAAE">
+         <td align="right" rowspan="3" margin-right="-5%"><img width="50%" height="70px" src="https://11479319.app.netsuite.com/core/media/media.nl?id=2740&amp;c=11479319&amp;h=CELCF61UEq2PqOV1RSxwVzuRh1cH07hKQr6Uq-YEq-X51kr3"/></td>
+      <#else>
+         <td align="right" rowspan="3" margin-right="-5%"><img src="https://11479319.app.netsuite.com/core/media/media.nl?id=2740&amp;c=11479319&amp;h=CELCF61UEq2PqOV1RSxwVzuRh1cH07hKQr6Uq-YEq-X51kr3"/></td>
+      </#if>
+    </tr>
+    <tr>
+      <td align="right"  style="font-size:11px;" margin-right="20%"> الموافق : ${record.trandate?string("yyyy/MM/dd")} م</td>
+    </tr>
+    <tr>
+      <td align="right" style="font-size:11px" margin-right="20%">${.now?string["hh:mm a"]} : الوقت  </td>
+    </tr>
+    <tr>
+      <td align="right" colspan="2" >الرقم الضريبى : ${data.regNum!"0"}</td>
+    </tr>
+  </table>
+  <p align="center"> (${record.tranid})  إشعار دائن رقم </p>
+  <table width="100%">
+    <tr>
+      <td width="30%"  rowspan="7" style="border-left:1px;border-top:1px;border-bottom:1px"> </td>
+      <td align="right" style="border-left:1px;border-top:1px;border-bottom:1px;border-right:1px"> ${record.cseg_ino_re_prpty} / الموقع</td>
+    </tr>
+    <tr>
+      <td align="right" style="border-left:1px;border-bottom:1px;border-right:1px">   ${record.custbody_ino_re_um_unitmaster} / رقم الوحدة</td>
+    </tr>
+    <tr>
+      <td align="right" style="border-left:1px;border-bottom:1px;border-right:1px ; direction:rtl">  <span> ${record.entity} </span> <span> / المستأجر</span> </td>
+    </tr>
+    <tr>
+      <td align="right" style="border-left:1px;border-bottom:1px;border-right:1px ; direction:rtl">  <span> ${record.entity} </span> <span>/ الاسم التجارى</span> </td>
+    </tr>
+    <tr>
+      <td align="right" style="border-left:1px;border-bottom:1px;border-right:1px">   ${record.entity.billaddress?replace("<br\\s*/?>", " ", "r")} / عنوان العميل</td>
+    </tr>
+    <#if record.createdfrom.recordType == "invoice">
+    <tr>
+      <td align="right" style="border-left:1px;border-bottom:1px;border-right:1px"><span style="margin-right:80px"> ${record.createdfrom.total?replace("[^0-9.]", "", "r")?number?string["#,###.00"]!""} : مبلغ الفاتورة </span> <span align="right">  ${record.createdfrom.tranid} / رقم الفاتورة</span></td>
+    </tr>
+    <#else>
+    <tr>
+      <td align="right" style="border-left:1px;border-bottom:1px;border-right:1px"> ${record.custbody_ino_pms_tenancy_contract.custrecord_ino_pms_tc_reference} / رقم العقد بمنصة إيجار  </td>
+    </tr>
+    </#if>
+     <tr>
+      <td align="right" style="border-left:1px;border-bottom:1px;border-right:1px"> ${record.entity.vatregnumber} / الرقم الضريبى للعميل  </td>
+    </tr>
+  </table>
+
+      <br/>
+  <table width="100%">
+     <tr>
+       <td align="center" colspan="2" width="85%" style="border-left:1px;border-top:1px;border-bottom:1px;vertical-align:middle"> البيان </td>
+       <td align="center" width="15%" style="border-left:1px;border-top:1px;border-right:1px;border-bottom:1px;white-space: nowrap;"> المبلغ ريال سعودى  </td>
+     </tr>
+     <#if record.createdfrom.recordType == "invoice">
+        <tr>
+
+           <td align="center" colspan="2" width="85%" style="border-left:1px;border-bottom:1px;"> ${record.createdfrom.tranid}  إشعار دائن على فاتورة رقم  </td>
+           <td align="center" width="15%" style="border-left:1px;border-right:1px;border-bottom:1px;"> ${record.createdfrom.total?replace("[^0-9.]", "", "r")?number?string["#,###.00"]}  </td>
+        </tr>
+     <#else>
+               <#if data.items?? && (data.items?size > 0)>
+                   <#assign itemsList = data.items!"">     
+                   <#list itemsList as item>
+                       <tr>
+                         <td align="center" colspan="2" width="85%" style="border-left:1px;border-bottom:1px;"> ${item.itemName}  </td>
+                         <td align="center" width="15%" style="border-left:1px;border-right:1px;border-bottom:1px;"> ${item.grossAmt?replace("[^0-9.]", "")?number?string["#,###.00"]}  </td>
+                      </tr> 
+                   </#list>
+               </#if>
+     </#if>
+     <tr>
+       <td align="right" width="85%" colspan="2"  style="border-left:1px;border-bottom:1px;"> إجمالى غير شامل ضريبة القيمة المضافة </td>
+       <td align="center" width="15%" style="border-left:1px;border-right:1px;border-bottom:1px;"> ${record.subtotal?replace("[^0-9.]", "", "r")?number?string["#,###.00"]} </td>
+     </tr>
+     <tr>
+       <td align="right" width="85%" colspan="2" style="border-left:1px;border-bottom:1px;">  ضريبة القيمة المضافة المستحقة  <span>15%</span></td>
+       <td align="center" width="15%" style="border-left:1px;border-right:1px;border-bottom:1px;"> ${record.taxtotal?replace("[^0-9.]", "", "r")?number?string["#,###.00"]} </td>
+     </tr>
+     <tr>
+       <td align="right" width="85%" colspan="2" style="border-left:1px;border-bottom:1px;"> إجمالى ضريبة القيمة المضافة المستحقة</td>
+       <td align="center" width="15%" style="border-left:1px;border-right:1px;border-bottom:1px;"> ${record.taxtotal?replace("[^0-9.]", "", "r")?number?string["#,###.00"]} </td>
+     </tr>
+     <tr>
+       <td align="center" width="35%" style="border-left:1px;border-bottom:1px;">
+            <#if record.custbody_ino_re_amount_in_words_ar?has_content>
+                  ${record.custbody_ino_re_amount_in_words_ar} لا غير
+            </#if>
+       </td>
+       <td align="right" width="55%" style="border-left:1px;border-bottom:1px;">اجمالي المستحق شامل ضريبة القيمة المضافة</td>
+       <td align="center" width="15%" style="border-left:1px;border-right:1px;border-bottom:1px;"> ${record.total?replace("[^0-9.]", "", "r")?number?string["#,###.00"]} </td>
+     </tr>
+  </table> 
+
+  <table  width="100%">
+    <tr style="padding-top:10px; padding-bottom:8px;">
+      <td align="right"> : نأمل سداد المبلغ المستحق اما عن طريق  </td>
+    </tr>  
+    <tr style="padding-top:5px; padding-bottom:5px;">
+      <td align="right">  <span align="right" style="font-size:12.5px"> : حوالة مصرفية باسم / وقف خادم الحرمين الشريفين الملك عبد الله بن عبد العزيز للموهبة و الإبداع معلومات الحساب كالتالى </span>    <span align="right" style="font-size:12.5px"> .1 </span> </td>
+    </tr>
+    <tr style="padding-top:5px; padding-bottom:5px;">
+      <td align="right"> <span style="margin-right:40px;font-size:12.5px"> ${record.custbody_az_ncic_account_number} / رقم الحساب  </span>  <span style="font-size:12.5px">  ${record.custbody_az_ncic_beneficiary_name} / اسم البنك  </span> </td>
+    </tr>
+    <tr style="padding-top:5px; padding-bottom:5px;">
+      <td align="right" style="font-size:12.5px"> ${record.custbody_az_ncic_iban} / رقم الآيبان   </td>
+    </tr>
+    <tr style="padding-top:5px; padding-bottom:5px;">
+      <td align="right" style="font-size:12.5px">  <span align="right" style="font-size:12.5px">. أو شيك مصرفى باسم / وقف خادم الحرمين الشريفين الملك عبد الله بن عبد العزيز للموهبة و الإبداع </span>    <span align="right" style="font-size:12.5px"> .2 </span>  </td>
+    </tr>
+    <tr style="padding-top:5px; padding-bottom:5px;">
+      <td align="right" style="font-size:12.5px">  <span align="right" style="font-size:12.5px; text-decoration:underline"> : للإستفسار  </span>  </td>
+    </tr>
+    <tr style="padding-top:5px; padding-bottom:5px;">
+      <td align="right" style="font-size:12.5px">
+        <span margin-right="45%" style="font-size:12.5px"> 
+          <#if record.createdfrom.recordType != "invoice"> إدارة العقارات </#if>
+        </span> 
+        <span align="right" style="font-size:12.5px;"> (0112849941/0112849983) : هاتف  </span>  </td>
+    </tr>
+    <tr style="padding-top:5px; padding-bottom:5px;">
+      <td align="right" style="font-size:12.5px">  <span align="right" style="font-size:12.5px;"> <span style="color:blue;text-decoration:underline">  ops@ncicom.com </span>  البريد الإلكترونى  </span>  </td>
+    </tr>
+  </table>
+  <p align="center" style="font-size:12.5px;text-decoration:underline"> هذا المستند يحتوى التوقيع الإلكترونى المشفر من هيئة الزكاة و الضريبة و الجمارك و لا يحتاج إلى توقيع أو ختم</p>
+</body>
+</pdf>
