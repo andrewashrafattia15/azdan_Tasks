@@ -12,9 +12,10 @@ define(['N/record', 'N/search','N/ui/serverWidget'], function (record,search ,se
                 const record = context.newRecord;
                 const items = getItemsList(record.id);
                 const bankData = getBankDetails();
+                const customerAddress = getCustomerData(record.getValue('entity'));
 
 
-                setData(items,bankData,context);
+                setData(customerAddress,items,bankData,context);
             }
 
         } catch (errBeforeLoad) {
@@ -23,6 +24,24 @@ define(['N/record', 'N/search','N/ui/serverWidget'], function (record,search ,se
     };
 
 
+    const getCustomerData = (custID) =>{
+        try {
+            
+            const customerSearch = search.lookupFields({
+                type: search.Type.CUSTOMER,
+                id: custID,
+                columns: ['billaddress','billcountry']
+            })
+
+            let address = customerSearch.billaddress.replace(/\n/g, ',');
+            let country = customerSearch.billcountry[0].text;
+
+            return {address:address,country:country} ;
+
+        } catch (errorGetCustomerData) {
+            log.debug('errorGetCustomerData',errorGetCustomerData)
+        }
+    }
    
 
     const getItemsList = (invID) =>{
@@ -42,7 +61,10 @@ define(['N/record', 'N/search','N/ui/serverWidget'], function (record,search ,se
                     'quantity',  
                     'rate',     
                     'amount',
-                    'taxcode',
+                    search.createColumn({
+                    name: 'rate',
+                    join: 'taxitem'
+                }),
                     'taxtotal',
                     'total'
                 ]
@@ -54,12 +76,13 @@ define(['N/record', 'N/search','N/ui/serverWidget'], function (record,search ,se
                     qty: result.getValue('quantity'),
                     rate: result.getValue('rate'),
                     amount: result.getValue('amount'),
-                    vat: result.getValue('taxcode'),
+                    vat: result.getValue({ name: 'rate', join: 'taxitem' }),
                     taxAmount: result.getValue('taxtotal'),
                     total: result.getValue('total')
                 });
                 return true;
             });
+
 
             return invoiceItems ;
 
@@ -101,7 +124,7 @@ define(['N/record', 'N/search','N/ui/serverWidget'], function (record,search ,se
         }
     }
 
-    const setData = (items,bankData,context) => {
+    const setData = (customerAddress,items,bankData,context) => {
 
             const custrecord = context.form.addField({
                 id: 'custpage_custrecord_to_print',
@@ -109,7 +132,9 @@ define(['N/record', 'N/search','N/ui/serverWidget'], function (record,search ,se
                 label: 'Text'
             });
 
+            log.debug(customerAddress);
             const data = {
+                customerAddress:customerAddress,
                 items:items,
                 bankData:bankData
             };

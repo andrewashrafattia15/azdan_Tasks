@@ -49,6 +49,13 @@
     </style>
 </head>
 <body header="nlheader" header-height="17%" footer="nlfooter" footer-height="20pt" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+  <#assign itemList = []>
+  <#if record.custpage_custrecord_to_print?has_content>
+    <#assign rawData = record.custpage_custrecord_to_print?eval_json>
+    <#assign itemList = rawData.items?default([])>
+    <#assign bankData = rawData.bankData?default([])>
+    <#assign customerData = rawData.customerAddress!{}>
+  </#if>
    <table width="100%" style="line-height:20px">
      <tr style="padding-bottom:25px">
        <th align="left" colspan="2" style="padding-left:10px;color:#FFCC00;font-weight:bold;font-size:20px"> Tax Invoice </th>
@@ -79,14 +86,14 @@
      </tr>
      <tr>
        <td align="left" style="color:#1A365D;border-bottom:0.5px solid #FFCC00;font-size:10px"> Address :</td>
-       <td align="center" style="color:#1A365D;border-bottom:0.5px solid #FFCC00;font-size:10px">${record.billaddress!""} </td>
+       <td align="center" style="color:#1A365D;border-bottom:0.5px solid #FFCC00;font-size:10px">${customerData.address!""} </td>
        <td width="20%"> </td>
        <td align="left" style="color:#1A365D;border-bottom:0.5px solid #FFCC00;font-size:10px"> Payment Terms : </td>
        <td align="center" style="color:#1A365D;border-bottom:0.5px solid #FFCC00;font-size:10px">${record.terms} </td>
      </tr>
      <tr>
        <td align="left" style="color:#1A365D;border-bottom:0.5px solid #FFCC00;font-size:10px"> Country :</td>
-       <td align="center" style="color:#1A365D;border-bottom:0.5px solid #FFCC00;font-size:10px">  </td>
+       <td align="center" style="color:#1A365D;border-bottom:0.5px solid #FFCC00;font-size:10px">${customerData.country!""}</td>
        <td width="20%"> </td>
        <td align="left" style="color:#1A365D;border-bottom:0.5px solid #FFCC00;font-size:10px"> Due Date : </td>
        <td align="center" style="color:#1A365D;border-bottom:0.5px solid #FFCC00;font-size:10px"> ${record.duedate} </td>
@@ -100,16 +107,11 @@
      </tr>
    </table>
 
-<#assign itemList = []>
-<#if record.custpage_custrecord_to_print?has_content>
-    <#assign rawData = record.custpage_custrecord_to_print?eval_json>
-    <#assign itemList = rawData.items?default([])>
-    <#assign bankData = rawData.bankData?default([])>
-</#if>
+
       
 <table style="width: 100%;">
         <tr>
-            <th width="30%" align="center" style="color:#1A365D; padding: 5px; border-bottom: 1px; background-color:#FFCC00;font-size:10px;">Product Service</th>
+            <th width="30%" align="center" style="color:#1A365D; padding: 5px; border-bottom: 1px; background-color:#FFCC00;font-size:10px;">Product/Service</th>
             <th width="10%" align="center" style="color:#1A365D; padding: 5px; border-bottom: 1px; background-color:#FFCC00;font-size:10px">Qty</th>
             <th width="10%" align="center" style="color:#1A365D; padding: 5px; border-bottom: 1px; background-color:#FFCC00;font-size:10px">Unit Price</th>
             <th width="10%" align="center" style="color:#1A365D; padding: 5px; border-bottom: 1px; background-color:#FFCC00;font-size:10px">Amount</th>
@@ -121,12 +123,13 @@
   <#assign qtySum = 0>
   <#assign rateSum = 0>
   <#assign amountSum = 0>
+  <#assign totalVat = 0>
   <#assign taxSum = 0>
   <#assign totalSum = 0>
     
     <#list itemList as line>
     <tr>
-        <td align="center" style="color:#1A365D; border-bottom: 1px ; border-right:1px dotted #FFCC00; font-size:10px">${line.name!""}</td>
+        <td align="center" style="color:#1A365D; border-bottom: 1px ; border-right:1px dotted #FFCC00; font-size:10px">${(line.name?split(":")[1]?trim)!""}</td>
         <td align="center" style="color:#1A365D; border-bottom: 1px ; border-right:1px dotted #FFCC00; font-size:10px">${line.qty!""}</td>
         <td align="center" style="color:#1A365D; border-bottom: 1px ; border-right:1px dotted #FFCC00; font-size:10px">${(line.rate?number)?string["#,##0.00"]!""}</td>
         <td align="center" style="color:#1A365D; border-bottom: 1px ; border-right:1px dotted #FFCC00; font-size:10px">${(line.amount?number)?string["#,##0.00"]!""}</td>
@@ -142,6 +145,8 @@
 <#assign rateSum = rateSum +
   (line.rate?has_content)?then(line.rate?number, 0)
 >
+  totalVat
+  <#assign totalVat = totalVat + (line.vat?replace("%", "")?number!0)>
   <#assign amountSum = amountSum + (line.amount)?number>
   <#assign taxSum = taxSum + (line.taxAmount)?number>
   <#assign totalSum = totalSum + (line.total)?number>
@@ -152,8 +157,8 @@
         <td align="right" style="color:#1A365D; padding: 5px;background-color:#FFCC00; border-bottom: 1px ; border-right:1px dotted #FFCC00; font-size:10px;font-weight:bold">${qtySum?string["#,##0.00"]!""}</td>
         <td align="right" style="color:#1A365D; padding: 5px;background-color:#FFCC00; border-bottom: 1px ; border-right:1px dotted #FFCC00; font-size:10px;font-weight:bold">${rateSum?string["#,##0.00"]!""}</td>
         <td align="right" style="color:#1A365D; padding: 5px;background-color:#FFCC00; border-bottom: 1px ; border-right:1px dotted #FFCC00; font-size:10px;font-weight:bold">${amountSum?string["#,##0.00"]!""}</td>
-        <td align="right" style="color:#1A365D; padding: 5px;background-color:#FFCC00; border-bottom: 1px ; border-right:1px dotted #FFCC00; font-size:10px;font-weight:bold"></td>
-        <td align="right" colspan="2" style="color:#1A365D; padding: 5px;background-color:#FFCC00; border-bottom: 1px ; border-right:1px dotted #FFCC00; font-size:10px;font-weight:bold">${taxSum?string["#,##0.00"]!""}</td>
+        <td align="right" colspan="2" style="color:#1A365D; padding: 5px;background-color:#FFCC00; border-bottom: 1px ; border-right:1px dotted #FFCC00; font-size:10px;font-weight:bold">${(totalVat?string("0.00")!"")}%</td>
+        <td align="right" style="color:#1A365D; padding: 5px;background-color:#FFCC00; border-bottom: 1px ; border-right:1px dotted #FFCC00; font-size:10px;font-weight:bold">${taxSum?string["#,##0.00"]!""}</td>
         <td align="right" style="color:#1A365D; padding: 5px;background-color:#FFCC00; border-bottom: 1px ; font-size:10px;font-weight:bold">${totalSum?string["#,##0.00"]!""}</td>
     </tr>
 </table>
@@ -171,11 +176,9 @@
         <tr>
           <td align="left" width="30%" >SUB TOTAL</td>
           <td align="center" width="20%" > AED </td>
-          <td align="right" width="50%" >${record.subtotal ?replace("[^0-9,٫]", "", "r")
+          <td align="right" width="50%" >${record.subtotal ?replace("[^0-9,٫.]", "", "r")
     ?replace(",", "", "r")
-    ?replace("٫", ".", "r")
-    ?number
-    ?string["#,##0.00"]} </td>
+    ?replace("٫", ".", "r")?number?string["#,##0.00"]} </td>
         </tr>
       </table>
     </td>
@@ -189,11 +192,9 @@
           <td align="left" width="30%">VAT</td>
           <td align="center" width="20%"> AED </td>
           <td align="right" width="50%">${record.taxtotal
-    ?replace("[^0-9,٫]", "", "r")
+    ?replace("[^0-9,٫.]", "", "r")
     ?replace(",", "", "r")
-    ?replace("٫", ".", "r")
-    ?number
-    ?string["#,##0.00"]
+    ?replace("٫", ".", "r")?number?string["#,##0.00"]
 }</td>
         </tr>
       </table>
@@ -207,11 +208,9 @@
         <tr>
           <td align="left" width="30%" style="font-size:11px">Total Due</td>
           <td align="center" width="20%"> AED </td>
-          <td align="right" width="50%">${record.total ?replace("[^0-9,٫]", "", "r")
+          <td align="right" width="50%">${record.total?replace("[^0-9,٫.]", "", "r")
     ?replace(",", "", "r")
-    ?replace("٫", ".", "r")
-    ?number
-    ?string["#,##0.00"]}</td>
+    ?replace("٫", ".", "r")?number?string["#,##0.00"]}</td>
         </tr>
       </table>
     </td>
@@ -224,11 +223,9 @@
         <tr>
           <td align="left" width="30%" >Recieved</td>
           <td align="center" width="20%" > AED </td>
-          <td align="right" width="50%">${record.total ?replace("[^0-9,٫]", "", "r")
+          <td align="right" width="50%">${record.total?replace("[^0-9,٫.]", "", "r")
     ?replace(",", "", "r")
-    ?replace("٫", ".", "r")
-    ?number
-    ?string["#,##0.00"]}</td>
+    ?replace("٫", ".", "r")?number?string["#,##0.00"]}</td>
         </tr>
       </table>
     </td>
@@ -241,7 +238,12 @@
         <tr>
           <td align="left" width="30%">Pending Dues</td>
           <td align="center" width="20%"> AED </td>
-          <td align="right" width="50%"> ${record.amountremainingtotalbox} </td>
+          <td align="right" width="50%">
+            <#assign rawVal = (record.entity.overduebalance!"0")?trim>
+            <#assign processedVal = rawVal?replace("[^0-9,٫.]", "", "r")
+    ?replace(",", "", "r")
+    ?replace("٫", ".", "r")>
+            ${(processedVal?length > 0)?then(processedVal, "0")?number?string["#,##0.00"]} </td>
         </tr>
       </table>
     </td>
