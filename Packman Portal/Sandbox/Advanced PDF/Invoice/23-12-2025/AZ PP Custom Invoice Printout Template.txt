@@ -1,0 +1,252 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+            <table width="100%" >
+              <tr>
+                <td> <img style="margin-left:-15px;" width="95%" src="https://11420259-sb1.app.netsuite.com/core/media/media.nl?id=1451&amp;c=11420259_SB1&amp;h=FlS7CKQywSRy5Mj5WAnfyvgXijeOLaf7-i6X5dF1XXdKaESc"/> </td>
+              </tr>
+            </table>
+        </macro>
+        <macro id="nlfooter">
+           <table width="100%" >
+              <tr>
+                <td> <img style="margin-left:-15px" width="95%" src="https://11420259-sb1.app.netsuite.com/core/media/media.nl?id=1452&amp;c=11420259_SB1&amp;h=E2bSD_fTHyR1V-OXfZr97u7DHTTI1bem0loZ7Lu47njXZrqZ"/> </td>
+              </tr>
+            </table>
+        </macro>
+    </macrolist>
+    <style>
+		* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+		</#if>
+		}
+    </style>
+</head>
+<body header="nlheader" header-height="17%" footer="nlfooter" footer-height="20pt" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+   <table width="100%" style="line-height:20px">
+     <tr style="padding-bottom:25px">
+       <th align="left" colspan="2" style="padding-left:10px;color:#FFCC00;font-weight:bold;font-size:20px"> Tax Invoice </th>
+       <th> </th>
+       <th> </th>
+       <th> </th>
+     </tr>
+     <tr>
+       <td align="left" style="color:#1A365D;border-bottom:0.5px solid #FFCC00;font-size:10px"> Billed to :</td>
+       <td align="center" style="color:#1A365D;border-bottom:0.5px solid #FFCC00;font-size:10px"> ${record.billaddress} </td>
+       <td width="20%"> </td>
+       <td align="left" style="color:#1A365D;border-bottom:0.5px solid #FFCC00;font-size:10px"> Invoice Date : </td>
+       <td align="center" style="color:#1A365D;border-bottom:0.5px solid #FFCC00;font-size:10px"> ${record.trandate} </td>
+     </tr>
+     <tr>
+       <td align="left" style="color:#1A365D;border-bottom:0.5px solid #FFCC00;font-size:10px"> Customer Name :</td>
+       <td align="center" style="color:#1A365D;border-bottom:0.5px solid #FFCC00;font-size:10px"> ${record.entity}</td>
+       <td width="20%"> </td>
+       <td align="left" style="color:#1A365D;border-bottom:0.5px solid #FFCC00;font-size:10px"> Invoice Number : </td>
+       <td align="center" style="color:#1A365D;border-bottom:0.5px solid #FFCC00;font-size:10px"> ${record.tranid} </td>
+     </tr>
+     <tr>
+       <td align="left" style="color:#1A365D;border-bottom:0.5px solid #FFCC00;font-size:10px"> TRN Number :</td>
+       <td align="center" style="color:#1A365D;border-bottom:0.5px solid #FFCC00;font-size:10px">${record.entity.vatregnumber}</td>
+       <td width="20%"> </td>
+       <td align="left" style="color:#1A365D;border-bottom:0.5px solid #FFCC00;font-size:10px"> Quotation / REF Number : </td>
+       <td align="center" style="color:#1A365D;border-bottom:0.5px solid #FFCC00;font-size:10px">  </td>
+     </tr>
+     <tr>
+       <td align="left" style="color:#1A365D;border-bottom:0.5px solid #FFCC00;font-size:10px"> Address :</td>
+       <td align="center" style="color:#1A365D;border-bottom:0.5px solid #FFCC00;font-size:10px">${record.billaddress!""} </td>
+       <td width="20%"> </td>
+       <td align="left" style="color:#1A365D;border-bottom:0.5px solid #FFCC00;font-size:10px"> Payment Terms : </td>
+       <td align="center" style="color:#1A365D;border-bottom:0.5px solid #FFCC00;font-size:10px">${record.terms} </td>
+     </tr>
+     <tr>
+       <td align="left" style="color:#1A365D;border-bottom:0.5px solid #FFCC00;font-size:10px"> Country :</td>
+       <td align="center" style="color:#1A365D;border-bottom:0.5px solid #FFCC00;font-size:10px">  </td>
+       <td width="20%"> </td>
+       <td align="left" style="color:#1A365D;border-bottom:0.5px solid #FFCC00;font-size:10px"> Due Date : </td>
+       <td align="center" style="color:#1A365D;border-bottom:0.5px solid #FFCC00;font-size:10px"> ${record.duedate} </td>
+     </tr>
+     <tr style="padding-bottom:10px">
+       <td align="left" style="color:#1A365D;border-bottom:0.5px solid #FFCC00;font-size:10px"> Contact Number :</td>
+       <td align="center" style="color:#1A365D;border-bottom:0.5px solid #FFCC00;font-size:10px"> ${record.entity.phone} </td>
+       <td width="20%"> </td>
+       <td align="left" style="color:#1A365D;"> </td>
+       <td align="left" style="color:#1A365D;"> </td>
+     </tr>
+   </table>
+
+<#assign itemList = []>
+<#if record.custpage_custrecord_to_print?has_content>
+    <#assign rawData = record.custpage_custrecord_to_print?eval_json>
+    <#assign itemList = rawData.items?default([])>
+    <#assign bankData = rawData.bankData?default([])>
+</#if>
+      
+<table style="width: 100%;">
+        <tr>
+            <th width="30%" align="center" style="color:#1A365D; padding: 5px; border-bottom: 1px; background-color:#FFCC00;font-size:10px;">Product Service</th>
+            <th width="10%" align="center" style="color:#1A365D; padding: 5px; border-bottom: 1px; background-color:#FFCC00;font-size:10px">Qty</th>
+            <th width="10%" align="center" style="color:#1A365D; padding: 5px; border-bottom: 1px; background-color:#FFCC00;font-size:10px">Unit Price</th>
+            <th width="10%" align="center" style="color:#1A365D; padding: 5px; border-bottom: 1px; background-color:#FFCC00;font-size:10px">Amount</th>
+            <th width="10%" align="center" style="color:#1A365D; padding: 5px; border-bottom: 1px; background-color:#FFCC00;font-size:10px">Discount</th>
+            <th width="10%" align="center" style="color:#1A365D; padding: 5px; border-bottom: 1px; background-color:#FFCC00;font-size:10px">VAT</th>
+            <th width="10%" align="center" style="color:#1A365D; padding: 5px; border-bottom: 1px; background-color:#FFCC00;font-size:10px">Amount</th>
+            <th width="10%" align="center" style="color:#1A365D; padding: 5px; border-bottom: 1px; background-color:#FFCC00;font-size:10px">Total</th>
+        </tr>
+  <#assign qtySum = 0>
+  <#assign rateSum = 0>
+  <#assign amountSum = 0>
+  <#assign taxSum = 0>
+  <#assign totalSum = 0>
+    
+    <#list itemList as line>
+    <tr>
+        <td align="center" style="color:#1A365D; border-bottom: 1px ; border-right:1px dotted #FFCC00; font-size:10px">${line.name!""}</td>
+        <td align="center" style="color:#1A365D; border-bottom: 1px ; border-right:1px dotted #FFCC00; font-size:10px">${line.qty!""}</td>
+        <td align="center" style="color:#1A365D; border-bottom: 1px ; border-right:1px dotted #FFCC00; font-size:10px">${(line.rate?number)?string["#,##0.00"]!""}</td>
+        <td align="center" style="color:#1A365D; border-bottom: 1px ; border-right:1px dotted #FFCC00; font-size:10px">${(line.amount?number)?string["#,##0.00"]!""}</td>
+        <td align="center" style="color:#1A365D; border-bottom: 1px ; border-right:1px dotted #FFCC00; font-size:10px">${record.discountrate!""}</td>
+        <td align="center" style="color:#1A365D; border-bottom: 1px ; border-right:1px dotted #FFCC00; font-size:10px">${line.vat!""}</td>
+        <td align="center" style="color:#1A365D; border-bottom: 1px ; border-right:1px dotted #FFCC00; font-size:10px">${(line.taxAmount?number)?string["#,##0.00"]!""}</td>
+        <td align="center" style="color:#1A365D; border-bottom: 1px ; font-size:10px">${(line.total?number)?string["#,##0.00"]!""}</td>
+
+  <#assign qtySum = (qtySum +
+  (line.qty?has_content)?then(line.qty?number, 0))
+>
+
+<#assign rateSum = rateSum +
+  (line.rate?has_content)?then(line.rate?number, 0)
+>
+  <#assign amountSum = amountSum + (line.amount)?number>
+  <#assign taxSum = taxSum + (line.taxAmount)?number>
+  <#assign totalSum = totalSum + (line.total)?number>
+    </tr>
+    </#list>
+    <tr>
+        <td align="left" style="color:#1A365D; padding: 5px;background-color:#FFCC00; border-bottom: 1px ; border-right:1px dotted #FFCC00; font-size:10px;font-weight:bold">Total</td>
+        <td align="right" style="color:#1A365D; padding: 5px;background-color:#FFCC00; border-bottom: 1px ; border-right:1px dotted #FFCC00; font-size:10px;font-weight:bold">${qtySum?string["#,##0.00"]!""}</td>
+        <td align="right" style="color:#1A365D; padding: 5px;background-color:#FFCC00; border-bottom: 1px ; border-right:1px dotted #FFCC00; font-size:10px;font-weight:bold">${rateSum?string["#,##0.00"]!""}</td>
+        <td align="right" style="color:#1A365D; padding: 5px;background-color:#FFCC00; border-bottom: 1px ; border-right:1px dotted #FFCC00; font-size:10px;font-weight:bold">${amountSum?string["#,##0.00"]!""}</td>
+        <td align="right" style="color:#1A365D; padding: 5px;background-color:#FFCC00; border-bottom: 1px ; border-right:1px dotted #FFCC00; font-size:10px;font-weight:bold"></td>
+        <td align="right" colspan="2" style="color:#1A365D; padding: 5px;background-color:#FFCC00; border-bottom: 1px ; border-right:1px dotted #FFCC00; font-size:10px;font-weight:bold">${taxSum?string["#,##0.00"]!""}</td>
+        <td align="right" style="color:#1A365D; padding: 5px;background-color:#FFCC00; border-bottom: 1px ; font-size:10px;font-weight:bold">${totalSum?string["#,##0.00"]!""}</td>
+    </tr>
+</table>
+
+<table width="100%" style="line-height:5%">
+  <tr>
+    <td width="30%" align="left" rowspan="2" style="vertical-align:bottom;font-size:12px;font-weight:bold;padding:10px;color:#1A365D;border-bottom:0.5px  #FFCC00">Bank Transfer Details :</td>
+    <td width="20%"></td>
+    <td width="50%" align="left" style="font-size:9px;font-weight:bold;padding:15px;color:#1A365D;border-bottom:0.5px  #FFCC00">** ALL PRICES ARE IN AED </td>
+  </tr>
+  <tr>  
+    <td width="20%"></td>
+    <td width="50%" align="right" style="font-size:9px;font-weight:bold;color:#1A365D;border-bottom:0.5px  #FFCC00">
+      <table width="100%" style="padding:5px">
+        <tr>
+          <td align="left" width="30%" >SUB TOTAL</td>
+          <td align="center" width="20%" > AED </td>
+          <td align="right" width="50%" >${record.subtotal ?replace("[^0-9,٫]", "", "r")
+    ?replace(",", "", "r")
+    ?replace("٫", ".", "r")
+    ?number
+    ?string["#,##0.00"]} </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td width="30%" align="left" style="font-size:10px;font-weight:bold;padding:10px;color:#1A365D;border-bottom:0.5px  #FFCC00"> Name : ${bankData[0].name}</td>
+    <td width="20%"></td>
+    <td width="50%" align="right" style="font-size:9px;font-weight:bold;color:#1A365D;border-bottom:0.5px  #FFCC00">
+      <table width="100%" style="padding:5px">
+        <tr>
+          <td align="left" width="30%">VAT</td>
+          <td align="center" width="20%"> AED </td>
+          <td align="right" width="50%">${record.taxtotal
+    ?replace("[^0-9,٫]", "", "r")
+    ?replace(",", "", "r")
+    ?replace("٫", ".", "r")
+    ?number
+    ?string["#,##0.00"]
+}</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td width="30%" align="left" style="font-size:10px;font-weight:bold;padding:10px;color:#1A365D;border-bottom:0.5px  #FFCC00"> Bank : ${bankData[0].bank}</td>
+    <td width="20%"></td>
+    <td width="50%" align="right" style="font-size:9px;font-weight:bold;color:#1A365D;border-bottom:0.5px  #FFCC00">
+      <table width="100%" style="padding:5px">
+        <tr>
+          <td align="left" width="30%" style="font-size:11px">Total Due</td>
+          <td align="center" width="20%"> AED </td>
+          <td align="right" width="50%">${record.total ?replace("[^0-9,٫]", "", "r")
+    ?replace(",", "", "r")
+    ?replace("٫", ".", "r")
+    ?number
+    ?string["#,##0.00"]}</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td width="30%" align="left" style="font-size:10px;font-weight:bold;padding:10px;color:#1A365D;border-bottom:0.5px  #FFCC00"> Account Number : ${bankData[0].number}</td>
+    <td width="20%"></td>
+    <td width="50%" align="right" style="font-size:9px;font-weight:bold;color:#1A365D;border-bottom:0.5px  #FFCC00">
+      <table width="100%" style="padding:5px">
+        <tr>
+          <td align="left" width="30%" >Recieved</td>
+          <td align="center" width="20%" > AED </td>
+          <td align="right" width="50%">${record.total ?replace("[^0-9,٫]", "", "r")
+    ?replace(",", "", "r")
+    ?replace("٫", ".", "r")
+    ?number
+    ?string["#,##0.00"]}</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td width="30%" align="left" style="font-size:10px;font-weight:bold;padding:10px;color:#1A365D;border-bottom:0.5px  #FFCC00"> IBAN : ${bankData[0].iban}</td>
+    <td width="20%"></td>
+    <td width="50%" align="right" style="font-size:9px;font-weight:bold;color:#1A365D;border-bottom:0.5px  #FFCC00">
+      <table width="100%" style="padding:5px">
+        <tr>
+          <td align="left" width="30%">Pending Dues</td>
+          <td align="center" width="20%"> AED </td>
+          <td align="right" width="50%"> ${record.amountremainingtotalbox} </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+      
+</body>
+</pdf>
