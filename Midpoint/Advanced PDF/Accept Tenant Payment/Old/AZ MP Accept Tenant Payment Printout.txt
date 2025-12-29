@@ -1,0 +1,274 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+    <link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false" />
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+
+     
+    <macrolist>
+        <macro id="nlheader">
+            <table class="header" style="width: 100%;">
+                 <tr align="center" style="padding-left:100px">
+                  <td align="center" style="width:90%; font-weight:bold; font-size:20pt;padding-right: -180px"> سند قبض  </td>
+                  <td  align="" style="width: 10%; padding-top:0px"> </td>                  
+                 </tr>
+               
+ 
+
+              <tr style="padding-top:-35px">
+                <td align="right" style=" width:40%; font-size:9pt; color:#868686; padding-right:-180px; padding-top:40px">  <strong style="color:black"> ${record.recordid}</strong> &nbsp;&nbsp;&nbsp; : رقم سند القبض #  </td>
+                <td  align="right" style="width: 60%;"></td>                
+              </tr>
+
+              <tr style="padding-top:-10px">
+                <td align="right" style=" width:40%; font-size:9pt;  padding-right:-80px;  padding-top:10px">   <strong style="color:black"> ${record.custrecord_az_mp_atp_date?string("yyyy MMM dd")}</strong> </td>
+                <td  align="right" style="width: 60%; color:#868686;font-size:9pt;padding-top:10px; padding-right:24px"> : التاريخ </td>
+                
+              </tr>
+            </table>
+                  
+        </macro>
+                      
+        <macro id="nlfooter">
+            
+         
+                  
+                 <table class="footer" style="width: 100%;">
+                <tr style="font-size:8pt; padding-top:20px">
+                    <td align="left" style="width: 50%;line-height:15px; color:black; ">
+                       
+                    </td>
+                  
+                    <td align="right" style="width:50%; line-height:15px; color:black;padding-left:150px; text-align:justify; text-indent:-19px; ">
+                    
+                    </td>
+                </tr>  
+            </table>
+        </macro>        
+    </macrolist>
+   <style type="text/css">* {
+            <#if .locale == "zh_CN">
+                font-family: NotoSans, NotoSansCJKsc, sans-serif;
+            <#elseif .locale == "zh_TW">
+                font-family: NotoSans, NotoSansCJKtc, sans-serif;
+            <#elseif .locale == "ja_JP">
+                font-family: NotoSans, NotoSansCJKjp, sans-serif;
+            <#elseif .locale == "ko_KR">
+                font-family: NotoSans, NotoSansCJKkr, sans-serif;
+            <#elseif .locale == "th_TH">
+                font-family: NotoSans, NotoSansThai, sans-serif;
+            <#else>
+                font-family: NotoSans, sans-serif;
+                font-family: NotoSansArabic, sans-serif;
+            </#if>
+            }
+      .arabic {
+        font-family: arabic-font;
+        position: right;
+        font-size: 8px;
+        line-height: 75%;
+      }
+
+        .english {
+        font-family: english-font;
+        position: left;
+        font-size: 8px;
+        line-height: 110%
+      }
+    </style>
+</head>
+<body header="nlheader" header-height="10%" footer="nlfooter" footer-height="35pt" padding="0.5in 0.3in 0.8in 0.3in" size="A4">
+  
+<table style="width:100%; margin-top:20px; padding-top:20px">
+  <tr>
+    <td class="arabic" align="right" style="font-weight:bold;font-size:12pt">
+      معلومات المستأجر
+    </td>
+  </tr>
+</table>
+
+<table style="width:100%; margin-top:10px;">
+
+  <tr style="font-size:10pt; color:#737373;">
+    <#if record.custrecord_az_mp_atp_tenant.custentity_ino_pms_commercial_number?has_content>
+      <td align="right" style="width:17.5%;padding-right:15px;">السجل التجاري</td>
+    <#else>
+      <td align="right" style="width:17.5%;padding-right:15px;">&nbsp;</td>
+    </#if>
+
+    <#if record.custrecord_az_mp_atp_tenant.vatregnumber?has_content>
+      <td align="right" style="width:17.5%;padding-right:10px;">الرقم الضريبي</td>
+    <#else>
+      <td align="right" style="width:17.5%;padding-right:10px;">&nbsp;</td>
+    </#if>
+
+    <td align="right" style="width:25%;padding-right:20px;">العنوان</td>
+    <td align="right" style="width:25%;padding-right:15px">اسم المستأجر</td>
+    <td align="right" style="width:15%;">نوع المستأجر</td>
+  </tr>
+
+
+  <tr style="font-size:10pt;">
+    <#if record.custrecord_az_mp_atp_tenant.custentity_ino_pms_commercial_number?has_content>
+      <td align="right" style="width:17.5%;padding-right:15px;">
+        ${record.custrecord_az_mp_atp_tenant.custentity_ino_pms_commercial_number}
+      </td>
+    <#else>
+      <td align="right" style="width:17.5%;padding-right:15px;">&nbsp;</td>
+    </#if>
+
+    <#if record.custrecord_az_mp_atp_tenant.vatregnumber?has_content>
+      <td align="right" style="width:17.5%;padding-right:10px;">
+        ${record.custrecord_az_mp_atp_tenant.vatregnumber}
+      </td>
+    <#else>
+      <td align="right" style="width:17.5%;padding-right:10px;">&nbsp;</td>
+    </#if>
+
+    <td align="right" style="width:25%;padding-right:20px; vertical-align:top;">
+      ${record.custrecord_az_mp_atp_tenant.address}
+    </td>
+    <td align="right" style="width:25%;padding-right:15px">
+      ${record.custrecord_az_mp_atp_tenant.companyname}
+    </td>
+    <#if record.custrecord_az_mp_atp_tenant.isperson>
+      <td align="right" style="width:15%;">فرد</td>
+    <#else>
+      <td align="right" style="width:15%;">شركة</td>
+    </#if>
+  </tr>
+</table>
+
+
+  
+  <table style="width:100%; margin-top:20px; padding-top:20px">
+    <tr>
+      <td align="right" style="font-weight:bold">معلومات سند القبض </td>
+    </tr>
+  </table>
+
+   <table style="width:100%; margin-top:10px">
+    <tr style="font-size:10pt; color:#737373; padding-top:0px">
+      <td  align="right" style="width:40%; padding-right:-130px  ">الوحدة </td>
+      <td align="right"  style="width:60%;  " > العقار</td>
+     
+    </tr>
+     
+    <tr style="font-size:10pt; ">
+      <td align="right" style="width:40%; padding-right:-130px  ">${record.custrecord_az_mp_atp_tenancy_contract.custrecord_ino_pms_tc_unit} </td>
+      <td align="right"  style="width:0%;" >${record.custrecord_az_mp_atp_property.custrecord_az_mp_prop_address}</td>
+     
+    </tr>
+
+   
+  </table>
+
+          <table style="width:100%; margin-top:20px; padding-top:20px">
+    <tr>
+      <td class ="arabic" align="right" style="font-weight:bold;font-size:12pt"> معلومات العقد</td>
+    </tr>
+  </table>
+    
+   <table style="width:100%; margin-top:10px">
+    <tr style="font-size:10pt; color:#737373; padding-top:0px"> 
+     
+      <td  align="right" style="width:25%;padding-right:-40px;  ">  الي  </td>
+      <td align="right"  style="width:25%;padding-right:-60px " > من </td>
+      <td align="right"  style="width:50%;  " > Ejar ID </td>
+      
+    </tr>
+    
+    <tr style="font-size:10pt; ">    
+   
+     
+      <td align="right" style="padding-right:-40px  ">  ${record.custrecord_az_mp_atp_tenancy_contract.custrecord_ino_pms_tc_effective_ed} </td>
+      <td align="right"  style="padding-right:-60px " > ${record.custrecord_az_mp_atp_tenancy_contract.custrecord_ino_pms_tc_effective_sd} </td> 
+      <td align="right"  style="  " >  ${record.custrecord_az_mp_atp_tenancy_contract.custrecord_ino_pms_tc_reference}  </td>
+        
+    </tr>     
+  </table>
+  <table style="width:100%; margin-top:10px;">
+    <tr style="font-size:11pt; color:#737373;">
+      <td align="right"> :الحساب البنكي</td>
+    </tr>
+    <tr>
+      <td align="right"> ${record.custrecord_az_mp_atp_bank_account.custrecord_ino_re_bank_ibannumber}</td>
+    </tr>
+  </table>
+
+   <table  style="width:100%; margin-top:10px;">
+   <tr style="font-size:8pt;font-weight:bold">
+       <td align="center" style=" width:12.5%; border-top: 1px solid #e2e2e2; border-bottom: 1px solid #e2e2e2;  border-left: 1px solid #e2e2e2;  "> مدفوع </td>
+       <td align="center" style=" width:12.5%; border-top: 1px solid #e2e2e2; border-bottom: 1px solid #e2e2e2; border-right: 1px solid #e2e2e2; border-left: 1px solid #e2e2e2 ; "> المتبقي</td>
+       <td align="center" style=" width:14.5%; border-top: 1px solid #e2e2e2; border-bottom: 1px solid #e2e2e2; "> المبلغ بعد الضريبة</td>
+       <td align="center" style=" width:12.5%; border-top: 1px solid #e2e2e2; border-bottom: 1px solid #e2e2e2; border-right: 1px solid #e2e2e2; border-left: 1px solid #e2e2e2"> الضريبة</td>
+       <td align="center" style=" width:12.5%; border-top: 1px solid #e2e2e2; border-bottom: 1px solid #e2e2e2; "> المبلغ</td>
+       <td colspan="3" align="center" style=" width:28%; border-top: 1px solid #e2e2e2; border-bottom: 1px solid #e2e2e2;  border-left: 1px solid #e2e2e2">الفترة </td>
+       <td align="center" style=" width:7.5%; border-top: 1px solid #e2e2e2; border-bottom: 1px solid #e2e2e2; border-right: 1px solid #e2e2e2; border-left: 1px solid #e2e2e2"> البيان </td>
+ 
+   </tr>
+   </table>
+
+
+        
+  
+       <table style="width:40% ; margin-top:80px">
+       
+          
+           <#if record.custrecord_az_mp_atp_tenancy_contract.custrecord_ino_pms_tc_total_amount != record.custrecord_az_mp_atp_tenancy_contract.custrecord_ino_pms_tc_amount_incl_tax>
+                 
+               <tr style="font-size:12pt;padding-bottom:10px">
+                 <td style="width:20%" >   ${record.custrecord_az_mp_atp_tenancy_contract.custrecord_ino_pms_tc_total_amount?string(",##0.00")}</td>
+                 <td  align="right" style="width:20%" >  قيمة العقد قبل الضريبة</td>
+               </tr>
+              <tr align="" style="font-size:12pt; padding-top:10px; padding-bottom:10px; ">
+                <td > ${record.custrecord_az_mp_atp_tenancy_contract.custrecord_ino_pms_tc_amount_incl_tax?string(",##0.00")}</td>
+                <td align="right" >  قيمة العقد بعد الضريبة</td>
+              </tr>
+                <tr align="" style="font-size:12pt;  background-color:#313030; color:#ffffff; font-weight:bold; padding-top: 10px;padding-bottom:10px;">
+                 <td > ${record.custrecord_az_mp_atp_paid_amount?string(",##0.00")}</td>
+                 <td  align="right" > المبلغ المدفوع </td>
+               </tr>
+             
+                   
+              <#else>
+                 <tr tyle="font-size:12pt;padding-bottom:10px">
+                 <td  style="width:20%"  >   ${record.custrecord_az_mp_atp_tenancy_contract.custrecord_ino_pms_tc_total_amount?string(",##0.00")}</td>
+                 <td    align="right" style="width:20%"  > قيمة العقد </td>
+               </tr>
+              <tr>
+                <td ></td>
+                <td align="right" >  </td>
+              </tr>
+                
+             
+                <tr align="" style="font-size:12pt;  background-color:#313030; color:#ffffff; font-weight:bold; padding-top: 10px;padding-bottom:10px;">
+                 <td > ${record.custrecord_az_mp_atp_paid_amount?string(",##0.00")}</td>
+                 <td  align="right" > المبلغ المدفوع </td>
+               </tr>
+            
+                </#if>
+              
+              </table>
+
+              <table style="width:100%">
+    <tr style=" padding-top: 15px;font-size: 12px;font-weight:bold">
+
+       <td align="center" style=" width:80%;   "></td>
+     <td align="center" style=" width:20%;padding-right:-30px "> :المبلغ المدفوع </td> 
+    </tr>
+  </table>
+  </body>             
+</pdf>
+   
