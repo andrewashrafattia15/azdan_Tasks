@@ -6,91 +6,104 @@ define(['N/record','N/search'], function (record,search) {
 
     const afterSubmit = (context) => {
         try {
-            if (context.type !== context.UserEventType.CREATE &&
-                context.type !== context.UserEventType.EDIT) {
-                return;
-            }
-
-            const recID = context.newRecord.id;
-            const lcBatchCollectedAmount = getLCBatchCollectedAmount(recID);
-            const tenantPaymentCollectedAmount = getTenantPaymentCollectedAmount(recID);
-
-            const invoicedAmount = lcBatchCollectedAmount + tenantPaymentCollectedAmount ;    
-
-            record.submitFields({
-                type: context.newRecord.type,
-                id: recID,
-                values: {
-                    'custrecord_ino_pms_lc_invoiced_amount': invoicedAmount
-                },
-                options: {
-                    ignoreMandatoryFields: true
-                }
-            });
+            if (context.type !== context.UserEventType.DELETE) {
+  
+                    const recordID = context.newRecord.id;
+                    const lcbCollectedAmount = getLCBatchCollectedAmount(recordID);
+                    const tpCollectedAmount = getTPCollectedAmount(recordID);
                     
-        } catch (errBeforeLoad) {
-            log.debug("errBeforeLoad", errBeforeLoad);
+                    submitFields(recordID,lcbCollectedAmount,tpCollectedAmount,context);
+                   
+            }
+                    
+        } catch (errorAfterSubmit) {
+            log.debug("errorAfterSubmit", errorAfterSubmit);
         }
     };
 
-    const getLCBatchCollectedAmount = (recID) => {  
+    const getLCBatchCollectedAmount = (recordID) => {
         try {
-            if(!recID){ return }
-
-            let sumCollectedAmount = 0;
 
             const tenantAllSearch = search.create({
                 type: 'customrecord_az_mp_tp_allocation',
-                filters: [['custrecord_az_mp_tpa_lease_charge',search.Operator.IS,recID],'AND',
+                filters: [['custrecord_az_mp_tpa_lease_charge',search.Operator.IS,recordID],'AND',
                 ['isinactive', search.Operator.IS, 'F'],'AND',
                 ['custrecord_az_mp_tpa_lease_close_batch', search.Operator.NONEOF, '@NONE@'], 'AND',
                 ['custrecord_az_mp_tpa_tenant_payment', search.Operator.ANYOF, '@NONE@']
                 ],
-                columns: ['custrecord_az_mp_tpa_collected_amount']
-            })
+                columns: [search.createColumn({
+                        name: 'custrecord_az_mp_tpa_collected_amount',
+                        summary: search.Summary.SUM
+                    })
+                ]
+            });
 
-            const results = tenantAllSearch.run().getRange(0, 1000);
+            const result = tenantAllSearch.run().getRange({ start: 0, end: 1 });
 
+            return parseFloat(
+                result[0]?.getValue({
+                    name: 'custrecord_az_mp_tpa_collected_amount',
+                    summary: search.Summary.SUM
+                })
+            ) || 0;
             
-            for(let i = 0 ; i < results.length ; i++){ 
-                sumCollectedAmount += parseFloat(results[i].getValue('custrecord_az_mp_tpa_collected_amount')) || 0;
-            }
-    
-            return sumCollectedAmount;
 
         } catch (errorGetLCBatchCollectedAmount) {
             log.debug('errorGetLCBatchCollectedAmount',errorGetLCBatchCollectedAmount);
         }
     }
 
-    const getTenantPaymentCollectedAmount = (recID) => {       
+    const getTPCollectedAmount = (recordID) => {       
         try {
-            if(!recID){ return }
-
-            let sumCollectedAmount = 0;
-
             const tenantAllSearch = search.create({
                 type: 'customrecord_az_mp_tp_allocation',
-                filters: [['custrecord_az_mp_tpa_lease_charge',search.Operator.IS,recID],'AND',
+                filters: [['custrecord_az_mp_tpa_lease_charge',search.Operator.IS,recordID],'AND',
                 ['isinactive', search.Operator.IS, 'F'],'AND',
                 ['custrecord_az_mp_tpa_lease_close_batch', search.Operator.ANYOF, '@NONE@'],'AND',
                 ['custrecord_az_mp_tpa_tenant_payment', search.Operator.NONEOF, '@NONE@'],'AND',
                 ['custrecord_az_mp_tpa_lease_invoice', search.Operator.NONEOF, '@NONE@']
                 ],
-                columns: ['custrecord_az_mp_tpa_collected_amount']
-            })
+                columns: [
+                    search.createColumn({
+                        name: 'custrecord_az_mp_tpa_collected_amount',
+                        summary: search.Summary.SUM
+                    })
+                ]
+            });
 
-            const results = tenantAllSearch.run().getRange(0, 1000);
+            const result = tenantAllSearch.run().getRange({ start: 0, end: 1 });
 
-            
-            for(let i = 0 ; i < results.length ; i++){ 
-                sumCollectedAmount += parseFloat(results[i].getValue('custrecord_az_mp_tpa_collected_amount')) || 0;
-            }
-
-            return sumCollectedAmount;
+            return parseFloat(
+                result[0]?.getValue({
+                    name: 'custrecord_az_mp_tpa_collected_amount',
+                    summary: search.Summary.SUM
+                })
+            ) || 0;
 
         } catch (errorGetTenantPaymentCollectedAmount) {
             log.debug('errorGetTenantPaymentCollectedAmount',errorGetTenantPaymentCollectedAmount);
+        }
+    }
+
+    const submitFields = (recordID,lcbCollectedAmount,tpCollectedAmount,context)=>{
+        try {
+
+            const invoicedAmount = lcbCollectedAmount + tpCollectedAmount ;    
+
+             record.submitFields({
+                        type: context.newRecord.type,
+                        id: recordID,
+                        values: {
+                            'custrecord_ino_pms_lc_invoiced_amount': invoicedAmount
+                    },
+                    options: {
+                        enableSourcing: true,
+                        ignoreMandatoryFields: true
+                    }
+                });
+
+        } catch (errorSubmitFields) {
+            log.debug('errorSubmitFields',errorSubmitFields);
         }
     }
 
