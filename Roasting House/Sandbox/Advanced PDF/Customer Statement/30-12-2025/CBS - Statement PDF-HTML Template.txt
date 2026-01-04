@@ -24,7 +24,7 @@
 	</td>
 	</tr>
 	<tr>
-	<td align="right">To${statement.trandate}</td>
+	<td align="right">To ${statement.trandate}</td>
 	</tr></table>
         </macro>
          <macro id="nlfooter">

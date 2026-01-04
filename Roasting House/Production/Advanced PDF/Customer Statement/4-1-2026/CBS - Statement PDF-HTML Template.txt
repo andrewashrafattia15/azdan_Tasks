@@ -1,0 +1,244 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd"><pdfset><#if statements?has_content><#list statements as statement>
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}"
+            src-italic="${nsfont.NotoSansArabic_Italic}" src-bolditalic="${nsfont.NotoSansArabic_BoldItalic}" bytes="2" />
+
+  <#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+            <table class="header" style="width: 100%;"><tr>
+              <td rowspan="2" align="left" >  <#if subsidiary.pagelogo?length !=0><img src="${subsidiary.pagelogo@url}" width="180" height="55"/></#if></td>
+	<td align="right">
+	<p style="font-size:12pt;"><span class="title"><strong> كشف حساب عميل<br/>Customer Statement</strong></span></p>
+	</td>
+	</tr>
+	<tr>
+	<td align="right">To  ${statement.trandate}</td>
+	</tr></table>
+        </macro>
+         <macro id="nlfooter">
+              <hr />
+            <table border-top="0" class="footer" style="width: 100%;">
+               <tr>
+                <td align="center" style="width: 100%;font-size:12;color:#004C99;"><strong> </strong></td>
+              </tr>
+              <tr>
+                <td align="center" style="width: 100%;font-size:8;"><strong>Al-Rahmaniyah district | Riyadh Saudi Arabia | Tel: ${subsidiary.addrphone} | V.A.T: ${subsidiary.federalidnumber} </strong></td>
+              </tr>
+                <tr>
+                <td align="center" style="width: 100%;font-size:8;"><strong>
+                  ${subsidiary.federalidnumber} <span style="direction:rtl; unicode-bidi:bidi-override;"> :رقم ضريبة القيمة المضافة</span>
+                  | <span style="direction:ltr; unicode-bidi:bidi-override;">${subsidiary.addrphone}</span> <span style="direction:rtl; unicode-bidi:bidi-override;">:هاتف</span>
+                  | <span style="direction:rtl; unicode-bidi:bidi-override;">الرياض المملكة العربية السعودية </span>
+                  | حي الرحمانية
+                  </strong>
+                </td>
+              </tr>
+              
+              <tr>
+                <td align="right"><pagenumber/> of <totalpages/></td>
+              </tr>
+          </table>
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+            <#if .locale == "zh_CN">
+                font-family: NotoSans, NotoSansCJKsc, sans-serif;
+            <#elseif .locale == "zh_TW">
+                font-family: NotoSans, NotoSansCJKtc, sans-serif;
+            <#elseif .locale == "ja_JP">
+                font-family: NotoSans, NotoSansCJKjp, sans-serif;
+            <#elseif .locale == "ko_KR">
+                font-family: NotoSans, NotoSansCJKkr, sans-serif;
+            <#elseif .locale == "th_TH">
+                font-family: NotoSans, NotoSansThai, sans-serif;
+            <#else>
+                font-family: NotoSans, sans-serif,NotoSansArabic; font-feature-settings:opentype;
+            </#if>
+        }
+        table {
+            font-size: 9pt;
+            table-layout: fixed;
+        }
+         th {
+             font-weight: bold;
+             font-size: 8pt;
+             vertical-align: middle;
+             padding: 5px 6px 3px;
+             background-color:#1A4889;
+             color: #fafafa;
+         }
+         td {
+             padding: 4px 6px;
+         }
+      td.border {
+             padding: 4px 6px;
+        border: .5px solid Silver;
+         }
+         td p { align:left }
+         b {
+             font-weight: bold;
+             color: #333333;
+         }
+         table.header td {
+             padding: 0;
+             font-size: 10pt;
+         }
+         table.footer td {
+             padding: 0;
+             font-size: 8pt;
+         }
+         table.itemtable th {
+             padding-bottom: 10px;
+             padding-top: 10px;
+            border: .5px solid Silver;
+         }
+         table.body td {
+             padding-top: 2px;
+         }
+         td.addressheader {
+             font-weight: bold;
+             font-size: 8pt;
+             padding-top: 6px;
+             padding-bottom: 2px;
+         }
+         td.address {
+             padding-top: 0;
+         }
+         span.title {
+             font-size: 16pt;
+         }
+         span.number {
+             font-size: 16pt;
+         }
+         div.remittanceSlip {
+             width: 100%;
+             /* To ensure minimal height of remittance slip */
+             height: 200pt;
+             page-break-inside: avoid;
+             page-break-after: avoid;
+         }
+         hr {
+             border-top: 1px solid #d3d3d3;
+             width: 100%;
+             color: #fafafa;
+             background-color: #1A4889;
+             height: 1px;
+         }
+</style>
+</head>
+<body header="nlheader" header-height="10%" footer="nlfooter" footer-height="20pt" padding="0.5in 0.5in 0.5in 0.5in" size="A4">
+    <table style="width: 100%; margin-top: 10px;"><tr>
+	<td class="addressheader" colspan="3">Customer/العميل</td>
+      <td class="addressheader" colspan="3">VAT</td>
+  
+	</tr>
+	<tr>
+	<td class="address" colspan="3">${customer.entityid}/${customer.custentity2}</td>
+      <td class="address" colspan="3">${customer.vatregnumber}</td>
+ 
+	</tr></table>
+  
+    <table class="itemtable" style="width: 100%;">
+      <tr>
+	<th align="right">اجمالي الرصيد المستحق</th> 
+	</tr>
+	<tr>
+
+      <td align="right" class="border">${statement.amountDue}</td>
+	</tr></table>
+
+
+<#if statement.lines?has_content>
+
+<table class="itemtable" style="width: 100%; margin-top: 10px;"><!-- start items --><#assign add3 = 0 ><#assign add1 = 0 ><#assign add2 = 0 ><#list statement.lines as line><#if line_index==0>
+<thead>
+	<tr>
+	<th colspan="3">تاريخ/Date</th>
+	<th colspan="4">الحركة/Type</th>
+	<th colspan="5">مذكرة/Memo</th>
+	<th style="width: 94px;">مدين/Dr</th>
+	<th align="right" colspan="4">دائن/Cr</th>
+	<th align="right" colspan="4">الرصيد/Balance</th>
+	</tr>
+</thead>
+</#if><tr>
+	<td class="border" colspan="3">${line.datecol}</td>
+	<td class="border" colspan="4">${line.description}</td>
+	<td class="border" colspan="5">${line.memo}</td>
+	<#if (line.charge)?is_number ><#assign add1+= line.charge ></#if>
+	<td class="border" style="width: 94px;">${line.charge}</td>
+	<#if (line.payment)?is_number ><#assign  add2 = add2 + line.payment></#if>
+	<td align="right" class="border" colspan="4">${line.payment}</td>
+	<#if (line.balance)?is_number ><#assign add3 = line.balance ></#if>
+	<td align="right" class="border" colspan="4">${line.balance}</td>
+	</tr>
+	</#list><!-- end items --></table>
+
+<table align="right" border="0" cellpadding="1" cellspacing="1" class="itemtable" style="width:100%;" width="100%">
+  <thead><tr>
+	<th align="right" colspan='15'>Total:</th>
+	<th align="right" style="width: 94px;">${add1?string[',##0.00']}</th>
+	<th align="right" colspan="4">${add2?string[',##0.00']}</th>
+	<th align="right" colspan="4">${add3?string[',##0.00']}</th>
+	</tr></thead></table>
+
+<!-- <table class="aging" style="width: 100%; margin-top: 10px;"><tr>
+    <th>${statement.aging1@label}</th>
+    <th>${statement.aging2@label}</th>
+    <th>${statement.aging3@label}</th>
+    <th>${statement.aging4@label}</th>
+    <th>${statement.aging5@label}</th>
+    <th>${statement.agingbal@label}</th>
+    </tr>
+    <tr>
+    <td>${statement.aging1}</td>
+    <td>${statement.aging2}</td>
+    <td>${statement.aging3}</td>
+    <td>${statement.aging4}</td>
+    <td>${statement.aging5}</td>
+    <td>${statement.agingbal}</td>
+    </tr></table> --><!-- </#if><#if preferences.RETURNFORM && remittanceSlip??>
+<hr />
+<div class="remittanceSlip">
+<table style="width: 100%; margin-top: 10px;"><tr>
+    <td><span class="nameandaddress">${companyInformation.companyName}</span></td>
+    <td align="right"><span class="number">${remittanceSlip@title}</span></td>
+    </tr></table>
+<table style="width: 100%; margin-top: 10px;"><tr>
+    <th>${remittanceSlip.customername@label}</th>
+    <th>${statement.trandate@label}</th>
+    <th>${statement.amountDue@label}</th>
+    <th>${remittanceSlip.amountPaid@label}</th>
+    </tr>
+    <tr>
+    <td>${companyInformation.addressText}</td>
+    <td>${statement.trandate}</td>
+    <td align="right">${statement.amountDue-customer.depositbalance}</td>
+    <td>&nbsp;</td>
+    </tr></table>
+<table style="width: 100%;"><tr>
+    <th>${remittanceSlip.ccinfo@label}</th>
+    <th>${remittanceSlip.companyaddress@label}</th>
+    </tr>
+    <tr>
+    <td>${remittanceSlip.ccinfo}</td>
+    <td>${companyInformation.addressText}</td>
+    </tr></table>
+</div>
+</#if> --></body></pdf></#list><#else><pdf><head></head><body>
+
+<p><br />Please use Single Currency Advanced Printing Template</p>
+</body>
+</pdf></#if></pdfset>
