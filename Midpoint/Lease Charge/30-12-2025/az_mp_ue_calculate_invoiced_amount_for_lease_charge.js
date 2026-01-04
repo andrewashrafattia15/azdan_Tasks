@@ -9,10 +9,11 @@ define(['N/record','N/search'], function (record,search) {
             if (context.type !== context.UserEventType.DELETE) {
   
                     const recordID = context.newRecord.id;
+                    const recordType = context.newRecord.type;
                     const lcbCollectedAmount = getLCBatchCollectedAmount(recordID);
                     const tpCollectedAmount = getTPCollectedAmount(recordID);
                     
-                    submitFields(recordID,lcbCollectedAmount,tpCollectedAmount,context);
+                    updateLeaseCharge(lcbCollectedAmount,tpCollectedAmount,recordID,recordType);
                    
             }
                     
@@ -40,12 +41,14 @@ define(['N/record','N/search'], function (record,search) {
 
             const result = tenantAllSearch.run().getRange({ start: 0, end: 1 });
 
-            return parseFloat(
+            const lcBatchCollectedAmount = parseFloat(
                 result[0]?.getValue({
                     name: 'custrecord_az_mp_tpa_collected_amount',
                     summary: search.Summary.SUM
                 })
             ) || 0;
+
+            return lcBatchCollectedAmount ;
             
 
         } catch (errorGetLCBatchCollectedAmount) {
@@ -73,25 +76,27 @@ define(['N/record','N/search'], function (record,search) {
 
             const result = tenantAllSearch.run().getRange({ start: 0, end: 1 });
 
-            return parseFloat(
+            const tpCollectedAmount = parseFloat(
                 result[0]?.getValue({
                     name: 'custrecord_az_mp_tpa_collected_amount',
                     summary: search.Summary.SUM
                 })
             ) || 0;
 
+            return tpCollectedAmount ;
+
         } catch (errorGetTenantPaymentCollectedAmount) {
             log.debug('errorGetTenantPaymentCollectedAmount',errorGetTenantPaymentCollectedAmount);
         }
     }
 
-    const submitFields = (recordID,lcbCollectedAmount,tpCollectedAmount,context)=>{
+    const updateLeaseCharge = (lcbCollectedAmount,tpCollectedAmount,recordID,recordType)=>{
         try {
 
             const invoicedAmount = lcbCollectedAmount + tpCollectedAmount ;    
 
              record.submitFields({
-                        type: context.newRecord.type,
+                        type: recordType,
                         id: recordID,
                         values: {
                             'custrecord_ino_pms_lc_invoiced_amount': invoicedAmount
@@ -102,8 +107,8 @@ define(['N/record','N/search'], function (record,search) {
                     }
                 });
 
-        } catch (errorSubmitFields) {
-            log.debug('errorSubmitFields',errorSubmitFields);
+        } catch (errorUpdateLeaseCharge) {
+            log.debug('errorUpdateLeaseCharge',errorUpdateLeaseCharge);
         }
     }
 
