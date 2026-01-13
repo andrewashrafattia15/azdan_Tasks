@@ -37,7 +37,7 @@ define(['N/record','N/search'], function (record,search) {
             const result = tenantAllSearch.run().getRange({ start: 0, end: 1 });
 
             
-            if(result){
+            if(result !== null && result.length > 0){
             const totalAmount = parseFloat(
                     result[0].getValue({
                         name: 'custrecord_az_mp_expa_amount',
