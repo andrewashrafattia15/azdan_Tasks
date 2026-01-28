@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+      <#assign data = {}>
+      <#if record.custpage_custrecord_to_print?has_content>
+         <#assign data = record.custpage_custrecord_to_print?eval/>
+      </#if>
+        <macro id="nlheader">
+            <table class="header" style="width: 100%;">
+                <tr>
+                    <#if subsidiary.logo@url != "" >
+                       <td rowspan="5" align="left" width="30%" style="padding-bottom:5px;vertical-align:middle"> <img src="${subsidiary.logo@url}" style=" width:150px; height:75px" /></td>
+                     <#else>
+                       <td rowspan="5" align="left" width="30%"></td>
+                      </#if>
+                    <td width="20%" style="font-size:9px">${(data.subName)!""}</td>
+                    <td width="50%" rowspan="4" align="right" style="vertical-align:middle;color:#007115;font-size:32px;font-weight:bold">
+                      Stock Transfer Request
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-size:9px">${(data.subAddress)!""}</td>
+                </tr>
+                <tr>
+                    <td style="font-size:9px">TRN: ${(data.subVAT)!""}</td>
+                </tr>
+                <tr>
+                    <td style="font-size:9px">Telephone: ${record.subsidiary.custrecord_az_cbc_subsidiary_phone}</td>
+                </tr>
+                <tr>
+                    <td style="font-size:9px">Email: ${record.subsidiary.custrecord_az_cbc_subsidiary_email}</td>
+                    <td align="right" style="font-size:11px">THIS IS NOT A TAX INVOICE</td>
+                </tr>
+            </table>
+        </macro>
+        <macro id="nlfooter">
+            <table class="footer" style="width: 100%;">
+                <tr>
+                    <td align="center" style="font-size:9px;font-weight:bold">
+                        ----------ELECTRONICALLY VERIFIED REPORT, NO SIGNATURE REQUIRED | THANK YOU FOR YOUR BUSINESS----------
+                    </td>
+                </tr>
+            </table>
+        </macro>
+    </macrolist>
+</head>
+<body header="nlheader" header-height="10%" footer="nlfooter" footer-height="20pt" padding="0.3in 0.5in 0.5in 0.5in" size="Letter">
+  <table width="100%">
+    <tr>
+      <td width="12%" align="center" style="vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-left:0.5px solid black;border-bottom:0.5px solid black;border-right:0.5px solid black">STR NO.</td>
+      <td width="16%" align="center" style="vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-bottom:0.5px solid black;border-right:0.5px solid black">STR Date</td>
+      <td width="18%" align="center" style="vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-bottom:0.5px solid black;border-right:0.5px solid black">Request From</td>
+      <td width="18%" align="center" style="vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-bottom:0.5px solid black;border-right:0.5px solid black">Request To</td>
+      <td width="18%" align="center" style="vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-bottom:0.5px solid black;border-right:0.5px solid black">Requested By</td>
+      <td width="18%" align="center" style="vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-bottom:0.5px solid black;border-right:0.5px solid black">Need By Date</td>
+    </tr>
+    <tr>
+      <td align="center" style="vertical-align:middle;font-size:9px;border-left:0.5px solid black;border-bottom:0.5px solid black;border-right:0.5px solid black">${record.tranid}</td>
+      <td align="center" style="vertical-align:middle;font-size:9px;border-bottom:0.5px solid black;border-right:0.5px solid black">${record.trandate}</td>
+      <td align="center" style="vertical-align:middle;font-size:9px;border-bottom:0.5px solid black;border-right:0.5px solid black">${record.location}</td>
+      <td align="center" style="vertical-align:middle;font-size:9px;border-bottom:0.5px solid black;border-right:0.5px solid black">${record.transferlocation}</td>
+      <td align="center" style="vertical-align:middle;font-size:9px;border-bottom:0.5px solid black;border-right:0.5px solid black">${record.custbody_az_g_trx_created_by}</td>
+      <td align="center" style="vertical-align:middle;font-size:9px;border-bottom:0.5px solid black;border-right:0.5px solid black">${record.shipdate}</td>
+    </tr>
+    <tr>
+      <td align="center" style="vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-left:0.5px solid black;border-bottom:0.5px solid black;border-right:0.5px solid black">Remarks</td>
+      <td align="center" colspan="5" style="vertical-align:middle;font-size:9px;border-bottom:0.5px solid black;border-right:0.5px solid black">${record.memo}</td>
+    </tr>
+  </table>
+
+  <table width="100%" style="padding-top:10px">
+    <tr>
+      <td width="10%" align="center" style="vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-left:0.5px solid black;border-bottom:0.5px solid black;border-right:0.5px solid black">
+        SL NO.
+      </td>
+      <td width="15%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">
+        Item Code
+      </td>
+      <td width="20%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">
+        Item Description
+      </td>
+      <td width="5%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">
+        UOM
+      </td>
+      <td width="5%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">
+        QTY
+      </td>
+      <td width="25%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">
+        Product Vertical
+      </td>
+      <td width="20%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-bottom:0.5px solid black;border-right:0.5px solid black">
+        Additional Note
+      </td>
+    </tr>
+     <#assign sn = 0>
+     <#assign qty = 0>
+     <#list (data.itemsList![]) as line>
+              <#assign sn = sn + 1>
+               <#assign qty = qty + line.quantity>
+                <tr>
+                    <td align="center" style="border-left:0.5px solid black;border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">${sn}</td>
+                    <td align="center" style="border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">${line.itemName}</td>
+                    <td align="center" style="border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">${line.description}</td>
+                    <td align="center" style="border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">${line.units}</td>
+                    <td align="center" style="border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">${line.quantity}</td>
+                    <td align="center" style="border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">${line.lineClass!""}</td>
+                    <td align="center" style="border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">${line.additionalNote}</td>
+                </tr>
+        </#list>
+    </table>
+                
+    <table width="100%" style="padding-top:30px">
+      <tr>
+        <td width="50%"></td>
+        <td width="15%" style="vertical-align:middle;font-size:9px;font-weight:bold;background-color:#D9F1D0;border-top:0.5px solid black;border-left:0.5px solid black;border-bottom:0.5px solid black;border-right:0.5px solid black"> Total QTY </td>
+        <td width="35%" align="right" style="vertical-align:middle;font-size:9px;font-weight:bold;border-top:0.5px solid black;border-bottom:0.5px solid black;border-right:0.5px solid black" >${qty}</td>
+      </tr>
+      <tr>
+        <td width="50%"></td>
+        <td width="15%" style="vertical-align:middle;font-size:9px;font-weight:bold;background-color:#D9F1D0;border-left:0.5px solid black;border-bottom:0.5px solid black;border-right:0.5px solid black"> Total SKUs </td>
+        <td width="35%" align="right" style="vertical-align:middle;font-size:9px;font-weight:bold;border-bottom:0.5px solid black;border-right:0.5px solid black" ></td>
+      </tr>
+    </table>
+</body>
+</pdf>
