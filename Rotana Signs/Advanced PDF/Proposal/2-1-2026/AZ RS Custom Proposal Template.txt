@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<link name="NotoSansArabic" type="font" subtype="truetype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" />
+    <macrolist>
+        <macro id="nlheader">
+            <table style="width: 100%; font-size: 10pt;">
+                <tr>
+                    <td width="45%" align="left"> <img src="${subsidiary.logo@url}" style="float: left; width:150px; height:90px" /> </td>
+                    <td width="55%" align="left" style="vertical-align:middle;font-size:25px"> Proposal </td>
+                </tr>
+            </table>
+        </macro>
+
+    </macrolist>
+  <style>
+    *{
+      font-family: "NotoSansArabic", sans-serif;
+    }
+  </style>
+</head>
+<body header="nlheader" header-height="10%" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+  <table width="100%">
+    <tr>
+      <td width="17%" align="left" style="font-size:8px;font-weight:bold">CLIENT:</td>
+      <td width="25%" align="left" style="font-size:8px;font-weight:bold">${record.entity.custentity_az_rs_customer_name}</td>
+      <td width="20%"> </td>
+      <td width="25%" align="right" style="font-size:8px;font-weight:bold">${record.entity.custentity_az_rs_customer_ar}</td>
+      <td width="15%" align="right" style="font-size:8px;font-weight:bold">:العميل</td>
+    </tr>
+    <tr>
+      <td align="left" style="font-size:8px;font-weight:bold">BRAND:</td>
+      <td align="left" style="font-size:8px;font-weight:bold">${record.custbody_az_rs_brand}</td>
+      <td> </td>
+      <td align="right" style="font-size:8px;font-weight:bold">${record.custbody_az_rs_brand}</td>
+      <td align="right" style="font-size:8px;font-weight:bold">:الماركة</td>
+    </tr>
+    <tr>
+      <td align="left" style="font-size:8px;font-weight:bold">DATE OF SUBMISSION:</td>
+      <td align="left" style="font-size:8px;font-weight:bold">${record.trandate?string("dd-MMM-yyyy")}</td>
+      <td> </td>
+      <td align="right" style="font-size:8px;font-weight:bold">${record.trandate?string("dd-MMM-yyyy")}</td>
+      <td align="right" style="font-size:8px;font-weight:bold">:تاريخ التسليم</td>
+    </tr>
+    <tr>
+         <td align="left" style="font-size:8px;font-weight:bold">CURRENCY:</td>
+         <td align="left" style="font-size:8px;font-weight:bold">${record.custbody_az_rs_currency}</td>
+         <td> </td>
+         <td align="right" style="font-size:8px;font-weight:bold">${record.custbody_az_rs_currency_ar}</td>
+         <td align="right" style="font-size:8px;font-weight:bold">:العملة</td>
+    </tr>
+  </table>
+
+  <table width="100%" style="padding-top:20px">
+    <tr>
+      <td width="15%" align="center" style="background-color:#0E763D;font-size:8px;font-weight:bold;color:white;border-top:0.5px;border-right:0.5px solid white;border-bottom:0.5px;border-left:0.5px;vertical-align:middle">CITY</td>
+      <td width="25%" align="center" style="background-color:#0E763D;font-size:8px;font-weight:bold;color:white;border-top:0.5px;border-right:0.5px solid white;border-bottom:0.5px;vertical-align:middle">MEDIA</td>
+      <td width="10%" align="center" style="background-color:#0E763D;font-size:8px;font-weight:bold;color:white;border-top:0.5px;border-right:0.5px solid white;border-bottom:0.5px;vertical-align:middle">DURATION</td>
+      <td width="5%" align="center" style="background-color:#0E763D;font-size:8px;font-weight:bold;color:white;border-top:0.5px;border-right:0.5px solid white;border-bottom:0.5px;vertical-align:middle">FACES</td>
+      <td width="15%" align="center" style="background-color:#0E763D;font-size:8px;font-weight:bold;color:white;border-top:0.5px;border-right:0.5px solid white;border-bottom:0.5px;vertical-align:middle">RENTAL COST</td>
+      <td width="5%" align="center" style="background-color:#0E763D;font-size:8px;font-weight:bold;color:white;border-top:0.5px;border-right:0.5px solid white;border-bottom:0.5px;vertical-align:middle">DISCOUNT</td>
+      <td width="15%" align="center" style="background-color:#0E763D;font-size:8px;font-weight:bold;color:white;border-top:0.5px;border-right:0.5px solid;border-bottom:0.5px;vertical-align:middle">NET</td>
+    </tr>
+      <#assign totalFaces = 0>
+      <#assign totalRentalCost = 0>
+      <#assign totalNet = 0>
+    <#list record.item as line>
+            <#if line.taxline != 'T'>
+              <#assign rate = line.rate?replace("[^0-9.,٫]", "", "r")?replace(",", "", "r")?replace("٫", ".", "r")?number>
+              <#assign discountAmount = rate * (line.custcol_az_rs_discount!0)> 
+              <#assign net = rate - discountAmount>
+              <#assign totalFaces += line.custcol_az_rs_faces>
+              <#assign totalRentalCost += rate>
+              <#assign totalNet += net>
+                <tr>
+                    <td align="left" style = "border-left:0.5px solid black;border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">${line.cseg_cities}</td>
+                    <td align="left" style = "border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">${line.item}</td>
+                    <td align="center" style = "border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">${line.custcol_az_rs_booking_period}</td>
+                    <td align="center" style = "border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">${line.custcol_az_rs_faces}</td>
+                    <td align="center" style = "border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">${line.rate?replace("[^0-9.,٫]", "", "r")?replace(",", "", "r")?replace("٫", ".", "r")?number?string["#,##0.00"]}</td>
+                    <td align="center" style = "border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">${line.custcol_az_rs_discount}</td>
+                    <td align="center" style = "border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px"> ${net?string["#,##0.00"]} </td>
+                </tr>
+            </#if>
+        </#list>
+        <tr><td colspan="7" style="padding-top:20px;border-right:0.5px;;border-bottom:0.5px;border-left:0.5px"></td></tr>
+        <tr>
+          <td  align="center" style="background-color:#E0E0E0;font-size:8px;font-weight:bold;border-bottom:0.5px;border-left:0.5px;vertical-align:middle">TOTAL | المجموع</td>
+          <td  align="center" style="background-color:#E0E0E0;font-size:8px;font-weight:bold;border-bottom:0.5px;vertical-align:middle"></td>
+          <td  align="center" style="background-color:#E0E0E0;font-size:8px;font-weight:bold;border-bottom:0.5px;vertical-align:middle"></td>
+          <td align="center" style="background-color:#E0E0E0;font-size:8px;font-weight:bold;border-bottom:0.5px;vertical-align:middle">${totalFaces}</td>
+          <td  align="center" style="background-color:#E0E0E0;font-size:8px;font-weight:bold;border-bottom:0.5px;vertical-align:middle">${totalRentalCost?string["#,###.00"]}</td>
+          <td align="center" style="background-color:#E0E0E0;font-size:8px;font-weight:bold;border-bottom:0.5px;vertical-align:middle"></td>
+          <td  align="center" style="background-color:#E0E0E0;font-size:8px;font-weight:bold;border-bottom:0.5px;border-right:0.5px;vertical-align:middle">${totalNet?string["#,###.00"]}</td>
+        </tr>
+  </table>
+
+  <table width="100%" style="padding-top:10px">
+    <tr>
+      <td width="60%"></td>
+      <td width="20%" align="left" style="background-color:#0E763D;font-size:8px;font-weight:bold;color:white;border-top:0.5px;border-right:0.5px;border-left:0.5px;vertical-align:middle">TOTAL NET:</td>
+      <td width="20%" align="right" style="font-size:8px;font-weight:bold;border-top:0.5px;border-right:0.5px;border-bottom:0.5px;vertical-align:middle">${record.subtotal?string["#,###.00"]}</td>
+    </tr>
+    <tr>
+      <td width="60%"></td>
+      <td width="20%" align="left" style="background-color:#0E763D;font-size:8px;font-weight:bold;color:white;border-right:0.5px;border-bottom:0.5px solid white;border-top:0.5px solid white;border-left:0.5px;vertical-align:middle">VAT (15%):</td>
+      <td width="20%" align="right" style="font-size:8px;font-weight:bold;border-right:0.5px;border-bottom:0.5px ;vertical-align:middle">${record.taxtotal?string["#,###.00"]}</td>
+    </tr>
+    <tr>
+      <td width="60%"></td>
+      <td width="20%" align="left" style="background-color:black;font-size:8px;font-weight:bold;color:white;border-right:0.5px;border-bottom:0.5px;border-left:0.5px;vertical-align:middle">Grand Total:</td>
+      <td width="20%" align="right" style="font-size:8px;font-weight:bold;border-right:0.5px;border-bottom:0.5px;vertical-align:middle">${record.total?string["#,###.00"]}</td>
+    </tr>
+  </table>
+
+
+   <table style="width: 100%; font-size: 8px;padding-top:30px">
+                <tr style="border-top:1px solid #0E763D;padding-top:0.5px">
+                  <td  align="left" style="font-weight:bold;border-top: 1px double green;font-size:8px">
+                    CLIENT APPROVAL
+                  </td >
+                  <td  style="font-weight:bold;border-top: 1px double green;"></td>
+                  <td  align="right" style="font-weight:bold;border-top: 1px double green;font-size:8px">
+                    موافقة العميل
+                  </td>
+                </tr>
+                 <tr>
+                  <td width="5%" align="left" style="font-size:8px" >
+                    By signing the below, I hereby acknowledge that I have completely read and fully understood the financial proposal as well as the terms and conditions set forth
+                  </td >
+                  <td width="40%" ></td>
+                  <td width="50%" align="right" style="font-size:8px" >
+                    <p align="right">بالتوقيع أدناه ، أقر بموجبه أنني قد اطلعت على العرض المالي بالكامل و كذلك الشروط و الأحكام و المنصوص عليها و فهمتها بالكامل</p>
+                  </td>
+                </tr>
+              </table>
+              <table width="100%" style="padding-top:15px">
+                <tr style="padding-top:25px">
+                  <td width="35%" align="left" style="border-bottom:0.5px #0E763D; font-size:8px;color:#0E763D" >
+                    NAME | الإسم
+                  </td >
+                  <td width="10%" ></td>
+                  <td width="35%" align="left" style="border-bottom:0.5px #0E763D ; font-size:8px;color:#0E763D" >
+                   SIGNATURE | التوقيع
+                  </td>
+                </tr>
+                <tr style="padding-top:25px">
+                  <td  align="left" style="border-bottom:0.5px #0E763D; font-size:8px;color:#0E763D" >
+                    POSITION | المنصب
+                  </td >
+                  <td ></td>
+                  <td  align="left" >
+                   
+                  </td>
+                </tr>
+                <tr style="padding-top:25px">
+                  <td  align="left" style="border-bottom:0.5px #0E763D; font-size:8px;color:#0E763D " >
+                    DATE | التاريخ
+                  </td >
+                  <td ></td>
+                  <td  align="left" style="border-bottom:0.5px #0E763D ; font-size:8px;color:#0E763D" >
+                   STAMP | الختم
+                  </td>
+                </tr>
+            </table>
+                
+</body>
+
+</pdf>
