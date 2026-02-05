@@ -320,14 +320,15 @@ define(['N/search','N/record' ,'N/render', 'N/log'], (search, record, render, lo
         });
 
         return {
-            shipmethod:po.shipmethod ? po.shipmethod[0].text: '',
-            incoterm:po.incoterm ? po.incoterm[0].text: '',
-            terms: po.terms ? po.terms[0].text: '',
+            shipmethod:po.shipmethod ?.length? po.shipmethod[0].text: '',
+            incoterm:po.incoterm ?.length? po.incoterm[0].text: '',
+            terms: po.terms ?.length? po.terms[0].text: '',
             duedate: po.duedate || '',
         };
 
         } catch (errorGetPurchaseOrderData) {
             log.debug('errorGetPurchaseOrderData',errorGetPurchaseOrderData)
+            return {};
         }
     }
 
@@ -487,7 +488,7 @@ define(['N/search','N/record' ,'N/render', 'N/log'], (search, record, render, lo
             template += '<table class="header" style="width:100%;">';
     
             template += '<tr>';
-            template += '<td rowspan="5" align="left" width="30%" style="padding-bottom:5px; vertical-align:middle;">';
+            template += '<td rowspan="5" align="left" width="25%" style="padding-bottom:5px; vertical-align:middle;">';
             template += '<img src="'+ (subsidiaryData.logoURL||'') + ' " style="width:150px; height:75px;" />';
             template += '</td>';
     
@@ -496,25 +497,25 @@ define(['N/search','N/record' ,'N/render', 'N/log'], (search, record, render, lo
                 template += ' ' + (subsidiaryData.subname||'') + ' ';
                 template += '</td>';
         
-                template += '<td width="50%" rowspan="4" align="right" ';
+                template += '<td width="55%" rowspan="4" align="right" ';
                 template += 'style="vertical-align:middle; color:#007115; font-size:38px; font-weight:bold;">';
                 template += 'Goods Receipt Note';
                 template += '</td>';
                 template += '</tr>';
         
                 template += '<tr>';
-                template += '<td style="font-size:9px;">' + (subsidiaryData.subAddress||'') + ' </td>';
+                template += '<td style="font-size:8px;">' + (subsidiaryData.subAddress||'') + ' </td>';
                 template += '</tr>';
         
                 template += '<tr>';
-                template += '<td style="font-size:9px;">TRN:' + (subsidiaryData.subVAT||'') + '</td>';
+                template += '<td style="font-size:8px;">TRN:' + (subsidiaryData.subVAT||'') + '</td>';
                 template += '</tr>';
         
                 template += '<tr>';
-                template += '<td style="font-size:9px;">Telephone: ' + (subsidiaryData.subsidiaryPhone||'') + '</td>';
+                template += '<td style="font-size:8px;">Telephone: ' + (subsidiaryData.subsidiaryPhone||'') + '</td>';
                 template += '</tr>';
                 template += '<tr>';
-                template += '<td style="font-size:9px;">Email: ' + (subsidiaryData.subsidiaryEmail||'') + '</td>';
+                template += '<td style="font-size:8px;">Email: ' + (subsidiaryData.subsidiaryEmail||'') + '</td>';
                 template += '<td align="right" style="vertical-align:middle; font-size:12px; font-weight:bold;">';
                 template += 'THIS IS NOT A TAX INVOICE';
                 template += '</td>';
@@ -648,13 +649,13 @@ define(['N/search','N/record' ,'N/render', 'N/log'], (search, record, render, lo
                     template += '<td width="11%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">Item Code</td>';
                     template += '<td width="18%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">Item Description</td>';
                     template += '<td width="5%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">UOM</td>';
-                    template += '<td width="5%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">PO QTY</td>';
-                    template += '<td width="5%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">Received QTY</td>';
+                    template += '<td width="5%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">PO<br/>  QTY</td>';
+                    template += '<td width="5%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">Received<br/>  QTY</td>';
                     template += '<td width="10%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">Unit Rate</td>';
-                    template += '<td width="6%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">Total FC</td>';
+                    template += '<td width="6%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">Total<br/> FC</td>';
                     template += '<td width="6%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">Disc</td>';
-                    template += '<td width="6%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">Total (AED)</td>';
-                    template += '<td width="7%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-bottom:0.5px solid black;border-right:0.5px solid black;">Additional Note</td>';
+                    template += '<td width="6%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">Total<br/>  (AED)</td>';
+                    template += '<td width="7%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-bottom:0.5px solid black;border-right:0.5px solid black;">Additional<br/>  Note</td>';
 
                     template += '</tr>';
                     
@@ -933,7 +934,7 @@ define(['N/search','N/record' ,'N/render', 'N/log'], (search, record, render, lo
 
     const finalizeTemplate = (template, context, data) => {
         try {
-            template += '</body></pdf>';
+            template += '</body></pdf>'; 
             const renderer = render.create();
             renderer.templateContent = template;
             renderer.addCustomDataSource({

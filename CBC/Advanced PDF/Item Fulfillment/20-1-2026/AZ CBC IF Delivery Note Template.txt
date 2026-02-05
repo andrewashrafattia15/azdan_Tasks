@@ -107,7 +107,7 @@
       <td width="29%" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;">${record.createdfrom.shipmethod}</td>
       <td></td>
       <td width="20%" style="background-color:#D9F1D0;border-left:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;font-weight:bold">Ship-Form (Whs)</td>
-      <td width="29%" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;">${record.item.location}</td>
+      <td width="29%" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;">${record.item[0].location}</td>
     </tr>
     <tr >
       <td width="20%" style="background-color:#D9F1D0;border-left:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;font-weight:bold">Carrier Plate No</td>
@@ -175,7 +175,7 @@
      </tr>
      <tr>
       <td rowspan="2" style="vertical-align:middle;border-right:0.5px solid black;border-bottom:0.5px solid black;border-left:0.5px solid black;background-color:#D9F1D0;font-weight:bold;font-size:9px">Quantity:</td>
-      <td rowspan="2" style="border-right:0.5px solid black;border-bottom:0.5px solid black;font-size:9px">${qty?string("00")!"0"}</td>
+      <td rowspan="2" style="vertical-align:middle;border-right:0.5px solid black;border-bottom:0.5px solid black;font-size:9px">${qty?string("00")!"0"}</td>
       <td></td>
       <td align="left" width="15%" style="background-color:#D9F1D0;font-weight:bold;vertical-align:middle;font-size:9px;border-right:0.5px solid black;border-bottom:0.5px solid black;border-left:0.5px solid black;">
        Name
