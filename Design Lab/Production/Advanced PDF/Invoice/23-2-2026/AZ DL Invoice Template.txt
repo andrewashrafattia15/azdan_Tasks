@@ -1,0 +1,655 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<#if record.subsidiary == "Sunna Alebtikar Letarfeh CO">
+  <pdf>
+   <head>
+  	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2"/>
+    <link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false" />
+
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+
+          <table style="width: 100%;">
+            <tr>
+              <td align="righ"  style="width:30%; font-weight: bold; font-size: 16pt;margin-top:20px; ">  فاتوة ضريبة <br/> Tax Invoice <br/> </td>
+         
+              
+              <td align="center" style="width:40%; vertical-align:middle;"><b style="font-size: 12pt;">${record.custbody_ino_einv_sa_trx_issuerinfo} <br/> ${record.custbody_ino_einv_sa_trx_sub_legalname}<br/></b><br/>
+              
+                VAT ID : ${record.custbody_ino_einv_sa_trx_sub_taxscheme} 
+                 
+                <br/> 
+                
+                ${record.custbody_ino_einv_sa_trx_sub_buildno},
+                ${record.custbody_ino_einv_sa_trx_sub_strname}
+                 <br/> 
+                ${record.custbody_ino_einv_sa_trx_sub_countryco},
+                ${record.custbody_ino_einv_sa_trx_sub_postalcod}, 
+                ${record.custbody_ino_einv_sa_trx_sub_cityname},
+                ${record.custbody_ino_einv_sa_trx_sub_subdiv} 
+          
+              </td>
+              
+              <td rowspan="2" align="right" style="width:30%; margin-top:-20px;  "> 
+                <#if subsidiary.logo?length != 0>
+                   <img src="${subsidiary.logo@url}" style="float: right;  ; width:185px; height:120px" />
+                <#else>
+                  <#if companyInformation.logoUrl?length != 0>
+                    <img src="${ companyInformation.logoUrl}" width="80px" style="float:  " />
+                 </#if>
+                </#if>                  
+                </td>
+            </tr>
+            <tr>
+              <#if record.custbody_ino_einv_sa_trx_qr2?length != 0>
+              <td align="left" style="margin-left:-18px;margin-top:0px;padding-top:-20px; padding-bottom:-10px;"><barcode codetype="qrcode" showtext="true" height ="110" width="110" value="${record.custbody_ino_einv_sa_trx_qr2}" /></td>
+              </#if>
+            </tr>
+          </table>
+                    <table style="width:100%;">
+                      <tr><td style="margin-top:0px;padding-top:0px"> 
+                        <hr style="border:1px" />
+                      </td></tr>           
+                      </table>
+        </macro>
+
+                    
+        <macro id="nlfooter">
+            <table class="footer" style="width: 100%;">
+                <tr>
+                    <td align="right">
+                        <pagenumber/> of <totalpages/>
+                    </td>
+                </tr>
+            </table>
+        </macro>
+    </macrolist>
+    <style>
+		* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+		</#if>
+          
+        font-family: NotoSans, sans-serif;
+        font-family: NotoSansArabic, sans-serif;
+		}
+		table {
+			font-size: 9pt;
+			table-layout: fixed;
+		}
+      .bold1{
+        font-weight:bold;
+      }
+
+        th {
+            font-weight: bold;
+            font-size: 8pt;
+            vertical-align: middle;
+            padding: 5px 6px 3px;
+            background-color: #e3e3e3;
+            color: #333333;
+          align:center;
+        }
+        td {
+            padding: 4px 6px;
+        }
+        b {
+            font-weight: bold;
+            color: #333333;
+        }
+        table.header td {
+            padding: 0px;
+            font-size: 10pt;
+        }
+        table.footer td {
+            padding: 0px;
+            font-size: 8pt;
+        }
+        table.itemtable th {
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+        table.body td {
+            padding-top: 2px;
+        }
+        table.total {
+            page-break-inside: avoid;
+        }
+        tr.totalrow {
+            background-color: #e3e3e3;
+            line-height: 200%;
+        }
+        td.totalboxtop {
+            font-size: 12pt;
+            background-color: #e3e3e3;
+        }
+        td.addressheader {
+            font-size: 8pt;
+            padding-top: 6px;
+            padding-bottom: 2px;
+        }
+        td.address {
+            padding-top: 0px;
+        }
+        td.totalboxmid {
+            font-size: 28pt;
+            padding-top: 20px;
+            background-color: #e3e3e3;
+        }
+        td.totalboxbot {
+            background-color: #e3e3e3;
+            font-weight: bold;
+        }
+        span.title {
+            font-size: 28pt;
+        }
+        span.number {
+            font-size: 16pt;
+        }
+      
+     .rtl td p{
+            text-align: right;
+            direction: rtl;
+           align:right;
+      }
+      th p{
+            text-align: center;
+           align:center;
+      }
+      .forceLeft { text-align: left;
+            direction: ltr;
+           align:left; }
+
+        span.itemname {
+            font-weight: bold;
+            line-height: 150%;
+        }
+        hr {
+            width: 100%;
+            color: #d3d3d3;
+            background-color: #d3d3d3;
+            height: 1px;
+        }
+
+
+
+       <#if record.custbody_ino_einv_sa_trx_qr2?length != 0>
+          *{ header:nlheader; header-height:23%; }
+       <#else> 
+          *{ header:nlheader; header-height:13%; }
+       </#if>
+      
+    </style>
+</head>
+<body footer="nlfooter" footer-height="20pt" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+
+  <table class="rtl" style="width:100%">
+    <tr>
+      <td style="width:20%"> ${record.tranid}</td> 
+      <td style="width:20%" align="left" class="bold1">رقم الفاتورة <br/> Invoice No. </td>
+      <!-- <td rowspan="2" style="width:40% " > ${record.custbody_ino_einv_sa_trx_entity_regist}  <br/> 
+       <#if record.custbody_ino_einv_sa_trx_entity_taxsch !="">VAT ID: ${record.custbody_ino_einv_sa_trx_entity_taxsch}</#if><br/> 
+         
+       <#if record.custbody_ino_einv_sa_trx_entity_buildn !="">${record.custbody_ino_einv_sa_trx_entity_buildn},</#if>
+       <#if record.custbody_ino_einv_sa_trx_entity_street!="">${record.custbody_ino_einv_sa_trx_entity_street}</#if> 
+      <br/>
+       
+       <#if record.custbody_ino_einv_sa_trx_entity_contry !="">${record.custbody_ino_einv_sa_trx_entity_contry},</#if>
+       <#if record.custbody_ino_einv_sa_trx_entity_postal !="">${record.custbody_ino_einv_sa_trx_entity_postal},</#if>
+       <#if record.custbody_ino_einv_sa_trx_entity_city !=""> ${record.custbody_ino_einv_sa_trx_entity_city}, </#if>
+       <#if record.custbody_ino_einv_sa_trx_entity_subd !="">${record.custbody_ino_einv_sa_trx_entity_subd}</#if>
+      </td> -->
+      <td style="width:40% " >
+        ${record.entity.parent}<br/>${record.entity.custentity_az_dl_arabicname}
+      </td>
+      <td style="width:20%" align="right" class="bold1">العمیل<br/> Client</td>
+    </tr>
+    <tr>
+      <td style="width:20%"> ${record.trandate}</td> 
+      <td style="width:20%" align="left" class="bold1">تاريخ الفاتورة <br/>Invoice Date </td>
+      <td style="width:40% " > ${record.custbody_az_dle_cs_get_customer_name.address} </td>
+      <td style="width:20%" align="right" class="bold1"> عنوان العمیل <br/> Client Address</td>
+    </tr>
+    <tr>
+      <td style="width:20%"> ${record.entity}</td> 
+      <td style="width:20%" align="left" class="bold1">Client Project</td>
+      <td style="width:30% ">${record.cseg_az_dle_prj_seg}</td>
+      <td align="right" class="bold1" style="width:20%;" >Project Segment</td>
+    </tr>
+    <tr>
+      <td style="width:20%"> ${record.otherrefnum}</td> 
+      <td style="width:20%" align="left" class="bold1">PO#</td>
+      <td style="width:40% " > ${record.custbody_az_dle_cs_get_customer_name.vatregnumber} </td>
+      <td style="width:20%" align="right" class="bold1">رقم التسجيل الضريبي<br/>TRN</td>
+    </tr>
+     <tr>
+      <td style="width:20%"> ${record.terms}</td> 
+      <td style="width:20%" align="left" class="bold1">Payment Terms</td>
+      
+    </tr>
+  </table>
+
+  
+<#if record.item?has_content>
+<table class="itemtable" style="width: 100%; margin-top: 10px;">
+    <!-- start items -->
+    <#list record.item as item>
+        <#if item_index==0>
+            <thead>
+            <tr style="border: 1px solid ;border-right: 1px solid ;border-left: 1px solid ;">
+                <th colspan="2" align="center" style="border-left: 1px solid ;" > الإجمالي مع الضريبة <br/> Total With VAT </th>
+                <th colspan="2" align="center">قیمة الضريبة <br/>VAT Amount </th>
+                <th colspan="1"> نسبة <br/>الضريبة<br/> VAT <br/>15% </th>
+                <th colspan="2" align="center">السعر <br/> Price</th>
+                <th colspan="1" align="center"> الكمیة <br/>Qty </th>
+                <th colspan="3" align="center" style="border-right: 1px solid ;"> الوصف<br/> Description</th>
+               
+            </tr>
+            </thead>
+        </#if>
+        <tr style="border-bottom: 1px solid ;">
+            <td colspan="2" align="center" style="border-left: 1px solid ; border-right: 1px solid ;">${item.grossamt?string("#,##0.00") }</td>
+            <td colspan="2" align="center" style="border-right: 1px solid ;">${item.tax1amt?string("#,##0.00") }</td>
+            <td colspan="1" align="center" style="border-right: 1px solid ;">${item.taxrate1}</td>
+            <td colspan="2" align="center" style="border-right: 1px solid ;">${item.amount?string("#,##0.00") }</td>
+            <td colspan="1" align="center" style="border-right: 1px solid ;">${item.quantity}</td>
+            <td colspan="3" align="right" style="border-right: 1px solid ;">${item.description}</td>
+            </tr>
+    </#list>
+    <!-- end items -->
+</table>
+</#if>
+
+
+
+          <table class="rtl" align="left" width="100%">
+            <tr >
+              <td colspan="2" align="left" style="border-bottom: 1px; "> ${record.currencysymbol} ${record.subtotal?string("#,##0.00")} </td>
+              <td  class="bold1" align="center" colspan="2" style="border-bottom: 1px; "> الإجمالي قبل الضريبة <br/> Total Before VAT </td>
+            </tr>
+            <tr >
+              <td colspan="2" align="left" > ${record.currencysymbol}  ${record.taxtotal?string("#,##0.00")} </td>
+              <td class="bold1" align="center"  colspan="2">(% القیمة المضافة ( 15 <br/> VAT Applied</td>
+            </tr>
+            <tr style="background-color: #e3e3e3; border-bottom: 1px; border-top: 1px;">
+              <td class="bold1" colspan="2" align="left" >  ${record.currencysymbol} ${record.total?string("#,##0.00")} </td>
+              <td class="bold1"  align="center"  colspan="2">الإجمالي بعد الضريبة <br/> Total After VAT</td>
+              <td rowspan="4" class="bold1" align="center" colspan="5"><#if record.custpage_ii_custrecord_to_print!="">  الإجمالي بعد الضريبة : ${record.custpage_ii_custrecord_to_print}</#if> </td>
+            </tr>   
+            <tr>
+              <td align="left" style="border-bottom: 1px; " colspan="2"> ${record.currencysymbol}  ${record.total?string("#,##0.00")} </td>
+              <td class="bold1" align="center"  style="border-bottom: 1px; " colspan="2"> الرصید المستحق<br/> Due Amount</td>
+            </tr>
+          </table>
+
+          <table align="left" style="width: 45%; margin-top: 10px;">
+            <tr>
+              <td  align="left" style="border-bottom: 1px;margin-right:15px;" ><div class="forceLeft"> ${record.custbody_az_bankdetails} </div></td>
+            </tr>
+          </table>
+
+</body>
+</pdf>
+          
+<#else>
+<pdf>
+<head>
+	  <link name="NotoSans" type="font" subtype="truetype" 
+              src="${nsfont.NotoSans_Regular}" 
+              src-bold="${nsfont.NotoSans_Bold}" 
+              src-italic="${nsfont.NotoSans_Italic}" 
+              src-bolditalic="${nsfont.NotoSans_BoldItalic}" 
+              bytes="2" />
+              
+        <link name="NotoSansArabic" type="font" subtype="opentype" 
+              src="${nsfont.NotoSansArabic_Regular}" 
+              src-bold="${nsfont.NotoSansArabic_Bold}" 
+              bytes="2" subset="false" />
+
+        <#if .locale == "zh_CN">
+            <link name="NotoSansCJKsc" type="font" subtype="opentype" 
+                  src="${nsfont.NotoSansCJKsc_Regular}" 
+                  src-bold="${nsfont.NotoSansCJKsc_Bold}" 
+                  bytes="2" />
+        <#elseif .locale == "zh_TW">
+            <link name="NotoSansCJKtc" type="font" subtype="opentype" 
+                  src="${nsfont.NotoSansCJKtc_Regular}" 
+                  src-bold="${nsfont.NotoSansCJKtc_Bold}" 
+                  bytes="2" />
+        <#elseif .locale == "ja_JP">
+            <link name="NotoSansCJKjp" type="font" subtype="opentype" 
+                  src="${nsfont.NotoSansCJKjp_Regular}" 
+                  src-bold="${nsfont.NotoSansCJKjp_Bold}" 
+                  bytes="2" />
+        <#elseif .locale == "ko_KR">
+            <link name="NotoSansCJKkr" type="font" subtype="opentype" 
+                  src="${nsfont.NotoSansCJKkr_Regular}" 
+                  src-bold="${nsfont.NotoSansCJKkr_Bold}" 
+                  bytes="2" />
+        <#elseif .locale == "th_TH">
+            <link name="NotoSansThai" type="font" subtype="opentype" 
+                  src="${nsfont.NotoSansThai_Regular}" 
+                  src-bold="${nsfont.NotoSansThai_Bold}" 
+                  bytes="2" />
+        </#if>
+   <macrolist>
+            <macro id="nlheader">
+                <table style="width: 100%; margin-bottom:20%">
+                    <tr>
+                        <td style="font-size: 7.5pt;"><b>Invoice No:</b></td>
+                        <td style="font-size: 7.5pt;"><b>${record.tranid}</b></td>
+                        <td style="font-size: 7.5pt;"><b>:رقم الفاتورة</b></td>
+                        <td rowspan="7" style="font-size: 9pt;">
+                            <p><b>فاتورة ضريبيه</b></p>
+                            <p><b>TAX INVOICE</b></p>
+                        </td>
+                        <td rowspan="7">
+                            <#if record.custbody_ino_einv_sa_trx_qr2?has_content>
+                                <barcode codetype="qrcode" showtext="true" height="100" width="100" value="${record.custbody_ino_einv_sa_trx_qr2}" />
+                            </#if>
+                        </td>
+                        <td rowspan="7" style="font-size:9pt;">
+                            <img src="${subsidiary.logo@url}" style="float: left; width:150px; height:70px; margin: 7px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 7.5pt;"><b>Invoice Issue Date:</b></td>
+                        <td style="font-size: 7.5pt;"><b>${record.trandate}</b></td>
+                        <td style="font-size: 7.5pt;"><b>:تاريخ اصدار الفاتورة</b></td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 7.5pt;"><b>Due Date:</b></td>
+                        <td style="font-size: 7.5pt;"><b>${record.duedate}</b></td>
+                        <td style="font-size: 7.5pt;"><b>:تاريخ الاستحقاق</b></td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 7.5pt;"><b>Terms:</b></td>
+                        <td style="font-size: 7.5pt;"><b>${record.terms}</b></td>
+                        <td style="font-size: 7.5pt;"><b>:الشروط</b></td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 7.5pt;"><b>P.O #</b></td>
+                        <td style="font-size: 7.5pt;"><b>${record.otherrefnum}</b></td>
+                        <td style="font-size: 7.5pt;"><b>:رقم طلب الشراء</b></td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 7.5pt;"><b>Event Date:</b></td>
+                        <td style="font-size: 7.5pt;"><b>${record.custbody_az_dle_eventdate}</b></td>
+                        <td style="font-size: 7.5pt;"><b>:تاريخ المناسبه</b></td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 7.5pt;"><b>Place of Supply:</b></td>
+                        <td style="font-size: 7.5pt;"><b>${record.location}</b></td>
+                        <td style="font-size: 7.5pt;"><b>:مكان التسليم</b></td>
+                    </tr>
+                </table>
+            </macro>
+
+            <macro id="nlfooter">
+                <table class="footer" style="width: 100%;">
+                    <tr style="font-weight: bold;">
+                        <td align="left"></td>
+                        <td align="right" style="font-size: 7.5pt;">
+                            Page No : <pagenumber/> of <totalpages/>
+                        </td>
+                    </tr>
+                </table>
+            </macro>
+        </macrolist>
+    <style type="text/css">
+            * {
+                <#if .locale == "zh_CN">
+                    font-family: NotoSans, NotoSansCJKsc, sans-serif;
+                <#elseif .locale == "zh_TW">
+                    font-family: NotoSans, NotoSansCJKtc, sans-serif;
+                <#elseif .locale == "ja_JP">
+                    font-family: NotoSans, NotoSansCJKjp, sans-serif;
+                <#elseif .locale == "ko_KR">
+                    font-family: NotoSans, NotoSansCJKkr, sans-serif;
+                <#elseif .locale == "th_TH">
+                    font-family: NotoSans, NotoSansThai, sans-serif;
+                <#else>
+                    font-family: NotoSans, NotoSansArabic, sans-serif;
+                              font-family: NotoSansArabic, sans-serif;
+
+                </#if>
+            }
+              
+            td p {text-align: left;}
+        </style>
+    </head>
+<body header="nlheader" header-height="20%" footer="nlfooter" footer-height="11pt" padding="0.5in" size="Letter-LANDSCAPE">
+    <#assign currency = record.currencysymbol > 
+
+<table style="width: 100%; margin-bottom:10px;font-size:7.5pt;">
+    <tr style="font-size:9pt;border:1px solid black;color:#ffffff; background-color:#000085;height:18pt">
+        <th style="font-size:9pt;border-left:1px solid black; width:99pt;"><b>Seller:</b></th>
+        <th style="width:137pt"></th>
+        <th style="font-size:9pt;width:135pt; text-align:right;"><b>المورد:</b></th>
+        <th style="font-size:9pt;width:108pt;"><b>Buyer:</b></th>
+        <th style="width:148pt;"></th>
+        <th style="font-size:9pt;border-right:1px solid black;width:139pt;text-align:right;"><b>العميل:</b></th>
+    </tr>
+
+  
+    <#if record.entity.parent.isperson == false>
+       <tr>
+            <td style="border-left:1px solid black;"><b>Name / الاسم</b></td>
+            <td style="border-left:1px solid black;"><b>${subsidiary.name}</b></td>
+            <td style="text-align:right; border-left:1px solid black;"><b>${subsidiary.custrecordaz_dle_arabic_name}</b></td>
+            <td style="border-left:1px solid black;"><b>Name / الاسم</b></td>
+            <td style="border-left:1px solid black;"><b>${record.entity.parent.companyname?replace("&", "and")}</b></td>
+            <td style="border-right:1px solid black;border-left:1px solid black;"><b>${record.entity.parent.custentity_az_dl_arabicname}</b></td>
+        </tr>
+    <#else>
+        <tr>
+            <td style="border-left:1px solid black;"><b>Name / الاسم</b></td>
+            <td style="border-left:1px solid black;"><b>${subsidiary.name}</b></td>
+            <td style="text-align:right; border-left:1px solid black;"><b>${subsidiary.custrecordaz_dle_arabic_name}</b></td>
+            <td style="border-left:1px solid black;"><b>Name / الاسم</b></td>
+            <td style="border-left:1px solid black;"><b>${record.entity.parent.firstname?replace("&", "and")} ${record.entity.parent.lastname?replace("&", "and")}</b></td>
+            <td style="border-right:1px solid black;border-left:1px solid black;"><b>${record.entity.parent.custentity_az_dl_arabicname?replace("&", "and")}</b></td>
+        </tr>
+    </#if>
+    <tr>
+        <td style="border-left:1px solid black;"><b>Address / العنوان</b></td>
+        <td style="border-left:1px solid black;"><b>${subsidiary.mainaddress_text?replace("&", "and")}</b></td>
+        <td style="text-align:right; border-left:1px solid black;"><b>${subsidiary.mainaddress_text?replace("&", "and")}</b></td>
+        <td style="border-left:1px solid black;"><b>Address / العنوان</b></td>
+        <td style="border-left:1px solid black;"><b>${record.entity.parent.address?default("")?replace("&", "and")}</b></td>
+        <td style="border-right:1px solid black;border-left:1px solid black;"><b>${record.entity.parent.address?default("")?replace("&", "and")}</b></td>
+    </tr>
+       <tr>
+        <td style="border-left:1px solid black;"><b>City / المدينه</b></td>
+        <td style="border-left:1px solid black;"><b>${subsidiary.city}</b></td>
+        <td style="text-align:right; border-left:1px solid black;"><b>${subsidiary.custrecord_az_dle_arabic_city}</b></td>
+        <td style="border-left:1px solid black;"><b>City / المدينه</b></td>
+        <td style="border-left:1px solid black;"><b>${record.entity.parent.city}</b></td>
+        <td style="border-right:1px solid black;border-left:1px solid black;"><b>${record.entity.parent.custentity_az_agri_arabic_city}</b></td>
+    </tr>
+     <tr>
+        <td style="border-left:1px solid black;"><b>Country / الدولة</b></td>
+        <td style="border-left:1px solid black;"><b>${subsidiary.country}</b></td>
+        <td style="text-align:right; border-left:1px solid black;"><b>${subsidiary.custrecord_az_dle_arabic_country}</b></td>
+        <td style="border-left:1px solid black;"><b>Country / الدولة</b></td>
+        <td style="border-left:1px solid black;"><b>${record.entity.parent.country}</b></td>
+        <td style="border-right:1px solid black;border-left:1px solid black;"><b>${record.entity.parent.custentity_az_dle_arabic_country}</b></td>
+    </tr>
+        <tr>
+        <td style="border-left:1px solid black;"><b>Postal Code / الرمز البريدي</b></td>
+        <td style="border-left:1px solid black;"><b>${subsidiary.custrecord_az_dle_postalcode}</b></td>
+        <td style="text-align:right; border-left:1px solid black;"><b>${subsidiary.custrecord_az_dle_postalcode}</b></td>
+        <td style="border-left:1px solid black;"><b>Postal Code / الرمز البريدي</b></td>
+        <td style="border-left:1px solid black;"><b>${record.entity.parent.custentity_az_dle_postalcode}</b></td>
+        <td style="border-right:1px solid black;border-left:1px solid black;"><b>${record.entity.parent.custentity_az_dle_postalcode}</b></td>
+    </tr>
+    <tr>
+        <td style="border-left:1px solid black;"><b>Phone / هاتف</b></td>
+        <td style="border-left:1px solid black;"><b>${subsidiary.addrphone}</b></td>
+        <td style="text-align:right; border-left:1px solid black;"><b>${subsidiary.addrphone}</b></td>
+        <td style="border-left:1px solid black;"><b>Phone / هاتف</b></td>
+        <td style="border-left:1px solid black;"><b>${record.entity.parent.phone}</b></td>
+        <td style="border-right:1px solid black;border-left:1px solid black;"><b>${record.entity.parent.phone}</b></td>
+    </tr>
+    <tr style="border-bottom:1px solid black;">
+        <td style="border-left:1px solid black;"><b>Vat No. / رقم ضريبة القيمة </b></td>
+        <td style="border-left:1px solid black;"><b>${subsidiary.federalidnumber}</b></td>
+        <td style="text-align:right; border-left:1px solid black;"><b>${subsidiary.federalidnumber}</b></td>
+        <td style="border-left:1px solid black;"><b>Vat No. / رقم ضريبة القيمة</b></td>
+        <td style="border-left:1px solid black;"><b>${record.entity.parent.vatregnumber}</b></td>
+        <td style="border-right:1px solid black;border-left:1px solid black;"><b>${record.entity.parent.vatregnumber}</b></td>
+    </tr>
+    <tr style="border-bottom:1px solid black;">
+        <td style="border-left:1px solid black;"><b>Describtion</b></td>
+        <td colspan="5" style="border-right:1px solid black;border-left:1px solid black;">${record.custbody_az_dle_describtion}</td>
+    </tr>
+</table>
+
+
+<#if  subsidiary.id == "11">
+    <table style="width: 100%; border: 1px solid black; font-size: 7.5pt; margin-bottom: 20px;">
+        <tr style="align: center; border-bottom: 1px solid black; height: 26pt;">
+            <td style="align: center; width: 20pt;">#<p>رقم </p></td>
+            <td style="align: center; border-left: 1px solid black; width: 208pt;">Nature of goods or services</td>
+            <td style="align: center; border-left: 1px solid black; width: 90pt;"><p>Description </p> <p> الوصف </p> </td>
+            <td style="align: center; border-left: 1px solid black; width: 40pt;"><p> Unit price </p> <p>سعر الوحدة </p> </td>
+            <td style="align: center; border-left: 1px solid black; width: 40pt;"><p> Quantity </p> <p> العدد </p> </td>
+            <td style="align: center; border-left: 1px solid black; width: 80pt;"><p>Taxable Amount</p><p>المبلغ الخاضع الضريبة </p></td>
+            <td style="align: center; border-left: 1px solid black; width: 30pt;"><p> Vat </p><p>ضريبة </p></td>
+            <td style="align: center; border-left: 1px solid black; width: 40pt;"><p>Amount </p><p>القيمه </p></td>
+            <td style="align: center; border-left: 1px solid black; width: 40pt;"><p> Days/Nights </p> <p> الايام/الليالي </p></td>
+            <td style="align: center; border-left: 1px solid black; width: 110pt;"><p> Item Subtotal (Including VAT) </p> <p> الإجمالي الفرعي للصنف </p></td>
+        </tr>
+          <#assign count = 1>
+        <#list record.item as item>
+           <tr>
+                
+                <td> ${count} </td>
+                <td style="align: left; border-left: 1px solid black;">${item.item}</td>
+                <td style="align: left; border-left: 1px solid black;">${item.description}</td>
+                <td style="align: left; border-left: 1px solid black;">${item.rate?replace(currency, '')}</td>
+                <td style="align: right; border-left: 1px solid black;">${item.quantity}</td>
+                <td style="align: right; border-left: 1px solid black;">${item.tax1amt?replace(currency, '')}</td>
+                <td style="align: right; border-left: 1px solid black;">${item.taxrate1}</td>
+                <td style="align: right; border-left: 1px solid black;">${item.amount?replace(currency, '')}</td>
+                <td style="align: right; border-left: 1px solid black;">${item.custcol_az_dle_so_nights}</td>
+                <td style="align: right; border-left: 1px solid black;">${item.grossamt?replace(currency, '')}</td>
+            </tr>
+          <#assign count++>
+        </#list>
+    </table>
+<#else>
+    <table style="width: 100%; border: 1px solid black; font-size: 7.5pt; margin-bottom: 20px;">
+        <tr style="align: center; border-bottom: 1px solid black; height: 26pt;">
+            <td style="align: center; width: 53pt;">#<p>رقم</p></td>
+            <td style="align: center; border-left: 1px solid black; width: 200pt;">Nature of goods or services</td>
+            <td style="align: center; border-left: 1px solid black; width: 50pt;"><p> Unit price </p> <p>سعر الوحدة </p> </td>
+            <td style="align: center; border-left: 1px solid black; width: 48pt;"><p> Quantity </p> <p> العدد </p></td>
+            <td style="align: center; border-left: 1px solid black; width: 80pt;"><p>Taxable Amount</p><p>المبلغ الخاضع الضريبة </p></td>
+            <td style="align: center; border-left: 1px solid black; width: 50pt;"><p> Vat </p><p>ضريبة </p></td>
+            <td style="align: center; border-left: 1px solid black; width: 61pt;"><p>Amount </p><p>القيمه </p></td>
+            <td style="align: center; border-left: 1px solid black; width: 155pt;"><p> Item Subtotal (Including VAT) </p> <p> الإجمالي الفرعي للصنف </p></td>
+        </tr>
+      <#assign count = 1>
+        <#list record.item as item>
+
+            <tr>
+                <td>${count}</td>
+                <td style="align: left; border-left: 1px solid black;">${item.item}</td>
+                <td style="align: left; border-left: 1px solid black;">${item.rate?replace(currency, '')}</td>
+                <td style="align: right; border-left: 1px solid black;">${item.quantity}</td>
+                <td style="align: right; border-left: 1px solid black;">${item.tax1amt?replace(currency, '')}</td>
+                <td style="align: right; border-left: 1px solid black;">${item.taxrate1}</td>
+                <td style="align: right; border-left: 1px solid black;">${item.amount?replace(currency, '')}</td>
+                <td style="align: right; border-left: 1px solid black;">${item.grossamt?replace(currency, '')}</td>
+            </tr>
+          <#assign count++>
+        </#list>
+    </table>
+</#if>
+
+
+
+  <table style="width: 100%; margin-bottom:10px;font-size:7.5pt;">
+    <tr>
+        <td style="width:25%;"><b>Tax Summary</b></td>
+        <td colspan="2"><b>Dr Bank details for Bank TT</b></td>
+        <td style="width:25%;"><b>Total Taxable Amount (Excluding Vat) / الاجمالي الخاضع للضريبه</b></td>
+        <td style="width:25%;" align="right"><b> ${record.subtotal?replace(currency, '')} ${record.currency}</b></td>
+    </tr>
+    <tr>
+        <td style="width:25%;"><b>Notes (ملاحظات)</b></td>
+        <td style="width:8.3%;">Account Name</td>
+        <td style="width:16.7%;">${subsidiary.custrecord_az_dle_account_name}</td>
+        <td style="width:25%;"><b>Total Vat / مجموع ضريبة القيمة المضافة</b></td>
+        <td style="width:25%; " align="right"><b>${record.taxtotal?replace(currency, '')} ${record.currency}</b></td>
+    </tr>
+    <tr>
+        <td style="width:25%;">${record.memo}</td>
+        <td style="width:8.3%;">Bank</td>
+        <td style="width:16.7%;">${subsidiary.custrecord_az_dle_bank}</td>
+        <td style="width:25%;"><b>Total Amount / المبلغ الاجمالي</b></td>
+        <td style="width:25%; " align="right"><b>${record.total?replace(currency, '')} ${record.currency}</b></td>
+    </tr>
+    <tr>
+        <td style="width:25%;"><b>Thanks for your business.</b></td>
+        <td style="width:8.3%;">Branch</td>
+        <td style="width:16.7%;">${subsidiary.custrecord_az_dle_branch}</td>
+        <td style="width:25%;"><b>Balance Due / الرصيد المستحق</b></td>
+        <td style="width:25%; " align="right"><b>${record.amountRemaining?replace(currency, '')} ${record.currency}</b></td>
+    </tr>
+    <tr>
+        <td style="width:25%;"><b>Payment Options (خيارات الدفع)</b></td>
+        <td style="width:8.3%;">IBAN</td>
+        <td style="width:16.7%;">${subsidiary.custrecord_az_dle_iban}</td>
+        <td style="width:25%;"></td>
+        <td style="width:25%; text-align:right;"></td>
+    </tr>
+    <tr>
+        <td style="width:25%;"></td>
+        <td style="width:8.3%;">Swift Code</td>
+        <td style="width:16.7%;">${subsidiary.custrecord_az_dle_swift_code}</td>
+        <td style="width:25%;"></td>
+        <td style="width:25%; text-align:right;"></td>
+    </tr>
+</table>
+
+<#assign total = (record.total!"0")?replace("[^0-9.]", "", "r")?number>
+<#assign exchangeRate = (record.exchangerate!"1")?replace("[^0-9.]", "", "r")?number>
+  <#assign totalInBaseCurrency = total * exchangeRate>
+    <#if record.currency !="AED">
+<table>
+  <tr>
+    <td><b>"For F.T.A, the value of this invoice in AED is ${totalInBaseCurrency?string["#,##0.00"]}. Exchange Rate: 1 AED = ${record.exchangerate?replace(record.currency, '')} (${record.currency})."</b></td>
+  </tr>
+</table>
+</#if>
+
+</body>
+</pdf>
+  
+</#if>
+
+
