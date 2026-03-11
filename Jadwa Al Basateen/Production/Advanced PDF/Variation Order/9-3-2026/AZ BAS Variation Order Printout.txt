@@ -1,0 +1,308 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+   <link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false" />
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+   <macrolist>
+        <macro id="nlheader">
+             <table class="header" style="width: 100%;">
+                <tr>
+                  <td style="width: 20%"> <img src="https://9193738.app.netsuite.com/core/media/media.nl?id=105&amp;c=9193738&amp;h=oyoAoG1NfPysBL6CCOfz7umyHuDaZt1cExjc-Bx57FKQOxK0" 
+                                                          style="width: 100px; height: 40px;padding-top:-20px"  /></td>
+                  <#if record.custrecord_ino_pm_vo_status == 'Pending Approval'>
+                  <td align="left" style="width: 20%"> <img src="https://9193738.app.netsuite.com/core/media/media.nl?id=103&amp;c=9193738&amp;h=WamSTaRaaeW76AXbA8M08qyVpEO8a5WQey86b70R018refci" 
+                                                          style="width: 100px; height: 50px;padding-top:-20px; " /> </td>
+                  <#else>
+                  <td align="left" style="width: 20%"> <img src="https://9193738.app.netsuite.com/core/media/media.nl?id=103&amp;c=9193738&amp;h=WamSTaRaaeW76AXbA8M08qyVpEO8a5WQey86b70R018refci" 
+                                                          style="width: 110px; height: 50px;padding-top:-20px; " /> </td>
+                  </#if>
+                  <td align="left" style="width:40%; font-weight:bold; font-size:16pt"> Variation Order </td>
+                  <td align="right" style="color:red;padding-top:20px"> ${record.custrecord_ino_pm_vo_status}</td>                  
+                </tr> 
+
+               
+               <tr>
+                  <td style=""> </td>
+                  <td align="right" style=""> </td>
+                  <td align="left" style=" font-weight:bold;color:red"> ${record.name} </td>
+                  <td align="right" style=""> </td>                  
+               </tr>  
+             
+            </table>
+       
+          
+        </macro>
+        <macro id="nlfooter">
+               
+                <table class="footer" style="width: 100%;font-size:9pt; color:#afaaac; padding-top:10px ">
+                <tr style=" ">
+                    <td align="left" style="width: 40%; "> <Strong> Jadwa Al-Basateen Real Estate Co.</Strong> - Riyadh       </td>
+                    <td align="center" style="width:20%"> </td>
+                    <td align="right" style="width:40%;  ">   الرياض - <strong>  شركة جدوي البساتين للعقارات </strong></td>
+                </tr>  
+
+              <tr style=" ">
+                    <td align="left" style="width: 40%; "> Al Diriyah - King Khaled Road <Strong> Zip Code</Strong>   13714    </td>
+                    <td align="center" style="width:20%"> albasateen.com.sa </td>
+                    <td align="right" style="width:40%;  "> 13714 <strong>  الرمز البريدي </strong> الدرعية - طريق الملك خالد</td>
+                </tr>  
+
+                <tr style=" ">
+                    <td align="left" style="width: 40%; "><Strong> C.R</Strong> 1010438489    </td>
+                    <td align="center" style="width:20%"> 920003749 </td>
+                    <td align="right" style="width:40%;  "> 1010438489  <strong> س.ت </strong>    </td>
+                </tr> 
+            </table>
+           
+        </macro>
+    </macrolist>
+   <style type="text/css">* {
+            <#if .locale == "zh_CN">
+                font-family: NotoSans, NotoSansCJKsc, sans-serif;
+            <#elseif .locale == "zh_TW">
+                font-family: NotoSans, NotoSansCJKtc, sans-serif;
+            <#elseif .locale == "ja_JP">
+                font-family: NotoSans, NotoSansCJKjp, sans-serif;
+            <#elseif .locale == "ko_KR">
+                font-family: NotoSans, NotoSansCJKkr, sans-serif;
+            <#elseif .locale == "th_TH">
+                font-family: NotoSans, NotoSansThai, sans-serif;
+            <#else>
+                font-family: NotoSans, sans-serif;
+                  font-family: NotoSansArabic, sans-serif;
+            </#if>
+            }
+      .arabic {
+        font-family: arabic-font;
+        position: right;
+        font-size: 8px;
+        line-height: 75%;
+      }
+
+        .english {
+        font-family: english-font;
+        position: left;
+        font-size: 8px;
+        line-height: 110%
+      }
+  </style>
+</head>
+<body header="nlheader" header-height="10%" footer="nlfooter" footer-height="3%" padding="0.5in 0.5in 0.5in 0.5in" size="A4">
+<table style="width:100%;padding-top:-20px ; font-size: 11px" >
+  <tr style="width:100%;border-top:1px solid black ">
+    
+  <td style="width: 50%; align:left; border-left:1px" >
+    <table style="width:100%; ">
+      <tr style="font-weight: bold">
+        <td style="width: 20%; align:left"> Buyer: </td>
+        <td style="width: 80%; align:righ"></td>
+      </tr>
+      <tr>
+        <td style=""> Company</td>
+        <td style="font-weight: bold"> : ${record.custrecord_ino_pm_vo_subsidiary} </td>
+      </tr>
+       <tr>
+        <td style=""> VAT</td>
+        <td style="font-weight: bold"> : ${record.custrecord_ino_pm_vo_subsidiary.taxidnum}  </td>
+      </tr>
+      <tr>
+        <td style=""> Project</td>
+        <td style="font-weight: bold"> : ${record.custrecord_ino_pm_vo_project_master} </td>
+      </tr>
+      <tr>
+        <td style=""> Date</td>
+        <td style="font-weight: bold"> : ${record.custrecord_ino_pm_vo_date?string("EEEE, MMMM d, yyyy")} </td>
+      </tr>
+        <tr>
+        <td style=""> Currency</td>
+        <td style="font-weight: bold"> : ${record.custrecord_ino_pm_vo_contract.custrecord_ino_pm_contract_currency} </td>
+      </tr>
+       <tr>
+        <td style=""> Tel</td>
+        <td style="font-weight: bold"> : 920003749 </td>
+      </tr>
+    </table>
+  
+  </td>
+
+  <td style="width: 50%; align:right;  border-left:1px; border-right:1px" >
+    <table  style="width:100%; ">
+       <tr style="font-weight: bold">
+        <td style="width: 20%; align:left"> To/Vendor: </td>
+        <td style="width: 80%; align:righ"></td>
+      </tr>
+      <tr>
+        <td style=""> Company</td>
+        <td style="font-weight: bold"> : ${record.custrecord_bas_vo_venodr} </td>
+      </tr>
+       <tr>
+        <td style=""> Address</td>
+        <td style="font-weight: bold"> : ${record.custrecord_bas_vo_venodr.address}</td>
+      </tr>
+      <tr>
+        <td style=""> VAT</td>
+        <td style="font-weight: bold"> : ${record.custrecord_bas_vo_venodr.vatregnumber} </td>
+      </tr>
+      <tr>
+        <td style=""> </td> 
+        <td style="font-weight:bold;">  </td>   
+      </tr>
+      <tr>
+        <td style="padding-top:px"> Reference</td>
+         <#if record.custrecord_ino_pm_vo_contract.custrecord_ino_pm_contract_award_meth == 'Bidding Process'>
+           <td style="font-weight:bold;padding-top:px"> : ${record.custrecord_ino_pm_vo_contract.custrecord_ino_pm_contract_bidding}</td>
+         <#else>
+           <td style="font-weight:bold;"> :</td>
+         </#if>
+      </tr>
+       <tr>
+        <td style=""> Tel</td>
+        <td style="font-weight: bold"> : ${record.custrecord_bas_vo_venodr.altphone} </td>
+      </tr>
+      <tr>
+        <td style=""> Fax</td>
+        <td style="font-weight: bold"> : ${record.custrecord_bas_vo_venodr.fax} </td>
+      </tr>
+       <tr>
+        <td style=""> Mobile</td>
+        <td style="font-weight: bold"> : ${record.custrecord_bas_vo_venodr.phone} </td>
+      </tr>
+                 <tr>
+        <td style=""> Email</td>
+        <td style="font-weight: bold"> : ${record.custrecord_bas_vo_venodr.email} </td>
+      </tr>
+    </table>
+  </td>  
+</tr>
+</table>
+
+ <table style="width:100%;" >
+  <tr style="width:100%;border-top:1px solid black;border-bottom:1px solid black;">
+    <td style="width:10%; text-decoration:underline;padding-top:3px; padding-bottom:3px"> Subject: </td>
+       <td style="padding-top:5px; padding-bottom:3px;font-size:14px"> ${record.custrecord_az_bas_vo_subject} </td>
+  </tr>
+</table>      
+
+   <table style="width:100%;font-size:11px">
+    <tr style="font-weight:bold">
+      
+      <td align="left" style="width:85%;border-left:1px solid black; border-right:1px solid black;border-bottom:1 px solid black"> Description </td>     
+      <td align="center" style="width:15%;border-bottom:1 px solid black; border-right:1 px solid black;" > Amount</td>
+    </tr>    
+
+      <tr>
+      
+      <td align="right" style="border-left:1 px solid black; border-right:1px solid black;border-bottom:1px solid black; font-size: 9pt">${record.custrecord_ino_pm_vo_description}</td>
+      <td align="right" style=" border-right:1px solid black;border-bottom:1px solid black; font-size: 9pt">${record.custrecord_ino_pm_vo_amount?string["#,##0.00"]}</td>
+    </tr>
+   </table>
+
+<#assign VatAmount = (record.custrecord_ino_pm_vp_pcamount * 0.15)/>
+<#assign TotalAmount = (VatAmount + record.custrecord_ino_pm_vp_pcamount)/>
+<#assign TaxCode = (record.custrecord_ino_pm_vo_contract.custrecord_ino_pm_contract_tax_code)/>
+<table style="margin-top: 10px; width:32.5%; align:right; font-size:11px; border:1px solid black; font-weight:bold;">
+    <tr>
+        <td align="left" style="width:50%; border-right:1px solid black;">Subtotal</td>
+        <td style="width:50%; align: right;"> ${record.custrecord_ino_pm_vp_pcamount?string["#,##0.00"]} </td>
+    </tr>
+
+    <tr style="border-top:1px solid black;">
+        <td align="left" style=" border-right:1px solid black;">VAT Amount</td>
+
+        <#if TaxCode == "S-KSA">
+            <td style=" align: right;"> ${VatAmount?string["#,##0.00"]} </td>
+        <#else>
+            <td style=" align: right;">0.00</td>
+        </#if>
+    </tr>
+
+    <tr style="border-top:1px solid black;">
+        <td align="left" style=" border-right:1px solid black;">Total</td>
+         <#if TaxCode == "S-KSA">
+            <td style=" align: right;"> ${TotalAmount?string["#,##0.00"]} </td>
+        <#else>
+            <td style=" align: right;"> ${record.custrecord_ino_pm_vp_pcamount?string["#,##0.00"]}</td>
+        </#if>
+    </tr>
+</table>
+
+
+
+   <table style="width:100%; margin-top:10px;font-size:11px; border:1px solid black">
+     <tr>
+      <td align="left" style="width:100%; font-weight:bold">${record.custpage_total_in_English!' '} ${record.custrecord_ino_pm_vo_contract.custrecord_ino_pm_contract_currency}</td>
+    </tr>
+  </table>
+           
+
+ <table style="width:100%; margin-top:10px;font-size:11px;">
+   <tr>
+      <td style="font-weight:bold;text-decoration:underline;padding-top:10px ">General Note:</td>
+   </tr>  
+    
+   <tr>
+     <td> 1. Copy of signed delivery note should always be submitted with your invoice - Contact Person at site. </td>
+   </tr>
+   
+   <tr>
+     <td> 2. Acknowledge Acceptance of this PO within 3 Days is Required. Otherwise it will be Considered as accepted by You.</td>
+   </tr>
+   
+   <tr>
+     <td> 3. Our P.O. number should always appear on your invoices.</td>
+   </tr>
+  
+   <tr>
+     <td>4. Delivery Note &amp; MTC Should be Submitted on Project while Delivering the Material.</td>
+   </tr>
+   
+  <tr>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td> With best regards,</td>
+  </tr>
+ 
+  <tr>
+    <td></td>
+  </tr>
+  
+  <tr>
+      <td></td>
+  </tr>
+
+    <tr>
+      <td align="center" style="font-weight:bold">This is an approved system-generated document; the company's stamp &amp; signature are not required.</td>
+    </tr>
+
+    <tr>
+      <td align="center" style="font-weight:bold;text-decoration:underline;padding-top:5px; padding-right: -30px "> Vendor Acceptance:</td>
+    </tr>
+
+    <tr>
+      <td align="center" style="padding-left:-40px;" > Name:</td>
+    </tr>
+
+     <tr>
+      <td align="center" style="padding-left:-3px;" > Sign &amp; Stamp:</td>
+    </tr>
+
+    <tr>
+      <td align="center" style="padding-left:-46px;" > Date:</td>
+    </tr>
+ </table>
+</body>
+</pdf>
