@@ -1,0 +1,454 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+
+    <head>
+        <link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}"
+            src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}"
+            src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+        <#if .locale=="zh_CN">
+            <link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}"
+                src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+            <#elseif .locale=="zh_TW">
+                <link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}"
+                    src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+                <#elseif .locale=="ja_JP">
+                    <link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}"
+                        src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+                    <#elseif .locale=="ko_KR">
+                        <link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}"
+                            src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+                        <#elseif .locale=="th_TH">
+                            <link name="NotoSansThai" type="font" subtype="opentype"
+                                src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+        </#if>
+        <macrolist>
+            <macro id="nlheader">
+                <table class="header" style="width: 100%;">
+                    <tr>
+                        <td align="left" colspan="17">
+                            <#if companyInformation.logoUrl?length !=0><img
+                                    src="https://6140731.app.netsuite.com/core/media/media.nl?id=2365&amp;c=6140731&amp;h=7IqSXclku_iFWE87-FZiiIxyCj2_oOEowAdI4F_3WBc-7xmQ"
+                                    style="float:right; width: 200; height:55;" /> </#if>
+                        </td>
+                        <td align="right"
+                            style="font-size: 8pt;border-left:2px;padding-right: 35px;border-color: #d2edf9;"
+                            colspan="9"><br /><br /><span
+                                style="font-weight:bold;color:MidnightBlue; padding-left: 10px">&nbsp;Tel:</span><span
+                                style="color:MidnightBlue;"> +974 4449 9556</span><br /> <span
+                                style="color:MidnightBlue;font-weight:bold; padding-left: 10px">&nbsp;P.O. Box:&nbsp;</span><span
+                                style="color:MidnightBlue;">4212, Doha – Qatar</span><br /><span
+                                style="color:MidnightBlue; padding-left: 10px">&nbsp;Sikkat Wadi, Msheireb, Building No. 7, <br />  </span><span
+                                style="color:MidnightBlue; padding-left: 10px">&nbsp;Zone 03, Street 810</span>
+                        </td>
+                    </tr>
+                </table>
+                <table style="width: 100%;">
+                    <tr>
+                        <td align="left" class="normal"><span
+                                style="font-weight:bold;color:MidnightBlue; font-size:12pt;"><br />Ref&nbsp;:&nbsp;</span><span
+                                style="color:MidnightBlue;">${record.tranid}</span></td>
+                    </tr>
+                  <#if record.custbody_az_mcq_blanket_po_no?has_content>
+                  <tr>
+                        <td align="left" class="normal" style="margin-top:-15px"><span
+                                style="font-weight:bold;color:MidnightBlue; font-size:12pt;"><br />BPO No.&nbsp;:&nbsp;</span><span
+                                style="color:MidnightBlue;">${record.custbody_az_mcq_blanket_po_no.tranid}</span></td>
+                  </tr>
+                    </#if>
+                    <tr>
+                        <td align="left" class="normal"><span
+                                style="font-weight:bold;color:MidnightBlue;font-size:12pt;">Date&nbsp;:&nbsp;</span>
+                            <span style="color:MidnightBlue;">${record.trandate}</span></td>
+                    </tr>
+                    <tr>
+                        <td align="center" class="normalbg" style="color:MidnightBlue;" colspan="2">Purchase Order</td>
+                    </tr>
+                    <tr>
+                        <td align="left" class="normal" colspan="2"><span
+                                style="font-weight:bold;color:MidnightBlue;">To:</span> ${record.entity.altname}</td>
+                    </tr>
+                    <tr>
+                        <td align="left" class="normal"><span
+                                style="font-weight:bold;color:MidnightBlue;">Tel:</span>${record.entity.phone}</td>
+                        <td align="left" class="normal"><span style="font-weight:bold;color:MidnightBlue;">Fax:</span>
+                            ${record.entity.fax}</td>
+                    </tr>
+                    <tr>
+                        <td align="left" class="normal"><span style="font-weight:bold;color:MidnightBlue;">Email:</span>
+                            ${record.entity.email}</td>
+                        <td align="left" class="normal"><span
+                                style="font-weight:bold;color:MidnightBlue;">Address:</span> ${record.entity.address}
+                        </td>
+                    </tr>
+                </table>
+            </macro>
+            <macro id="nlfooter">
+                <table style="width: 100%;">
+                    <tr>
+                        <td align="left">${.now}</td>
+                        <td align="right">
+                            <pagenumber /> of
+                            <totalpages />
+                        </td>
+                    </tr>
+
+                </table>
+            </macro>
+            <macro id="nlheader2">
+                <table class="header" style="width: 100%;">
+                    <tr>
+                        <td align="left" colspan="17">
+                            <#if companyInformation.logoUrl?length !=0><img
+                                    src="https://6140731.app.netsuite.com/core/media/media.nl?id=2365&amp;c=6140731&amp;h=7IqSXclku_iFWE87-FZiiIxyCj2_oOEowAdI4F_3WBc-7xmQ"
+                                    style="float:right; width: 200; height:55;" /> </#if>
+                        </td>
+                        <td align="right"
+                            style="font-size: 8pt;border-left:2px;padding-right: 35px;border-color: #d2edf9;"
+                            colspan="9"><br /><br /><span
+                                style="font-weight:bold;color:MidnightBlue; padding-left: 10px">&nbsp;Tel:</span><span
+                                style="color:MidnightBlue;"> +974 4449 9556</span><br /> <span
+                                style="color:MidnightBlue;font-weight:bold; padding-left: 10px">&nbsp;P.O. Box:&nbsp;</span><span
+                                style="color:MidnightBlue;">4212, Doha – Qatar</span><br /><span
+                                style="color:MidnightBlue; padding-left: 10px ">&nbsp;Sikkat Wadi, Msheireb, Building No. 7, <br />  </span><span
+                                style="color:MidnightBlue; padding-left: 10px">&nbsp;Zone 03, Street 810</span>
+                        </td>
+                    </tr>
+                </table>
+
+                <table style="width: 100%;">
+                    <tr>
+                        <td class="normal"><span
+                                style="font-weight:bold;color:MidnightBlue; font-size:12pt;"><br />Ref&nbsp;:&nbsp;</span><span
+                                style="color:MidnightBlue;">${record.tranid}</span></td>
+                    </tr>
+                    <tr>
+                        <td align="left" class="normal"><span
+                                style="font-weight:bold;color:MidnightBlue;font-size:12pt;">Date&nbsp;:&nbsp;</span>
+                            <span style="color:MidnightBlue;">${record.trandate}</span></td>
+                    </tr>
+                </table>
+            </macro>
+            <macro id="nlfooter2">
+            </macro>
+        </macrolist>
+        <style type="text/css">
+            * {
+                <#if .locale=="zh_CN">font-family: NotoSans, NotoSansCJKsc, sans-serif;
+                <#elseif .locale=="zh_TW">font-family: NotoSans, NotoSansCJKtc, sans-serif;
+                <#elseif .locale=="ja_JP">font-family: NotoSans, NotoSansCJKjp, sans-serif;
+                <#elseif .locale=="ko_KR">font-family: NotoSans, NotoSansCJKkr, sans-serif;
+                <#elseif .locale=="th_TH">font-family: NotoSans, NotoSansThai, sans-serif;
+                <#else>font-family: NotoSans, sans-serif;
+                </#if>
+            }
+
+            table {
+                font-size: 9pt;
+                table-layout: fixed;
+            }
+
+            th {
+                font-weight: bold;
+                font-size: 8pt;
+                vertical-align: middle;
+                padding: 5px 6px 3px;
+                background-color: #d2edf9;
+                color: #191970;
+            }
+
+            td {
+                padding: 4px 6px;
+            }
+
+            td p {
+                align: left
+            }
+
+            b {
+                font-weight: bold;
+                color: #333333;
+            }
+
+            table.header td {
+                padding: 0;
+                font-size: 10pt;
+            }
+
+            table.footer td {
+                padding: 0;
+                font-size: 8pt;
+            }
+
+            table.itemtable th {
+                padding-bottom: 10px;
+                padding-top: 10px;
+            }
+
+            table.body td {
+                padding-top: 2px;
+            }
+
+            table.total {
+                page-break-inside: avoid;
+            }
+
+            tr.totalrow {
+                background-color: #e3e3e3;
+                line-height: 200%;
+            }
+
+            td.totalboxtop {
+                font-size: 12pt;
+                background-color: #e3e3e3;
+            }
+
+            td.normal {
+                font-size: 10pt;
+                padding-top: 6px;
+                padding-bottom: 4px;
+            }
+
+            td.normalbg {
+                font-size: 16pt;
+                padding-top: 6px;
+                padding-bottom: 2px;
+                background-color: #d2edf9;
+            }
+
+            td.po {
+                font-size: 16pt;
+                padding-top: 6px;
+                padding-bottom: 2px;
+            }
+
+            td.address {
+                padding-top: 0;
+            }
+
+            td.totalboxmid {
+                font-size: 28pt;
+                padding-top: 20px;
+                background-color: #e3e3e3;
+            }
+
+            td.totalboxbot {
+                background-color: #e3e3e3;
+                font-weight: bold;
+            }
+
+            span.title {
+                font-size: 28pt;
+            }
+
+            span.number {
+                font-size: 16pt;
+            }
+
+            span.itemname {
+                font-weight: bold;
+                line-height: 150%;
+            }
+
+            hr {
+                width: 100%;
+                color: #d3d3d3;
+                background-color: #d3d3d3;
+                height: 1px;
+            }
+        </style>
+    </head>
+
+    <body header="nlheader" header-height="31%" footer="nlfooter" footer-height="5pt" padding="0.5in 0.5in 0.5in 0.5in"
+        size="Letter">
+        <table style="width: 100%;">
+
+            <tr>
+                <td class="normalbg" style="color:MidnightBlue;" colspan="2">Subject : <u>${record.memo}</u>
+                </td>
+            </tr>
+            <tr>
+                <td class="normal">Dear Sir,</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="normal" colspan="2">With reference to your financial Quotation on the above-mentioned
+                    subject, we are pleased to confirm the purchase of mentioned below for Media City as per your
+                    Quotation with Reference No. <u> ${record.custbody52}</u> dated: <u>${record.custbody51}</u></td>
+            </tr>
+            <tr>
+                <td class="normal">The financial terms for the placement as follows:</td>
+            </tr>
+            <tr>
+                <td class="normal">&nbsp;</td>
+            </tr>
+        </table>
+        <#if record.item?has_content>
+
+            <table border="1" class="itemtable" style="width: 100%;">
+                <!-- start items -->
+                <#list record.item as item>
+                    <#if item_index==0>
+                        <#assign count=1 />
+                        <thead>
+                            <tr>
+                                <th align="center" border-right="1" colspan="3">Item No.</th>
+                                <th border-right="1" colspan="12">Description</th>
+                                <th border-right="1" colspan="3">Quantity</th>
+                                <th border-right="1" colspan="3">UOM</th>
+                                <th align="right" border-right="1" colspan="4">Unit Price</th>
+                                <th align="right" colspan="4">Total Amount</th>
+                            </tr>
+                        </thead>
+                    </#if>
+                    <tr>
+                        <td align="center" border-right="1" border-top="1" colspan="3">${count?int}
+                            <#assign count=count+1 />
+                        </td>
+                        <td border-right="1" border-top="1" colspan="12"><span
+                                class="itemname">${item.item}</span><br />${item.description}</td>
+                        <td border-right="1" border-top="1" colspan="3">${item.quantity}</td>
+                        <td border-right="1" border-top="1" colspan="3">${item.units}</td>
+                        <td align="right" border-right="1" border-top="1" colspan="4">${item.rate?string(',##0.00')}
+                        </td>
+                        <td align="right" border-top="1" colspan="4">${item.amount?string(',##0.00')}</td>
+                    </tr>
+                </#list><!-- end items -->
+                <tr>
+                    <td align="right" border-top="1" colspan="21"
+                        style=" background-color: #D3D3D3;color:MidnightBlue;font-size: 12pt;">Total Offer Amount:</td>
+                    <td align="right" border-top="1" colspan="4" style=" background-color: #D3D3D3;color:MidnightBlue;">
+                        <b>${record.currency}</b></td>
+                    <td align="right" border-top="1" colspan="4" style=" background-color: #D3D3D3;color:MidnightBlue;">
+                        <b>${record.total?string(',##0.00')}</b></td>
+                </tr>
+            </table>
+        </#if>
+
+
+       <#if record.expense?has_content>
+
+            <table border="1" class="itemtable" style="width: 100%;">
+                <!-- start items -->
+                <#list record.expense as item>
+                    <#if item_index==0>
+                        <#assign count=1 />
+                        <thead>
+                            <tr>
+                                <th width="15%" align="center" border-right="1">Category</th>
+                                <th width="20%" align="center" border-right="1">Account</th>
+                                <th width="10%" align="center" border-right="1">Amount</th>
+                                <th width="23%" align="center" border-right="1">Memo</th>
+                                <th width="17%" align="center" border-right="1">Department</th>
+                                <th width="15%" align="center" border-right="1">Project Centre</th>
+                            </tr>
+                        </thead>
+                    </#if>
+                    <tr>
+                        <td align="center" border-right="1" border-top="1">${item.category}</td>
+                        <td align="center" border-right="1" border-top="1">${item.account}</td>
+                        <td align="center" border-right="1" border-top="1">${item.amount?string(',##0.00')}</td>
+                        <td align="center" border-right="1" border-top="1">${item.memo}</td>
+                        <td align="center" border-right="1" border-top="1">${item.department}</td>
+                        <td align="center" border-right="1" border-top="1">${item.class}</td>
+                    </tr>
+                </#list><!-- end items -->
+                          <tr>
+                    <td align="center" border-top="1"
+                        style=" background-color: #D3D3D3;color:MidnightBlue;font-size: 12pt;">Total Offer Amount:</td>
+                    <td align="center" border-top="1" style=" background-color: #D3D3D3;color:MidnightBlue;">
+                        <b>${record.currency}</b></td>
+                    <td align="left" border-top="1" colspan="4" style=" background-color: #D3D3D3;color:MidnightBlue;">
+                        <b>${record.total?string(',##0.00')}</b></td>
+                </tr>
+            </table>
+        </#if>
+        <table style="width: 100%;">
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td style="color:MidnightBlue;font-size: 10pt; padding-left:10px;"><span style="font-weight:bold;">Delivery
+                        Schedule:${record.custbody_delivery_date}</span></td>
+
+                <td style="color:MidnightBlue;font-size: 10pt;padding-left:10px;"><span style="font-weight:bold;">Payment
+                        Terms:</span> ${record.terms}</td>
+            </tr>
+            <tr>
+                <td style="color:MidnightBlue;font-size: 10pt; padding-left:10px;"><span
+                        style="font-weight:bold;"> Delivery:</span></td>
+              <td></td>
+            </tr>
+          <tr>
+                <td style="color:MidnightBlue;font-size: 10pt;padding-left:10px;"> <span> ${record.custbody_az_mcq_address_name} </span></td>
+              <td></td>
+            </tr>
+        </table>
+        <table style="width: 100%;page-break-inside: avoid;">
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="2">Kindly acknowledge the same by sending an email, for any more details you are requested
+                    to co-ordinate with Email: <b>procurement@mediacity.qa</b> </td>
+            </tr>
+            <tr>
+                <td>Best Regards,</td>
+            </tr>
+            <tr>
+                <#if record.approvalstatus=='Approved'>
+                    <td align="left">
+                        <img src="https://6140731.app.netsuite.com/core/media/media.nl?id=3576&amp;c=6140731&amp;h=Zuq-PU2TPFaKcCul5-FgXDHnp2HBvgO_pcBi6zvH8GdClR8Z"
+                            style="float:left; width: 60; height:60;" />
+                    </td>
+                </#if>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+            <tr>
+                <td><b>Khaldoon Hijazin, CPA</b></td>
+            </tr>
+            <tr>
+                <td>Finance and Accounting Manager</td>
+            </tr>
+        </table>
+        <pbr header="nlheader2" header-height="15%" footer="nlfooter2" footer-height="17%"
+            padding="0.3in 0.5in 0.3in 0.5in" size="Letter" />
+
+        <h4><b><i>Internal Use Only</i></b></h4>
+
+
+        <#if record.item?has_content>
+
+            <table border="1" class="itemtable" style="width: 100%;">
+                <!-- start items -->
+                <#list record.item as item>
+                    <#if item_index==0>
+                        <thead>
+                            <tr>
+                                <th align="left" border-right="1" colspan="6">Item Name</th>
+                                <th align="left" border-right="1" colspan="6">GL Account</th>
+                                <th align="left" border-right="1" colspan="6">Department</th>
+                                <th align="left" border-right="1" colspan="6">Cost Center</th>
+                            </tr>
+                        </thead>
+                    </#if>
+                    <tr>
+                        <td align="left" border-right="1" border-top="1" colspan="6">${item.item}</td>
+                        <td align="left" border-right="1" border-top="1" colspan="6">${item.custcol_da_expense_account}
+                        </td>
+                        <td align="left" border-right="1" border-top="1" colspan="6">${item.department}</td>
+                        <td align="left" border-right="1" border-top="1" colspan="6">${item.class}</td>
+                    </tr>
+                </#list><!-- end items -->
+            </table>
+        </#if>
+    </body>
+</pdf>
