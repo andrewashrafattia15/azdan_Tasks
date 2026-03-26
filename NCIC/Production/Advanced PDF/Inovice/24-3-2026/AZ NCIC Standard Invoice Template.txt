@@ -1,0 +1,397 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+    <link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false" />
+
+  <#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+            <table class="header" style="width: 100%;">
+                <tr>
+                    <!-- Left Column: Date & Time -->
+                    <td width="25%" align="right" style="vertical-align: top;">
+                        <p><span> ${record.custpage_hijri_date!""}</span><span><b> :التاريخ </b></span></p>
+                        <p><span><b>م</b></span> <span> ${record.trandate} </span><span><b>:الموافق</b></span></p>
+                        <p><span> ${.now?string["hh:mm a"]} </span><span><b> :الوقت </b></span></p>
+                    </td>
+
+                    <!-- Right Column: Logo + VAT Number + Invoice Title -->
+                    <td width="75%" align="right" style="vertical-align: top;">
+                        <@filecabinet nstype="image" style="float: right; width: 25%; height: 30%;" src="${subsidiary.logo@Url}" /><br /><br />
+                        <table style="width: 100%; border-collapse: collapse; clear: both; margin-top: 6px;">
+                            <tr>
+                                <td width="50%" align="center" style="padding: 0;">
+                                    <p style="font-size:11pt; font-weight:bold;">(${record.tranid}) فاتورة ضريبية رقم</p>
+                                </td>
+                                <td width="50%" align="right" style="padding: 0;">
+                                    <p style="font-size:11pt;">الرقم الضريبي ${subsidiary.custrecord_az_ncic_kaae_vat}</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </macro>
+
+        <macro id="nlfooter">
+          <hr style="border-top: 1px solid #000000;"/>
+          <table class="footer" style="width: 100%;">
+                <tr>
+                    <td align="center">
+                     ${subsidiary.custrecord_az_ncic_full_name}
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">
+                     <span> سجل تجاري رقم ${subsidiary.custrecord_az_ncic_trade_license} - عضوية رقم ${subsidiary.state!""}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">
+                     <span> ${subsidiary.mainaddress_text} </span>
+                    </td>
+                </tr>
+            </table>
+        </macro>
+    </macrolist>
+
+    <style>
+		* {
+            <#if .locale=="zh_CN">font-family: NotoSans, NotoSansCJKsc, sans-serif;
+            <#elseif .locale=="zh_TW">font-family: NotoSans, NotoSansCJKtc, sans-serif;
+            <#elseif .locale=="ja_JP">font-family: NotoSans, NotoSansCJKjp, sans-serif;
+            <#elseif .locale=="ko_KR">font-family: NotoSans, NotoSansCJKkr, sans-serif;
+            <#elseif .locale=="th_TH">font-family: NotoSans, NotoSansThai, sans-serif;
+            <#else>font-family: NotoSans, sans-serif;
+            font-family: NotoSansArabic, sans-serif;
+            </#if>
+        }
+
+        .arabic {
+            font-family: NotoSansArabic, sans-serif;
+            position: right;
+            font-size: 8pt;
+            line-height: 75%;
+        }
+        .invoice-title {
+            font-weight: bold;
+        }
+		table {
+            width: 100%;
+			font-size: 9pt;
+			table-layout: fixed;
+		}
+
+        .header-table {
+            width: 100%;
+            border-collapse: collapse;
+            border-top: 1px solid;
+            border-right: 1px solid;
+            border-left: 1px solid;
+            margin-bottom: 5px;
+        }
+
+        .header-table td {
+            padding: 5px;
+            border-bottom: 1px solid;
+            vertical-align: top;
+        }
+
+        td {
+            padding: 4px 6px;
+        }
+		td p { align: left; font-size: 10pt; }
+        b {
+            font-weight: bold;
+            color: #333333;
+        }
+        table.header td {
+            padding: 0px;
+            font-size: 10pt;
+        }
+        table.footer td {
+            padding: 2px;
+            font-size: PX;;
+        }
+        table.itemtable {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid;
+            direction: rtl;
+        }
+        table.itemtable th {
+            border-left: 1px solid;
+            border-bottom: 1px solid;
+            padding: 5px;
+        }
+        table.itemtable td {
+            border-left: 1px solid;
+            border-bottom: 1px solid;
+            padding: 5px;
+        }
+        .customborder {
+            border-left: 1px solid #ffffff;
+        }
+        hr {
+            width: 100%;
+            color: #d3d3d3;
+            background-color: #d3d3d3;
+            height: 1px;
+        }
+        .custompadding td {
+            padding-top: 4px;
+            padding-bottom: 4px;
+        }
+    </style>
+</head>
+
+<body header="nlheader" header-height="11%" footer="nlfooter" footer-height="7%" padding="0.25in 0.25in 0.25in 0.25in" size="Letter">
+
+
+      
+
+
+    <table class="header-table arabic">
+        <tr>
+            <!-- Left Column: QR Code -->
+            <td align="center" style="width: 30%; border-right: 1px solid black;">
+                <#if record.custbody_ino_einv_sa_trx_qr2?has_content>
+                    <barcode codetype="qrcode" height="175px" width="175px" showtext="true" value="${record.custbody_ino_einv_sa_trx_qr2}"/>
+                <#else>
+                    <barcode codetype="qrcode" height="175px" width="175px" showtext="true" value="The QR code is empty"/>
+                </#if>
+            </td>
+
+            <!-- Right Column: Company & Customer Info -->
+            <td style="width: 70%;">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr>
+                        <td colspan="2"  style="width: 100%;" align="right">
+                            <p>
+                                <span style="display: inline-block; min-width: 120px; text-align: left;">${record.cseg_ino_re_prpty!""}</span>
+                                <span>/ الموقع</span>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"  align="right">
+                            <p>
+                                <span style="display: inline-block; min-width: 120px; text-align: left;"><b>${record.custbody_ino_re_um_unitmaster.name!""}</b></span>
+                                <span>/ رقم الوحدة</span>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"  align="right">
+                            <p>
+                                <span style="display: inline-block; min-width: 120px; text-align: left;">${record.entity.companyname!""}</span>
+                                <span>/ المستأجر</span>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"  align="right">
+                            <p>
+                                <span style="display: inline-block; min-width: 120px; text-align: left;">${record.entity.companyname!""}</span>
+                                <span>/ الاسم التجاري</span>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="right" style="padding: 4px 0px; border:0px">
+                            <table width="100%" align="right"  >
+                                <tr>
+                                 
+                                    <td align="center"  style="line-height:10px; unicode-bidi: bidi-override;">
+<#assign rawAddr = record.entity.address?string />
+
+<#-- Step 1: Normalize ALL types of line breaks to a single delimiter -->
+<#assign cleanAddr = rawAddr
+  ?replace("\r\n", "<br/>")?replace("\r", "<br/>")?replace("\n", "<br/>")
+  ?replace("<BR/>", "<br/>")?replace("<BR>", "<br/>")
+  ?replace("<br>", "<br/>")?replace("<br />", "<br/>")
+  ?replace("&nbsp;", " ")
+/>
+
+<#-- Step 2: Split on the normalized <br/> -->
+<#assign parts = cleanAddr?split("<br/>") />
+
+<p dir="rtl" style="text-align: right;font-size:11px">
+  <#list parts as part>
+    <#assign trimmed = part?trim />
+    <#if trimmed?has_content>
+      <#if (part_index > 0)> - </#if>
+      <bdi>${trimmed}</bdi>
+    </#if>
+  </#list>
+</p>
+                                    
+                                    </td>
+                                    <td width="20%" align="right"> / عنوان العميل </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="right">
+                            <table style="width:100%; border-collapse:collapse;">
+                                <tr>
+                                    <#if record.custbody_ino_pms_tenancy_contract != "">
+                                    <td align="right" style="border:none; padding:0; margin:0;">
+                                        <p style="margin:0; padding:0;">
+                                            <span><b>${record.custbody_ino_pms_tenancy_contract.custrecord_ino_pms_tc_reference!""}</b></span>
+                                            <span> / رقم العقد بمنصة ايجار</span>
+                                        </p>
+                                    </td>
+                                    </#if>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                  <#if record.custpage_lease_charge?has_content>
+                        <td  align="center" style="border:0">                       
+                               <span>${record.custpage_lease_charge!""}</span> <span> / رقم الدفعة </span>                       
+                        </td>
+                        <td style="border-bottom: 0;" align="right">
+                            <p>
+                                <span style="display: inline-block; min-width: 120px; text-align: left;"><b>${record.entity.vatregnumber}</b></span>
+                                <span>/ الرقم الضريبي للعميل</span>
+                            </p>
+                        </td>
+                  <#else>
+                    <td  colspan="2" style="border-bottom: 0;" align="right">
+                            <p>
+                                <span style="display: inline-block; min-width: 120px; text-align: left;"><b>${record.entity.vatregnumber}</b></span>
+                                <span>/ الرقم الضريبي للعميل</span>
+                            </p>
+                        </td>
+                  </#if>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <table class="itemtable" style="border-bottom:0px">
+        <tr>
+            <th height="10%"><p align="center">المبلغ ريال سعودي</p></th>
+            <th colspan="2" align="center"> البيان </th>
+            <#list record.item as item>
+            <#if item.item?has_content>
+                <#if item.custcol_az_ncic_consumption?has_content>
+                    <th colspan="3" align="center"> الفترة</th>
+                    <th colspan="2" align="center" class="customborder"> كمية الاستهلاك</th>
+                <#else>
+                    <th colspan="5" align="center" class="customborder"> الفترة</th>
+                </#if>
+            </#if>
+            </#list>
+        </tr>
+    </table>
+    <table class="itemtable" style="border-top:0px">
+        <#list record.item as item>
+        <#if item.item?has_content>
+            <#assign exemptionText = " " />
+            <#if item.item.internalid?string == "381">
+                <#assign exemptionText = "معفي" />
+            </#if>
+            <tr>
+                <td align="center">${item.amount?string(',##0.00')}</td>
+                <td colspan="2" align="center">${item.description}</td>
+                <#if item.custcol_az_ncic_consumption?has_content>
+                    <td colspan="3"  align="right">${record.enddate} <span><b>الى</b> &nbsp; &nbsp; &nbsp;</span> ${record.startdate} <span><b>من</b></span></td>
+                    <td colspan="2" class="customborder" align="center">${item.custcol_az_ncic_consumption!""}</td>
+                <#else>
+                    <td colspan="5" class="customborder" align="center">${record.enddate} <span><b>الى</b> &nbsp; &nbsp; &nbsp;</span> ${record.startdate} <span><b>من</b></span></td>
+                </#if>
+            </tr>
+        </#if>
+        </#list>
+
+        <tr>
+            <td align="center"><b>${record.subtotal?string(',##0.00')}</b></td>
+            <td colspan="7" align="right" class="customborder" >الاجمالي غير شامل ضريبة القيمة المضافة</td>
+        </tr>
+        <tr>
+          <#if record.taxtotal == 0 >
+             <td align="center"><b>${record.taxtotal?string(',##0.00')}</b></td>
+             <td colspan="7" align="right" class="customborder"> ضريبة القيمة المضافة المستحقة / معفى </td>
+          <#else>
+             <td align="center"><b>${record.taxtotal?string(',##0.00')}</b></td>
+             <td colspan="7" align="right" class="customborder"><span> ${exemptionText} </span> %ضريبة القيمة المضافة المستحقة 15</td>
+          </#if>
+        </tr>
+        <tr>
+            <td align="center"><b>${record.taxtotal?string(',##0.00')}</b></td>
+            <td colspan="7" align="right" class="customborder">إجمالي ضريبة القيمة المضافة المستحقة</td>
+        </tr>
+        <tr>
+            <td align="center" style="border-bottom: none;"><b>${record.total?string(',##0.00')}</b></td>
+            <td colspan="4" align="right" style="border-bottom: none;">إجمالي المستحق شامل ضريبة القيمة المضافة</td>
+            <td colspan="3" align="center" class="customborder" style="border-bottom: none;">${record.custbody_ino_re_amount_in_words_ar!""}</td>
+        </tr>
+    </table>
+
+    <table class="custompadding" style="padding-top:10px;">
+        <tr>
+            <td colspan="2" align="right">
+                :نأمل سداد المبلغ المستحق إما عن طريق
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="right">
+                : حوالة مصرفية باسم /وقف خادم الحرميين الشريفيين الملك عبدالله بن عبدالعزيز للموهبة والإبداع معلومات الحساب كالتالي <span> .1</span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="right">
+                <b>${record.custbody_az_ncic_account_number!""}</b><span> رقم الحساب </span>.${record.custbody_az_ncic_bank_name!""} <span>/ اسم البنك </span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="right">
+                <b>${record.custbody_az_ncic_iban!""}</b><span> / رقم الآيبان </span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="right">
+                .أو شيك مصرفي باسم / ${record.custbody_az_ncic_beneficiary_name!""} <span> .2</span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="font-size:4px;" align="right">
+                <b><u>:للاستفسارات</u></b>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="right">
+                (0112849983 / 0112849941)<span>:هاتف</span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="right">
+                <a href="mailto:ops@nicom.com.sa" style="color:#0000FF; text-decoration:none;">ops@ncicom.com</a><span>:البريد الإلكتروني </span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="font-size:4px;" align="right">
+                <u>هذا المستند يحتوي التوقيع الالكتروني المشفر من هيئة الزكاة والضريبة والجمارك ولا يحتاج إلى توقيع أو ختم</u>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</pdf>
