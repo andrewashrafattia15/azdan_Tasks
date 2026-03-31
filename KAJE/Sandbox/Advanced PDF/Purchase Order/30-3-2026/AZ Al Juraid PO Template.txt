@@ -1,0 +1,540 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+    <link name="NotoSerif" type="font" subtype="truetype" src="${nsfont.NotoSerif_Regular}" src-bold="${nsfont.NotoSerif_Bold}" bytes="2" />
+    <link name="NotoSansArabic" type="font" subtype="truetype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" />
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+
+    <macrolist>
+       <macro id="nlheader">
+
+        </macro>
+             <macro id="nlWatermark">
+    <table style="width: 100%; height: 100%; margin: 0; padding: 0; border: 0; border-spacing: 0;">
+        <tr>
+            <td style="margin: 0; padding: 0; border: 0;">
+                <img src="https://5452166-sb1.app.netsuite.com/core/media/media.nl?id=59543&amp;c=5452166_SB1&amp;h=P0szJNTgsdGZS1SIQHxErCNA-9Io0UYK13jQucyj2isicmiE" 
+                     style="width: 105%; height: 93.8%; display: block; margin: 0; padding: 0; border: 0;" />
+            </td>
+        </tr>
+    </table>
+</macro>
+
+    </macrolist>
+    <style>
+	  * { 
+font-family: 'NotoSerif', 'Times New Roman', Times, serif;
+font-family: "NotoSansArabic", sans-serif;
+  }
+       
+        body {
+          font-family: 'NotoSerif', 'Times New Roman', Times, serif;
+
+            font-size: 10pt;
+        }
+        
+                  table {
+                table-layout: fixed;
+                width: 100%;
+                border-collapse: collapse;
+                border-spacing: 0;
+            }
+
+            th {
+                font-weight: bold;
+                vertical-align: middle;
+                padding: 5px 6px 3px;
+                color: #333333;
+                padding-bottom: 10px;
+                padding-top: 10px;
+            }
+
+            td {
+                padding: 2px 4px;
+            }
+
+            b {
+                font-weight: bold;
+                color: #333333;
+            }
+        
+        .title-box {
+            text-align: center;
+            font-size: 18pt;
+            font-weight: bold;
+            padding: 10px;
+            margin: 15px 0;
+            border: 2px solid #003366;
+        }
+        
+         .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        
+        .info-table td {
+            border: 1px solid #333;
+            padding: 5px;
+            font-size: 9pt;
+            vertical-align: top;
+        }
+      .title-table {
+                    width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+      }
+                .title-table td {
+            font-size: 9pt;
+            vertical-align: top;
+        }
+        .label {
+            font-weight: bold;
+        }
+      .title {
+        font-size:15px;
+      }
+        
+        .section-header {
+            background-color: #f0f0f0;
+            padding: 5px;
+            border: 1px solid #333;
+          width:100%;
+        }
+      .section-header td {
+    padding: 2px 4px; 
+        line-height:14
+}
+        
+        .terms-box {
+            width:100%;
+            border: 1px solid #333;
+            padding: 8px;
+            font-size: 9pt;
+        }
+        
+        .signature-table {
+            width: 100%;
+            margin-top: 15px;
+            border-collapse: collapse;
+        }
+        
+        .signature-table td {
+            border: 1px solid #333;
+            padding: 30px 10px 10px 10px;
+            text-align: center;
+            font-size: 8pt;
+            font-weight: bold;
+        }
+        
+        .totals-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        
+        .totals-table td {
+            border: 1px solid #333;
+            padding: 5px;
+            font-size: 9pt;
+        }
+        
+        .totals-label {
+            font-weight: bold;
+            text-align: right;
+        }
+        
+        .totals-amount {
+            text-align: right;
+        }
+        
+        .note-box {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            padding: 5px;
+            margin: 5px 0;
+            font-size: 7pt;
+        }
+    </style>
+</head>
+<body header="nlheader" background-macro="nlWatermark" header-height="10%"   footer="nlfooter" footer-height="20%" padding="0.3in 0.3in 0.3in 0.3in" size="letter">
+  <table width="100%" style="font-size:9px">
+    <tr>
+      <td width="49%" style="background-color:#AFCB9F;font-size:11px;margin-top:10px;">
+        <table width="100%" style="vertical-align:middle">
+          <tr>
+            <td align="left" >
+              <b>PURCHASE ORDER</b>
+            </td>
+            <td></td>
+            <td align="right" >
+             أمر شراء
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td></td>
+      <td align="right" width="49%" style="background-color:#AFCB9F;font-size:11px;margin-top:10px;vertical-align:middle"><b>Date :  ${record.trandate?string["dd MMM yyyy"]}</b></td>
+    </tr>
+    <tr>
+      <td style="font-size:11px"><b>PURCHASE ORDER NUMBER: ${record.tranid}</b></td>
+      <td></td>
+      <td align="right"  ></td>
+    </tr>
+    <tr>
+      <td style="border:0.5px;border-color:green;background-color:#AFCB9F;" >
+        <table width="100%">
+          <tr  >
+            <td align="left" >
+             <b>COMPANY DETAILS</b>
+            </td>
+            <td></td>
+            <td align="right" >
+              تفاصيل الشركة
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td></td>
+      <td style="border:0.5px;border-color:green;background-color:#AFCB9F;" >
+        <table width="100%">
+          <tr>
+            <td align="left" >
+              <b>SUPPLIER DETAILS</b>
+            </td>
+            <td></td>
+            <td align="right" >
+              تفاصيل المورد
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td style="border-left:0.5px;border-bottom:0.5px;border-right:0.5px;border-color:green">
+        <table width="100%">
+         <tr>
+          <td colspan="2" style="font-size:11px">
+            <b> KHALID A. AL JURAID TRADING CO. LTD.</b>
+          </td>
+    </tr>
+    <tr>
+        <td colspan="2">Office Furniture - School Furniture &amp; Partition</td>
+    </tr>
+    <tr>
+      <td align="left"><b>P.O. Box:</b> 389 Al Khobar, 31952 KSA</td>
+      <td align="left"><b>CR:</b> 2051026261</td>
+    </tr>
+    <tr>
+      <td align="left"><b>Tel:</b> +966138918089</td>
+      <td align="left"><b>VAT:</b> 311664649400003</td>
+    </tr>
+    <tr>
+      <td align="left"><b>Fax:</b> +966138918350</td>
+      <td align="left"><b>Email:</b> info@aljuraidgroup.com</td>
+    </tr>
+    <tr>
+        <td align="left" colspan="2"><b>Shipping Address:</b> Khalid Al Juraid Trading Co. Ltd.
+King Khalid Road (Azizyah) Al Buhairah Neighborhood Al Khobar PO Box. 303 Saudi Arabia
+        </td>
+    </tr>
+    <tr>
+        <td align="left" colspan="2"><b>Project Name:</b> ${record.custbody_az_aj_memo!""} </td>
+    </tr>
+  </table>
+
+      </td>
+      <td></td>
+      <td align="right" width="45%" style="border-left:0.5px;border-bottom:0.5px;border-right:0.5px;border-color:green" >
+        <table >
+      
+        <tr>
+            <td><strong>Vendor Name:</strong>  ${record.entity.companyname}</td>
+        </tr>
+        <tr>
+            <td><strong>Address:</strong>  ${addressPart!""}</td>
+        </tr>
+       <#if officePart?has_content>
+<tr>
+    <td><strong>Office Add:</strong> ${officePart}</td>
+</tr>
+</#if>
+      <tr>
+    <td><strong>Email:</strong>  ${record.entity.email!""}</td>
+</tr>
+
+<tr>
+    <td><strong>Vat No:</strong> ${record.vatregnum!""}</td>
+</tr>
+
+<tr>
+    <td><strong>Contact Person:</strong> ${record.custpage_contactname!""}</td>
+</tr>
+
+<tr>
+    <td><strong>Contact No:</strong> ${record.custpage_contactno!""}</td>
+</tr>
+
+<tr>
+    <td><strong>Vendor Reference:</strong> ${record.otherrefnum!""}</td>
+</tr>
+
+<tr>
+    <td><strong>Payment Terms:</strong> ${record.terms}</td>
+</tr>
+
+<tr>
+    <td><strong>Shipping Terms:</strong> ${record.incoterm!""}</td>
+</tr>
+
+<tr>
+    
+</tr>
+    </table>
+      </td>
+    </tr>
+        
+  </table>
+
+
+  <table style="width:100%; table-layout:fixed; page-break-inside: avoid;font-size:9px;margin-top:10px"> 
+    <#if record.item?has_content>
+    <#list record.item as item>
+      <#if item_index==0>
+    <tr style="border-top:1px solid green;">
+    <td align="center" style="border-left:1px solid green;border-bottom:1px solid green;border-right:1px solid green; width:10%; padding:5px;background-color:#AFCB9F;"><b>Item #</b><br/> رقم العنصر</td>
+    <td align="center" style="border-bottom:1px solid green;border-right:1px solid green;  width:40%;  padding:5px;background-color:#AFCB9F;"><b>Description</b><br/> الوصف</td>
+    <td align="center" style="border-bottom:1px solid green;border-right:1px solid green;  width:10%;  padding:5px;background-color:#AFCB9F;"><b>Unit</b><br/> وحدة</td>
+    <td align="center" style="border-bottom:1px solid green;border-right:1px solid green;  width:10%; padding:5px;background-color:#AFCB9F;"><b>Qty</b><br/> الكمية</td>
+    <td align="center" style="border-bottom:1px solid green;border-right:1px solid green;  width:14%;  padding:5px;background-color:#AFCB9F;"><p style="text-align: center;"><b>Unit Price</b><br/> سعر الوحدة</p></td>
+    <td align="center" style="border-bottom:1px solid green;border-right:1px solid green;  padding:5px;background-color:#AFCB9F;"><b>Amount</b><br/>المبلغ</td>
+    
+    </tr>
+    </#if>
+    <tr>
+    <td align="center" style="border-left:1px solid green;border-bottom:1px solid green;border-right:1px solid green;  padding:5px;">${item_index+1}</td>
+    <td align="left" style="border-bottom:1px solid green;border-right:1px solid green;  padding:5px;">${item.description}</td>
+    <td align="center" style="border-bottom:1px solid green;border-right:1px solid green;  padding:5px;">${item.units}</td>
+    <td align="center" style="border-bottom:1px solid green;border-right:1px solid green;  padding:5px;">${item.quantity}</td>
+    <td align="center" style="border-bottom:1px solid green;border-right:1px solid green;  padding:5px;">${item.rate? string('#,##0.00')}</td>
+    <td align="center" style="border-bottom:1px solid green;border-right:1px solid green;  padding:5px;">${record.custbody_az_kaje_currencysymbol}${item.amount? string('#,##0.00')}</td>
+
+    </tr>
+    </#list>
+         <tr>
+           <td></td><td></td>
+      <td colspan="3" style="border-right:1px solid green;border-bottom:1px solid green;border-left:1px solid green; padding: 5px;margin-left:-1px;">
+        <table width="100%">
+          <tr>
+            <td align="left"><b>SUB TOTAL</b></td>
+            <td align="right">الإجمالي</td>
+          </tr>
+        </table>  
+      </td>
+      <td align="center" style="padding: 5px;border-right:1px solid green;border-bottom:1px solid green;">${record.custbody_az_kaje_currencysymbol}${record.subtotal? string('#,##0.00')}</td>
+	</tr> 
+    
+    
+    <tr >
+      <td></td>
+      <td></td>
+      <td colspan="3" style="border-right:1px solid green;border-bottom:1px solid green;border-left:1px solid green; padding: 5px;margin-left:-1px">
+        <table width="100%">
+          <tr>
+            <td align="left"><b>VAT 15%</b></td>
+            <td align="right">%ضريبة القيمة المضافة 15</td>
+          </tr>
+        </table>     
+      </td>
+      <td align="center" style="padding: 5px;border-right:1px solid green;border-bottom:1px solid green;">${record.custbody_az_kaje_currencysymbol}${record.taxtotal? string('#,##0.00')}</td>
+    </tr>
+    
+      <tr>
+        <td></td>
+        <td></td>
+       <td colspan="3" style="border-right:1px solid green;border-bottom:1px solid green;border-left:1px solid green; padding: 5px;margin-left:-1px">
+         <table width="100%">
+          <tr>
+            <td align="left"><b>TOTAL W/VAT</b></td>
+            <td align="right">الإجمالي مع الضريبة</td>
+          </tr>
+         </table>     
+       </td>
+      <td align="center" style="border-right:1px solid green;border-bottom:1px solid green;padding: 5px;">${record.custbody_az_kaje_currencysymbol}${record.total? string('#,##0.00')}</td>
+
+    </tr>
+  </table>
+    <#else>
+      <#list record.expense as expense>
+      <#if expense_index==0>
+    <tr style="border-top:1px solid green;">
+    <td colspan="3" align="center" style="border-left:1px solid green;border-bottom:1px solid green;border-right:1px solid green;  width:75%;  padding:5px;background-color:#AFCB9F;"><b>Description</b><br/> الوصف</td>
+    <td align="center" style="border-bottom:1px solid green;border-right:1px solid green;  padding:5px;background-color:#AFCB9F;"><b>Amount</b><br/>المبلغ</td>
+    </tr>
+    </#if>
+    <tr>
+    <td colspan="3" align="left" style="border-left:1px solid green;border-bottom:1px solid green;border-right:1px solid green;  padding:5px;">${expense.memo}</td>
+    <td align="center" style="border-bottom:1px solid green;border-right:1px solid green;  padding:5px;">${record.custbody_az_kaje_currencysymbol}${expense.amount? string('#,##0.00')}</td>
+    </tr>
+        </#list>
+
+    <tr>
+      <td></td>
+      <td></td>
+      <td style="border-right:1px solid green;border-bottom:1px solid green;border-left:1px solid green; padding: 5px;margin-left:-1px;">
+        <table width="100%">
+          <tr>
+            <td align="left"><b>SUB TOTAL</b></td>
+            <td align="right">الإجمالي</td>
+          </tr>
+        </table>  
+      </td>
+      <td align="center" style="padding: 5px;border-right:1px solid green;border-bottom:1px solid green;">${record.custbody_az_kaje_currencysymbol}${record.subtotal? string('#,##0.00')}</td>
+	</tr> 
+    
+    
+    <tr >
+      <td></td>
+      <td></td>
+      <td style="border-right:1px solid green;border-bottom:1px solid green;border-left:1px solid green; padding: 5px;margin-left:-1px">
+        <table width="100%">
+          <tr>
+            <td width="30%" align="left"><b>VAT 15%</b></td>
+            <td align="right">%ضريبة القيمة المضافة 15</td>
+          </tr>
+        </table>     
+      </td>
+      <td align="center" style="padding: 5px;border-right:1px solid green;border-bottom:1px solid green;">${record.custbody_az_kaje_currencysymbol}${record.taxtotal? string('#,##0.00')}</td>
+    </tr>
+    
+      <tr>
+        <td></td>
+        <td></td>
+       <td style="border-right:1px solid green;border-bottom:1px solid green;border-left:1px solid green; padding: 5px;margin-left:-1px">
+         <table width="100%">
+          <tr>
+            <td align="left"><b>TOTAL W/VAT</b></td>
+            <td align="right">الإجمالي مع الضريبة</td>
+          </tr>
+         </table>     
+       </td>
+      <td align="center" style="border-right:1px solid green;border-bottom:1px solid green;padding: 5px;">${record.custbody_az_kaje_currencysymbol}${record.total? string('#,##0.00')}</td>
+
+    </tr>
+  </table>
+
+        </#if>  
+<#assign billingAddress =  record.billaddress >
+
+<#if billingAddress?contains("Office Add:")>
+
+    <#assign addressPart = billingAddress?split("Office Add:")[0]>
+    <#assign officePart = billingAddress?split("Office Add:")[1]>
+
+<#else>
+
+    <#assign addressPart = billingAddress>
+    <#assign officePart = ''>
+
+</#if>
+      
+<div style="page-break-inside: avoid; width:100%;">
+  
+<table width="100%" style="border-collapse:collapse; margin-top:10px">
+
+  <tr>
+    <td width="50%" style="font-size:8px; border:1px solid green; border-right:none;">
+      ${record.entity.comments}
+      <br/>
+      <b>TERMS AND CONDITIONS :</b>
+      ${record.custpage_memo}
+    </td>
+
+    <td width="50%" style="padding:0px; border:1px solid green;">
+      <table style="width:100%; font-size:8.5px; border-collapse:collapse;">
+        
+        <tr style="font-weight:bold;">
+          <td>ACKNOWLEDGED &amp; ACCEPTED BY:</td>
+        </tr>  
+
+        <tr>
+          <td style="height:80px"></td>
+        </tr> 
+
+        <tr style="font-size:8.5px; font-weight:bold; border-bottom:1px solid;border-color:green"> <td align="center" style="border-top:1px;border-color:green">VENDOR (NAME &amp; SIGNATURE)</td> </tr>
+
+        <tr>
+          <td><b>APPROVED BY:</b> Zuhair M.D. Haj Moh'd</td>
+        </tr>
+
+        <tr>
+          <td>
+            <#if record.approvalstatus == "Approved">
+              <table style="width:50%" align="center">
+                <tr>
+                  <td>
+                    <img src="https://5452166.app.netsuite.com/core/media/media.nl?id=17638&amp;c=5452166&amp;h=lUQrRldnc2vD3a_juo-k7MyI17D30l_7N5X9L6otFz9T4-2b" height="100px" width="150px"/>
+                  </td>
+                </tr>
+              </table>
+            </#if>
+
+            <#if record.approvalstatus != "Approved">
+              <table style="width:50%" align="center">
+                <tr>
+                  <td style="height:80px"></td>
+                </tr>
+              </table>
+            </#if>
+          </td>
+        </tr>
+
+        <tr align="center" style="font-size:8.5px; font-weight:bold;border-top:1px;border-color:green"> <td align="center">AUTHORIZED SIGNATORY</td> </tr>
+
+      </table>
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2" style="border-left:1px solid green; border-right:1px solid green; background-color:#AFCB9F; font-size:9px;">
+      <b>IMPORTANT NOTE:</b> Please Revert the P.O duly signed and Stamped for Payment Processing.
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2" style="border:1px solid green; padding:0;">
+      
+      <table style="width:100%;">
+        <tr>
+          <td align="center" style="font-weight:bold; width:33%; padding-top:10px;">Prepared by:</td>
+          <td align="center" style="font-weight:bold; width:33%; padding-top:10px;">Reviewed by:</td>
+          <td align="center" style="font-weight:bold; width:33%; padding-top:10px;">Verified By:</td>
+        </tr>
+
+        <tr>
+          <td align="center" style="margin-top: 35px">${record.custbody_az_kaje_prepared_by.altname}</td>
+          <td align="center" style="margin-top: 35px">${record.custbody_az_kaje_reviewed_by.altname}</td>
+          <td align="center" style="margin-top: 35px">${record.custbody_az_kaje_verified_by.altname}</td>
+        </tr>
+      </table>
+
+    </td>
+  </tr>
+
+</table>
+</div>
+</body>
+
+</pdf>
