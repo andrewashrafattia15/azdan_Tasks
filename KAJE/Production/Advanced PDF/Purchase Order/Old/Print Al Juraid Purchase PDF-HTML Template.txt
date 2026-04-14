@@ -1,0 +1,339 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+      <link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false" />
+
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+      
+       <macrolist>
+      
+        <macro id="nlheader">
+          
+           <table style="width: 100%;border-bottom:1px; solid;">
+             <tr><td align="left" style="width: 49%;font-size:15px; font-family: Times New Roman, sans-serif"><b>Khalid A.Al Juraid Trading Co. LTD</b></td>
+             <td align="right" colspan="2" style=" width:51%; border:none;font-family: NotoSansArabic, sans-serif;font-size:15px;"><b>شركة خالد أويسط الجريد التجارية المحدودة</b></td>
+           
+             </tr>
+             
+                <tr  style="border-bottom:1px solid;"><td align="left" style="width: 49%;font-size:12px;"><b>Office Furniture - School Furniture &amp; Partitions</b> <br/><br/>CR:2051026261 <br/>Vat:311664649400003</td>
+             <td align="center" style="width: 1%;border:none"><img src="${companyInformation.logoUrl}" height="80px" width="80px;"/></td>
+             <td align="right" style=" width:50%; border:none;font-family: NotoSansArabic, sans-serif;font-size:12px;"><b>أثاث مكتبى - أثاث مدرسى و قواطع</b><br/><br/> 
+               <table align="right" style="font-size:12px;">
+                 <tr><td align="right" style="font-family: NotoSansArabic, sans-serif;">س.ت : 2051026261</td></tr>
+                 <tr><td align="right" style="font-family: NotoSansArabic, sans-serif;">سجل ضريبى : 311664649400003</td></tr>
+               </table>
+               
+                  </td>
+             
+             </tr>
+             <tr><td align="center" colspan="3"><b>PURCHASE ORDER # ${record.tranid}</b></td></tr>
+          </table>
+          
+         
+        </macro>
+          <macro id="nlfooter">
+            
+            <table class="footer" style="width: 100%; border:1px solid;">
+              <tr style="font-weight:bold;">
+                <td style="border-right:1px solid;">ACKNOWLEDGED &amp; ACCEPTED BY:</td>
+              <td>APPROVED BY: Zuhair M.D. Haj Moh'd</td>
+              </tr> 
+              
+              <tr><td style="border-right:1px solid;"></td>
+              <td>
+                <#if record.approvalstatus == "Approved">
+                <table style="width:50%" align="center">
+                  <tr>
+                    <td><img src="https://5452166.app.netsuite.com/core/media/media.nl?id=17638&amp;c=5452166&amp;h=lUQrRldnc2vD3a_juo-k7MyI17D30l_7N5X9L6otFz9T4-2b&amp;fcts=20230920054410&amp;whence=" height="100px" width="150px" /></td>
+                    
+
+                  </tr>
+                </table>
+             </#if>
+                <#if record.approvalstatus != "Approved">
+                  <table style="width:50%" align="center">
+                  <tr>
+					<td style="height:80px"></td>
+
+
+                  </tr>
+                </table>
+                  </#if>
+                </td>
+              </tr>
+            
+            
+              <tr><td style="border-right:1px solid;"></td>
+              <td></td>
+              </tr> 
+              
+              <tr style="font-size:10px; font-weight:bold; border-bottom:1px solid;"><td style="border-right:1px solid;">VENDOR (NAME &amp; SIGNATURE)</td>
+              <td>AUTHORIZED SIGNATORY</td>
+              </tr>
+              <tr style="border-bottom:1px solid;"><td colspan="2"><b>IMPORTANT NOTE: Please Revert the P.O duly signed and Stamped for Payment Processing.</b></td></tr>
+              <tr style="font-size:11px; font-weight:bold;"><td colspan="2">PO Box 303 - Al-Khobar 31952 Kingdom Of Saudi Arabia - Tel: +966138979099 - Fax: +966138944596 - Email: info@aljuraidgroup.com <br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Website: www.aljuraidgroup.com  </td></tr>
+            </table>
+         <table class="footer" style="width:100%;">
+    <tr>
+        <td align="center" style="font-weight:bold; width:33%;">Prepared by:</td>
+        <td align="center" style="font-weight:bold; width:33%;">Reviewed by:</td>
+        <td align="center" style="font-weight:bold; width:33%;">Verified By:</td>
+    </tr>
+    <tr>
+        <td align="center" style="width:33%; margin-top: 30px">${record.custbody_az_kaje_prepared_by.altname}<br/><br/><br/><br/></td>
+        <td align="center" style="width:33%; margin-top: 30px">${record.custbody_az_kaje_reviewed_by.altname}<br/><br/><br/><br/></td>
+        <td align="center" style="width:33%; margin-top: 30px">${record.custbody_az_kaje_verified_by.altname}<br/><br/><br/><br/></td>
+    </tr>
+</table>
+	
+
+        </macro>
+         
+      </macrolist>
+    <style type="text/css">* {
+                box-sizing: border-box;
+            }
+
+            div.row {
+                margin-left: -5px;
+                margin-right: -5px;
+            }
+
+            div.column {
+                float: left;
+                width: 50%;
+                padding: 5px;
+            }
+
+            /* Clearfix (clear floats) */
+            div.row::after {
+                content: "";
+                clear: both;
+                display: table;
+            }
+
+            table {
+                font-size: 12px;
+                table-layout: fixed;
+                width: 100%;
+                border-collapse: collapse;
+                border-spacing: 0;
+                border: 1px;
+            }
+
+            th {
+                font-weight: bold;
+                vertical-align: middle;
+                padding: 5px 6px 3px;
+                color: #333333;
+                padding-bottom: 10px;
+                padding-top: 10px;
+            }
+
+            td {
+                padding: 4px 6px;
+            }
+
+            b {
+                font-weight: bold;
+                color: #333333;
+            }
+</style>
+</head>
+<body header="nlheader" header-height="13%" padding="0.5in 0.5in 0.5in 0.5in" size="Letter" style="font-size:14px;border:1px;border-color:black; margin:15px;padding:0px;">
+
+  <table style="width:100%;">
+    <tr>
+      <td style="border-right:1px solid; width:60%;">
+      	<table style="width:100%;">
+          <tr >
+      		<td><b>Vendor Name</b> : ${record.entity.companyname}</td>
+          </tr>
+          <tr>
+            <td><b>Address</b> :${record.billaddress}</td>
+          </tr>
+          <tr>
+     	 	<td><b>Email</b> : ${record.entity.email}</td>
+          </tr>
+          <tr>
+      		<td><b>Vat No</b> : ${record.vatregnum}</td>
+          </tr>
+          <tr>
+      		<td><b>Contact Person</b> : ${record.custpage_contactname}</td>
+          </tr>
+          <tr>
+      		<td><b>Contact No</b> : ${record.custpage_contactno}</td>
+          </tr>
+          <tr>
+      		<td><b>Vendor Reference</b> : ${record.otherrefnum}</td>
+          </tr>
+        </table>
+      </td>
+
+      <td style="width:40%;">
+      	<table style="width:100%;">
+          <tr>
+    		<td><b>Po Date</b> : ${record.trandate} </td>
+          </tr>
+          <tr>
+        	<td><b>Payment Terms</b> : ${record.terms} </td>
+          </tr>
+          <tr>
+    		<td><b>Shipping Terms</b> : ${record.incoterm} </td>
+          </tr>
+          <tr>
+    		<td><b>Shipping Address</b>:Khalid Al Juraid Trading Co. Ltd.
+King Khalid Road (Azizyah)
+Al Buhairah Neighborhood
+Al Khobar PO Box. 303
+Saudi Arabia</td>
+          </tr>
+          <tr>
+    		<td> </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    
+    <tr>
+      <td colspan="2" style="border-top:1px solid;"><b>Project Name : ${record.custbody_az_aj_memo}</b></td>
+    </tr>  
+    
+     <tr style="border-top:1px solid;">
+      <td colspan="2"> </td>
+    
+    </tr>
+  </table>
+
+
+  
+  <table style="width:100%; border:1px solid; table-layout:fixed;"> 
+    <#if record.item?has_content>
+    <#list record.item as item><#if item_index==0>
+    <tr style="border-bottom:1px solid; font-weight:bold;">
+    <td align="center" style="border-right:1px solid; width:9%;">Item No.</td>
+    <td align="left" style="border-right:1px solid; width:51%;">Description</td>
+    <td align="center" style="border-right:1px solid; width:7%;">Unit</td>
+    <td align="center" style="border-right:1px solid; width:7%;">Qty</td>
+    <td align="center" style="border-right:1px solid; width:11%;">Unit Price</td>
+    <td align="right" style="width:18%;">Amount</td>
+    
+    </tr>
+    </#if>
+    <tr style="border-bottom:1px solid;">
+    <td align="center" style="border-right:1px solid;">${item_index+1}</td>
+    <td align="left" style="border-right:1px solid;">${item.description}</td>
+    <td align="center" style="border-right:1px solid;">${item.units}</td>
+    <td align="center" style="border-right:1px solid;">${item.quantity}</td>
+    <td align="right" style="border-right:1px solid;">${item.rate? string('#,##0.00')}</td>
+    <td align="right" >${record.custbody_az_kaje_currencysymbol}${item.amount? string('#,##0.00')}</td>
+
+    </tr>
+    </#list>
+      </#if>
+
+    <#if record.expense?has_content>
+      <#list record.expense as expense>
+        
+       
+
+         <#if expense_index==0>
+              <tr style="border-bottom:1px solid; font-weight:bold;">
+               
+                <td  colspan="3" align="left" style="border-right:1px solid;">Memo</td>
+                <td align="center" style="border-right:1px solid;">Amount</td>
+                <td align="center" style="border-right:1px solid;">Tax Rate</td>
+                <td align="center" style="border-right:1px solid;">Gross Amount</td>
+              </tr>
+            </#if>
+            
+            <tr style="border-bottom:1px solid;">
+           
+              <td colspan="3" align="left" style="border-right:1px solid;">${expense.memo}</td>
+              <td align="right" style="border-right:1px solid;">${expense.amount? string('#,##0.00')}</td>
+              <td align="center" style="border-right:1px solid;">${expense.taxrate1}</td>
+              <td align="right" style="border-right:1px solid;">${expense.grossamt? string('#,##0.00')}</td>
+
+            </tr>
+        </#list>
+      </#if>
+      
+      
+    
+      
+    <tr style="border-bottom:1px solid;">
+    <td colspan="5" align="right" style="border-right:1px solid;"><b>Sub Total</b></td>
+      <td align="center">${record.custbody_az_kaje_currencysymbol}${record.subtotal? string('#,##0.00')}</td>
+	</tr> 
+    
+
+    <tr style="border-bottom:1px solid;">
+    <td colspan="5" align="right" style="border-right:1px solid;"><b>Amount Before Tax</b></td>
+      <td align="center">${record.custbody_az_kaje_currencysymbol}${record.subtotal? string('#,##0.00')}</td>
+
+    </tr> 
+    
+    <tr style="border-bottom:1px solid;">
+    <td colspan="5" align="right" style="border-right:1px solid;"><b>Vat 15%</b></td>
+      <td align="center">${record.custbody_az_kaje_currencysymbol}${record.taxtotal? string('#,##0.00')}</td>
+
+    </tr>
+    
+      <tr>
+    <td colspan="5" align="right" style="border-right:1px solid;"><b>Total</b></td>
+      <td align="center">${record.custbody_az_kaje_currencysymbol}${record.total? string('#,##0.00')}</td>
+
+    </tr>
+  </table>
+
+  <table style="width:100%;">
+    <tr>
+      <td colspan="2"> <b>Total</b>:${record.custbody_az_kaje_currencysymbol}${record.subtotal? string('#,##0.00')}</td>
+    </tr>
+    <tr>
+      <td colspan="2"> <b>VAT 15%</b>:${record.custbody_az_kaje_currencysymbol}${record.taxtotal? string('#,##0.00')}</td>
+    </tr> 
+    <tr style="border-bottom:1px solid;">
+      <td colspan="2"> <b>Total (VAT Inclusive)</b>:${record.custbody_az_kaje_currencysymbol}${record.total? string('#,##0.00')}</td>
+    </tr>
+    <tr>
+      <td>
+        <b>${record.custbody_az_kaje_totalinwords}</b>
+      </td>
+    </tr>
+  </table>
+
+</body>
+
+<!-- Last page: T&C with footer anchored at bottom -->
+<body header="nlheader" header-height="14%" footer="nlfooter" footer-height="29%" padding="0.5in 0.5in 0.5in 0.5in" size="Letter" style="font-size:14px;border:1px;border-color:black; margin:15px;padding:0px;">
+
+  <table style="width:100%">
+    <tr><td><b>TERMS AND CONDITIONS :</b></td></tr>
+    <tr><td></td> </tr>
+    <tr><td>${record.custpage_memo}</td></tr>
+
+    <tr>
+        <td style="border-top:1px solid #000; width: 100%"></td>
+    </tr>
+
+    <tr><td><b>NOTES :</b></td></tr>
+    <tr><td></td> </tr>
+    <tr>
+      <td colspan="2"> ${record.entity.comments}</td>
+    </tr>
+  </table>
+
+</body>
+</pdf>
