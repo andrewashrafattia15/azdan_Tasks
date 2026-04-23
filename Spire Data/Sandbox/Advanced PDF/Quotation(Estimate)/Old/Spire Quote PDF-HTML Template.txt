@@ -1,0 +1,260 @@
+<pdf>
+  <head>
+    <style type="text/css">
+
+      body {
+        font-family: sans-serif;
+        font-size: 9pt;
+        margin: 0;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 8pt;
+      }
+
+      th, td {
+        border: 0.2px solid #e0e0e0;
+        padding: 3px 4px;
+        font-size: 8pt;
+      }
+
+      th {
+        background-color: #f9f9f9;
+        font-weight: bold;
+      }
+
+      .no-border td,
+      .no-border th {
+        border: none;
+      }
+
+      .center { text-align: center; }
+      .right { text-align: right; }
+      .left { text-align: left; }
+      .bold { font-weight: bold; }
+
+      h2 {
+        margin: 0;
+        font-size: 14pt;
+      }
+
+      h3 {
+        font-size: 9pt;
+        margin-top: 10px;
+        margin-bottom: 5px;
+      }
+
+      p {
+        font-size: 8pt;
+        margin: 0;
+      }
+
+    </style>
+  </head>
+
+  <body padding="10mm">
+
+    <!-- Header Section -->
+    <table class="no-border" style="margin-bottom: 8px;">
+      <tr>
+        <td style="width:70%;">
+          <strong>${subsidiary.companyName!"Company Name"}</strong><br/>
+          ${subsidiary.mainaddress_text!""}<br/>
+          TRN: ${subsidiary.federalidnumber}
+        </td>
+        <td style="width:30%; text-align:right;">
+          <@filecabinet nstype="image" src="${subsidiary.logo}" style="width:140px; height:30;" />
+        </td>
+      </tr>
+    </table>
+
+    <!-- Title -->
+    <table class="no-border" style="width:100%; margin-bottom:8px;">
+      <tr>
+        <td style="text-align:center; width:100%;">
+          <h2>QUOTATION</h2>
+        </td>
+      </tr>
+    </table>
+
+    <!-- Billing / Shipping -->
+    <table style="margin-bottom:6px;">
+      <tr>
+        <th>Billing Address</th>
+        <th>Shipping Address</th>
+      </tr>
+      <tr>
+        <td style="vertical-align:top;">
+          ${record.billaddress!""}<br/>
+          <b>TRN:</b> ${record.entity.vatregnumber!""}
+        </td>
+        <td style="vertical-align:top;">
+          ${record.custbody2!""}
+        </td>
+      </tr>
+    </table>
+
+    <!-- Sales Rep -->
+    <#assign salesRepName = "">
+    <#if record.salesrep?has_content>
+      <#assign salesRepParts = record.salesrep?string?split(" ")>
+      <#if salesRepParts?size gt 1>
+        <#assign salesRepName = salesRepParts[1..]?join(" ")>
+      <#else>
+        <#assign salesRepName = record.salesrep>
+      </#if>
+    </#if>
+
+    <!-- Quote Info -->
+    <table style="margin-bottom:5px;">
+      <tr>
+        <td><b>Document No:</b> ${record.tranid}</td>
+        <td><b>Date:</b> ${record.trandate}</td>
+        <td><b>Currency:</b> ${record.currency}</td>
+        <td><b>Rate:</b> ${record.exchangerate?string["0.00"]!"-"}</td>
+      </tr>
+      <tr>
+        <td><b>Created By:</b> ${record.salesrep}</td>
+        <td><b>Terms:</b> ${record.terms}</td>
+        <td><b>Validity:</b> ${record.expectedclosedate}</td>
+        <td><b>Sales Rep:</b> ${salesRepName}</td>
+      </tr>
+    </table>
+
+    <!-- Items -->
+    <table style="margin-bottom:8px;">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Item</th>
+          <th>Description</th>
+          <th>UOM</th>
+          <th>Qty</th>
+          <th>Terms</th>
+          <th class="right">Rate</th>
+          <th class="right">VAT %</th>
+          <th class="right">VAT</th>
+          <th class="right">Amount</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <#list record.item as item>
+        <tr>
+          <td>${item_index + 1}</td>
+          <td>${item.item!""}</td>
+          <td>${item.description!""}</td>
+
+          <td class="right">
+            <#if item.itemtype != "Description">
+              ${item.units!""}
+            </#if>
+          </td>
+
+          <td class="right">
+            <#if item.itemtype != "Description">
+              ${item.quantity!""}
+            </#if>
+          </td>
+
+          <td class="right">
+            <#if item.itemtype != "Description">
+              ${item.custcol_spire_qut_months!""}
+            </#if>
+          </td>
+
+          <td class="right">
+            <#if item.itemtype != "Description">
+              ${item.rate?string["#,##0.00"]}
+            </#if>
+          </td>
+
+          <td class="right">
+            <#if item.itemtype != "Description">
+              ${(item.taxrate1 * 100)?string["#,##0.00"]}%
+            </#if>
+          </td>
+
+          <td class="right">
+            <#if item.itemtype != "Description">
+              ${item.tax1amt?string["#,##0.00"]}
+            </#if>
+          </td>
+
+          <td class="right">
+            <#if item.itemtype != "Description">
+              ${item.amount?string["#,##0.00"]}
+            </#if>
+          </td>
+
+        </tr>
+        </#list>
+      </tbody>
+    </table>
+
+    <!-- Totals -->
+    <table style="margin-bottom:8px;">
+      <tr>
+        <td style="width:60%; vertical-align:top;">
+          <b>Amount in Words:</b><br/>
+          ${record.custbody_amount_in_words!""}
+        </td>
+
+        <td style="width:40%;">
+          <table class="no-border">
+            <tr>
+              <td>Subtotal:</td>
+              <td class="right">${record.currency.symbol!""} ${record.subtotal?string["#,##0.00"]!"0.00"}</td>
+            </tr>
+
+            <tr>
+              <td>VAT:</td>
+              <td class="right">${record.currency.symbol!""} ${record.taxtotal?string["#,##0.00"]!"0.00"}</td>
+            </tr>
+
+            <tr>
+              <td><b>Total:</b></td>
+              <td class="right"><b>${record.currency.symbol!""} ${record.total?string["#,##0.00"]!"0.00"}</b></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+
+    <!-- Billing Schedule -->
+    <#if record.custbody_billing_schedule_summary?has_content>
+      <b>BILLING SCHEDULE</b><br/>
+      <pre style="font-family: monospace; font-size:8pt; line-height:10px;">
+${record.custbody_billing_schedule_summary}
+      </pre>
+    </#if>
+
+    <!-- Terms -->
+    <div style="page-break-inside: avoid;">
+     <h3 style="text-transform:uppercase;">Terms and Conditions</h3>
+
+     <table>
+        <tr>
+         <td style="padding:6px; text-align:justify;">
+          ${record.custbody_spire_terms_condition?replace("\n","<br/>")}
+         </td>
+       </tr>
+     </table>
+   </div>
+
+    <!-- Footer -->
+    <p class="center" style="font-size:8pt;">
+      Thank you for the opportunity to serve you!
+    </p>
+
+    <table class="no-border" style="width:100%; margin-top:5px;">
+      <tr>
+        <td class="left">Page <pagenumber/> of <totalpages/></td>
+        <td class="right">Printed: ${.now?string("dd-MMM-yyyy HH:mm:ss")}</td>
+      </tr>
+    </table>
+
+  </body>
+</pdf>
