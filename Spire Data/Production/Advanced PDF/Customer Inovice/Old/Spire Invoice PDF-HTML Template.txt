@@ -1,0 +1,268 @@
+<pdf>
+  <head>
+    <style type="text/css">
+
+      body {
+        font-family: sans-serif;
+        font-size: 9pt;
+        margin: 0;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 8pt;
+      }
+
+      th, td {
+        border: 0.2px solid #e0e0e0;
+        padding: 3px 4px;
+        font-size: 8pt;
+      }
+
+      th {
+        background-color: #f9f9f9;
+        font-weight: bold;
+      }
+
+      .no-border td,
+      .no-border th {
+        border: none;
+      }
+
+      .center { text-align: center; }
+      .right { text-align: right; }
+      .left { text-align: left; }
+      .bold { font-weight: bold; }
+
+      h2 {
+        margin: 0;
+        font-size: 14pt;
+      }
+
+      h3 {
+        font-size: 9pt;
+        margin-top: 10px;
+        margin-bottom: 5px;
+      }
+
+      p {
+        font-size: 8pt;
+        margin: 0;
+      }
+
+    </style>
+  </head>
+
+  <body padding="10mm">
+
+    <!-- Header -->
+    <table class="no-border" style="margin-bottom: 8px;">
+      <tr>
+        <td style="width:70%;">
+          <strong>${subsidiary.companyName!"Company Name"}</strong><br/>
+          ${subsidiary.mainaddress_text!""}<br/>
+          TRN: ${subsidiary.federalidnumber}
+        </td>
+        <td style="width:30%; text-align:right;">
+          <@filecabinet nstype="image" src="${subsidiary.logo}" style="width:140px; height:30;" />
+        </td>
+      </tr>
+    </table>
+
+    <!-- Title -->
+    <table class="no-border" style="width:100%; margin-bottom:8px;">
+      <tr>
+        <td class="center">
+          <h2>TAX INVOICE</h2>
+        </td>
+      </tr>
+    </table>
+
+    <!-- Invoice Info -->
+    <table style="margin-bottom:6px;">
+      <tr>
+        <td><b>Subsidiary:</b> ${record.subsidiary}</td>
+        <td><b>Customer:</b> ${record.entity.altname}</td>
+        <td><b>Invoice #:</b> ${record.tranid}</td>
+        <td><b>Date:</b> ${record.trandate}</td>
+      </tr>
+      <tr>
+        <td><b>TRN:</b> ${record.entity.vatregnumber}</td>
+        <td><b>Terms:</b> ${record.terms}</td>
+        <td><b>Due Date:</b> ${record.duedate}</td>
+        <td><b>Supply Date:</b> ${record.duedate}</td>
+      </tr>
+      <tr>
+        <td><b>LPO:</b> ${record.otherrefnum}</td>
+        <td><b>Currency:</b> ${record.currency}</td>
+        <td><b>Rate:</b> ${record.exchangerate?string["0.00"]!"-"}</td>
+        <td>
+          <b>Sales Rep:</b>
+          <#assign salesRepName = "">
+          <#if record.salesrep?has_content>
+            <#assign salesRepParts = record.salesrep?string?split(" ")>
+            <#assign salesRepName = salesRepParts[1..]?join(" ")>
+          </#if>
+          ${salesRepName}
+        </td>
+      </tr>
+    </table>
+
+    <!-- Billing / Shipping -->
+    <table style="margin-bottom:6px;">
+      <tr>
+        <th>Billing Address</th>
+        <th>Shipping Address</th>
+      </tr>
+      <tr>
+        <td style="vertical-align:top;">
+          ${record.billaddress!""}
+        </td>
+        <td style="vertical-align:top;">
+          ${record.custbody2!""}
+        </td>
+      </tr>
+    </table>
+
+    <!-- Items -->
+    <table style="margin-bottom:8px;">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Item</th>
+          <th>Description</th>
+          <th>UOM</th>
+          <th>Qty</th>
+          <th style="text-align:right;">Rate</th>
+          <th style="text-align:right;">VAT %</th>
+          <th style="text-align:right;">VAT</th>
+          <th style="text-align:right;">Amount</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <#list record.item as item>
+        <tr>
+          <td>${item_index + 1}</td>
+          <td>${item.item!""}</td>
+          <td>${item.description!""}</td>
+          <td class="right">${item.units!""}</td>
+          <td class="right">${item.quantity!""}</td>
+          <td class="right">${item.rate?string["#,##0.00"]!"0.00"}</td>
+          <td class="right">${(item.taxrate1 * 100)?string["#,##0.00"]!"0.00"}%</td>
+          <td class="right">${item.tax1amt?string["#,##0.00"]!"0.00"}</td>
+          <td class="right">${item.amount?string["#,##0.00"]!"0.00"}</td>
+        </tr>
+        </#list>
+      </tbody>
+    </table>
+
+    <!-- Discount Logic -->
+    <#assign discountAmt = 0>
+    <#if record.discounttotal?has_content>
+      <#assign discountClean = record.discounttotal?replace("[^0-9\\.-]", "", "r")>
+      <#if discountClean?has_content>
+        <#assign discountAmt = discountClean?number?abs>
+      </#if>
+    </#if>
+
+    <!-- Totals -->
+    <table style="margin-bottom:8px;">
+      <tr>
+        <td style="width:60%; vertical-align:top;">
+          <b>Amount in Words:</b><br/>
+          ${record.custbody_amount_in_words!""}
+        </td>
+
+        <td style="width:40%;">
+          <table class="no-border">
+            <tr>
+              <td>Subtotal:</td>
+              <td class="right">
+                ${record.currency.symbol!""}
+                ${record.subtotal?string["#,##0.00"]!"0.00"}
+              </td>
+            </tr>
+
+            <#if discountAmt != 0>
+            <tr>
+              <td>Discount:</td>
+              <td class="right">
+                ${record.currency.symbol!""}
+                ${discountAmt?string["#,##0.00"]}
+              </td>
+            </tr>
+            </#if>
+
+            <tr>
+              <td>VAT:</td>
+              <td class="right">
+                ${record.currency.symbol!""}
+                ${record.taxtotal?string["#,##0.00"]!"0.00"}
+              </td>
+            </tr>
+
+            <tr>
+              <td><b>Total:</b></td>
+              <td class="right">
+                <b>
+                  ${record.currency.symbol!""}
+                  ${record.total?string["#,##0.00"]!"0.00"}
+                </b>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+
+    <!-- Remark -->
+    <h3>Remark</h3>
+    <table>
+      <tr>
+        <td>
+          ${record.memo!""}
+        </td>
+      </tr>
+    </table>
+
+    <!-- Bank Details -->
+    <h3>Bank Details</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Account No</th>
+          <th>IBAN</th>
+          <th>Beneficiary</th>
+          <th>Currency</th>
+          <th>Bank</th>
+          <th>SWIFT</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>${subsidiary.custrecord1401}</td>
+          <td>${subsidiary.custrecord1402}</td>
+          <td>${subsidiary.custrecord1403}</td>
+          <td>${subsidiary.custrecord1404}</td>
+          <td>${subsidiary.custrecord1405}</td>
+          <td>${subsidiary.custrecord1406}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Footer -->
+    <p class="center" style="font-size:8pt; margin-top:10px;">
+      Thank you for your business!
+    </p>
+
+    <table class="no-border" style="width:100%; margin-top:5px;">
+      <tr>
+        <td class="left">Page <pagenumber/> of <totalpages/></td>
+        <td class="right">Printed: ${.now?string("dd-MMM-yyyy HH:mm:ss")}</td>
+      </tr>
+    </table>
+
+  </body>
+</pdf>

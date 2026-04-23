@@ -1,0 +1,229 @@
+<pdf>
+  <head>
+    <style type="text/css">
+
+      body {
+        font-family: sans-serif;
+        font-size: 9pt;
+        margin: 0;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 8pt;
+      }
+
+      th, td {
+        border: 0.2px solid #e0e0e0;
+        padding: 3px 4px;
+        font-size: 8pt;
+      }
+
+      th {
+        background-color: #f9f9f9;
+        font-weight: bold;
+      }
+
+      .no-border td,
+      .no-border th {
+        border: none;
+      }
+
+      .center { text-align: center; }
+      .right { text-align: right; }
+      .left { text-align: left; }
+      .bold { font-weight: bold; }
+
+      h2 {
+        margin: 0;
+        font-size: 14pt;
+      }
+
+      h3 {
+        font-size: 9pt;
+        margin-top: 10px;
+        margin-bottom: 5px;
+      }
+
+      p {
+        font-size: 8pt;
+        margin: 0;
+      }
+
+    </style>
+  </head>
+
+  <body padding="10mm">
+
+    <!-- Header -->
+    <table class="no-border" style="margin-bottom: 8px;">
+      <tr>
+        <td style="width:70%;">
+          <strong>${subsidiary.companyName!"Company Name"}</strong><br/>
+          ${subsidiary.mainaddress_text!""}<br/>
+          TRN: ${subsidiary.federalidnumber}
+        </td>
+        <td style="width:30%; text-align:right;">
+          <@filecabinet nstype="image" src="${subsidiary.logo}" style="width:140px; height:30;" />
+        </td>
+      </tr>
+    </table>
+
+    <!-- Title -->
+    <table class="no-border" style="width:100%; margin-bottom:8px;">
+      <tr>
+        <td class="center">
+          <h2>PURCHASE ORDER</h2>
+        </td>
+      </tr>
+    </table>
+
+    <!-- PO Info -->
+    <table style="margin-bottom:6px;">
+      <tr>
+        <td><b>Vendor:</b> ${record.entity.companyname}</td>
+        <td><b>Date:</b> ${record.trandate}</td>
+        <td><b>PO #:</b> ${record.tranid}</td>
+        <td><b>Terms:</b> ${record.terms}</td>
+      </tr>
+      <tr>
+        <td><b>Currency:</b> ${record.currency}</td>
+        <td><b>Rate:</b> ${record.exchangerate?string["0.00"]!"-"}</td>
+        <td><b>Delivery Date:</b> ${record.duedate}</td>
+        <td><b>Reference:</b> ${record.otherrefnum!""}</td>
+      </tr>
+    </table>
+
+    <!-- Items -->
+    <table style="margin-bottom:8px;">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Item</th>
+          <th>Description</th>
+          <th>UOM</th>
+          <th>Qty</th>
+          <th style="text-align:right;">Rate</th>
+          <th style="text-align:right;">VAT %</th>
+          <th style="text-align:right;">VAT</th>
+          <th style="text-align:right;">Amount</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <#list record.item as item>
+        <tr>
+          <td>${item_index + 1}</td>
+          <td>${item.item!""}</td>
+          <td>${item.description!""}</td>
+          <td class="right">${item.units!""}</td>
+          <td class="right">${item.quantity!""}</td>
+          <td class="right">${item.rate?string["#,##0.00"]!"0.00"}</td>
+          <td class="right">${item.taxrate1!""}</td>
+          <td class="right">${item.tax1amt?string["#,##0.00"]!"0.00"}</td>
+          <td class="right">${item.amount?string["#,##0.00"]!"0.00"}</td>
+        </tr>
+        </#list>
+      </tbody>
+    </table>
+
+    <!-- Totals -->
+    <table style="margin-bottom:8px;">
+      <tr>
+        <td style="width:60%; vertical-align:top;">
+          <b>Amount in Words:</b><br/>
+          ${record.custbody_amount_in_words!""}
+        </td>
+
+        <td style="width:40%;">
+          <table class="no-border">
+
+            <#assign subtotalClean =
+              (record.subtotal!"0")?string
+                ?replace("[^0-9.-]", "", "r")
+                ?number
+                ?string["#,##0.00"]
+            >
+
+            <#assign taxClean =
+              (record.taxtotal!"0")?string
+                ?replace("[^0-9.-]", "", "r")
+                ?number
+                ?string["#,##0.00"]
+            >
+
+            <#assign totalClean =
+              (record.total!"0")?string
+                ?replace("[^0-9.-]", "", "r")
+                ?number
+                ?string["#,##0.00"]
+            >
+
+            <tr>
+              <td>Subtotal:</td>
+              <td class="right">${record.currency} ${subtotalClean}</td>
+            </tr>
+
+            <tr>
+              <td>Tax:</td>
+              <td class="right">${record.currency} ${taxClean}</td>
+            </tr>
+
+            <tr>
+              <td><b>Total:</b></td>
+              <td class="right">
+                <b>${record.currency} ${totalClean}</b>
+              </td>
+            </tr>
+
+          </table>
+        </td>
+      </tr>
+    </table>
+
+    <!-- Remark & Terms -->
+    <h3>Remarks</h3>
+    <table style="margin-bottom:8px;">
+      <tr>
+        <td>
+          ${record.memo!""}
+        </td>
+      </tr>
+    </table>
+
+    <h3>Terms</h3>
+    <table style="margin-bottom:8px;">
+      <tr>
+        <td>
+          ${record.terms!""}
+        </td>
+      </tr>
+    </table>
+
+    <!-- Vendor / Delivery Info -->
+    <table style="margin-bottom:8px;">
+      <tr>
+        <th>Vendor Address</th>
+        <th>Delivery Address</th>
+      </tr>
+      <tr>
+        <td style="vertical-align:top;">
+          ${record.billaddress!""}
+        </td>
+        <td style="vertical-align:top;">
+          ${record.shipaddress!""}
+        </td>
+      </tr>
+    </table>
+
+    <!-- Footer -->
+    <table class="no-border" style="width:100%; margin-top:5px;">
+      <tr>
+        <td class="left">Page <pagenumber/> of <totalpages/></td>
+        <td class="right">Printed: ${.now?string("dd-MMM-yyyy HH:mm:ss")}</td>
+      </tr>
+    </table>
+
+  </body>
+</pdf>
