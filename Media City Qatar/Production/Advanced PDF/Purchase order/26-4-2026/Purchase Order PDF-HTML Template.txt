@@ -1,0 +1,692 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+
+    <head>
+        <link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}"
+              src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}"
+              src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+        <#if .locale=="zh_CN">
+        <link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}"
+              src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+        <#elseif .locale=="zh_TW">
+        <link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}"
+              src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+        <#elseif .locale=="ja_JP">
+        <link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}"
+              src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+        <#elseif .locale=="ko_KR">
+        <link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}"
+              src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+        <#elseif .locale=="th_TH">
+        <link name="NotoSansThai" type="font" subtype="opentype"
+              src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+    </#if>
+    <macrolist>
+        <macro id="nlheader">
+            <table class="header" style="width: 100%;">
+                <tr>
+                    <td align="left" colspan="17">
+                        <#if companyInformation.logoUrl?length !=0><img
+                            src="https://6140731.app.netsuite.com/core/media/media.nl?id=2365&amp;c=6140731&amp;h=7IqSXclku_iFWE87-FZiiIxyCj2_oOEowAdI4F_3WBc-7xmQ"
+                            style="float:right; width: 200; height:55;" /> </#if>
+                    </td>
+                    <td align="right"
+                        style="font-size: 8pt;border-left:2px;padding-right: 35px;border-color: #d2edf9;"
+                        colspan="9"><br /><br /><span
+                            style="font-weight:bold;color:MidnightBlue; padding-left: 10px">&nbsp;Tel:</span><span
+                            style="color:MidnightBlue;">+974 4449 9501</span><br /> <span
+                            style="color:MidnightBlue;font-weight:bold; padding-left: 10px">&nbsp;P.O. Box:&nbsp;</span><span
+                            style="color:MidnightBlue;">4212, Doha – Qatar</span><br /><span
+                            style="color:MidnightBlue; padding-left: 10px">&nbsp;Sikkat Wadi, Msheireb, Building No. 7, <br />  </span><span
+                            style="color:MidnightBlue; padding-left: 10px">&nbsp;Zone 03, Street 810</span>
+                    </td>
+                </tr>
+            </table>
+            <table style="width: 100%;">
+                <tr>
+                    <td align="left" class="normal"><span
+                            style="font-weight:bold;color:MidnightBlue; font-size:12pt;"><br />Ref&nbsp;:&nbsp;</span><span
+                            style="color:MidnightBlue;">${record.tranid}</span></td>
+                </tr>
+                <#if record.custbody_az_mcq_blanket_po_no?has_content>
+                <tr>
+                    <td align="left" class="normal" style="margin-top:-15px"><span
+                            style="font-weight:bold;color:MidnightBlue; font-size:12pt;"><br />BPO No.&nbsp;:&nbsp;</span><span
+                            style="color:MidnightBlue;">${record.custbody_az_mcq_blanket_po_no.tranid}</span></td>
+                </tr>
+            </#if>
+            <tr>
+                <td align="left" class="normal"><span
+                        style="font-weight:bold;color:MidnightBlue;font-size:12pt;">Date&nbsp;:&nbsp;</span>
+                    <span style="color:MidnightBlue;">${record.trandate}</span></td>
+            </tr>
+            <tr>
+                <td align="center" class="normalbg" style="color:MidnightBlue;" colspan="2">Purchase Order</td>
+            </tr>
+            <tr>
+                <td align="left" class="normal" colspan="2"><span
+                        style="font-weight:bold;color:MidnightBlue;">To:</span> ${record.entity.altname}</td>
+            </tr>
+            <tr>
+                <td align="left" class="normal"><span
+                        style="font-weight:bold;color:MidnightBlue;">Tel:</span>${record.entity.phone}</td>
+                <td align="left" class="normal"><span style="font-weight:bold;color:MidnightBlue;">Fax:</span>
+                    ${record.entity.fax}</td>
+            </tr>
+            <tr>
+                <td align="left" class="normal"><span style="font-weight:bold;color:MidnightBlue;">Email:</span>
+                    ${record.entity.email}</td>
+                <td align="left" class="normal"><span
+                        style="font-weight:bold;color:MidnightBlue;">Address:</span> ${record.entity.address}
+                </td>
+            </tr>
+            </table>
+        </macro>
+        <macro id="nlfooter">
+            <table style="width: 100%;">
+                <tr>
+                    <td align="left">${.now}</td>
+                    <td align="right">
+                        <pagenumber /> of
+                        <totalpages />
+                    </td>
+                </tr>
+
+            </table>
+        </macro>
+        <macro id="nlheader2">
+            <table class="header" style="width: 100%;">
+                <tr>
+                    <td align="left" colspan="17">
+                        <#if companyInformation.logoUrl?length !=0><img
+                            src="https://6140731.app.netsuite.com/core/media/media.nl?id=2365&amp;c=6140731&amp;h=7IqSXclku_iFWE87-FZiiIxyCj2_oOEowAdI4F_3WBc-7xmQ"
+                            style="float:right; width: 200; height:55;" /> </#if>
+                    </td>
+                    <td align="right"
+                        style="font-size: 8pt;border-left:2px;padding-right: 35px;border-color: #d2edf9;"
+                        colspan="9"><br /><br /><span
+                            style="font-weight:bold;color:MidnightBlue; padding-left: 10px">&nbsp;Tel:</span><span
+                            style="color:MidnightBlue;">+974 4449 9501</span><br /> <span
+                            style="color:MidnightBlue;font-weight:bold; padding-left: 10px">&nbsp;P.O. Box:&nbsp;</span><span
+                            style="color:MidnightBlue;">4212, Doha – Qatar</span><br /><span
+                            style="color:MidnightBlue; padding-left: 10px ">&nbsp;Sikkat Wadi, Msheireb, Building No. 7, <br />  </span><span
+                            style="color:MidnightBlue; padding-left: 10px">&nbsp;Zone 03, Street 810</span>
+                    </td>
+                </tr>
+            </table>
+
+            <table style="width: 100%;">
+                <tr>
+                    <td class="normal"><span
+                            style="font-weight:bold;color:MidnightBlue; font-size:12pt;"><br />Ref&nbsp;:&nbsp;</span><span
+                            style="color:MidnightBlue;">${record.tranid}</span></td>
+                </tr>
+                <tr>
+                    <td align="left" class="normal"><span
+                            style="font-weight:bold;color:MidnightBlue;font-size:12pt;">Date&nbsp;:&nbsp;</span>
+                        <span style="color:MidnightBlue;">${record.trandate}</span></td>
+                </tr>
+            </table>
+        </macro>
+        <macro id="nlfooter2">
+        </macro>
+    </macrolist>
+    <style type="text/css">
+        * {
+        <#if .locale=="zh_CN">font-family: NotoSans, NotoSansCJKsc, sans-serif;
+        <#elseif .locale=="zh_TW">font-family: NotoSans, NotoSansCJKtc, sans-serif;
+        <#elseif .locale=="ja_JP">font-family: NotoSans, NotoSansCJKjp, sans-serif;
+        <#elseif .locale=="ko_KR">font-family: NotoSans, NotoSansCJKkr, sans-serif;
+        <#elseif .locale=="th_TH">font-family: NotoSans, NotoSansThai, sans-serif;
+        <#else>font-family: NotoSans, sans-serif;
+        </#if>
+        }
+
+        table {
+            font-size: 9pt;
+            table-layout: fixed;
+        }
+
+        th {
+            font-weight: bold;
+            font-size: 8pt;
+            vertical-align: middle;
+            padding: 5px 6px 3px;
+            background-color: #d2edf9;
+            color: #191970;
+        }
+
+        td {
+            padding: 4px 6px;
+        }
+
+        td p {
+            align: left
+        }
+
+        b {
+            font-weight: bold;
+            color: #333333;
+        }
+
+        table.header td {
+            padding: 0;
+            font-size: 10pt;
+        }
+
+        table.footer td {
+            padding: 0;
+            font-size: 8pt;
+        }
+
+        table.itemtable th {
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+
+        table.body td {
+            padding-top: 2px;
+        }
+
+        table.total {
+            page-break-inside: avoid;
+        }
+
+        tr.totalrow {
+            background-color: #e3e3e3;
+            line-height: 200%;
+        }
+
+        td.totalboxtop {
+            font-size: 12pt;
+            background-color: #e3e3e3;
+        }
+
+        td.normal {
+            font-size: 10pt;
+            padding-top: 6px;
+            padding-bottom: 4px;
+        }
+
+        td.normalbg {
+            font-size: 16pt;
+            padding-top: 6px;
+            padding-bottom: 2px;
+            background-color: #d2edf9;
+        }
+
+        td.po {
+            font-size: 16pt;
+            padding-top: 6px;
+            padding-bottom: 2px;
+        }
+
+        td.address {
+            padding-top: 0;
+        }
+
+        td.totalboxmid {
+            font-size: 28pt;
+            padding-top: 20px;
+            background-color: #e3e3e3;
+        }
+
+        td.totalboxbot {
+            background-color: #e3e3e3;
+            font-weight: bold;
+        }
+
+        span.title {
+            font-size: 28pt;
+        }
+
+        span.number {
+            font-size: 16pt;
+        }
+
+        span.itemname {
+            font-weight: bold;
+            line-height: 150%;
+        }
+
+        hr {
+            width: 100%;
+            color: #d3d3d3;
+            background-color: #d3d3d3;
+            height: 1px;
+        }
+    </style>
+    </head>
+
+    <body header="nlheader" header-height="31%" footer="nlfooter" footer-height="5pt" padding="0.5in 0.5in 0.5in 0.5in"
+          size="Letter">
+    <table style="width: 100%;">
+
+        <tr>
+            <td class="normalbg" style="color:MidnightBlue;" colspan="2">Subject : <u>${record.memo}</u>
+            </td>
+        </tr>
+        <tr>
+            <td class="normal">Dear Sir,</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="normal" colspan="2">With reference to your financial Quotation on the above-mentioned
+                subject, we are pleased to confirm the purchase of mentioned below for Media City as per your
+                Quotation with Reference No. <u> ${record.custbody52}</u> dated: <u>${record.custbody51}</u></td>
+        </tr>
+        <tr>
+            <td class="normal">The financial terms for the placement as follows:</td>
+        </tr>
+        <tr>
+            <td class="normal">&nbsp;</td>
+        </tr>
+    </table>
+    <#if record.item?has_content>
+
+    <table border="1" class="itemtable" style="width: 100%;">
+        <!-- start items -->
+        <#list record.item as item>
+        <#if item_index==0>
+        <#assign count=1 />
+        <thead>
+        <tr>
+            <th align="center" border-right="1" colspan="3">Item No.</th>
+            <th border-right="1" colspan="12">Description</th>
+            <th border-right="1" colspan="3">Quantity</th>
+            <th border-right="1" colspan="3">UOM</th>
+            <th align="right" border-right="1" colspan="4">Unit Price</th>
+            <th align="right" colspan="4">Total Amount</th>
+        </tr>
+        </thead>
+    </#if>
+    <tr>
+        <td align="center" border-right="1" border-top="1" colspan="3">${count?int}
+            <#assign count=count+1 />
+        </td>
+        <td border-right="1" border-top="1" colspan="12"><span
+                class="itemname">${item.item}</span><br />${item.description}</td>
+        <td border-right="1" border-top="1" colspan="3">${item.quantity}</td>
+        <td border-right="1" border-top="1" colspan="3">${item.units}</td>
+        <td align="right" border-right="1" border-top="1" colspan="4">${item.rate?string(',##0.00')}
+        </td>
+        <td align="right" border-top="1" colspan="4">${item.amount?string(',##0.00')}</td>
+    </tr>
+    </#list><!-- end items -->
+    <tr>
+        <td align="right" border-top="1" colspan="21"
+            style=" background-color: #D3D3D3;color:MidnightBlue;font-size: 12pt;">Total Offer Amount:</td>
+        <td align="right" border-top="1" colspan="4" style=" background-color: #D3D3D3;color:MidnightBlue;">
+            <b>${record.currency}</b></td>
+        <td align="right" border-top="1" colspan="4" style=" background-color: #D3D3D3;color:MidnightBlue;">
+            <b>${record.total?string(',##0.00')}</b></td>
+    </tr>
+    </table>
+</#if>
+
+
+<#if record.expense?has_content>
+
+<table border="1" class="itemtable" style="width: 100%;">
+    <!-- start items -->
+    <#list record.expense as item>
+    <#if item_index==0>
+    <#assign count=1 />
+    <thead>
+    <tr>
+        <th width="15%" align="center" border-right="1">Category</th>
+        <th width="20%" align="center" border-right="1">Account</th>
+        <th width="10%" align="center" border-right="1">Amount</th>
+        <th width="23%" align="center" border-right="1">Memo</th>
+        <th width="17%" align="center" border-right="1">Department</th>
+        <th width="15%" align="center" border-right="1">Project Centre</th>
+    </tr>
+    </thead>
+</#if>
+<tr>
+    <td align="center" border-right="1" border-top="1">${item.category}</td>
+    <td align="center" border-right="1" border-top="1">${item.account}</td>
+    <td align="center" border-right="1" border-top="1">${item.amount?string(',##0.00')}</td>
+    <td align="center" border-right="1" border-top="1">${item.memo}</td>
+    <td align="center" border-right="1" border-top="1">${item.department}</td>
+    <td align="center" border-right="1" border-top="1">${item.class}</td>
+</tr>
+</#list><!-- end items -->
+<tr>
+    <td align="center" border-top="1"
+        style=" background-color: #D3D3D3;color:MidnightBlue;font-size: 12pt;">Total Offer Amount:</td>
+    <td align="center" border-top="1" style=" background-color: #D3D3D3;color:MidnightBlue;">
+        <b>${record.currency}</b></td>
+    <td align="left" border-top="1" colspan="4" style=" background-color: #D3D3D3;color:MidnightBlue;">
+        <b>${record.total?string(',##0.00')}</b></td>
+</tr>
+</table>
+</#if>
+<table style="width: 100%;">
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td style="color:MidnightBlue;font-size: 10pt; padding-left:10px;"><span style="font-weight:bold;">Delivery
+                        Schedule:${record.custbody_delivery_date}</span></td>
+
+        <td style="color:MidnightBlue;font-size: 10pt;padding-left:10px;"><span style="font-weight:bold;">Payment
+                        Terms:</span> ${record.terms}</td>
+    </tr>
+    <tr>
+        <td style="color:MidnightBlue;font-size: 10pt; padding-left:10px;"><span
+                style="font-weight:bold;"> Delivery:</span></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="color:MidnightBlue;font-size: 10pt;padding-left:10px;"> <span> ${record.custbody_az_mcq_address_name} </span></td>
+        <td></td>
+    </tr>
+</table>
+<table style="width: 100%;page-break-inside: avoid;">
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td colspan="2">Kindly acknowledge the same by sending an email, for any more details you are requested
+            to co-ordinate with Email: <b>procurement@mediacity.qa</b> </td>
+    </tr>
+    <tr>
+        <td>Best Regards,</td>
+    </tr>
+    <tr>
+        <#if record.approvalstatus=='Approved'>
+        <td align="left">
+            <img src="https://6140731.app.netsuite.com/core/media/media.nl?id=3576&amp;c=6140731&amp;h=Zuq-PU2TPFaKcCul5-FgXDHnp2HBvgO_pcBi6zvH8GdClR8Z"
+                 style="float:left; width: 60; height:60;" />
+        </td>
+    </#if>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td><b>Khaldoon Hijazin, CPA</b></td>
+    </tr>
+    <tr>
+        <td>Finance and Accounting Manager</td>
+    </tr>
+</table>
+<pbr header="nlheader2" header-height="15%" footer="nlfooter2" footer-height="5pt"
+     padding="0.3in 0.5in 0.3in 0.5in" size="Letter" />
+
+<table style="width: 100%;">
+
+    <tr>
+        <td class="normalbg"  style="font-size: 13pt; color: MidnightBlue; padding-bottom: 10px; font-family: 'Red Hat Display', sans-serif;">
+            Terms and Conditions of Purchase
+        </td>
+    </tr>
+</table>
+
+<!-- Clause 1: Definitions -->
+<table style="width: 100%; font-size: 8pt; page-break-inside: avoid;">
+    <tr>
+        <td style="font-weight: bold; color: MidnightBlue; padding-top: 8px;">1.&#160;&#160;Definitions</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;">In these conditions:</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;"><b>"MCQ"</b> means Media City Qatar, incorporated in Qatar under Law Number 13 of 2019 and has its registered office at Sikkat Wadi, Msheireb, building 7, Street 810, Zone 3, Doha Qatar, represented by Hamad Omar Al-Mannai who is duly authorized for this purpose.</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;"><b>"Contract"</b> means this Purchase Order, these Terms and Conditions of Purchase, the Specifications and all other documents attached hereto or referred to herein.</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;"><b>"Supplier"</b> means the individual, firm or company with whom the MCQ enters into the Contract (including where necessary any of the Supplier's sub-contractors) as identified in the Purchase Order.</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;"><b>"Contract Delivery"</b> means the date identified in the Contract by which the Supplier shall have completed the Contract to the satisfaction of the MCQ.</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;"><b>"Goods"</b> means anything (other than Services or Works) supplied or to be supplied to the MCQ under the Contract.</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;"><b>"Purchase Order"</b> means this document which is issued by the MCQ to the Supplier for the supply of Goods.</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;"><b>"Contract Start"</b> means the date identified in the Contract when the Supplier shall commence delivery of the Contract.</td>
+    </tr>
+</table>
+
+<!-- Clause 2: Warranty -->
+<table style="width: 100%; font-size: 8pt; page-break-inside: avoid;">
+    <tr>
+        <td style="font-weight: bold; color: MidnightBlue; padding-top: 10px;">2.&#160;&#160;Warranty</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;"><b>2.1.</b>&#160; The Supplier warrants that, for the duration of this Purchase Order, it has full legal capacity and all necessary licences, consents, and approvals required to accept and perform this Purchase Order, and that it is duly authorised to do so. The Supplier confirms that this Purchase Order is accepted by a properly authorised representative. The Supplier acts as an independent contractor and not as an agent of MCQ. The Supplier shall not, and shall ensure that its personnel do not, represent or imply that it has authority to bind or act on behalf of MCQ.</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;"><b>2.2.</b>&#160; The Supplier warrants that the Goods, at the time of delivery, shall conform to the specifications and the requirements of the Purchase Order, and shall be free from defects in design, materials, and workmanship. This warranty shall remain in effect for a period of one (1) year from the date of delivery, or for such other period expressly stated in this Purchase Order.</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;"><b>2.3.</b>&#160; The Supplier warrants that it has good and marketable title to all Goods supplied by the Supplier or its sub-contractors or vendors.</td>
+    </tr>
+</table>
+
+<!-- Clause 3: Delivery -->
+<table style="width: 100%; font-size: 8pt; page-break-inside: avoid;">
+    <tr>
+        <td style="font-weight: bold; color: MidnightBlue; padding-top: 10px;">3.&#160;&#160;Delivery</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px; font-style: italic;">Conditions for the supply of Goods</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;"><b>3.1.</b>&#160; The Supplier shall deliver the Goods in accordance with the terms and conditions in the Purchase Order. A delivery note must accompany the Goods and must specify the quotation reference, the type of Goods being delivered, the MCQ's reference number and the Purchase Order number.</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;"><b>3.2.</b>&#160; Unless expressly agreed otherwise the Goods shall be delivered as specified in the Purchase Order to the point of delivery and by the delivery date specified therein.</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;"><b>3.3.</b>&#160; Delivery and any other costs associated with the supply of the Goods shall be at the Supplier's own expense unless otherwise stated on the Purchase Order. Any Delivery Date or time specified in the Purchase Order shall be of the essence.</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;"><b>3.4.</b>&#160; Without prejudice to the Supplier's obligation to deliver the Goods on time, the Supplier shall promptly provide the MCQ with written notice of any anticipated delay, specifying both the reason for the delay and its expected duration.</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;"><b>3.5.</b>&#160; Goods may be returned at the Supplier's expense if they do not correspond with the Contract.</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;"><b>3.6.</b>&#160; The cost of packaging will be deemed to be included in the cost of the Goods. If the Supplier requires packaging to be returned, it will be returned at the Supplier's expense.</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;"><b>3.7.</b>&#160; The Goods shall remain at the Suppliers risk until delivery in accordance with this Purchase Order. The property in the Goods shall pass on delivery or on payment of the invoiced price whichever is the earlier.</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;"><b>3.8.</b>&#160; The MCQ's signature given on any delivery note or other document presented for signature in connection with delivery of the Goods is evidence only of the number of packages received, and not evidence of actual quantity, quality or condition of the Goods.</td>
+    </tr>
+</table>
+
+<!-- Clause 4: Inspection -->
+<table style="width: 100%; font-size: 8pt; page-break-inside: avoid;">
+    <tr>
+        <td style="font-weight: bold; color: MidnightBlue; padding-top: 10px;">4.&#160;&#160;Inspection</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;">The MCQ shall have the right, but not the obligation, at any time to inspect, test, and examine the Goods. MCQ's failure to inspect, or any waiver of its right to inspect, shall not relieve the Supplier of any liability or obligation under the Contract.</td>
+    </tr>
+</table>
+
+<!-- Clause 5: Invoices and Payment -->
+<table style="width: 100%; font-size: 8pt; page-break-inside: avoid;">
+    <tr>
+        <td style="font-weight: bold; color: MidnightBlue; padding-top: 10px;">5.&#160;&#160;Invoices and Payment</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;"><b>5.1.</b>&#160; The Supplier shall submit an invoice within 30 days of meeting any milestone set out in the request for quotation to the satisfaction of the MCQ or otherwise within 30 days of supplying the Goods or Services. Invoices shall include the Purchase Order number. The MCQ shall pay the Supplier within 30 days of receipt of an invoice except where an invoice is disputed.</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;"><b>5.2.</b>&#160; Price shall include all taxes, charges and duties. Notwithstanding the above, taxes (including withholding taxes and others), duties, charges and other obligations (including retention of payment) shall apply, where applicable, in accordance with the tax laws applicable in the State of Qatar and allied circulars, notifications and instructions issued from time to time by the General Tax Authority of Qatar or any other designated authority, during the performance of the Services. Media City shall have the right to withhold from any payment due to the Counterparty such amount of money as may be required to be withheld by the Laws of Qatar. Upon request, Media City shall provide the Counterparty with the evidence of deduction of withholding tax or other regulatory obligation from payment in accordance with statutory instruments mentioned herein. Where a requirement consists of materials and services, they must be quoted and invoiced separately as withholding tax applies to the Service portion only.</td>
+    </tr>
+</table>
+
+<!-- Clause 6: Intellectual Property Rights -->
+<table style="width: 100%; font-size: 8pt; page-break-inside: avoid;">
+    <tr>
+        <td style="font-weight: bold; color: MidnightBlue; padding-top: 10px;">6.&#160;&#160;Intellectual Property Rights</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;">The Supplier hereby irrevocably assigns and transfers to the MCQ all rights, title, and interest in and to the Goods, including without limitation all copyrights, other intellectual property rights associated therewith. This assignment includes the right to reproduce, distribute, perform, display, prepare derivative works of, and otherwise use the Goods in any manner the MCQ sees fit, in perpetuity, throughout the universe, in all media now known or hereafter devised. The Supplier agrees that the MCQ shall not be limited in any way in its use or modifications to the Goods. Upon the MCQ's request, the Supplier shall execute any documents necessary to confirm or perfect the rights herein assigned.</td>
+    </tr>
+</table>
+
+<!-- Clause 7: Liabilities and Indemnities -->
+<table style="width: 100%; font-size: 8pt; page-break-inside: avoid;">
+    <tr>
+        <td style="font-weight: bold; color: MidnightBlue; padding-top: 10px;">7.&#160;&#160;Liabilities and Indemnities</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;"><b>7.1.</b>&#160; The Supplier, its affiliates, and their respective officers, employees, contractors, and agents shall be fully liable for all losses, damages, costs, and expenses incurred by MCQ arising out of or in connection with the supply of the Goods under the Contract. The liability and corresponding compensation shall be equivalent to the actual damage suffered by MCQ.</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;"><b>7.2.</b>&#160; The Supplier is deemed an independent Supplier and shall indemnify, defend, and hold harmless MCQ, its affiliates, employees, and assigns from and against any and all losses, damages, liabilities, claims, and expenses of any kind arising out of or in connection with the supply, manufacture, delivery, or handling of the Goods by the Supplier, its affiliates, sub-contractors, or employees, or arising from any act or omission related thereto.</td>
+    </tr>
+</table>
+
+<!-- Clause 8: Termination -->
+<table style="width: 100%; font-size: 8pt; page-break-inside: avoid;">
+    <tr>
+        <td style="font-weight: bold; color: MidnightBlue; padding-top: 10px;">8.&#160;&#160;Termination</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;"><b>8.1.</b>&#160; If the Supplier fails to fulfil its obligations under the Contract, the MCQ may terminate the Contract immediately by written notice and may recover from the Supplier any reasonable costs necessarily and properly incurred by the MCQ as a consequence of termination.</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;"><b>8.2.</b>&#160; The MCQ may, at its sole discretion and for its convenience, terminate the Contract, in whole or in part at any time by providing written notice to the Supplier. The MCQ shall only be liable to pay the Supplier for Goods satisfactorily delivered and accepted prior to the effective date of termination. The Supplier shall not be entitled to any additional compensation, including loss of anticipated profit or consequential damages, arising from such termination.</td>
+    </tr>
+</table>
+
+<!-- Clause 9: Notices -->
+<table style="width: 100%; font-size: 8pt; page-break-inside: avoid;">
+    <tr>
+        <td style="font-weight: bold; color: MidnightBlue; padding-top: 10px;">9.&#160;&#160;Notices</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;">A notice may be served: by delivery to the Supplier; by sending it by email to him; or by ordinary first-class post to the Supplier's last known place of business or registered office. A notice shall be deemed served at the time of delivery, after four hours for an email or facsimile, or on the second working day after posting.</td>
+    </tr>
+</table>
+
+<!-- Clause 10: Force Majeure -->
+<table style="width: 100%; font-size: 8pt; page-break-inside: avoid;">
+    <tr>
+        <td style="font-weight: bold; color: MidnightBlue; padding-top: 10px;">10.&#160;&#160;Force Majeure</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;"><b>10.1.</b>&#160; Neither the Supplier shall be liable for any failure or delay in delivering the Goods, nor MCQ for any failure or delay in receiving or using the Goods, to the extent such failure or delay is caused by an event of force majeure beyond the affected Party's reasonable control.</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;"><b>10.2.</b>&#160; Force majeure events include, but are not limited to, acts of God, natural disasters, epidemics, pandemics, war, terrorism, civil unrest, government actions, export or import restrictions, strikes, lockouts, and any other events that are unforeseeable and unavoidable despite the exercise of reasonable diligence.</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;"><b>10.3.</b>&#160; The Party affected by a force majeure event shall promptly notify the other Party in writing of the occurrence, including the cause of non-performance and the anticipated duration of the delay.</td>
+    </tr>
+</table>
+
+<!-- Clause 11: Law and Jurisdiction -->
+<table style="width: 100%; font-size: 8pt; page-break-inside: avoid;">
+    <tr>
+        <td style="font-weight: bold; color: MidnightBlue; padding-top: 10px;">11.&#160;&#160;Law and Jurisdiction</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;">This Contract shall be governed by and interpreted in accordance with the laws of the state of Qatar and shall be subject to the exclusive jurisdiction of the Qatari courts.</td>
+    </tr>
+</table>
+
+<!-- Clause 12: Variations -->
+<table style="width: 100%; font-size: 8pt; page-break-inside: avoid;">
+    <tr>
+        <td style="font-weight: bold; color: MidnightBlue; padding-top: 10px;">12.&#160;&#160;Variations to the Contract</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;">No variation to the Contract will be effective until it has been recorded in writing and signed by the MCQ and the Supplier.</td>
+    </tr>
+</table>
+
+<!-- Clause 13: Duration -->
+<table style="width: 100%; font-size: 8pt; page-break-inside: avoid;">
+    <tr>
+        <td style="font-weight: bold; color: MidnightBlue; padding-top: 10px;">13.&#160;&#160;Duration</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;">The Contract will begin on the 'Contract start' date and will be completed by the 'Contract delivery' date.</td>
+    </tr>
+</table>
+
+<!-- Clause 14: Confidentiality -->
+<table style="width: 100%; font-size: 8pt; page-break-inside: avoid;">
+    <tr>
+        <td style="font-weight: bold; color: MidnightBlue; padding-top: 10px;">14.&#160;&#160;Confidentiality</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;">Each party shall keep confidential and not disclose to any third party any information of a confidential nature (including business, technical, financial or personal data) obtained from the other party in connection with this PO, and shall use such information only for the purpose of performing its obligations under this PO; this obligation does not apply to information that is or becomes publicly available other than through a breach of this clause, was lawfully known to the receiving party before disclosure, is independently developed without use of the disclosing party's confidential information, or is required to be disclosed by law, a court of competent jurisdiction or a regulatory authority, provided that, to the extent legally permitted, the receiving party gives prompt notice to the disclosing party of any such required disclosure.</td>
+    </tr>
+</table>
+
+<!-- Clause 15: Waiver -->
+<table style="width: 100%; font-size: 8pt; page-break-inside: avoid;">
+    <tr>
+        <td style="font-weight: bold; color: MidnightBlue; padding-top: 10px;">15.&#160;&#160;Waiver</td>
+    </tr>
+    <tr>
+        <td style="padding-top: 4px;">The failure of either the Supplier or the MCQ to insist upon strict performance of any provision of the Contract, or the failure of either the Supplier or the MCQ to exercise any right or remedy to which it is entitled under the Contract, will not constitute a waiver and will not diminish the obligations established by the Contract.</td>
+    </tr>
+</table>
+
+<!-- Closing statement -->
+<table style="width: 100%; font-size: 8pt; page-break-inside: avoid;">
+    <tr>
+        <td style="padding-top: 14px; font-style: italic; border-top: 1px solid #d3d3d3;">
+            This Purchase Order is issued subject to the applicable terms and conditions, which shall be deemed accepted by and binding upon you upon receipt and/or commencement of any performance thereunder.
+        </td>
+    </tr>
+</table>
+
+<pbr header="nlheader2" header-height="15%" footer="nlfooter2" footer-height="17%"
+     padding="0.3in 0.5in 0.3in 0.5in" size="Letter" />
+
+<h4><b><i>Internal Use Only</i></b></h4>
+
+
+<#if record.item?has_content>
+
+<table border="1" class="itemtable" style="width: 100%;">
+    <!-- start items -->
+    <#list record.item as item>
+    <#if item_index==0>
+    <thead>
+    <tr>
+        <th align="left" border-right="1" colspan="6">Item Name</th>
+        <th align="left" border-right="1" colspan="6">GL Account</th>
+        <th align="left" border-right="1" colspan="6">Department</th>
+        <th align="left" border-right="1" colspan="6">Cost Center</th>
+    </tr>
+    </thead>
+</#if>
+<tr>
+    <td align="left" border-right="1" border-top="1" colspan="6">${item.item}</td>
+    <td align="left" border-right="1" border-top="1" colspan="6">${item.custcol_da_expense_account}
+    </td>
+    <td align="left" border-right="1" border-top="1" colspan="6">${item.department}</td>
+    <td align="left" border-right="1" border-top="1" colspan="6">${item.class}</td>
+</tr>
+</#list><!-- end items -->
+</table>
+</#if>
+
+</body>
+</pdf>
