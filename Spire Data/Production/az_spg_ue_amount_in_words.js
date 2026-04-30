@@ -1,119 +1,145 @@
 /**
- * @NApiVersion 2.x
+ * @NApiVersion 2.1
  * @NScriptType UserEventScript
  */
+define(['N/search'], (search) => {
 
-define(['N/search'], function (search) {
-
-    function beforeSubmit(context) {
+    const beforeSubmit = (context) => {
         try {
-            var rec = context.newRecord;
+            const rec = context.newRecord;
 
-            var total = rec.getValue('total') || 0;
-            var currencyId = rec.getValue('currency');
+            const total = rec.getValue({ fieldId: 'total' }) || 0;
+            const currencyId = rec.getValue({ fieldId: 'currency' });
 
-            var currencyInfo = getCurrencyInfo(currencyId);
+            const currencyInfo = getCurrencyInfo(currencyId);
 
-            var words = convertAmount(total, currencyInfo);
+            const words = convertAmount(total, currencyInfo);
 
             rec.setValue({
-                fieldId: 'custbody_amount_in_words',
+                fieldId: 'custbody_az_spg_amount_in_words',
                 value: words
             });
 
         } catch (e) {
-            log.error("Amount in Words Error", e);
+            log.debug("error in before submit", e);
         }
-    }
+    };
 
-    function getCurrencyInfo(currencyId) {
-        // Map currency symbol/code to major/minor names
-        var currencyMap = {
-            "USD": { major: "DOLLARS", minor: "CENTS" },
-            "AED": { major: "DIRHAMS", minor: "FILS" },
-            "SAR": { major: "RIYALS", minor: "HALALAS" },
-            "QAR": { major: "RIYALS", minor: "DIRHAMS" },
-            "OMR": { major: "RIALS", minor: "BAISA" },
-            "KWD": { major: "DINARS", minor: "FILS" },
-            "BHD": { major: "DINARS", minor: "FILS" },
-            "EUR": { major: "EUROS", minor: "CENTS" },
-            "GBP": { major: "POUNDS", minor: "PENCE" }
-        };
+    const getCurrencyInfo = (currencyId) => {
 
-        var currencySymbol = search.lookupFields({
-            type: search.Type.CURRENCY,
-            id: currencyId,
-            columns: ['symbol', 'name']
-        }).symbol;
+        try {
+            
+            const currencyMap = {
+                "USD": { major: "DOLLARS", minor: "CENTS" },
+                "AED": { major: "DIRHAMS", minor: "FILS" },
+                "SAR": { major: "RIYALS", minor: "HALALAS" },
+                "QAR": { major: "RIYALS", minor: "DIRHAMS" },
+                "OMR": { major: "RIALS", minor: "BAISA" },
+                "KWD": { major: "DINARS", minor: "FILS" },
+                "BHD": { major: "DINARS", minor: "FILS" },
+                "EUR": { major: "EUROS", minor: "CENTS" },
+                "GBP": { major: "POUNDS", minor: "PENCE" }
+            };
+    
+            const lookup = search.lookupFields({
+                type: search.Type.CURRENCY,
+                id: currencyId,
+               columns: ['symbol', 'name', 'currencycode']
+            });
+    
+            const currencyCode = lookup.currencycode;
+    
+            return currencyMap[currencyCode] || {
+                major: "UNSPECIFIED CURRENCY",
+                minor: ""
+            };
 
-        return currencyMap[currencySymbol] || { major: "UNSPECIFIED CURRENCY", minor: "" };
-    }
-
-    function convertAmount(amount, currency) {
-        amount = parseFloat(amount).toFixed(2);
-        var parts = amount.split('.');
-        var majorPart = parseInt(parts[0]);
-        var minorPart = parseInt(parts[1]);
-
-        var words = numberToWords(majorPart) + " " + currency.major;
-
-        if (minorPart > 0 && currency.minor) {
-            words += " AND " + numberToWords(minorPart) + " " + currency.minor;
+        } catch (error) {
+            log.debug("Error in fetching currency info", error);
         }
+    };
 
-        words += " ONLY";
+    const convertAmount = (amount, currency) => {
 
-        return words;
-    }
-
-    function numberToWords(num) {
-        if (num === 0) return "ZERO";
-
-        var a = ["", "ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX",
-                 "SEVEN", "EIGHT", "NINE", "TEN", "ELEVEN", "TWELVE",
-                 "THIRTEEN", "FOURTEEN", "FIFTEEN", "SIXTEEN",
-                 "SEVENTEEN", "EIGHTEEN", "NINETEEN"];
-
-        var tens = ["", "", "TWENTY", "THIRTY", "FORTY", "FIFTY",
-                    "SIXTY", "SEVENTY", "EIGHTY", "NINETY"];
-
-        function convertLessThan100(n) {
-            if (n < 20) return a[n];
-            var t = Math.floor(n / 10);
-            var o = n % 10;
-            return tens[t] + (o ? "-" + a[o] : "");
-        }
-
-        function convertLessThan1000(n) {
-            var str = "";
-            var h = Math.floor(n / 100);
-            var r = n % 100;
-            if (h > 0) {
-                str += a[h] + " HUNDRED";
-                if (r > 0) str += " ";
+        try {
+            amount = parseFloat(amount).toFixed(2);
+    
+            const parts = amount.split('.');
+            const majorPart = parseInt(parts[0], 10);
+            const minorPart = parseInt(parts[1], 10);
+    
+            let words = numberToWords(majorPart) + " " + currency.major;
+    
+            if (minorPart > 0 && currency.minor) {
+                words += " AND " + numberToWords(minorPart) + " " + currency.minor;
             }
-            if (r > 0) str += convertLessThan100(r);
-            return str;
+    
+            words += " ONLY";
+    
+            return words;
+            
+        } catch (error) {
+            log.debug("Error in converting amount", error);
         }
+    };
 
-        var units = ["", " THOUSAND ", " MILLION ", " BILLION "];
-        var word = "";
-        var i = 0;
-
-        while (num > 0) {
-            var chunk = num % 1000;
-            if (chunk > 0) {
-                word = convertLessThan1000(chunk) + units[i] + word;
+    const numberToWords = (num) => {
+        try {
+            if (num === 0) return "ZERO";
+    
+            const a = ["", "ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX",
+                "SEVEN", "EIGHT", "NINE", "TEN", "ELEVEN", "TWELVE",
+                "THIRTEEN", "FOURTEEN", "FIFTEEN", "SIXTEEN",
+                "SEVENTEEN", "EIGHTEEN", "NINETEEN"];
+    
+            const tens = ["", "", "TWENTY", "THIRTY", "FORTY", "FIFTY",
+                "SIXTY", "SEVENTY", "EIGHTY", "NINETY"];
+    
+            const convertLessThan100 = (n) => {
+                if (n < 20) return a[n];
+                const t = Math.floor(n / 10);
+                const o = n % 10;
+                return tens[t] + (o ? "-" + a[o] : "");
+            };
+    
+            const convertLessThan1000 = (n) => {
+                let str = "";
+                const h = Math.floor(n / 100);
+                const r = n % 100;
+    
+                if (h > 0) {
+                    str += a[h] + " HUNDRED";
+                    if (r > 0) str += " ";
+                }
+                if (r > 0) str += convertLessThan100(r);
+    
+                return str;
+            };
+    
+            const units = ["", " THOUSAND ", " MILLION ", " BILLION "];
+    
+            let word = "";
+            let i = 0;
+    
+            while (num > 0) {
+                const chunk = num % 1000;
+    
+                if (chunk > 0) {
+                    word = convertLessThan1000(chunk) + units[i] + word;
+                }
+    
+                num = Math.floor(num / 1000);
+                i++;
             }
-            num = Math.floor(num / 1000);
-            i++;
+    
+            return word.trim();
+        
+        } catch (error) {
+            log.debug("Error in number to words conversion", error);
         }
-
-        return word.trim();
     }
 
     return {
-        beforeSubmit: beforeSubmit
+        beforeSubmit
     };
-
 });

@@ -27,7 +27,7 @@
                      <#else>
                        <td rowspan="5" align="left" width="30%"></td>
                       </#if>
-                    <td width="20%" style="font-size:9px">${(data.subsidiaryData.subname)!""}</td>
+                    <td width="20%" style="font-size:9px">${(record.createdfrom.subsidiary!"")?keep_after_last(":")?trim}</td>
                     <td width="50%" rowspan="4" align="right" style="vertical-align:middle;color:#007115;font-size:38px;font-weight:bold">
                       Delivery Note
                     </td>
@@ -65,7 +65,7 @@
       <td width="29%" style="border-top:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;">${record.tranid}</td>
       <td></td>
       <td width="20%" style="background-color:#D9F1D0;border:0.5px;font-size:9px;font-weight:bold">Customer ID</td>
-      <td width="29%" style="border-top:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;">${(data.customerData.customer)!""}</td>
+      <td width="29%" style="border-top:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;">${(data.customerData?? && data.customerData.customer?has_content)?then(data.customerData.customer?keep_before(" "),"")}</td>
     </tr>
     <tr>
       <td width="20%" style="background-color:#D9F1D0;border-left:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;font-weight:bold">DN Date</td>
@@ -156,7 +156,7 @@
                     <td align="center" style = "border-left:0.5px solid black;border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">${sn}</td>
                     <td align="center" style = "border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">${line.displayname}</td>
                     <td align="center" style = "border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">${line.description}</td>
-                    <td align="center" style = "border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">${line.units}</td>
+                    <td align="center" style = "border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">${line.unitsdisplay}</td>
                     <td align="center" style = "border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">${line.quantity}</td>
                     <td align="center" style = "border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">${(data.itemsData[sn-1].extraValue)!""}</td>
                 </tr>

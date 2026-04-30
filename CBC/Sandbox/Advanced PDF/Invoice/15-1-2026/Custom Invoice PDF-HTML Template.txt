@@ -15,7 +15,7 @@
 		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
 	</#if>
     <macrolist>
-      <#assign data = {}>
+      <#assign centralData = {}>
       <#if record.custpage_custrecord_to_print?has_content>
          <#assign data = record.custpage_custrecord_to_print?eval/>
       </#if>
@@ -27,16 +27,16 @@
                      <#else>
                        <td rowspan="5" align="left" width="30%"></td>
                       </#if>
-                    <td width="20%" style="font-size:9px">${(data.subsidiaryData.subName)!""}</td>
-                    <td width="50%" rowspan="5" align="right" style="vertical-align:middle;color:#007115;font-size:38px;font-weight:bold">
-                      Tax Credit Note
+                    <td width="20%" style="font-size:9px">${(data.subName)!""}</td>
+                    <td width="50%" rowspan="5" align="right" style="vertical-align:middle;color:#007115;font-size:32px;font-weight:bold">
+                      Tax Invoice
                     </td>
                 </tr>
                 <tr>
-                    <td style="font-size:9px">${(data.subsidiaryData.subAddress)!""}</td>
+                    <td style="font-size:9px">${(data.subAddress)!""}</td>
                 </tr>
                 <tr>
-                    <td style="font-size:9px">TRN: ${(data.subsidiaryData.subVAT)!""}</td>
+                    <td style="font-size:9px">TRN: ${(data.subVAT)!""}</td>
                 </tr>
                 <tr>
                     <td style="font-size:9px">Telephone: ${record.subsidiary.custrecord_az_cbc_subsidiary_phone}</td>
@@ -60,53 +60,72 @@
 <body header="nlheader" header-height="10%" footer="nlfooter" footer-height="20pt" padding="0.3in 0.5in 0.5in 0.5in" size="Letter">
   <table width="100%">
     <tr>
-      <td width="20%" style="background-color:#D9F1D0;border:0.5px;font-size:9px;font-weight:bold">Credit Note No.</td>
+      <td width="20%" style="background-color:#D9F1D0;border:0.5px;font-size:9px;font-weight:bold">Invoice No.</td>
       <td width="29%" style="border-top:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;">${record.tranid}</td>
       <td></td>
-      <td width="20%" style="background-color:#D9F1D0;border:0.5px;font-size:9px;font-weight:bold">Customer Name</td>
-      <td width="29%" style="border-top:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;">${(record.entity.companyname)!""}</td>
+      <td width="20%" style="background-color:#D9F1D0;border:0.5px;font-size:9px;font-weight:bold">Customer ID</td>
+      <td width="29%" style="border-top:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;">${(record.entity.entityid)!""}</td>
     </tr>
     <tr>
-      <td width="20%" style="background-color:#D9F1D0;border-left:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;font-weight:bold">Credit Note Date</td>
+      <td width="20%" style="background-color:#D9F1D0;border-left:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;font-weight:bold">Invoice Date</td>
       <td width="29%" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;">${record.trandate?string("dd-MMM-yyyy")}</td>
       <td></td>
-      <td width="20%" style="background-color:#D9F1D0;border-left:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;font-weight:bold">Customer ID</td>
-      <td width="29%" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;">${(record.entity.entityid)!""}</td>
+      <td width="20%" style="background-color:#D9F1D0;border-left:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;font-weight:bold">Customer Name</td>
+      <td width="29%" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;">${(record.entity.companyname)!""}</td>
     </tr>
     <tr>
-      <td width="20%" style="background-color:#D9F1D0;border-left:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;font-weight:bold">Tax Invoice No.</td>
-      <td width="29%" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;">${record.createdfrom}</td>
+      <td width="20%" style="background-color:#D9F1D0;border-left:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;font-weight:bold">Quotation Ref</td>
+      <td width="29%" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;"></td>
       <td></td>
       <td width="20%" style="background-color:#D9F1D0;border-left:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;font-weight:bold">Customer TRN</td>
       <td width="29%" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;">${(record.entity.vatregnumber)!""}</td>
     </tr>
     <tr>
-      <td width="20%" style="background-color:#D9F1D0;border-left:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;font-weight:bold">Return Req No.</td>
-      <td width="29%" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;"></td>
-      <td></td>
-      <td width="20%" style="background-color:#D9F1D0;border-left:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;font-weight:bold">Customer Contact</td>
-      <td width="29%" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;">${(record.entity.phone)!""}</td>
-    </tr>
-    <tr>
-      <td width="20%" style="background-color:#D9F1D0;border-left:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;font-weight:bold">Check List No.</td>
-      <td width="29%" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;"></td>
+      <td width="20%" style="background-color:#D9F1D0;border-left:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;font-weight:bold">SO Ref</td>
+      <td width="29%" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;"> ${record.createdfrom} </td>
       <td></td>
       <td width="20%" style="background-color:#D9F1D0;border-left:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;font-weight:bold">Customer Address</td>
       <td width="29%" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;">${(data.customerData.customerAddress)!""}</td>
     </tr>
     <tr>
+      <td width="20%" style="background-color:#D9F1D0;border-left:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;font-weight:bold">Order Type</td>
+      <td width="29%" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;">${record.custbody_az_cbc_order_type}</td>
+      <td></td>
+      <td width="20%" style="background-color:#D9F1D0;border-left:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;font-weight:bold">Customer Contact</td>
+      <td width="29%" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;">${record.entity.phone}</td>
+    </tr>
+    <tr>
       <td width="20%" style="background-color:#D9F1D0;border-left:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;font-weight:bold">Branch Name</td>
       <td width="29%" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;">${record.location}</td>
       <td></td>
-      <td width="20%" style="background-color:#D9F1D0;border-left:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;font-weight:bold">Salesperson</td>
-      <td width="29%" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;">${record.entity.salesrep}</td>
+      <td width="20%" style="background-color:#D9F1D0;border-left:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;font-weight:bold">Customer Order ref</td>
+      <td width="29%" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;"></td>
     </tr>
     <tr>
-      <td width="20%" style="background-color:#D9F1D0;border-left:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;font-weight:bold">Order Type</td>
-      <td width="29%" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;">${record.createdfrom.custbody_az_cbc_order_type}</td>
+      <td width="20%" style="background-color:#D9F1D0;border-left:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;font-weight:bold">Shipping terms</td>
+      <td width="29%" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;">${record.custbody_az_cbc_shipping_terms}</td>
       <td></td>
-      <td width="20%" style="background-color:#D9F1D0;border-left:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;font-weight:bold">Prepared By</td>
-      <td width="29%" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;">${record.custbody_az_g_trx_created_by}</td>
+      <td width="20%" style="background-color:#D9F1D0;border-left:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;font-weight:bold">Payment Terms</td>
+      <td width="29%" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;">${record.terms}</td>
+    </tr>
+    <tr >
+      <td width="20%" style="background-color:#D9F1D0;border-left:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;font-weight:bold">Salesperson</td>
+      <td width="29%" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;">${record.salesrep}</td>
+      <td ></td>
+      <td width="20%" style="background-color:#D9F1D0;border-left:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;font-weight:bold">Bill-To-Address</td>
+      <td width="29%" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;">${(data.billToAddress)!""}</td>
+    </tr>
+    <tr >
+      <td width="20%" rowspan="2" style="background-color:#D9F1D0;border-left:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;font-weight:bold">Prepared By</td>
+      <td width="29%" rowspan="2" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;">${record.custbody_az_g_trx_created_by}</td>
+      <td ></td>
+      <td width="20%" style="background-color:#D9F1D0;border-left:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;font-weight:bold">Ship-To-Address</td>
+      <td width="29%" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;">${(data.shipToAddress)!""}</td>
+    </tr>
+    <tr >
+      <td ></td>
+      <td width="20%" style="background-color:#D9F1D0;border-left:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;font-weight:bold">Delivery Instructions</td>
+      <td width="29%" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;"></td>
     </tr>
   </table>
 
@@ -118,7 +137,7 @@
       <td width="11%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">
         Item Code
       </td>
-      <td width="18%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">
+      <td width="15%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">
         Item Description
       </td>
       <td width="5%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">
@@ -127,38 +146,51 @@
       <td width="5%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">
         QTY
       </td>
-      <td width="10%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">
+      <td width="5%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">
         Unit Rate
       </td>
-      <td width="8%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">
-        Total<br/> (Exc. VAT)
+      <td width="7%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">
+        Total (Exc. VAT)
       </td>
-      <td width="9%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">
+      <td width="7%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">
         Discount
       </td>
-      <td width="9%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">
+      <td width="7%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">
         VAT @5%
       </td>
-      <td width="9%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">
-        Total <br/> (Inc. VAT)
+      <td width="7%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-right:0.5px solid black;border-bottom:0.5px solid black;">
+        Total (Inc. VAT)
       </td>
-      <td width="10%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-bottom:0.5px solid black;border-right:0.5px solid black">
-        Additional <br/> Notes
+      <td width="9%" align="center" style="font-weight:bold;vertical-align:middle;font-size:9px;background-color:#D9F1D0;border-top:0.5px solid black;border-bottom:0.5px solid black;border-right:0.5px solid black">
+        Additional Note
       </td>
     </tr>
      <#assign sn = 0>
+       <#assign totalDiscount = 0>
      <#list record.item as line>
             <#if line.taxline != 'T'>
               <#assign sn = sn + 1>
                 <tr>
                     <td align="center" style = "border-left:0.5px solid black;border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">${sn}</td>
-                    <td align="center" style = "border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">${line.item.displayname}</td>
                     <td align="center" style = "border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">${line.item}</td>
+                    <td align="center" style = "border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">${line.description}</td>
                     <td align="center" style = "border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">${line.units}</td>
                     <td align="center" style = "border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">${line.quantity}</td>
                     <td align="center" style = "border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">${line.rate}</td>
                     <td align="center" style = "border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">${line.amount}</td>
-                    <td align="center" style = "border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">${line.custcol_az_cbc_discount_amount_line}</td>
+                    <td align="center" style = "border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">
+                      <#if line.custcol_az_cbc_discount_amount_line?string == "">
+                        AED0.00
+                      <#else>
+                        ${line.custcol_az_cbc_discount_amount_line}
+                      </#if>
+                        
+                      <#if line.custcol_az_cbc_discount_amount_line?has_content><#assign cleanValue = line.custcol_az_cbc_discount_amount_line?replace("AED", "")?replace(",", "")?trim>
+                        <#if cleanValue != "">
+                          <#assign totalDiscount = totalDiscount + cleanValue?number>
+                        </#if>
+                      </#if>                    
+                      </td>
                     <td align="center" style = "border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">${line.tax1amt}</td>
                     <td align="center" style = "border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">${line.grossamt}</td>
                     <td align="center" style = "border-bottom:0.5px solid black;border-right:0.5px solid black;font-size:8px">${line.custcol_az_cbc_additional_note}</td>
@@ -168,42 +200,45 @@
     </table>
                 
     <table width="100%" style="padding-top:10px">
-     <tr>  
-      <td width="55%"></td>
+     <tr>
+      <td width="50%" style="border-right:0.5px solid black;border-bottom:0.5px solid black;border-top:0.5px solid black;border-left:0.5px solid black;background-color:#D9F1D0;font-weight:bold;font-size:9px">Bank Details:</td>
+       <td width="5%"></td>
       <td align="left" width="25%" style="background-color:#D9F1D0;font-weight:bold;vertical-align:middle;font-size:9px;border-right:0.5px solid black;border-bottom:0.5px solid black;border-left:0.5px solid black;border-top:0.5px solid black">
         Sub Total (Exc. VAT)
       </td>
       <td align="left" width="20%" style="vertical-align:middle;font-size:9px;border-bottom:0.5px solid black;border-right:0.5px solid black;border-top:0.5px solid black">
         ${record.subtotal}
       </td>
-     </tr>
-     <tr>
-       <td width="55%"></td>
+    </tr>
+    <tr>
+      <td rowspan="3" style="border-right:0.5px solid black;border-bottom:0.5px solid black;border-left:0.5px solid black;font-weight:bold;vertical-align:middle;font-size:9px;">
+      </td>
+       <td></td>
       <td align="left" style="background-color:#D9F1D0;border-right:0.5px solid black;border-bottom:0.5px solid black;border-left:0.5px solid black;font-weight:bold;vertical-align:middle;font-size:9px;">
         Discount
       </td>
       <td align="left" style="vertical-align:middle;font-size:9px;border-bottom:0.5px solid black;border-right:0.5px solid black;">
-       ${record.discounttotal}
+       AED${totalDiscount?string["#,##0.00"]}
       </td>
-     </tr>
-     <tr>
-       <td width="55%"></td>
+    </tr>
+    <tr>
+      <td></td>
       <td align="left" style="background-color:#D9F1D0;border-right:0.5px solid black;border-bottom:0.5px solid black;border-left:0.5px solid black;font-weight:bold;vertical-align:middle;font-size:9px;">
         VAT Amount
       </td>
       <td align="left" style="vertical-align:middle;font-size:9px;border-bottom:0.5px solid black;border-right:0.5px solid black;">
         ${record.taxtotal}
       </td>
-     </tr>
-     <tr>
-       <td width="55%"></td>
+    </tr>
+    <tr>
+      <td></td>
       <td align="left" style="background-color:#D9F1D0;border-right:0.5px solid black;border-bottom:0.5px solid black;border-left:0.5px solid black;font-weight:bold;vertical-align:middle;font-size:9px;">
         Total
       </td>
       <td align="left" style="vertical-align:middle;font-size:9px;border-bottom:0.5px solid black;border-right:0.5px solid black;">
         ${record.total}
       </td>
-     </tr>
+    </tr>
   </table>
 
   <table width="100%" style="padding-top:30px">
@@ -219,28 +254,12 @@
      </td>
      <td width="50%"></td>
     </tr>
+    <tr style="padding-top:30px">
+      <td ><span style="font-weight:bold">Received By:</span><span>____________________</span> </td>
+      <td ><span style="font-weight:bold">Accounts Dept:</span><span>____________________</span> </td>
+    </tr>
   </table>
-             
 
-  <table width="100%" style="padding-top:10px">
-     <tr> 
-      <td align="left" width="20%" style="background-color:#D9F1D0;font-weight:bold;vertical-align:middle;font-size:9px;border-right:0.5px solid black;border-bottom:0.5px solid black;border-left:0.5px solid black;border-top:0.5px solid black">
-        Return Reason
-      </td>
-      <td align="left" width="80%" style="vertical-align:middle;font-size:9px;border-bottom:0.5px solid black;border-right:0.5px solid black;border-top:0.5px solid black">
-        ${record.custbody_az_cbc_return_reason}
-      </td>
-     </tr>
-     <tr>
-      <td align="left" style="background-color:#D9F1D0;border-right:0.5px solid black;border-bottom:0.5px solid black;border-left:0.5px solid black;font-weight:bold;vertical-align:middle;font-size:9px;">
-        Details
-      </td>
-      <td align="left" style="vertical-align:middle;font-size:9px;border-bottom:0.5px solid black;border-right:0.5px solid black;">
-       ${record.custbody_az_cbc_details_for_return}
-      </td>
-     </tr>
-  </table>
-             
   <table width="100%" style="padding-top:30px">
     <tr>
       <td align="left" style="background-color:#D9F1D0">

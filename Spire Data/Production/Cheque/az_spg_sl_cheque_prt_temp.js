@@ -47,7 +47,7 @@ define(['N/search', 'N/render','N/record','N/file'], (search, render,record,file
         });
 
         const logoId = subsidiaryRec.getValue('pagelogo');
-        const company = subsidiaryRec.getText('representingcustomer');
+        const company = subsidiaryRec.getText('name');
 
         let logoUrl = '';
 
@@ -103,7 +103,7 @@ define(['N/search', 'N/render','N/record','N/file'], (search, render,record,file
                 class: escapeXml(chequeRecord.getText('class')),
                 location: escapeXml(chequeRecord.getText('location')),
                 department: escapeXml(chequeRecord.getText('department')),
-                amount_in_words: escapeXml(chequeRecord.getText('custbody_amount_in_words')),
+                amount_in_words: escapeXml(chequeRecord.getText('custbody_az_spg_amount_in_words')),
                 company: escapeXml(sub.company),
                 trn: sub.vatRegNum,
                 logo: sub.logoUrl || '',
@@ -281,7 +281,7 @@ define(['N/search', 'N/render','N/record','N/file'], (search, render,record,file
             template += '<tr>';
             template += '<td width="20%"><b>Transaction #:</b> ' + (header.tranid || '') + '</td>';
             template += '<td width="15%"><b>Check #:</b> ' + (header.checknumber || '') + '</td>';
-            template += '<td><b>Payee :</b> ' + (header.payee || '') + '</td>';
+            template += '<td><b>Payee :</b> ' +(header.payee ? header.payee.trim().split(/\s+/).slice(1).join(' ') : '') +'</td>';
             template += '<td><b>Currency :</b> ' + (header.currency || '') + '</td>';
             
             template += '</tr>';
@@ -317,12 +317,12 @@ define(['N/search', 'N/render','N/record','N/file'], (search, render,record,file
                 template += '<table style="margin-bottom:10px;">';
 
                 template += '<tr>';
-                template += '<th width="35%"><b>Account</b></th>';
-                template += '<th width="10%"><b>Amount</b></th>';
-                template += '<th width="8%" style="white-space: normal;word-wrap: break-word;"><b>Tax Rate</b></th>';
-                template += '<th width="12.5%" style="white-space: normal;word-wrap: break-word;"><b>Tax Amount</b></th>';
-                template += '<th width="14.5%" style="white-space: normal;word-wrap: break-word;"><b>Gross Amount</b></th>';
-                template += '<th width="20%"><b>Memo</b></th>';
+                template += '<th width="30%" style="white-space: nowrap;"><b>Account</b></th>';
+                template += '<th width="10%" style="white-space: nowrap;"><b>Amount</b></th>';
+                template += '<th width="10%" style="white-space: nowrap;"><b>Tax Rate</b></th>';
+                template += '<th width="15%" style="white-space: nowrap;"><b>Tax Amount</b></th>';
+                template += '<th width="15%" style="white-space: nowrap;"><b>Gross Amount</b></th>';
+                template += '<th width="20%" style="white-space: nowrap;"><b>Memo</b></th>';
                 template += '</tr>';
 
                 expenses.forEach(exp => {

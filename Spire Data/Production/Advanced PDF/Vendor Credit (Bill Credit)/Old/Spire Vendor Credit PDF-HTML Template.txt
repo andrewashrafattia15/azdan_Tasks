@@ -88,7 +88,7 @@
         <td><b>Currency:</b> ${record.currency}</td>
       </tr>
       <tr>
-        <td><b>Vendor:</b> ${record.entity}</td>
+        <td><b>Vendor:</b> ${record.entity?keep_after(" ")}</td>
         <td><b>Exchange Rate:</b>
           <#if record.exchangerate?is_number>
             ${record.exchangerate?string["0.00"]}
@@ -180,7 +180,7 @@
       <tr>
         <td style="width: 60%; vertical-align: top;">
           <strong>Amount in Words:</strong><br/>
-          ${record.custbody_amount_in_words!" "}
+          ${record.custbody_az_spg_amount_in_words!" "}
         </td>
 
         <td style="width: 40%;">

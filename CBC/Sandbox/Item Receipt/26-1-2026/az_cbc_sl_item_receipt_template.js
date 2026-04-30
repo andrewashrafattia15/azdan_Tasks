@@ -25,9 +25,6 @@ define(['N/search','N/record' ,'N/render', 'N/log'], (search, record, render, lo
         }
     };
 
-    // ===========================================================
-    // 1. Get Purchase Order Header + Items
-    // ===========================================================
     const getSubsidiaryData = (subsidiaryID) => {
         try {
             if (!subsidiaryID) return '';
@@ -93,6 +90,7 @@ define(['N/search','N/record' ,'N/render', 'N/log'], (search, record, render, lo
                     'subsidiary',
                     'currency',
                     'location',
+                    'custbody_az_cbc_vendor_ref_number',
                     'custbody_az_g_trx_created_by',
                     'custbody_az_cbc_return_reason',
                     'custbody_az_cbc_details_for_return',
@@ -108,17 +106,19 @@ define(['N/search','N/record' ,'N/render', 'N/log'], (search, record, render, lo
                         trandate: headerResult[0].getValue('trandate') || '',
                         createdFrom: headerResult[0].getText('createdfrom') || '',
                         currency: headerResult[0].getText('currency') || '',                  
-                        subsidiary: headerResult[0].getValue('subsidiary') || '',
+                        subsidiaryid: headerResult[0].getValue('subsidiary') || '',
+                        subsidiary: headerResult[0].getText('subsidiary') || '',
                         createdFromFirstWord: headerResult[0].getText('createdfrom') 
                          ?  headerResult[0].getText('createdfrom') .trim().split(/\s+/)[0]: '',
                         location: headerResult[0].getText('location')|| '',
+                        vendorRefNumber: headerResult[0].getValue('custbody_az_cbc_vendor_ref_number')|| '',
                         createdBy: headerResult[0].getText('custbody_az_g_trx_created_by')|| '',
                         returnReason: headerResult[0].getValue('custbody_az_cbc_return_reason')|| '',
                         details: headerResult[0].getValue('custbody_az_cbc_details_for_return')|| '',
                         memo: headerResult[0].getValue('memo')|| '',
                     };
             }
-            const subsidiaryData = getSubsidiaryData(header.subsidiary);
+            const subsidiaryData = getSubsidiaryData(header.subsidiaryid);
             const createdFromType = headerResult[0].getText('createdfrom') 
                          ?  headerResult[0].getText('createdfrom') .trim().split(/\s+/)[0]: '';
             const createdFromID = headerResult[0].getValue('createdfrom');
@@ -308,23 +308,18 @@ define(['N/search','N/record' ,'N/render', 'N/log'], (search, record, render, lo
 
         if (!purchaseOrderID) return {};
 
-        const po = search.lookupFields({
-            type: search.Type.PURCHASE_ORDER,
-            id: purchaseOrderID,
-            columns: [
-                'shipmethod',
-                'incoterm',
-                'terms',
-                'duedate'
-            ]
-        });
+            const poRec = record.load({
+                type: record.Type.PURCHASE_ORDER,
+                id: purchaseOrderID
+            });
 
-        return {
-            shipmethod:po.shipmethod ?.length? po.shipmethod[0].text: '',
-            incoterm:po.incoterm ?.length? po.incoterm[0].text: '',
-            terms: po.terms ?.length? po.terms[0].text: '',
-            duedate: po.duedate || '',
-        };
+            return {
+                employee: poRec.getText({ fieldId: 'employee' }) || '',
+                shipmethod: poRec.getText({ fieldId: 'shipmethod' }) || '',
+                incoterm: poRec.getText({ fieldId: 'incoterm' }) || '',
+                terms: poRec.getText({ fieldId: 'terms' }) || '',
+                duedate: poRec.getValue({ fieldId: 'duedate' }) || ''
+            };
 
         } catch (errorGetPurchaseOrderData) {
             log.debug('errorGetPurchaseOrderData',errorGetPurchaseOrderData)
@@ -494,7 +489,7 @@ define(['N/search','N/record' ,'N/render', 'N/log'], (search, record, render, lo
     
             if(header.createdFromFirstWord=='Purchase'){
                 template += '<td width="20%" style="font-size:9px;">';
-                template += ' ' + (subsidiaryData.subname||'') + ' ';
+                template += ' ' + (header.subsidiary ? header.subsidiary.split(':').pop().trim() : '') + ' ';
                 template += '</td>';
         
                 template += '<td width="55%" rowspan="4" align="right" ';
@@ -581,7 +576,7 @@ define(['N/search','N/record' ,'N/render', 'N/log'], (search, record, render, lo
                     template += '<td width="29%" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;">' + (header.trandate||'') + '</td>';
                     template += '<td></td>';
                     template += '<td width="20%" style="background-color:#D9F1D0;border-left:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;font-weight:bold">Vendor Ref</td>';
-                    template += '<td width="29%" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;"> </td>';
+                    template += '<td width="29%" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;">' + (header.vendorRefNumber||'') + '</td>';
                     template += '</tr>';
 
                     template += '<tr>';
@@ -623,7 +618,7 @@ define(['N/search','N/record' ,'N/render', 'N/log'], (search, record, render, lo
 
                     template += '<tr>';
                     template += '<td width="20%" rowspan="2" style="background-color:#D9F1D0;border-left:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;font-weight:bold">Buyer Name</td>';
-                    template += '<td width="29%" rowspan="2" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;"></td>';
+                    template += '<td width="29%" rowspan="2" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;">' + (purchaseOrderData.employee || '').split(' ').slice(1).join(' ') + '</td>';
                     template += '<td></td>';
                     template += '<td width="20%" style="background-color:#D9F1D0;border-left:0.5px;border-right:0.5px;border-bottom:0.5px;font-size:9px;font-weight:bold">Need By Date</td>';
                     template += '<td width="29%" style="border-right:0.5px;border-bottom:0.5px;font-size:9px;">' + (purchaseOrderData.duedate||'') + '</td>';

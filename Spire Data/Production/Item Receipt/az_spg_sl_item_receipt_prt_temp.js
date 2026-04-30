@@ -46,7 +46,7 @@ define(['N/search', 'N/render','N/record', 'N/file'], (search, render,record,fil
         });
 
         const logoId = subsidiaryRec.getValue('pagelogo');
-        const company = subsidiaryRec.getText('representingcustomer');
+        const company = subsidiaryRec.getText('name');
 
         let logoUrl = '';
 
@@ -250,7 +250,7 @@ define(['N/search', 'N/render','N/record', 'N/file'], (search, render,record,fil
 
             template += '<tr>';
             template += '<td colspan="2"><b>Created From :</b> ' + (header.createdfrom || '') + '</td>';
-            template += '<td colspan="3"><b>Vendor :</b> ' + (header.vendor || '') + '</td>';
+            template += '<td colspan="3"><b>Vendor :</b> ' + (header.vendor ? header.vendor.trim().split(/\s+/).slice(1).join(' ') : '') + '</td>';
             template += '</tr>';
             
             template += '<tr>';

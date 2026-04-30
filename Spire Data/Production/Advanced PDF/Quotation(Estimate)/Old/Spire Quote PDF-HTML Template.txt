@@ -80,18 +80,61 @@
     </table>
 
     <!-- Billing / Shipping -->
-    <table style="margin-bottom:6px;">
+    <table width="100%" style="margin-bottom:6px;">
       <tr>
-        <th>Billing Address</th>
-        <th>Shipping Address</th>
+        <th width="50%">Billing Address</th>
+        <th width="50%">Shipping Address</th>
       </tr>
       <tr>
-        <td style="vertical-align:top;">
-          ${record.billaddress!""}<br/>
-          <b>TRN:</b> ${record.entity.vatregnumber!""}
+        <td width="50%" style="vertical-align:top;">
+          <#if record.custbody_az_spg_reseller?has_content>
+             ${record.billaddress!""}<br/>
+             <b>TRN:</b> ${record.entity.vatregnumber!""}
+          </#if>
         </td>
-        <td style="vertical-align:top;">
-          ${record.custbody2!""}
+        <td width="50%" style="vertical-align:top;">
+          <#if record.custbody_az_spg_enduser?has_content>
+            <#assign raw = record.custpage_customer_contacts!"" />
+
+<#if raw?has_content>
+  <#assign data = raw?eval />
+  <#assign customer = data.customer!{} />
+  <#assign contacts = data.contacts![] />
+<#else>
+  <#assign customer = {} />
+  <#assign contacts = [] />
+</#if>
+
+<!-- ================= CUSTOMER ================= -->
+<b>${customer.name!""}</b><br/>
+${customer.address!""}<br/>
+<#if customer.website?has_content>
+  <b>Website:</b> ${customer.website}<br/>
+</#if>
+
+<br/>
+
+<!-- ================= CONTACTS ================= -->
+<#if contacts?has_content>
+  <b>Contacts</b>
+
+  <table style="width:100%; border-collapse:collapse;">
+    <tr>
+      <th align="left">Name</th>
+      <th align="left">Email</th>
+      <th align="left">Phone</th>
+    </tr>
+
+    <#list contacts as c>
+      <tr>
+        <td>${c.name!""}</td>
+        <td>${c.email!""}</td>
+        <td>${c.phone!""}</td>
+      </tr>
+    </#list>
+  </table>
+</#if>
+          </#if>
         </td>
       </tr>
     </table>
@@ -199,7 +242,7 @@
       <tr>
         <td style="width:60%; vertical-align:top;">
           <b>Amount in Words:</b><br/>
-          ${record.custbody_amount_in_words!""}
+          ${record.custbody_az_spg_amount_in_words!""}
         </td>
 
         <td style="width:40%;">
@@ -232,17 +275,15 @@ ${record.custbody_billing_schedule_summary}
     </#if>
 
     <!-- Terms -->
-    <div style="page-break-inside: avoid;">
-     <h3 style="text-transform:uppercase;">Terms and Conditions</h3>
+    <h3 style="text-transform:uppercase;">Terms and Conditions</h3>
 
-     <table>
-        <tr>
-         <td style="padding:6px; text-align:justify;">
-          ${record.custbody_spire_terms_condition?replace("\n","<br/>")}
-         </td>
-       </tr>
-     </table>
-   </div>
+    <table>
+      <tr>
+        <td style="padding:6px; text-align:justify;">
+          ${record.custbody_az_spg_terms_conditions?replace("\n","<br/>")}
+        </td>
+      </tr>
+    </table>
 
     <!-- Footer -->
     <p class="center" style="font-size:8pt;">

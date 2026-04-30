@@ -61,13 +61,14 @@
 <table style="margin-bottom: 10px;">
   <thead>
     <tr>
-      <th style="width:4%;">#</th>
+      <th style="width:5%;">#</th>
       <th style="width:20%;">Account</th>
       <th style="width:25%;">Memo</th>
-      <th style="width:12%;">Department</th>
-      <th style="width:12%;">Class</th>
-      <th style="width:12%;">Debit</th>
-      <th style="width:12%;">Credit</th>
+      <th style="width:10%;">Department</th>
+      <th style="width:10%;">Class</th>
+      <th style="width:10%;">Location</th>
+      <th style="width:10%;">Debit</th>
+      <th style="width:10%;">Credit</th>
     </tr>
   </thead>
   <tbody>
@@ -95,7 +96,8 @@
       <td>${line.account!""}</td>
       <td>${line.memo!""}</td>
       <td>${line.department!""}</td>
-      <td>${line.class!""}</td>
+      <td style="white-space:normal;word-break: break-all;">${line.class!""}</td>
+      <td>${line.location!""}</td>
       <td class="right">
         <#if debitAmt != 0>
           ${debitAmt?string["#,##0.00"]}

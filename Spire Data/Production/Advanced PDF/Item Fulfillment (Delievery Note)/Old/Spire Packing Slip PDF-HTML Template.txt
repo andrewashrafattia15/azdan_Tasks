@@ -19,9 +19,9 @@
 <table class="no-border" style="margin-bottom: 10px; width: 100%;">
   <tr>
     <td class="no-border" style="width: 70%;">
-      <strong>${companyInformation.companyName!record.subsidiary!""}</strong><br/>
-      ${companyInformation.addressText!""}<br/>
-      TRN: ${companyInformation.federalIdNumber!""}
+     <strong>${(subsidiary.companyName)!""}</strong><br/>
+          ${(subsidiary.mainaddress_text)!""}<br/>
+      TRN: ${(subsidiary.federalidnumber)!""}
     </td>
     <td class="no-border" style="width: 30%; text-align: right;">
       <#if companyInformation.logoUrl?has_content>
@@ -39,28 +39,18 @@
 </table>
 
 <!-- ================= DOCUMENT INFO ================= -->
-<table style="margin-bottom: 5px;">
+<table width="100%" style="margin-bottom: 5px;">
   <tr>
-    <td><b>Subsidiary:</b> ${record.subsidiary}</td>
-    <td><b>Customer:</b> ${record.entity}</td>
-    <td><b>Packing Slip #:</b> ${record.tranid}</td>
-    <td><b>Date:</b> ${record.trandate}</td>
+    <td width="20%" style="white-space: nowrap;"><b>Subsidiary:</b> ${record.subsidiary}</td>
+    <td width="30%"><b>Customer:</b> ${record.entity?keep_after(" ")}</td>
+    <td width="20%" style="white-space: nowrap;"><b>Packing Slip #:</b> ${record.tranid}</td>
+    <td width="30%"><b>Date:</b> ${record.trandate}</td>
   </tr>
   <tr>
-    <td><b>Sales Order #:</b> ${record.createdfrom}</td>
+    <td style="white-space: nowrap;"><b>Sales Order #:</b> ${record.createdfrom?replace(".*#\\s*", "", "r")}</td>
     <td><b>Shipping Method:</b> ${record.shipmethod}</td>
     <td><b>Location:</b><#if record.item?has_content>${record.item[0].location!""}</#if></td>
     <td><b>Prepared By:</b> ${record.employee}</td>
-  </tr>
-</table>
-
-<!-- ================= ADDRESSES ================= -->
-<table style="margin-bottom: 10px;">
-  <tr>
-    <th>Ship To</th>
-  </tr>
-  <tr>
-    <td>${record.shipaddress}</td>
   </tr>
 </table>
 
