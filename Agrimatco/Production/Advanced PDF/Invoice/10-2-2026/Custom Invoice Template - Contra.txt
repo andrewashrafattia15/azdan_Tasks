@@ -1,0 +1,638 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+      <link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false" />
+    <macrolist>
+        <macro id="nlheader">
+          
+        </macro>
+        <macro id="nlfooter">
+            
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+			<#if .locale == "zh_CN">
+				font-family: NotoSans, NotoSansCJKsc, sans-serif;
+			<#elseif .locale == "zh_TW">
+				font-family: NotoSans, NotoSansCJKtc, sans-serif;
+			<#elseif .locale == "ja_JP">
+				font-family: NotoSans, NotoSansCJKjp, sans-serif;
+			<#elseif .locale == "ko_KR">
+				font-family: NotoSans, NotoSansCJKkr, sans-serif;
+			<#elseif .locale == "th_TH">
+				font-family: NotoSans, NotoSansThai, sans-serif;
+			<#else>
+				font-family: NotoSans, sans-serif;
+  				font-family: NotoSansArabic, sans-serif;
+			</#if>
+			}
+		table {
+			font-size: 6pt;
+			table-layout: fixed;
+		}
+        th {
+            font-weight: bold;
+            font-size: 5pt;
+            vertical-align: middle;
+            padding: 5px 6px 3px;
+            background-color: #F7F7F7;
+            color: #333333;
+            text-align: center;
+           align:center;
+        }
+        td {
+            padding: 4px 6px;
+        }
+		/* td p { align:left } */
+        b {
+            font-weight: bold;
+            color: #333333;
+        }
+        table.header td {
+            padding: 0px;
+            font-size: 7pt;
+        }
+        table.footer td {
+            padding: 0px;
+            font-size: 5pt;
+        }
+        table.itemtable th {
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+        table.body td {
+            padding-top: 2px;
+        }
+        table.total {
+            page-break-inside: avoid;
+        }
+        tr.totalrow {
+            background-color: #e3e3e3;
+            line-height: 200%;
+        }
+        td.totalboxtop {
+            font-size: 9pt;
+            background-color: #e3e3e3;
+        }
+        td.addressheader {
+            font-size: 5pt;
+            padding-top: 6px;
+            padding-bottom: 2px;
+        }
+        td.address {
+            padding-top: 0px;
+        }
+        td.totalboxmid {
+            font-size: 25pt;
+            padding-top: 20px;
+            background-color: #e3e3e3;
+        }
+        td.totalboxbot {
+            background-color: #e3e3e3;
+            font-weight: bold;
+        }
+        span.title {
+            font-size: 25pt;
+        }
+        span.number {
+            font-size: 13pt;
+        }
+        span.itemname {
+            font-weight: bold;
+            line-height: 150%;
+        }
+        hr {
+            width: 100%;
+            color: #c9c9c9;
+            background-color: #c9c9c9;
+            height: 1px;
+        }
+  .right{
+            text-align: right;
+            direction: rtl;
+           align:right;    
+  }
+  .left{
+            text-align: left;
+            direction: ltr;
+           align:left;    
+  }
+  
+  .center{
+            text-align: center;
+           align:center;    
+  }
+    .center p{
+            text-align: center;
+           align:center;    
+  }
+  .arabic {
+    
+  }
+  
+      /* td p{
+            text-align: right;
+            direction: rtl;
+           align:right;
+      }  */
+  th p{
+            text-align: center;
+           align:center;
+      }
+
+         /* body{background-image: url(
+        "${record.subsidiary.custrecord_az_agri_background_url@url}"
+    );}  */
+</style>
+</head>
+      
+<body header="nlheader" header-height="21%" footer="nlfooter" footer-height="10%" padding="10px" size="Letter">
+
+<table style= 'width:100%;'>
+     <tr>
+       <td style= ' align:center; font-size:15px;  ' >  Tax Invoice   فاتورة ضريبية</td>
+     </tr>
+     <tr>
+       <td style= ' align:center; font-size:15px;  ' >مبيعات ذمم</td>
+     </tr>
+</table>
+
+             
+<table   style= 'width:100%; margin-top:10px;  background:#ECECEC; '>
+  <#assign printTime = .now?string["hh:mm a"] />
+    
+     <#if record.custbody_ino_einv_sa_trx_qr2?length != 0>
+       <tr>
+         <td>&nbsp;</td>
+       </tr>
+    </#if>
+       
+       
+  <tr>
+  <td  style= 'width:30%; padding-top: 15px'>
+        <table style="border: 1px solid #B9B9B9; width: 115%">
+      <tr>
+        <td style='align:left'>Invoice Number: ${record.tranid}</td>
+      </tr>
+      
+      <tr style="border-top: 1px solid #B9B9B9;">
+        <td style='align:left'>Issue Date: ${record.trandate}</td>
+      </tr>
+      <tr style="border-top: 1px solid #B9B9B9;">
+        <td style='align:left'>Issue Time: ${printTime}</td>
+      </tr>
+      
+      <tr style="border-top: 1px solid #B9B9B9;">
+        <td style='align:left'>Due Date: ${record.duedate}</td>
+      </tr>
+
+      <tr style="border-top: 1px solid #B9B9B9;">
+        <td style='align:left; font-size:7pt'>Customer Name: ${record.custbody_ino_einv_sa_trx_entity_regist}</td>
+      </tr>
+
+      <tr style="border-top: 1px solid #B9B9B9;">
+        <td style='align:left; font-size:7pt'>VAT Registration Number: ${record.custbody_ino_einv_sa_trx_entity_taxsch}</td>
+      </tr>
+      <tr style="border-top: 1px solid #B9B9B9;">
+        <td style='align:left; font-size:7pt'>Engineer Name: ${record.salesrep.custentity_ino_hrms_emp_fullname}</td>
+      </tr>
+      <tr style="border-top: 1px solid #B9B9B9;">
+        <td style='align:left; font-size:7pt'>PO#: ${record.otherrefnum}</td>
+      </tr>
+
+      <tr style="border-top: 1px solid #B9B9B9;">
+        <td style='align:left; font-size:7pt'>Memo: ${record.memo}</td>
+      </tr>
+    </table>
+  </td>
+  <td style= 'width:40%;' >  
+    <#if record.custbody_ino_einv_sa_trx_qr2?length != 0>
+          <table >
+                 <tr>
+                <td align="center" style="padding:3px; background:#ffffff; margin-left:40px; " ><barcode codetype="qrcode" showtext="true" height ="130" width="130" value="${record.custbody_ino_einv_sa_trx_qr2}" /></td>
+                 </tr>
+            </table>
+            </#if>
+
+  </td>
+  <td style= 'width:30%; padding-top: 15px'>
+    <table  style="border: 1px solid #B9B9B9; width: 100%;direction: rtl;">
+      <tr>
+        <td style = "align:right;">${record.tranid} :الرقم التسلسلي</td>
+      </tr>
+      
+      <tr style="border-top: 1px solid #B9B9B9;">
+        <td style = "align:right;">${record.trandate} :تاريخ اصدار الفاتورة</td>
+      </tr>
+      <tr style="border-top: 1px solid #B9B9B9;">
+        <td style = "align:right;">${printTime} :ساعة اصدار الفاتورة</td>
+      </tr>
+      
+      <tr style="border-top: 1px solid #B9B9B9;">
+        <td style = "align:right;">${record.duedate} :تاريخ الاستحقاق</td>
+      </tr>
+
+      <tr style="border-top: 1px solid #B9B9B9;">
+        <td style="font-size:7pt;align:right;text-align:right;padding-left:0;" ><p align="right"> اسم العميل :${record.custbody_ino_einv_sa_trx_entity_regist}</p></td>
+      </tr>
+
+      <tr style="border-top: 1px solid #B9B9B9;">
+        <td style="font-size:7pt;align:right;">${record.custbody_ino_einv_sa_trx_entity_taxsch} :الرقم الضريبي</td>
+      </tr>
+      
+      <tr style="border-top: 1px solid #B9B9B9;">
+        <td style="font-size:7pt;align:right;">${record.salesrep.custentity_ino_hrms_emp_fullname} :اسم المهندس</td>
+      </tr>
+      <tr style="border-top: 1px solid #B9B9B9;">
+        <td style="font-size:7pt;align:right;">${record.otherrefnum} :امر المشتريات</td>
+      </tr>
+
+      <tr style="border-top: 1px solid #B9B9B9;">
+        <td style="font-size:7pt;align:right;">${record.memo} :ملاحظات</td>
+      </tr>
+    </table>
+  </td>
+  </tr>
+</table>
+             
+<!-- <table class="right"   style="width : 100% ; border: 1px solid #B9B9B9; margin-top:10px; padding:5px;">
+  <tr>
+    <td  style=" font-size : 14pt">هوية المورد </td>
+    <td  style=" align:left; font-size : 14pt">Seller Identification</td>
+  </tr>
+  <tr>
+    <td  class="right" >  اسم المورد  </td>
+    <td  style=" align:left; "> Seller Name</td>
+  </tr>
+  
+  <tr   >
+    <td   style="border-top: 1px solid #B9B9B9; border-right: 1px solid #B9B9B9;border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9;    background-color: #F7F7F7;">${record.custbody_ino_einv_sa_trx_sub_legalname}</td>
+    <td   style='border-top: 1px solid #B9B9B9; border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9; align:left; background-color: #F7F7F7;' > ${record.custbody_ino_einv_sa_trx_issuerinfo}</td>
+  </tr>
+
+
+  <tr>
+    <td   class="right" >رقم تسجيل ضريبة القيمة المضافة</td>
+    <td   style=" align:left; ">VAT Registration Number</td>
+  </tr>
+  
+  <tr   >
+    <td   style="border-top: 1px solid #B9B9B9; border-right: 1px solid #B9B9B9;border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9;    background-color: #F7F7F7;">${record.custbody_ino_einv_sa_trx_sub_taxscheme}</td>
+    <td   style='border-top: 1px solid #B9B9B9; border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9; align:left; background-color: #F7F7F7;' > ${record.custbody_ino_einv_sa_trx_sub_taxscheme}</td>
+  </tr>
+
+
+  <tr>
+    <td class="right" >
+      <table style="width:100%;">
+        
+  <tr>
+    <td  class="right" >رقم المعرفات الإضافية للمورد</td>
+    <td   style=" align:left; ">Additional Seller ID Number</td>
+  </tr>
+  
+  <tr   >
+    <td   style="border-top: 1px solid #B9B9B9; border-right: 1px solid #B9B9B9;border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9;    background-color: #F7F7F7;">${record.custbody_ino_einv_sa_trx_sub_crm}</td>
+    <td   style='border-top: 1px solid #B9B9B9; border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9; align:left; background-color: #F7F7F7;' > ${record.custbody_ino_einv_sa_trx_sub_crm}</td>
+  </tr>
+      </table>
+    </td>
+    <td>
+      <table style="width:100%;">
+        
+  <tr>
+    <td  style="width:40%;" class="right" >نوع المعرفات الإضافية للمورد</td>
+    <td   style=" align:left; width:60%;">Additional Seller ID Type</td>
+  </tr>
+  
+  <tr   >
+    <td   style="border-top: 1px solid #B9B9B9; border-right: 1px solid #B9B9B9;border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9;    background-color: #F7F7F7;">السجل التجاري</td>
+    <td   style='border-top: 1px solid #B9B9B9; border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9; align:left; background-color: #F7F7F7;' >Commercial Registration (CR)</td>
+  </tr>
+      </table>
+    </td>
+  </tr>
+
+
+  <tr>
+    <td  style=" font-size : 14pt">العنوان</td>
+    <td  style=" align:left; font-size : 14pt">Address</td>
+  </tr>
+  <tr>
+    <td  class="right" >اسم الشارع</td>
+    <td  style=" align:left; ">Street Name</td>
+  </tr>
+  
+  <tr   >
+    <td   style="border-top: 1px solid #B9B9B9; border-right: 1px solid #B9B9B9;border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9;    background-color: #F7F7F7;">${record.custbody_ino_einv_sa_trx_sub_strname}</td>
+    <td   style='border-top: 1px solid #B9B9B9; border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9; align:left; background-color: #F7F7F7;' >${record.custbody_ino_einv_sa_trx_sub_strname} </td>
+  </tr>
+  
+ <tr>
+    <td class="right" >
+      <table style="width:100%;">
+        
+  <tr>
+    <td  class="right" >اسم المدينة</td>
+    <td   style=" align:left; ">city</td>
+  </tr>
+  
+  <tr   >
+    <td   style="border-top: 1px solid #B9B9B9; border-right: 1px solid #B9B9B9;border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9;    background-color: #F7F7F7;">${record.custbody_ino_einv_sa_trx_sub_cityname}</td>
+    <td   style='border-top: 1px solid #B9B9B9; border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9; align:left; background-color: #F7F7F7;' > ${record.custbody_ino_einv_sa_trx_sub_cityname}</td>
+  </tr>
+      </table>
+    </td>
+    <td>
+      <table style="width:100%;">
+        
+  <tr>
+    <td  class="right" >رقم المبنى</td>
+    <td   style=" align:left; ">Building Number</td>
+  </tr>
+  
+  <tr   >
+    <td   style="border-top: 1px solid #B9B9B9; border-right: 1px solid #B9B9B9;border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9;    background-color: #F7F7F7;">${record.custbody_ino_einv_sa_trx_sub_buildno}</td>
+    <td   style='border-top: 1px solid #B9B9B9; border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9; align:left; background-color: #F7F7F7;' >${record.custbody_ino_einv_sa_trx_sub_buildno}</td>
+  </tr>
+      </table>
+    </td>
+  </tr>
+
+
+   <tr>
+    <td class="right" >
+      <table style="width:100%;">
+        
+  <tr>
+    <td  class="right" >رمز الدولة</td>
+    <td   style=" align:left; ">Country Code</td>
+  </tr>
+  
+  <tr   >
+    <td   style="border-top: 1px solid #B9B9B9; border-right: 1px solid #B9B9B9;border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9;    background-color: #F7F7F7;">${record.custbody_ino_einv_sa_trx_sub_countryco}</td>
+    <td   style='border-top: 1px solid #B9B9B9; border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9; align:left; background-color: #F7F7F7;' > ${record.custbody_ino_einv_sa_trx_sub_countryco}</td>
+  </tr>
+      </table>
+    </td>
+    <td>
+      <table style="width:100%;">
+        
+  <tr>
+    <td  class="right" >اسم الحي</td>
+    <td   style=" align:left; ">District</td>
+  </tr>
+  
+  <tr   >
+    <td   style="border-top: 1px solid #B9B9B9; border-right: 1px solid #B9B9B9;border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9;    background-color: #F7F7F7;">${record.custbody_ino_einv_sa_trx_sub_subdiv}</td>
+    <td   style='border-top: 1px solid #B9B9B9; border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9; align:left; background-color: #F7F7F7;' >${record.custbody_ino_einv_sa_trx_sub_subdiv}</td>
+  </tr>
+      </table>
+    </td>
+  </tr>
+
+
+ <tr>
+    <td class="right" >
+      <table style="width:100%;">
+        
+  <tr>
+    <td  class="right" >الرمز البريدي</td>
+    <td   style=" align:left; ">Postal Code</td>
+  </tr>
+  
+  <tr   >
+    <td   style="border-top: 1px solid #B9B9B9; border-right: 1px solid #B9B9B9;border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9;    background-color: #F7F7F7;">${record.custbody_ino_einv_sa_trx_sub_postalcod}</td>
+    <td   style='border-top: 1px solid #B9B9B9; border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9; align:left; background-color: #F7F7F7;' > ${record.custbody_ino_einv_sa_trx_sub_postalcod}</td>
+  </tr>
+      </table>
+    </td>
+    <td></td>
+  </tr>
+
+  
+</table>
+      -->
+<table class="right"   style="width : 100% ;">
+
+
+  <tr>
+    <td>
+      <table style="width:100%;">
+        
+  <!-- <tr>
+    <td  style="width:40%;" class="right" >نوع المعرفات الإضافية للمورد</td>
+    <td   style=" align:left; width:60%;">Additional Seller ID Type</td>
+  </tr>
+  
+  <tr   >
+    <td   style=" border-top: 1px solid #B9B9B9; border-right: 1px solid #B9B9B9;border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9;    background-color: #F7F7F7;">السجل التجاري</td>
+    <td   style=' border-top: 1px solid #B9B9B9; border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9; align:left; background-color: #F7F7F7;' >Commercial Registration (CR)</td>
+  </tr> -->
+      </table>
+    </td>
+  </tr>
+
+
+  <!-- <tr>
+    <td  style=" font-size : 14pt">العنوان</td>
+    <td  style=" align:left; font-size : 14pt">Address</td>
+  </tr>
+  <tr>
+    <td  class="right" >اسم الشارع</td>
+    <td  style=" align:left; ">Street Name</td>
+  </tr>
+  
+  <tr   >
+    <td   style="border-top: 1px solid #B9B9B9; border-right: 1px solid #B9B9B9;border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9;    background-color: #F7F7F7;">${record.custbody_ino_einv_sa_trx_entity_street}</td>
+    <td   style='border-top: 1px solid #B9B9B9; border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9; align:left; background-color: #F7F7F7;' > ${record.custbody_ino_einv_sa_trx_entity_street}</td>
+  </tr>
+  
+ <tr>
+    <td class="right" >
+      <table style="width:100%;">
+        
+  <tr>
+    <td  class="right" >اسم المدينة</td>
+    <td   style=" align:left; ">city</td>
+  </tr>
+  
+  <tr   >
+    <td   style="border-top: 1px solid #B9B9B9; border-right: 1px solid #B9B9B9;border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9;    background-color: #F7F7F7;">${record.custbody_ino_einv_sa_trx_entity_city}</td>
+    <td   style='border-top: 1px solid #B9B9B9; border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9; align:left; background-color: #F7F7F7;' > ${record.custbody_ino_einv_sa_trx_entity_city}</td>
+  </tr>
+      </table>
+    </td>
+    <td>
+      <table style="width:100%;">
+        
+  <tr>
+    <td  class="right" >رقم المبنى</td>
+    <td   style=" align:left; ">Building Number</td>
+  </tr>
+  
+  <tr   >
+    <td   style="border-top: 1px solid #B9B9B9; border-right: 1px solid #B9B9B9;border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9;    background-color: #F7F7F7;">${record.custbody_ino_einv_sa_trx_entity_buildn}</td>
+    <td   style='border-top: 1px solid #B9B9B9; border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9; align:left; background-color: #F7F7F7;' >${record.custbody_ino_einv_sa_trx_entity_buildn}</td>
+  </tr>
+      </table>
+    </td>
+  </tr>
+
+
+   <tr>
+    <td class="right" >
+      <table style="width:100%;">
+        
+  <tr>
+    <td  class="right" >رمز الدولة</td>
+    <td   style=" align:left; ">Country Code</td>
+  </tr>
+  
+  <tr   >
+    <td   style="border-top: 1px solid #B9B9B9; border-right: 1px solid #B9B9B9;border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9;    background-color: #F7F7F7;">${record.custbody_ino_einv_sa_trx_entity_contry}</td>
+    <td   style='border-top: 1px solid #B9B9B9; border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9; align:left; background-color: #F7F7F7;' > ${record.custbody_ino_einv_sa_trx_entity_contry}</td>
+  </tr>
+      </table>
+    </td>
+    <td>
+      <table style="width:100%;">
+        
+  <tr>
+    <td  class="right" >اسم الحي</td>
+    <td   style=" align:left; ">District</td>
+  </tr>
+  
+  <tr   >
+    <td   style="border-top: 1px solid #B9B9B9; border-right: 1px solid #B9B9B9;border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9;    background-color: #F7F7F7;">${record.custbody_ino_einv_sa_trx_entity_subd}</td>
+    <td   style='border-top: 1px solid #B9B9B9; border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9; align:left; background-color: #F7F7F7;' >${record.custbody_ino_einv_sa_trx_entity_subd}</td>
+  </tr>
+      </table>
+    </td>
+  </tr>
+
+
+ <tr>
+    <td class="right" >
+      <table style="width:100%;">
+        
+  <tr>
+    <td  class="right" >الرمز البريدي</td>
+    <td   style=" align:left; ">Postal Code</td>
+  </tr>
+  
+  <tr   >
+    <td   style="border-top: 1px solid #B9B9B9; border-right: 1px solid #B9B9B9;border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9;    background-color: #F7F7F7;">${record.custbody_ino_einv_sa_trx_entity_postal}</td>
+    <td   style='border-top: 1px solid #B9B9B9; border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9; align:left; background-color: #F7F7F7;' > ${record.custbody_ino_einv_sa_trx_entity_postal}</td>
+  </tr>
+      </table>
+    </td>
+    <td></td>
+  </tr> -->
+
+  
+</table>
+
+
+<table class="right"  style="width : 100% ; border: 1px solid #B9B9B9; margin-top:5px; padding:5px;">
+  <tr>
+    <th style="border-left: 1px solid #B9B9B9;">إجمالي المبلغ شامل الضريبة <br/> Subtotal Including VAT</th>
+    <th style="border-left: 1px solid #B9B9B9; width:51px">مبلغ الضريبة<br/> VAT Amount</th>
+    <th style="border-left: 1px solid #B9B9B9;">إجمالي المبلغ قبل الضريبة<br/> Subtotal Before VAT</th>
+    <th style="border-left: 1px solid #B9B9B9; width:41px">الضريبة<br/> VAT Rate</th>
+    <th style="border-left: 1px solid #B9B9B9; width:50px">سعر الوحدة<br/> Unit Price</th>
+    <th style="border-left: 1px solid #B9B9B9; width:35px">الكمية<br/>Quantity </th>
+    <th style="border-left: 1px solid #B9B9B9;width:151px">وصف المادة<br/> Product Description </th>
+    <th style="width:200px">اسم المادة<br/> Product Name </th>
+  </tr>
+
+   <#if record.custpage_custrecord_to_print?has_content>
+     <#assign customrecord = record.custpage_custrecord_to_print?eval/>
+     <#list customrecord as item>
+      <tr >
+       <td align="center" style="border-left: 1px solid #B9B9B9; border-top: 1px solid #B9B9B9;"> <strong> <#if item.grossAmt?string == ""> ${item.grossAmt} <#else>  ${item.grossAmt?string(",##0.00")} </#if> </strong> </td>
+       <td align="center" style="border-left: 1px solid #B9B9B9; border-top: 1px solid #B9B9B9;"> <strong> <#if item.taxAmt?string == ""> ${item.taxAmt} <#else>  ${item.taxAmt?string(",##0.00")} </#if> </strong> </td>
+       <td align="center" style="border-left: 1px solid #B9B9B9; border-top: 1px solid #B9B9B9;"> <strong><#if item.amount?string == ""> ${item.amount} <#else>  ${item.amount?string(",##0.00")} </#if> </strong> </td>
+       <td align="center" style="border-left: 1px solid #B9B9B9; border-top: 1px solid #B9B9B9;"> <strong>${item.taxRate}%</strong> </td>
+       <td align="center" style="border-left: 1px solid #B9B9B9; border-top: 1px solid #B9B9B9;"> <strong> <#if item.rate?string == ""> ${item.rate} <#else>  ${item.rate?string(",##0.00")} </#if> </strong> </td>
+       <td align="center" style="border-left: 1px solid #B9B9B9; border-top: 1px solid #B9B9B9;"> <strong>${item.quantity}</strong> </td>
+
+       <#assign itemParts = item.itemName?split(":") />
+       <td align="center" style=" border-top: 1px solid #B9B9B9;border-left: 1px solid #B9B9B9;"> <strong>${(item.description)!" "}</strong> </td>
+       <td align="left" style="border-top: 1px solid #B9B9B9;"> <strong><#if item.custcol_ino_einv_sa_trx_ln_itemnamear?has_content > ${item.custcol_ino_einv_sa_trx_ln_itemnamear}  <#else> ${item.itemNo} - ${itemParts[itemParts?size - 1]} / ${item.itemArabicName}</#if> </strong> </td>
+      </tr>
+    </#list>
+   </#if>
+         
+</table>
+            
+<table   style="width : 60% ; border: 1px solid #B9B9B9; margin-top:5px; background-color: #F7F7F7;">
+  <tr>
+    <td class="center" style="width : 70% ; border-right: 1px solid #B9B9B9; border-bottom: 1px solid #B9B9B9;">Total Before VAT / المبلغ قبل الضريبة </td>
+    <td class="center" style="width : 30% ; border-bottom: 1px solid #B9B9B9;"> <strong>  ${record.subtotal?string(",##0.00")}</strong></td>
+  </tr>
+  <tr>
+    <td class="center" style="width : 70% ; border-right: 1px solid #B9B9B9; border-bottom: 1px solid #B9B9B9;">VAT Amount / مبلغ الضريبة</td>
+    <td class="center" style="width : 30% ; border-bottom: 1px solid #B9B9B9;"><strong> ${record.taxtotal?string(",##0.00")} </strong> </td>
+  </tr>
+  <tr>
+    <td class="center" style=" border-right: 1px solid #B9B9B9;" >Invoice Total Amount (Including VAT) / الإجمالي شامل الضريبة</td>
+    <td class="center"><strong> ${record.total?string(",##0.00")} </strong></td>
+  </tr>
+</table>
+
+<table class="center"   style="width : 100% ; border: 1px solid #B9B9B9; margin-top:10px; padding:5px;">
+  <tr>
+    <td><p align="right">تهدف خدمات مكافحة الآفات المقدمة إلى تقليل و السيطرة على نشاط الآفات بناءً على ظروف الموقع التى تمت ملاحظتها وقت تنفيذ الخدمة. ولا تتحمل شركة كونترا لمكافحة الآفات أى مسؤولية عن عودة الإصابة الناتجة عن العيوب الإنشائية أو سوء النظافة أو عدم التزام العميل بتنفيذ التوصيات الموصى بها من قبل فرقنا أو عوامل خارجة عن نطاق سيطرتنا، كما تقع مسؤولية المتابعة المستمرة و تنفيذ الإجراءات التصحيحية على العميل </p></td>
+  </tr>
+  <tr>
+    <td><p align="left">The pest control services provided are intended to reduce and control pest activity based on site conditions observed at the time of service. Contra Pest Control is not responsible for re-infestation caused by structural 
+defects, sanitation issues, client non-compliance with recommendations, or factors beyond our control; continued monitoring and corrective actions are the responsibility of the client.</p></td>
+</tr>
+</table>
+
+<table class="center"   style="width : 100% ; margin-top:10px; padding:5px;">
+  <tr>
+    <td class="center">توقيع العميل <br/><b> Customer Signature </b></td>
+    <td></td>
+    <td class="center">توقيع و ختم الشركة <br/><b> Company Signature / Stamp </b></td>
+  </tr>
+</table>
+           
+<!-- <table class="right"   style="width : 100% ; border: 1px solid #B9B9B9; margin-top:10px; padding:5px;">
+  <tr>
+    <td   class="right" style=" font-size : 14pt">شروط الدفع </td>
+    <td  style=" align:left; font-size : 14pt">Payment Terms</td>
+  </tr>
+  <tr>
+    <td  class="right" > طريقة الدفع</td>
+    <td  style=" align:left; "> Payment means</td>
+  </tr>
+  
+  <tr   >
+    <td   style="border-top: 1px solid #B9B9B9; border-right: 1px solid #B9B9B9;border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9;    background-color: #F7F7F7;">
+     <#if record.custbody_ino_einv_sa_trx_paymentmeansc == "Bank Card">البطاقة المصرفية
+       <#elseif  record.custbody_ino_einv_sa_trx_paymentmeansc == "Credit Transfer">تحويل الرصيد
+       <#elseif  record.custbody_ino_einv_sa_trx_paymentmeansc == "In Cash"> نقدا
+       <#elseif  record.custbody_ino_einv_sa_trx_paymentmeansc == "Instrument Not Defined">الأداة غير محددة
+       <#elseif  record.custbody_ino_einv_sa_trx_paymentmeansc == "Payment to Bank Account">الدفع إلى الحساب البنكي
+</#if>
+    </td>
+    <td   style='border-top: 1px solid #B9B9B9; border-bottom: 1px solid #B9B9B9;  border-left: 1px solid #B9B9B9; align:left; background-color: #F7F7F7;' > ${record.custbody_ino_einv_sa_trx_paymentmeansc}</td>
+  </tr>
+</table>
+        -->
+  </body>
+</pdf>

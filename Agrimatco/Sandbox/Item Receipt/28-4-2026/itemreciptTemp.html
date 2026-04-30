@@ -1,0 +1,163 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+    <link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false" />
+
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlfooter">
+            <table style="border: none;">
+                <tr style="border: none;">
+                    <td align="left" style="border: none;">
+                        <p style="text-align:left;font-size:12px;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; crr_date
+                            <span style="float:right;">
+                                crr_time 
+                            </span>
+                        </p>
+                    </td>
+                    <td align="right" style="border: none;">
+                        <pagenumber/> of <totalpages/>
+                    </td>
+                </tr>
+            </table>
+        </macro>
+        <macro id="nlheader">
+            <p></p>
+
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+      		font-family: NotoSansArabic, sans-serif;
+		</#if>
+		}
+      table { font-size: 9pt; table-layout: fixed; width: 100%; }
+th { font-weight: bold; font-size: 8pt; vertical-align: middle; padding: 5px 6px 3px; background-color: #e3e3e3; color: #333333; padding-bottom: 10px; padding-top: 10px; }
+td { padding: 4px 6px; }
+b { font-weight: bold; color: #333333; }
+table,th,td {
+        margin: 0in;
+        font-size: 9px;
+  		font-weight: normal;
+        font-family: "Calibri", sans-serif;
+        border: 0.5px solid black;
+  border-collapse: collapse;}
+  body{background-image: url(
+    ${"varbackground"?replace("&", "&amp;")}
+    );}
+</style>
+</head>
+<body padding="0.5in 0.5in 0.5in 0.5in" size="Letter" footer="nlfooter" footer-height="10pt" header="nlheader" header-height="10%">
+        <p align="center" style="font-weight: bold;">استلام بضاعة</p>
+        <p align="center" style="font-weight: bold;">
+            <!-- refnum -->
+         </p>
+
+
+    <table style="width: 100%;">
+            <tr>
+                <td align="right" style="width: 90%;">accreditation_num</td>
+                <td align="right">رقم الاعتماد</td>
+            </tr>
+            <tr>
+                <td align="right">accreditation_date</td>
+                <td align="right">تاريخ الاعتماد</td>
+            </tr>
+            <tr>
+                <td align="right">entity</td>
+                <td align="right">المورد</td>
+            </tr>
+            <!--locationRow-->
+            <tr>
+                <td align="right">memo</td>
+                <td align="right">ملاحظات</td>
+            </tr>
+    </table>
+  <br/>
+    <table style="width: 100%;">
+        <tr style="background-color: #ffff80;" align="center">
+            <!-- <td align="center">الاجمالي</td> -->
+            <td align="center" style="width: 10%;">تاريخ إنتهاء الصلاحية</td>
+            <td align="center" style="width: 10%;">مكان الإستلام</td>
+            <td align="center" style="width: 10%;">رقم اللوط</td> 
+            <td align="center" style="width: 13%;">التكلفة النهائية للوحدة بالعملة المحلية</td> 
+            <!-- <td align="center" style="width: 10%;">التكلفة النهائية</td> 
+            <td align="center" style="width: 10%;">اجمالي المبلغ</td>  -->
+            <td align="center" style="width: 13%;">قيمة البضاعة بسعر المورد بالعملة المحلية</td>
+            <td align="center" style="width: 8%;">الكمية</td>
+            <td align="center" style="width: 7%;">الوحدة</td>
+            <td align="center" style="width: 20%;">بيان المادة</td>
+            <td align="center" style="width: 8%;">رمز المادة</td>
+        </tr>
+        <!-- <table1> -->
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td align="right">
+                    <!-- landedcostamt -->
+                </td>
+                <td align="right">
+                    <!-- totalamt -->
+                </td>
+                <td style="background-color: #ffff80;" align="center">الاجمالي</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+    </table>
+
+    <!-- <table style="width: 100%;"> -->
+        <!-- <tr> -->
+            <!-- <td align="center" style="background-color: #ffff80;">total_local_cur</td> -->
+            <!-- <td style="width:80%;">اجمالي الاعتماد بالعملة المحلية</td> -->
+        <!-- </tr> -->
+    <!-- </table> -->
+  	<br/>
+    <table style="width: 100%;">
+        <tr style="background-color: #ffff80;" align="center">
+            <td align="center">ملاحظات</td>
+            <td align="center" style="width: 10%;">رقم المستند</td>
+            <td align="center" style="width: 12%;"> التكلفة علي المخزون</td>
+            <td align="center" style="width: 15%;">الجهة</td>
+            <td align="center" style="width: 10%;">تاريخ الحركة</td>
+            <td align="center" style="width: 10%;">نوع الحركة</td>
+        </tr>
+        <!-- <table2> -->  
+    </table>
+      <table style="width: 100%;">
+        <tr>
+          	<td style="border: none;"></td>
+            <td style="border: none;width: 10%; "></td>
+            <td align="right" style="width: 12%;background-color: #ffff80;width: 12%;">num2</td>
+            <td style="border: none;width: 15%;"></td>
+            <td style="border: none;width: 10%;"></td>
+            <td style="border: none;width: 10%;"></td>
+
+        </tr>
+    </table>
+</body>
+</pdf>
