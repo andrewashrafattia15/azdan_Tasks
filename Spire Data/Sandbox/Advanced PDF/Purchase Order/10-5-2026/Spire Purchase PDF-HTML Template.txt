@@ -1,0 +1,302 @@
+<pdf>
+  <head>
+    <macrolist>
+      <macro id="nlfooter">
+        <table class="no-border" style="width:100%; margin-top:10px; font-size:8pt;">
+          <tr>
+            <td align="left" >
+              Page <pagenumber/> of <totalpages/>
+            </td>
+            <td align="center">
+              Printed: ${.now?string("dd-MMM-yyyy HH:mm:ss")}
+            </td>
+            <td align="right" >
+              Created By: ${record.custbody_az_spg_created_by?substring(record.custbody_az_spg_created_by?index_of(" ") + 1)!""}
+            </td>
+          </tr>
+        </table>
+      </macro>
+    </macrolist>
+    <style type="text/css">
+
+      body {
+        font-family: sans-serif;
+        font-size: 9pt;
+        margin: 0;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 8pt;
+      }
+
+      th, td {
+        border: 0.2px solid #e0e0e0;
+        padding: 3px 4px;
+        font-size: 8pt;
+      }
+
+      th {
+        background-color: #f9f9f9;
+        font-weight: bold;
+      }
+
+      .no-border td,
+      .no-border th {
+        border: none;
+      }
+
+      .center { text-align: center; }
+      .right { text-align: right; }
+      .left { text-align: left; }
+      .bold { font-weight: bold; }
+
+      h2 {
+        margin: 0;
+        font-size: 14pt;
+      }
+
+      h3 {
+        font-size: 9pt;
+        margin-top: 10px;
+        margin-bottom: 5px;
+      }
+
+      p {
+        font-size: 8pt;
+        margin: 0;
+      }
+
+    </style>
+  </head>
+
+  <body footer="nlfooter" footer-height="20pt" padding="10mm">
+
+    <!-- Header -->
+    <table class="no-border" style="margin-bottom: 8px;">
+      <tr>
+        <td style="width:70%;">
+          <strong style="font-size:15px">${subsidiary.name!""}</strong><br/>
+          ${subsidiary.mainaddress_text!""}<br/>
+          TRN: ${subsidiary.federalidnumber}
+        </td>
+        <td align="right" style="width:30%">
+          <@filecabinet nstype="image" src="${subsidiary.logo}" style="width:159px; height:63px;" />
+        </td>
+      </tr>
+    </table>
+
+    <!-- Title -->
+    <table class="no-border" style="width:100%; margin-bottom:8px;">
+      <tr>
+        <td class="center">
+          <h2>PURCHASE ORDER</h2>
+        </td>
+      </tr>
+    </table>
+
+    <!-- PO Info -->
+    <table style="margin-bottom:6px;">
+      <tr>
+        <td colspan="2"><b>Vendor:</b> ${record.entity.companyname}</td>
+        <td><b>Date:</b> ${record.trandate}</td>
+        <td><b>PO #:</b> ${record.tranid}</td>
+        <td><b>Terms:</b> ${record.terms}</td>
+      </tr>
+    </table>
+    <table style="margin-bottom:6px;">
+      <#assign poData = record.custpage_custrecord_vendor_data?eval_json>
+
+      <tr>
+        <td><b>Vendor Address:</b> ${poData.vendorAddress}</td>
+        <td><b>Currency:</b> ${record.currency}</td>
+        <td><b>Rate:</b> ${record.exchangerate?string["0.00"]!"-"}</td>
+        <td><b>Delivery Date:</b> ${record.duedate}</td>
+        <td><b>Reference:</b> ${record.otherrefnum!""}</td>
+      </tr>
+    </table>
+
+    <!-- Items -->
+    <table style="margin-bottom:8px;">
+      <thead>
+        <tr>
+          <th width="5%">#</th>
+          <th width="20%">Item</th>
+          <th width="25%">Description</th>
+          <th width="5%">UOM</th>
+          <th width="10%">Qty</th>
+          <th width="10%" style="text-align:right;">Rate</th>
+          <th width="10%" style="text-align:right;">VAT %</th>
+          <th width="10%" style="text-align:right;">VAT</th>
+          <th width="10%" style="text-align:right;">Amount</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <#list record.item as item>
+        <tr>
+          <td>${item_index + 1}</td>
+          <td>${item.item!""}</td>
+          <td>${item.description!""}</td>
+          <td class="right">${item.units!""}</td>
+          <td class="right">${item.quantity!""}</td>
+          <td class="right">${item.rate?string["#,##0.00"]!"0.00"}</td>
+          <td class="right">${item.taxrate1!""}</td>
+          <td class="right">${item.tax1amt?string["#,##0.00"]!"0.00"}</td>
+          <td class="right">${item.amount?string["#,##0.00"]!"0.00"}</td>
+        </tr>
+        </#list>
+      </tbody>
+    </table>
+
+    <!-- Totals -->
+    <table style="margin-bottom:8px;">
+      <tr>
+        <td style="width:60%; vertical-align:top;">
+          <b>Amount in Words:</b><br/>
+           ${record.currency.symbol!""} ${record.custbody_az_spg_amount_in_words!""}
+        </td>
+
+        <td style="width:40%;">
+          <table class="no-border">
+
+            <#assign subtotalClean =
+              (record.subtotal!"0")?string
+                ?replace("[^0-9.-]", "", "r")
+                ?number
+                ?string["#,##0.00"]
+            >
+
+            <#assign taxClean =
+              (record.taxtotal!"0")?string
+                ?replace("[^0-9.-]", "", "r")
+                ?number
+                ?string["#,##0.00"]
+            >
+
+            <#assign totalClean =
+              (record.total!"0")?string
+                ?replace("[^0-9.-]", "", "r")
+                ?number
+                ?string["#,##0.00"]
+            >
+
+            <tr>
+              <td>Net Total:</td>
+              <td class="right">${record.currency} ${subtotalClean}</td>
+            </tr>
+
+            <tr>
+              <td>Tax:</td>
+              <td class="right">${record.currency} ${taxClean}</td>
+            </tr>
+
+            <tr>
+              <td><b>Gross Total:</b></td>
+              <td class="right">
+                <b>${record.currency} ${totalClean}</b>
+              </td>
+            </tr>
+
+          </table>
+        </td>
+      </tr>
+    </table>
+
+    <!-- Remark & Terms -->
+    <h3>Remarks</h3>
+    <table style="margin-bottom:8px;">
+      <tr>
+        <td>
+          ${record.memo!""}
+        </td>
+      </tr>
+    </table>
+
+    <h3>Terms</h3>
+    <table style="margin-bottom:8px;">
+      <tr>
+        <td>
+          ${record.terms!""}
+        </td>
+      </tr>
+    </table>
+
+<#if record.custbody_az_spg_salesorder_no.custbody_az_spg_enduser?has_content>
+<#assign raw = record.custpage_customer_contacts!"" />
+<#if raw?has_content>
+  <#assign data = raw?eval />
+  <#assign customer = data.customer!{} />
+  <#assign contacts = data.contacts![] />
+  <#assign resellerTRN = data.resellerTRN!'' />
+<#else>
+  <#assign customer = {} />
+  <#assign contacts = [] />
+  <#assign resellerTRN = ''/>
+</#if>
+</#if>
+
+    <!-- Vendor / Delivery Info -->
+       <table width="100%" style="margin-bottom:6px;">
+      <tr>
+        <th width="60%">Reseller Details</th>
+        <th width="40%">End User Details</th>
+      </tr>
+      <tr>
+        <td width="60%" style="vertical-align:top;">
+          <#if record.custbody_az_spg_salesorder_no.custbody_az_spg_reseller?has_content>
+             ${record.custbody_az_spg_salesorder_no.billaddress!""}<br/>
+             <b>TRN:</b> ${resellerTRN!""}
+          </#if>
+        </td>
+        <td width="40%" style="vertical-align:top;">
+<#if record.custbody_az_spg_salesorder_no.custbody_az_spg_enduser?has_content>
+
+
+<!-- ================= CUSTOMER ================= -->
+<b>${customer.name!""}</b><br/>
+${customer.address!""}<br/>
+<#if customer.website?has_content>
+  <b>Website:</b> ${customer.website}<br/>
+</#if>
+
+<br/>
+
+<!-- ================= CONTACTS ================= -->
+  <b>Contacts</b>
+
+  <table style="width:100%; border-collapse:collapse;">
+    <tr>
+      <th align="left">Name</th>
+      <th align="left">Email</th>
+      <th align="left">Phone</th>
+    </tr>
+
+<#if contacts?has_content>
+    <#list contacts as c>
+      <tr>
+        <td>${c.name!""}</td>
+        <td>${c.email!""}</td>
+        <td>${c.phone!""}</td>
+      </tr>
+    </#list>
+</#if>
+  </table>
+          </#if>
+        </td>
+      </tr>
+    </table>
+
+   <h3>Note</h3>
+    <table style="margin-bottom:8px;">
+      <tr>
+        <td>
+          ${record.custbody_az_spg_note!""}
+        </td>
+      </tr>
+    </table>
+
+
+  </body>
+</pdf>

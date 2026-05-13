@@ -28,7 +28,7 @@ define(['N/search', 'N/render','N/record', 'N/file'], (search, render,record,fil
 
             const items = buildItems(itemReceiptRecord);
 
-            let template = getTemplateHeader();
+            let template = getTemplateHeader(header);
             template = getTemplateBody(template, header,items);
             finalizeTemplate(template, context);
             }
@@ -98,6 +98,7 @@ define(['N/search', 'N/render','N/record', 'N/file'], (search, render,record,fil
                 department: escapeXml(itemReceiptRecord.getText('department')),
                 currency: escapeXml(itemReceiptRecord.getText('currency')),
                 exchangerate: itemReceiptRecord.getValue('exchangerate'),
+                createdby: escapeXml(itemReceiptRecord.getText('custbody_az_spg_created_by')),
                 company: escapeXml(sub.company),
                 logo: sub.logoUrl || '',
                 subsidiary_address: sub.address,
@@ -177,7 +178,7 @@ define(['N/search', 'N/render','N/record', 'N/file'], (search, render,record,fil
     // ===========================================================
     // 2. Template Header (Fonts + Styles)
     // ===========================================================
-    const getTemplateHeader = () => {
+    const getTemplateHeader = (header) => {
     
             let template = '';
     
@@ -185,6 +186,23 @@ define(['N/search', 'N/render','N/record', 'N/file'], (search, render,record,fil
             template += '<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">';
             template += '<pdf>';
             template += '<head>';
+            template += '<macrolist>';
+            template += '<macro id="nlfooter">';
+            template += '<table class="no-border" style="width:100%; margin-top:10px; font-size:8pt;">';
+            template += '<tr>';
+            template += '<td align="left">';
+            template += 'Page <pagenumber/> of <totalpages/>';
+            template += '</td>';
+            template += '<td align="center">';
+            template += 'Printed: ${.now?string("dd-MMM-yyyy HH:mm:ss")}';
+            template += '</td>';
+            template += '<td align="right" >';
+            template += 'Created By: ' + ((header.createdby || '').split(' ').slice(1).join(' '));
+            template += '</td>';
+            template += '</tr>';
+            template += '</table>';
+            template += '</macro>';
+            template += '</macrolist>';
             template += '<style type="text/css">';
             template += 'body { font-family: sans-serif; font-size: 10pt; margin: 0; }';
             template += 'table { width: 100%; border-collapse: collapse; }';
@@ -198,7 +216,7 @@ define(['N/search', 'N/render','N/record', 'N/file'], (search, render,record,fil
     
             template += '</head>';
     
-            template += "<body padding='10mm'>";
+            template += "<body footer='nlfooter' footer-height='20pt' padding='10mm'>";
     
             return template;
     };
@@ -211,17 +229,17 @@ define(['N/search', 'N/render','N/record', 'N/file'], (search, render,record,fil
 
         try {
 
-            template += '<table class="no-border" style="margin-bottom:10px;">';
+            template += '<table width="100%" class="no-border" style="margin-bottom:10px;">';
             template += '<tr>';
             template += '<td style="width:70%;font-size:10px; vertical-align:top;">';
-            template += '<strong>'+(header.company || 'Company Name') +'</strong><br/>';
+            template += '<strong style="font-size:15px">'+(header.company || ' ') +'</strong><br/>';
             template += (header.subsidiary_address || '')+'<br/>';
             template += 'TRN :'+ (header.trn || '') + '<br/>';
             template += '</td>';
             template += '<td align="right" style="width:30%;vertical-align:top;">';
             if (header.logo) {
 
-                template += '<img src="' + header.logo+ '" style="width:140px; height:50px;" />';
+                template += '<img src="' + header.logo+ '" style="width:159px; height:63px;vertical-align:top;" />';
 
             }
             template += '</td>';
@@ -232,31 +250,31 @@ define(['N/search', 'N/render','N/record', 'N/file'], (search, render,record,fil
             // ===================================================
             // TITLE
             // ===================================================
-            template += '<table class="no-border" style="margin-bottom:10px;">';
+            template += '<table width="100%" class="no-border" style="margin-bottom:10px;">';
             template += '<tr><td class="center"><h2>GOODS RECEIPT NOTE (GRN)</h2></td></tr>';
             template += '</table>';
 
             // ===================================================
             // CHECK INFO
             // ===================================================
-            template += '<table style="margin-bottom:10px;">';
-
+            template += '<table width="100%" style="margin-bottom:10px;">';
             template += '<tr>';
-            template += '<td width="20%"><b>Reference #:</b> ' + (header.referencenum || '') + '</td>';
-            template += '<td width="20%"><b>Date :</b> ' + (header.date || '') + '</td>';
-            template += '<td width="20%" ><b>Posting Period :</b> ' + (header.postingperiod || '') + '</td>';
-            template += '<td width="20%" colspan="2"><b>Memo :</b> ' + (header.memo || '') + '</td>';
+            template += '<td width="30%"><b>Reference #:</b> ' + (header.referencenum || '') + '</td>';
+            template += '<td width="30%"><b>Date :</b> ' + (header.date || '') + '</td>';
+            template += '<td width="40%" ><b>Posting Period :</b> ' + (header.postingperiod || '') + '</td>';
             template += '</tr>';
+            template += '</table>';
 
+            template += '<table width="100%" style="margin-bottom:10px;">';
             template += '<tr>';
             template += '<td colspan="2"><b>Created From :</b> ' + (header.createdfrom || '') + '</td>';
-            template += '<td colspan="3"><b>Vendor :</b> ' + (header.vendor ? header.vendor.trim().split(/\s+/).slice(1).join(' ') : '') + '</td>';
+            template += '<td ><b>Vendor :</b> ' + (header.vendor ? header.vendor.trim().split(/\s+/).slice(1).join(' ') : '') + '</td>';
             template += '</tr>';
-            
+            template += '</table>';
+
+            template += '<table width="100%" style="margin-bottom:10px;">';
             template += '<tr>';
-            template += '<td><b>Subsidiary :</b> ' + (header.subsidiary || '') + '</td>';
-            template += '<td><b>Class :</b> ' + (header.class || '') + '</td>';
-            template += '<td><b>Department :</b> ' + (header.department || '') + '</td>';
+            template += '<td><b>Memo :</b> ' + (header.memo || '') + '</td>';
             template += '<td><b>Currency :</b> ' + (header.currency || '') + '</td>';
             template += '<td><b>Exchange Rate :</b> ' + (header.exchangerate || '') + '</td>';
             template += '</tr>';
@@ -270,7 +288,7 @@ define(['N/search', 'N/render','N/record', 'N/file'], (search, render,record,fil
 
             if (items && items.length > 0) {
 
-                template += '<table >';
+                template += '<table width="100%" style="margin-bottom:10px;">';
 
                 template += '<tr>';
                 template += '<th width="20%" style="font-size:9px"><b>Item</b></th>';
@@ -294,16 +312,6 @@ define(['N/search', 'N/render','N/record', 'N/file'], (search, render,record,fil
                 template += '</table>';
             }
 
-            // ===================================================
-            // PAGE NUMBER (UNDER LAST TABLE)
-            // ===================================================
-            template += '<table class="no-border" style="width:100%;">';
-            template += '<tr>';
-            template += '<td style="text-align:center; font-size:8pt;">';
-            template += 'Page <pagenumber/> of <totalpages/>';
-            template += '</td> <td class="right">Printed: ${.now?string("dd-MMM-yyyy HH:mm:ss")}</td>';
-            template += '</tr>';
-            template += '</table>';
             return template;
 
         } catch (e) {

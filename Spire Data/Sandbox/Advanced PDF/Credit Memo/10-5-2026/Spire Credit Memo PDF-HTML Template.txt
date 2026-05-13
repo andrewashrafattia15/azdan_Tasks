@@ -1,0 +1,272 @@
+<pdf>
+  <head>
+    <macrolist>
+      <macro id="nlfooter">
+        <table class="no-border" style="width:100%; margin-top:10px; font-size:8pt;">
+          <tr>
+            <td align="left" >
+              Thank you for your order!
+            </td>
+            <td align="center">
+              Page <pagenumber/> of <totalpages/>
+            </td>
+            <td align="right" >
+              Created By: ${record.custbody_az_spg_created_by?substring(record.custbody_az_spg_created_by?index_of(" ") + 1)!""}
+            </td>
+          </tr>
+        </table>
+      </macro>
+    </macrolist>
+    <style type="text/css">
+
+      body {
+        font-family: sans-serif;
+        font-size: 9pt;
+        margin: 0;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 8pt;
+        margin-bottom:10px;
+      }
+
+      th, td {
+        border: 0.2px solid #e0e0e0;
+        padding: 3px 4px;
+        font-size: 8pt;
+      }
+
+      th {
+        background-color: #f9f9f9;
+        font-weight: bold;
+      }
+
+      .no-border td,
+      .no-border th {
+        border: none;
+      }
+
+      .center { text-align: center; }
+      .right { text-align: right; }
+      .left { text-align: left; }
+      .bold { font-weight: bold; }
+
+      h2 {
+        margin: 0;
+        font-size: 14pt;
+      }
+
+      h3 {
+        font-size: 9pt;
+        margin-top: 10px;
+        margin-bottom: 5px;
+      }
+
+      p {
+        font-size: 8pt;
+        margin: 0;
+      }
+
+    </style>
+  </head>
+
+  <body footer="nlfooter" footer-height="20pt" padding="10mm">
+
+    <!-- Header Section -->
+    <table class="no-border" style="margin-bottom: 8px;">
+      <tr>
+        <td style="width:70%;">
+          <strong style="font-size:15px">${subsidiary.name!""}</strong><br/>
+          ${subsidiary.mainaddress_text!""}<br/>
+          TRN: ${subsidiary.federalidnumber}
+        </td>
+        <td align="right" style="width:30%;">
+          <@filecabinet nstype="image" src="${subsidiary.logo}" style="width:159px; height:63px;" />
+        </td>
+      </tr>
+    </table>
+
+<!-- Title -->
+<table class="no-border" style="width:100%; margin-bottom:8px;">
+  <tr>
+    <td style="text-align:center; width:100%;">
+      <h2 style="margin:0;">CREDIT MEMO</h2>
+    </td>
+  </tr>
+</table>
+
+    <!-- Credit Memo Info -->
+    <table class="section tight">
+      <tr>
+        <td><b>Customer:</b> ${record.entity}</td>
+        <td><b>Date:</b> ${record.trandate}</td>
+        <td><b>Exchange Rate:</b>
+          <#if record.exchangerate?is_number>
+            ${record.exchangerate?string["0.00"]}
+          <#else>
+            ${record.exchangerate}
+          </#if>
+        </td>
+        <td><b>Currency:</b> ${record.currency}</td>
+      </tr>
+    </table>
+    <table width="100%" class="section tight">
+      <tr>
+        <td><b>Credit Memo #:</b> ${record.tranid}</td>
+        <td colspan="2"><b>Sales Rep:</b> ${record.salesrep}</td>
+        <td><b>Posting Period:</b> ${record.postingperiod!""}</td>
+      </tr>
+    </table>
+    <table width="100%" class="section tight">
+      <tr>
+        <td><b>Email:</b> ${record.email!""}</td>
+        <td><b>Terms:</b> ${record.terms!""}</td>
+       <td><b>Created From:</b> ${record.createdfrom?split("#")[1]!""}</td>
+        <td><b>Status:</b> ${record.status!""}</td>
+      </tr>
+    </table>
+
+    <!-- Billing and Shipping -->
+    <table width="100%" style="margin-bottom:6px;">
+      <tr>
+        <th width="60%">Billing Address</th>
+        <th width="40%">Shipping Address</th>
+      </tr>
+      <tr>
+        <td style="vertical-align:top;">
+          <#if record.custbody_az_spg_reseller?has_content>
+             ${record.billaddress!""}<br/>
+             <b>TRN:</b> ${record.entity.vatregnumber!""}
+          </#if>
+        </td>
+        <td style="vertical-align:top;">
+          <#if record.custbody_az_spg_enduser?has_content>
+            <#assign raw = record.custpage_customer_contacts!"" />
+
+<#if raw?has_content>
+  <#assign data = raw?eval />
+  <#assign customer = data.customer!{} />
+  <#assign contacts = data.contacts![] />
+<#else>
+  <#assign customer = {} />
+  <#assign contacts = [] />
+</#if>
+
+<!-- ================= CUSTOMER ================= -->
+<b>${customer.name!""}</b><br/>
+${customer.address!""}<br/>
+<#if customer.website?has_content>
+  <b>Website:</b> ${customer.website}<br/>
+</#if>
+
+<br/>
+
+<!-- ================= CONTACTS ================= -->
+  <b>Contacts</b>
+
+  <table style="width:100%; border-collapse:collapse;margin-bottom:10px">
+    <tr>
+      <th align="left">Name</th>
+      <th align="left">Email</th>
+      <th align="left">Phone</th>
+    </tr>
+
+<#if contacts?has_content>
+    <#list contacts as c>
+      <tr>
+        <td>${c.name!""}</td>
+        <td>${c.email!""}</td>
+        <td>${c.phone!""}</td>
+      </tr>
+    </#list>
+</#if>
+  </table>
+          </#if>
+        </td>
+      </tr>
+    </table>
+    <!-- Item Table -->
+    <table class="section">
+      <thead>
+        <tr>
+          <th style="width: 4%;">#</th>
+          <th style="width: 24%;">Item</th>
+          <th style="width: 21%;">Description</th>
+          <th style="width: 8%;">Qty</th>
+          <th style="width: 10%;">Rate</th>
+          <th style="width: 8%;">VAT %</th>
+          <th style="width: 10%;">VAT</th>
+          <th style="width: 13%;">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <#list record.item as item>
+          <tr>
+            <td style="width: 4%;" class="center">${item_index + 1}</td>
+            <td style="width: 24%;">${item.item}</td>
+            <td style="width: 21%;">${item.description}</td>
+            <td style="width: 8%;" class="right">${item.quantity}</td>
+            <td style="width: 10%;" class="right">${item.rate?string["0.00"]!" "}</td>
+            <td style="width: 8%;" class="right">${item.taxrate1!""}</td>
+            <td style="width: 10%;" class="right">${item.tax1amt?string["0.00"]!" "}</td>
+            <td style="width: 13%;" class="right">${item.amount?string["0.00"]!" "}</td>
+          </tr>
+        </#list>
+      </tbody>
+    </table>
+
+    <!-- Totals -->
+    <table class="section">
+      <tr>
+        <td style="width: 60%; vertical-align: top;">
+          <strong>Amount in Words:</strong><br/>
+           ${record.currency.symbol!""} ${record.custbody_az_spg_amount_in_words!" "}
+        </td>
+
+<#assign currency = record.subtotal?replace('[0-9,\\.\\-]', '', 'r')?trim>
+<#assign subtotal = record.subtotal?replace('[^0-9,\\.\\-]', '', 'r')?trim>
+<#assign discounttotal = record.discounttotal?replace('[^0-9,\\.\\-]', '', 'r')?trim>
+<#assign taxtotal = record.taxtotal?replace('[^0-9,\\.\\-]', '', 'r')?trim>
+<#assign total = record.total?replace('[^0-9,\\.\\-]', '', 'r')?trim>
+        <td style="width: 40%;">
+          <table style="width:100%; border:none;">
+            <tr>
+              <td style="border:none;">Net Total:</td>
+              <td class="right" style="border:none;">${currency} ${subtotal}</td>
+            </tr>
+
+            <#if record.discounttotal?has_content && record.discounttotal != 0>
+              <tr>
+                <td style="border:none;">Discount:</td>
+                <td class="right" style="border:none;">${currency} ${discounttotal}</td>
+              </tr>
+            </#if>
+
+            <tr>
+              <td style="border:none;">Tax:</td>
+              <td class="right" style="border:none;">${currency} ${taxtotal}</td>
+            </tr>
+
+            <tr>
+              <td style="border:none;"><b>Gross Total:</b></td>
+              <td class="right" style="border:none;"><b>${currency} ${total}</b></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+
+    <!-- Memo -->
+    <table class="section">
+      <tr>
+        <td>
+          <strong>Memo:</strong><br/>
+          ${record.memo!""}
+        </td>
+      </tr>
+    </table>
+
+  </body>
+</pdf>

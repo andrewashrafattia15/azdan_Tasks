@@ -1,0 +1,108 @@
+<pdf>
+  <head>
+    <style type="text/css">
+      body { font-family: sans-serif; font-size: 10pt; margin: 0; }
+      table { width: 100%; border-collapse: collapse; }
+      th, td { border: 1px solid #000; padding: 4px 6px; font-size: 9pt; }
+      th { background-color: #eee; font-size: 9pt; }
+      .no-border td, .no-border th { border: none; }
+      .center { text-align: center; }
+      .right { text-align: right; }
+      .bold { font-weight: bold; }
+      h2 { margin: 0; font-size: 18pt; }
+    </style>
+  </head>
+
+<body padding="10mm">
+
+<!-- ================= HEADER ================= -->
+<table class="no-border" style="margin-bottom: 10px; width: 100%;">
+  <tr>
+    <td class="no-border" style="width: 70%;">
+     <strong>${(subsidiary.name)!""}</strong><br/>
+          ${(subsidiary.mainaddress_text)!""}<br/>
+      TRN: ${(subsidiary.federalidnumber)!""}
+    </td>
+    <td class="no-border" style="width: 30%; text-align: right;">
+      <#if companyInformation.logoUrl?has_content>
+      <img src="${companyInformation.logoUrl}" style="width:150px; height:40;" />
+          </#if>
+    </td>
+  </tr>
+</table>
+
+<!-- ================= TITLE ================= -->
+<table class="no-border" style="width: 100%; margin-bottom: 10px;">
+  <tr>
+    <td align="center"><h2>PACKING SLIP</h2></td>
+  </tr>
+</table>
+
+<!-- ================= DOCUMENT INFO ================= -->
+<table width="100%" style="margin-bottom: 5px;">
+  <tr>
+    <td colspan="2" width="55%"><b>Customer:</b> ${record.entity?keep_after(" ")}</td>
+    <td width="22.5%" style="white-space: nowrap;"><b>Packing Slip #:</b> ${record.tranid}</td>
+    <td width="22.5%"><b>Date:</b> ${record.trandate}</td>
+  </tr>
+  <tr>
+    <td style="white-space: nowrap;"><b>Sales Order #:</b> ${record.createdfrom?replace(".*#\\s*", "", "r")}</td>
+    <td><b>Shipping Method:</b> ${record.shipmethod}</td>
+    <td><b>Location:</b><#if record.item?has_content>${record.item[0].location!""}</#if></td>
+    <td><b>Prepared By:</b> ${record.employee}</td>
+  </tr>
+</table>
+
+<!-- ================= ITEMS (NO PRICING) ================= -->
+<table style="margin-bottom: 10px;">
+  <thead>
+    <tr>
+      <th style="width:4%">#</th>
+      <th style="width:22%">Item</th>
+      <th style="width:30%">Description</th>
+      <th style="width:10%">UOM</th>
+      <th style="width:10%">Qty</th>
+      <th style="width:24%">Lot / Serial</th>
+    </tr>
+  </thead>
+  <tbody>
+    <#list record.item as item>
+    <tr>
+      <td class="center">${item_index + 1}</td>
+      <td>${item.item}</td>
+      <td>${item.description}</td>
+      <td class="right">${item.unitsdisplay}</td>
+      <td class="right">${item.quantity}</td>
+      <td>${item.inventorydetail}</td>
+    </tr>
+    </#list>
+  </tbody>
+</table>
+
+<!-- ================= REMARK ================= -->
+<table style="margin-top: 10px;">
+  <tr>
+    <td style="padding:10px; height:60px;">
+      <strong>Remark:</strong><br/>
+      ${record.memo}
+    </td>
+  </tr>
+</table>
+
+<p class="center" style="margin-top:10px; font-size:9pt;">
+  Goods received in good condition
+</p>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <table style="width:100%; font-size:8pt;">
+    <tr>
+      <td class="center">
+        Page <pagenumber/> of <totalpages/>
+      </td>
+    </tr>
+  </table>
+</footer>
+
+</body>
+</pdf>

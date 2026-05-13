@@ -1,0 +1,153 @@
+<pdf>
+  <head>
+    <style type="text/css">
+
+      body {
+        font-family: sans-serif;
+        font-size: 9pt;
+        margin: 0;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 8pt;
+      }
+
+      th, td {
+        border: 0.2px solid #e0e0e0;
+        padding: 3px 4px;
+        font-size: 8pt;
+      }
+
+      th {
+        background-color: #f9f9f9;
+        font-weight: bold;
+      }
+
+      .no-border td,
+      .no-border th {
+        border: none;
+      }
+
+      .center { text-align: center; }
+      .right { text-align: right; }
+      .left { text-align: left; }
+      .bold { font-weight: bold; }
+
+      h2 {
+        margin: 0;
+        font-size: 14pt;
+      }
+
+      h3 {
+        font-size: 9pt;
+        margin-top: 10px;
+        margin-bottom: 5px;
+      }
+
+      p {
+        font-size: 8pt;
+        margin: 0;
+      }
+
+    </style>
+  </head>
+
+  <body padding="10mm">
+
+    <!-- Header Section -->
+    <table class="no-border" style="margin-bottom: 8px;">
+      <tr>
+        <td style="width:70%;">
+          <strong>${subsidiary.name!""}</strong><br/>
+          ${subsidiary.mainaddress_text!""}<br/>
+          TRN: ${subsidiary.federalidnumber}
+        </td>
+        <td style="width:30%; text-align:right;">
+          <@filecabinet nstype="image" src="${subsidiary.logo}" style="width:140px; height:30;" />
+        </td>
+      </tr>
+    </table>
+
+<!-- Title -->
+<table class="no-border" style="width:100%; margin-bottom:8px;">
+  <tr>
+    <td style="text-align:center; width:100%;">
+      <h2 style="margin:0;">BILL PAYMENT VOUCHER</h2>
+    </td>
+  </tr>
+</table>
+
+    <!-- ================= PAYMENT INFO ================= -->
+    <table class="section" width="100%">
+      <tr>
+        <td width="30%"><b>Vendor:</b> ${record.entity.companyname!""}</td>
+        <td width="20%"><b>Date:</b> ${record.trandate!""}</td>
+        <td width="30%"><b>Payment #:</b> ${record.tranid!""}</td>
+        <td width="20%"><b>Account:</b> ${record.account!""}</td>
+      </tr>
+
+      <tr>
+        <td><b>Payment Method:</b> ${record.paymentmethod!""}</td>
+        <td><b>Currency:</b> ${record.currency!""}</td>
+        <td><b>Exchange Rate:</b> ${record.exchangerate!""}</td>
+        <td><b>Memo:</b> ${record.memo!""}</td>
+      </tr>
+    </table>
+
+    <!-- ================= APPLIED BILLS ================= -->
+    <table class="section">
+      <thead>
+        <tr>
+          <th style="width:10%;">Apply</th>
+          <th style="width:25%;">Bill #</th>
+          <th style="width:25%;">Bill Date</th>
+          <th style="width:40%;" class="right">Amount Paid</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <#if record.apply?has_content>
+          <#list record.apply as bill>
+            <#if bill.apply?is_boolean && bill.apply>
+              <tr>
+                <td class="center">Applied</td>
+                <td>${bill.refnum!""}</td>
+                <td>${bill.applydate!""}</td>
+                <td class="right">${bill.amount!""}</td>
+              </tr>
+            </#if>
+          </#list>
+        <#else>
+          <tr>
+            <td colspan="4" class="center">No bills applied</td>
+          </tr>
+        </#if>
+      </tbody>
+    </table>
+
+    <!-- ================= AMOUNT IN WORDS ================= -->
+    <table class="section">
+      <tr>
+        <th>Amount in Words</th>
+      </tr>
+      <tr>
+        <td style="height:50px;">
+           ${record.currency.symbol!""} ${record.custbody_az_spg_amount_in_words!""}
+        </td>
+      </tr>
+    </table>
+
+    <!-- ================= FOOTER ================= -->
+    <table class="no-border section">
+      <tr>
+        <td class="left">
+          Page <pagenumber/> of <totalpages/>
+        </td>
+        <td class="right">Created By:  ${record.custbody_az_spg_created_by?substring(record.custbody_az_spg_created_by?index_of(" ") + 1)!""}</td>   
+      </tr>
+    </table>
+
+  </body>
+</pdf>

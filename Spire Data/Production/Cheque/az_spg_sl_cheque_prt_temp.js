@@ -29,7 +29,7 @@ define(['N/search', 'N/render','N/record','N/file'], (search, render,record,file
             const expenses = buildExpenses(chequeRecord);
             const items = buildItems(chequeRecord);
 
-            let template = getTemplateHeader();
+            let template = getTemplateHeader(header);
             template = getTemplateBody(template, header,expenses,items);
             finalizeTemplate(template, context);
             }
@@ -103,6 +103,7 @@ define(['N/search', 'N/render','N/record','N/file'], (search, render,record,file
                 class: escapeXml(chequeRecord.getText('class')),
                 location: escapeXml(chequeRecord.getText('location')),
                 department: escapeXml(chequeRecord.getText('department')),
+                createdby: escapeXml(chequeRecord.getText('custbody_az_spg_created_by')),
                 amount_in_words: escapeXml(chequeRecord.getText('custbody_az_spg_amount_in_words')),
                 company: escapeXml(sub.company),
                 trn: sub.vatRegNum,
@@ -212,7 +213,7 @@ define(['N/search', 'N/render','N/record','N/file'], (search, render,record,file
     };
 
 
-    const getTemplateHeader = () => {
+    const getTemplateHeader = (header) => {
         try {
             let template = '';
     
@@ -220,6 +221,23 @@ define(['N/search', 'N/render','N/record','N/file'], (search, render,record,file
             template += '<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">';
             template += '<pdf>';
             template += '<head>';
+            template += '<macrolist>';
+            template += '<macro id="nlfooter">';
+            template += '<table class="no-border" style="width:100%; margin-top:10px; font-size:8pt;">';
+            template += '<tr>';
+            template += '<td align="left">';
+            template += 'Page <pagenumber/> of <totalpages/>';
+            template += '</td>';
+            template += '<td align="center">';
+            template += 'Printed: ${.now?string("dd-MMM-yyyy HH:mm:ss")}';
+            template += '</td>';
+            template += '<td align="right">';
+            template += 'Created By: ' + ((header.createdby || '').split(' ').slice(1).join(' '));
+            template += '</td>';
+            template += '</tr>';
+            template += '</table>';
+            template += '</macro>';
+            template += '</macrolist>';
             template += '<style type="text/css">';
             template += 'body { font-family: sans-serif; font-size: 10pt; margin: 0; }';
             template += 'table { width: 100%; border-collapse: collapse; }';
@@ -233,7 +251,7 @@ define(['N/search', 'N/render','N/record','N/file'], (search, render,record,file
     
             template += '</head>';
     
-            template += "<body padding='10mm'>";
+            template += "<body footer='nlfooter' footer-height='20pt' padding='10mm'>";
     
             return template;
             
@@ -251,14 +269,14 @@ define(['N/search', 'N/render','N/record','N/file'], (search, render,record,file
             template += '<table class="no-border" style="margin-bottom:10px;">';
             template += '<tr>';
             template += '<td style="width:70%;font-size:10px; vertical-align:top;">';
-            template += (header.company || '') + '<br/>';
+            template += '<strong style="font-size:15px">'+(header.company || '') +'</strong><br/>';
             template += (header.subsidiary_address || '') + '<br/>';
             template += 'TRN :'+(header.trn || '') + '<br/>';
             template += '</td>';
-            template += '<td align="right" style="width:30%; text-align:right;">';
+            template += '<td align="right" style="width:30%;">';
             if (header.logo) {
 
-                template += '<img src="' + header.logo+ '" style="width:140px; height:50px;vertical-align:top;" />';
+                template += '<img src="' + header.logo+ '" style="width:159px; height:63px;vertical-align:top;" />';
 
             }
             template += '</td>';
@@ -277,28 +295,31 @@ define(['N/search', 'N/render','N/record','N/file'], (search, render,record,file
             // CHECK INFO
             // ===================================================
             template += '<table style="margin-bottom:10px;">';
-
             template += '<tr>';
             template += '<td width="20%"><b>Transaction #:</b> ' + (header.tranid || '') + '</td>';
             template += '<td width="15%"><b>Check #:</b> ' + (header.checknumber || '') + '</td>';
             template += '<td><b>Payee :</b> ' +(header.payee ? header.payee.trim().split(/\s+/).slice(1).join(' ') : '') +'</td>';
-            template += '<td><b>Currency :</b> ' + (header.currency || '') + '</td>';
-            
+            template += '<td><b>Date :</b> ' + (header.date || '') + '</td>';     
             template += '</tr>';
-            
+            template += '</table>';
+
+            template += '<table style="margin-bottom:10px;">';
             template += '<tr>';
             template += '<td width="40%" colspan="2"><b>Account :</b> ' + (header.account || '') + '</td>';
-            template += '<td><b>Amount :</b> ' + formatCurrency(header.amount) + '</td>';
-            template += '<td width="20%"><b>Balance :</b> ' + formatCurrency(header.balance || '0') + '</td>';
+            template += '<td colspan="2"><b>Amount :</b> ' + formatCurrency(header.amount) + '</td>';
             template += '</tr>';
+            template += '</table>';
 
+            template += '<table style="margin-bottom:10px;">';
             template += '<tr>';
             template += '<td><b>Memo :</b> ' + (header.memo || '') + '</td>';
             template += '<td><b>Tax :</b> ' + (header.tax || '0.00') + '</td>';
-            template += '<td><b>Date :</b> ' + (header.date || '') + '</td>';
             template += '<td><b>Exchange Rate :</b> ' + (header.exchangerate || '') + '</td>';
+            template += '<td><b>Currency :</b> ' + (header.currency || '') + '</td>';
             template += '</tr>';
+            template += '</table>';
 
+            template += '<table style="margin-bottom:10px;">';
             template += '<tr>';
             template += '<td><b>Subsidiary :</b> ' + (header.subsidiary || '') + '</td>';
             template += '<td><b>Class :</b> ' + (header.class || '') + '</td>';
@@ -315,7 +336,6 @@ define(['N/search', 'N/render','N/record','N/file'], (search, render,record,file
             if (expenses && expenses.length > 0) {
 
                 template += '<table style="margin-bottom:10px;">';
-
                 template += '<tr>';
                 template += '<th width="30%" style="white-space: nowrap;"><b>Account</b></th>';
                 template += '<th width="10%" style="white-space: nowrap;"><b>Amount</b></th>';
@@ -380,21 +400,13 @@ define(['N/search', 'N/render','N/record','N/file'], (search, render,record,file
             template += '<tr>';
             template += '<th><b>Amount in Words</b></th></tr>';
             template += '<tr><td>';
-            template += (header.amount_in_words|| '');
+            template += (header.currency || '') + ' ' + (header.amount_in_words|| '');
             template += '</td>';
             template += '</tr>';
             template += '</table>';
 
-            // ===================================================
-            // PAGE NUMBER (UNDER LAST TABLE)
-            // ===================================================
-            template += '<table class="no-border" style="width:100%;">';
-            template += '<tr>';
-            template += '<td style="text-align:center; font-size:8pt;">';
-            template += 'Page <pagenumber/> of <totalpages/>';
-            template += '</td> <td class="right">Printed: ${.now?string("dd-MMM-yyyy HH:mm:ss")}</td>';
-            template += '</tr>';
-            template += '</table>';
+            template += '</body></pdf>';
+
             return template;
 
         } catch (e) {
@@ -405,15 +417,14 @@ define(['N/search', 'N/render','N/record','N/file'], (search, render,record,file
 
     const finalizeTemplate = (template, context) => {
         try {
-
-            template += '</body></pdf>';
             const renderer = render.create();
             renderer.templateContent = template;
-           
+
             const pdfFile = renderer.renderAsPdf();
             context.response.writeFile(pdfFile, true);
         } catch (e) {
-            log.debug('Error in finalizeTemplate', e);
+            log.error('Error in finalizeTemplate', e);
+            context.response.write('Error generating PDF: ' + (e.message || e));
         }
     };
 
