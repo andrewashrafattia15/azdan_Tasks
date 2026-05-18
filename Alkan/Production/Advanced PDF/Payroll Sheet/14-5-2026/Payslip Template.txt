@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+    <head>
+      <link name="NotoSansArabic" type="font" subtype="truetype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" />
+
+    <style type="text/css">
+      *{
+  	    font-family: NotoSansArabic, sans-serif;
+        font-size:12px
+      }
+    </style>
+  </head>
+   <body padding="0.5in' 0.5in 0.5in 0.5in" size="Letter" footer='nlfooter' header="nlheader" footer-height='9%'>
+
+<#assign rawData = record.custpage_custrecord_to_print!"" />
+
+<#-- SAFE JSON parsing -->
+<#assign data = {}>
+
+<#if rawData?has_content>
+    <#attempt>
+        <#assign data = rawData?eval>
+    <#recover>
+        <#assign data = {}>
+    </#attempt>
+</#if>
+
+<#assign payroll = (data.payrollData)!{} />
+<#assign subsidiary = (data.subsidiaryData)!{} />
+
+<#assign earnings = (payroll.earnings)![] />
+<#assign deductions = (payroll.deductions)![] />
+
+<#assign eSize = earnings?size!0>
+<#assign dSize = deductions?size!0>
+
+<#assign maxRows = (eSize > dSize)?then(eSize, dSize)!0>
+
+<#if maxRows == 0>
+  <#assign maxRows = 1>
+</#if>
+
+     <table style="width: 100%;">
+                    <tr>
+                      <td align="left">
+                        <#if subsidiary.logoUrl?? && subsidiary.logoUrl != "">
+                           <img src="${subsidiary.logoUrl}" style="width:159px;height:63px" />
+                        </#if>
+                      </td>
+                      <td align="right">
+                          Print Date: ${.now?string("dd-MMM-yyyy HH:mm:ss")}
+                      </td>
+                    </tr>
+      </table>
+
+     <p align="center" style="font-size:20px;font-weight:bold"> مفردات المرتب </p>
+
+      <table width="100%" style="margin-bottom:15px">
+          <tr>
+            <td width="25%" align="right">${record.custrecord_ino_hrms_psh_employee.altname!""}</td>
+            <td width="10%" align="right" style="margin-right:20px;color:#2F5496">اسم الموظف</td>
+            <td width="45%" align="right">${record.custrecord_ino_hrms_psh_employee.entityid!""}</td>
+            <td width="10%" align="right"  style="margin-right:20px;color:#2F5496">كود الموظف</td>
+          </tr>
+          <tr align="right">
+            <td align="right">${record.custrecord_ino_hrms_psh_payrollperiod!""}</td>
+            <td align="right"  style="margin-right:20px;color:#2F5496">راتب الشهر</td>
+            <td align="right">${record.custrecord_ino_hrms_psh_subsidiary!""}</td>
+            <td align="right"  style="margin-right:20px;color:#2F5496">الشركة</td>
+          </tr>
+      </table>
+
+
+      <table width="100%" style="margin-bottom:15px; table-layout:fixed;">
+ <thead>
+         <tr>
+           <td width="50%" style="border-left:0.5px;border-bottom:0.5px;border-right:0.5px;border-top:0.5px;background-color:#CCD9EB;color:#2F5496" colspan="2" align="center">الاستقطاعات</td>
+           <td width="50%" style="border-bottom:0.5px;border-right:0.5px;border-top:0.5px;background-color:#CCD9EB;color:#2F5496" colspan="2" align="center">الاستحقاقات</td>
+         </tr>
+       </thead>
+
+<tbody>
+    <#list 0..maxRows-1 as i>
+     
+      <#if i == maxRows-1>
+         <tr>
+        <!-- DEDUCTIONS NAME -->
+        <td width="35%" align="right" style="border-left:0.5px;border-bottom:0.5px;">
+          <#if deductions[i]??>${deductions[i].name}</#if>
+        </td>
+
+        <!-- DEDUCTIONS AMOUNT -->
+        <td width="15%" align="right" style="border-right:0.5px;border-bottom:0.5px">
+          <#if deductions[i]??>${deductions[i].amount}</#if>
+        </td>
+
+        <!-- EARNINGS NAME -->
+        <td width="35%" align="right" style="border-bottom:0.5px;">
+          <#if earnings[i]??>${earnings[i].name}</#if>
+        </td>
+
+        <!-- EARNINGS AMOUNT -->
+        <td width="15%" align="right" style="border-right:0.5px;border-bottom:0.5px">
+          <#if earnings[i]??>${earnings[i].amount}</#if>
+        </td>
+
+      </tr>
+
+    <#else>
+        <tr>
+        <!-- DEDUCTIONS NAME -->
+        <td width="35%" align="right" style="border-left:0.5px">
+          <#if deductions[i]??>${deductions[i].name}</#if>
+        </td>
+
+        <!-- DEDUCTIONS AMOUNT -->
+        <td width="15%" align="right" style="border-right:0.5px">
+          <#if deductions[i]??>${deductions[i].amount}</#if>
+        </td>
+
+        <!-- EARNINGS NAME -->
+        <td width="35%" align="right" >
+          <#if earnings[i]??>${earnings[i].name}</#if>
+        </td>
+
+        <!-- EARNINGS AMOUNT -->
+        <td width="15%" align="right" style="border-right:0.5px">
+          <#if earnings[i]??>${earnings[i].amount}</#if>
+        </td>
+
+      </tr>
+    </#if>
+
+    </#list>
+  </tbody>
+</table>
+
+     <table width="100%" style="margin-bottom:15px">
+       <thead>
+         <tr>
+           <td width="50%" style="border-left:0.5px;border-bottom:0.5px;border-right:0.5px;border-top:0.5px;background-color:#CCD9EB;color:#2F5496" align="center">اجمالى الاستقطاعات</td>
+           <td width="50%" style="border-bottom:0.5px;border-right:0.5px;border-top:0.5px;background-color:#CCD9EB;color:#2F5496" align="center">اجمالى الاستحقاقات</td>
+         </tr>
+       </thead>
+       <tbody>
+         <tr>
+           <td style="border-left:0.5px;border-bottom:0.5px;border-right:0.5px;color:red;" align="center">${(record.custrecord_ino_hrms_psh_gross_earnings!0.00)?replace("^[^0-9.-]+", "", "r")}</td>
+           <td style="border-bottom:0.5px;border-right:0.5px;color:red;" align="center">${(record.custrecord_ino_hrms_psh_totaldeductions!0.00)?replace("^[^0-9.-]+", "", "r")}</td>
+         </tr>
+       </tbody>
+     </table>
+
+     <table width="100%" style="margin-bottom:25px">
+         <tr>
+           <td width="50%" style="border-left:0.5px;border-bottom:0.5px;border-right:0.5px;border-top:0.5px;background-color:#CCD9EB;font-weight:bold" align="center">${(record.custrecord_ino_hrms_psh_netpay!0.00)?replace("^[^0-9.-]+", "", "r")}</td>
+           <td width="50%" style="border-bottom:0.5px;border-right:0.5px;border-top:0.5px;background-color:#CCD9EB;color:#2F5496" align="center">صافى المرتب</td>
+         </tr>
+     </table>
+
+     <table width="100%" style="margin-bottom:15px">
+       <tr>
+         <td width="80%" align="right">${record.custrecord_ino_hrms_psh_employee.custentity_ino_hrms_emp_bank!""}</td>
+         <td align="right" style="color:#2F5496">تم تحويل المرتب على </td>
+       </tr>
+     </table>
+  </body>
+</pdf>
