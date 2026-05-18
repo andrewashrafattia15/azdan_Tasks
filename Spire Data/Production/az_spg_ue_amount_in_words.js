@@ -2,7 +2,38 @@
  * @NApiVersion 2.1
  * @NScriptType UserEventScript
  */
-define(['N/search'], (search) => {
+define(['N/search', 'N/ui/serverWidget'], (search, serverWidget) => {
+
+    
+    const beforeLoad = (context) => {
+        try {
+
+            if (context.type === context.UserEventType.PRINT) {
+
+                const record = context.newRecord;
+                const recID = record.id;
+
+                const currencyId = record.getValue('currency');
+
+                const currencyLookup = search.lookupFields({
+                    type: search.Type.CURRENCY,
+                    id: currencyId,
+                    columns: ['symbol']
+                });
+
+                const currency = currencyLookup.symbol;
+                const amount = record.getValue('total');
+            
+                const paymentAmountInArabic = numberToArabicWords(currency,amount);
+                
+
+                setData(paymentAmountInArabic,context);
+            }
+
+        } catch (errBeforeLoad) {
+            log.debug("errBeforeLoad", errBeforeLoad);
+        }
+    };
 
     const beforeSubmit = (context) => {
         try {
@@ -139,7 +170,109 @@ define(['N/search'], (search) => {
         }
     }
 
+        const numberToArabicWords = (currency,amount) => {
+        try {
+            
+            const ones = ["", "واحد", "اثنان", "ثلاثة", "أربعة", "خمسة", "ستة", "سبعة", "ثمانية", "تسعة"];
+            const teens = ["عشرة", "أحد عشر", "اثنا عشر", "ثلاثة عشر", "أربعة عشر", "خمسة عشر", "ستة عشر", "سبعة عشر", "ثمانية عشر", "تسعة عشر"];
+            const tens = ["", "", "عشرون", "ثلاثون", "أربعون", "خمسون", "ستون", "سبعون", "ثمانون", "تسعون"];
+            const thousands = ["", "ألف", "مليون", "مليار"];
+            
+            const convert_hundreds = (num) => {
+                let result = "";
+                if (num > 99) {
+                    let hundreds = Math.floor(num / 100);
+                    if (hundreds === 1) result += "مائة";
+                else if (hundreds === 2) result += "مائتان";
+                else if (hundreds < 10) result += ones[hundreds] + " مائة";
+                num %= 100;
+                if (num > 0) result += " و";
+            }
+            if (num >= 10 && num < 20) {
+                result += teens[num - 10];
+            } else if (num >= 20) {
+                let t = Math.floor(num / 10);
+                let o = num % 10;
+                if (o > 0) result += ones[o] + " و" + tens[t];
+                else result += tens[t];
+            } else if (num > 0) {
+                result += ones[num];
+            }
+            return result.trim();
+        }
+        
+        const convert_number = (num) => {
+            if (num === 0) return "صفر";
+            let parts = [];
+            let i = 0;
+            while (num > 0) {
+                let n = num % 1000;
+                if (n > 0) {
+                    let section = convert_hundreds(n);
+                    if (i > 0) {
+                        section += " " + thousands[i];
+                    }
+                    parts.unshift(section);
+                }
+                num = Math.floor(num / 1000);
+                i++;
+            }
+            return parts.join(" و");
+        }
+        
+        let integerPart = Math.floor(amount);
+        let decimalPart = Math.round((amount - integerPart) * 100);
+        
+        let words = convert_number(integerPart) + " " ;
+        
+        if(currency == "SAR"){
+            words += " ريالاً";
+            if (decimalPart > 0) {
+                words += " و" + convert_number(decimalPart) + " هللة فقط لا غير";
+            }   
+        }
+        else if(currency == "USD"){
+            words += " دولاراً";
+            if (decimalPart > 0) {
+                words += " و" + convert_number(decimalPart) + " سنتاً فقط لا غير";
+            }  
+        }
+        else if(currency == "AED"){
+            words += " درهماً";
+            if (decimalPart > 0) {
+                words += " و" + convert_number(decimalPart) + " فلساً فقط لا غير";
+            }  
+        }
+        return words;
+        } catch (errorNumberToArabicWords) {
+            log.debug("errorNumberToArabicWords",errorNumberToArabicWords);
+        }
+    }
+
+    const setData = (paymentAmountInArabic,context) => {
+        try {
+            
+            const custrecord = context.form.addField({
+                id: 'custpage_custrecord_amount_in_words_arabic',
+                type: serverWidget.FieldType.LONGTEXT,
+                label: 'Text'
+            });
+            
+            
+            const data = {
+                paymentAmountInArabic:paymentAmountInArabic,
+            };
+            
+            custrecord.defaultValue = JSON.stringify(data);
+            
+            } catch (errorSetData) {
+                log.debug("errorSetData",errorSetData)
+            }
+        };
+
+
     return {
+        beforeLoad,
         beforeSubmit
     };
 });

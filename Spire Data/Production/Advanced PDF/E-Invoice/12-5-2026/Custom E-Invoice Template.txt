@@ -1,0 +1,495 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+  
+     <#-- Define Arabic digits as a list -->
+<#assign arabicDigits = ["٠", "١", "٢", "٣", "٤", "٥", "٦", "٧", "٨", "٩"] />
+
+<#-- Function to convert Western numbers to Arabic -->
+<#function convertToArabicNumber westernNumber>
+  <#assign numberString = westernNumber?string />
+  <#assign arabicNumber = "" />
+
+  <#-- Process each character in the number string -->
+  <#list 0..(numberString?length - 1) as i>
+    <#assign char = numberString[i]>
+    <#-- Check if the character is a digit -->
+    <#if char?matches("\\d")>
+      <#assign arabicNumber = arabicNumber + arabicDigits[char?number] />
+    <#elseif char == ".">
+      <#assign arabicNumber = arabicNumber + "٫" /> <#-- Replace dot with Arabic decimal separator -->
+    <#else>
+      <#assign arabicNumber = arabicNumber + char />
+    </#if>
+  </#list>
+
+  <#-- Return the Arabic number -->
+  <#return arabicNumber />
+</#function>
+    
+<head>
+     <link name="NotoSansArabic" type="font" subtype="truetype" src="${nsfont.NotoSansArabic_Regular}"
+      src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" />
+  
+    <style type="text/css">
+        * { font-family: sans-serif;  font-family: "NotoSansArabic", sans-serif;}
+        table { width: 100%; border-collapse: collapse; margin-top: 5px; table-layout: fixed;margin-bottom:10px }
+        th { font-weight: bold; font-size: 8px; border: 0.5px solid #000000; padding: 3px; vertical-align: middle; text-align: center; }
+        td { border: 0.5px solid #000000; padding: 3px; font-size: 8px; vertical-align: top; }
+        
+        .no-border { border: none; }
+        .title-box { font-size: 14pt; font-weight: bold; text-align: center; border: none; }
+        .rtl { direction: rtl; text-align: right; }
+        .ltr { direction: ltr; text-align: left; }
+        .center { text-align: center; }
+    </style>
+</head>
+<body padding="0.4in">
+
+  <table class="no-border" style="margin-bottom: 8px;">
+      <tr>
+        <td align="right" style="width:30%;border:0px">
+          <@filecabinet nstype="image" src="${subsidiary.logo}" style="width:159px; height:63px;" />
+        </td>
+      </tr>
+    </table>
+
+    <table >
+        <tr>
+            <td class="no-border" align="center" style="font-size:12px;">فاتورة ضريبية</td>
+        </tr>    
+        <tr>
+            <td class="no-border" align="center" style="font-size:12px;"><b>Tax Invoice</b></td>
+        </tr>
+    </table>
+
+    <table>
+        <tr style="margin-bottom:10px">
+            <td align="left">Invoice Number:</td>
+            <td align="left">${record.tranid}</td>
+            <td align="right">${record.tranid}</td>
+            <td align="right">رقم الفاتورة</td>
+        </tr>
+        <tr>
+            <td align="left">Invoice Issue Date</td>
+            <td align="left">${record.custbody_ino_einv_sa_tr_signing_time}</td>
+            <td align="right">
+              <p align="right">
+              <#if record.custbody_ino_einv_sa_tr_signing_time?has_content>
+                ${convertToArabicNumber(record.custbody_ino_einv_sa_tr_signing_time)} 
+              </#if></p>
+            </td>
+            <td align="right">تاريخ إصدار الفاتورة</td>
+            <td class="no-border" rowspan="6" align="center" style="vertical-align:middle"> <barcode codetype="qrcode" showtext="false" value="${record.custbody_ino_einv_sa_trx_qr2}" height="100px" width="100px"/></td>
+        </tr>
+        <tr>
+            <td align="left">Date Of Supply</td>
+            <td align="left">${record.trandate}</td>
+            <td align="right">
+            <#if record.trandate?has_content>
+                ${convertToArabicNumber(record.trandate)} 
+              </#if>
+            </td>
+            <td align="right">تاريخ التوريد</td>
+        </tr>
+        <tr>
+            <td align="left">Contract Reference:</td>
+            <td align="left" colspan="2">${record.otherrefnum}</td>
+            <td align="right">مرجع الاتفاقية</td>
+        </tr>
+        <tr>
+            <td align="left">Payment Terms</td>
+            <td align="left" colspan="2">${record.terms}</td>
+            <td align="right">شروط الدفع</td>
+        </tr>
+    </table>
+
+    <table style="margin-top: 10px;">
+        <tr>
+            <th width="25%" colspan="2" align="left">Seller Details</th>
+            <th width="25%" colspan="2" align="right">تفاصيل المورد</th>
+            <th width="25%" colspan="2" align="left">Buyer Details</th>
+            <th width="25%" colspan="2" align="right">تفاصيل العميل</th>
+        </tr>
+        <tr>
+            <td align="left">Name</td>
+            <td align="left"><p align="left">${record.subsidiary}</p></td>
+            <td align="right"><p align="right">${record.custbody_ino_einv_sa_trx_sub_legalname}</p></td>
+            <td align="right">الإسم</td>
+            <td align="left">Name</td>
+            <td align="left"><p align="left">${record.entity}</p></td>
+            <td align="right"><p align="right">${record.custbody_ino_einv_sa_trx_entity_regist}</p></td>
+            <td align="right">الإسم</td>
+        </tr>
+        <tr>
+            <td align="left">Bldg No</td>
+            <td align="left"><p align="left">${record.custbody_ino_einv_sa_trx_sub_buildno}</p></td>
+            <td align="right"><p align="right">${record.subsidiary.custrecord_az_spg_build_no_ar}</p></td>
+            <td align="right">رقم المبنى</td>
+            <td align="left">Bldg No</td>
+            <td align="left"><p align="left">${record.entity.custentity_ino_einv_sa_entity_buildingno}</p></td>
+            <td align="right"><p align="right">${record.entity.custentity_az_spg_buildingno_ar}</p></td>
+            <td align="right">رقم المبنى</td>
+        </tr>
+        <tr>
+            <td align="left">Street Name</td>
+            <td align="left"><p align="left">${record.subsidiary.custrecord_az_spg_street_name}</p></td>
+            <td align="right"><p align="right">${record.custbody_ino_einv_sa_trx_sub_strname}</p></td>
+            <td align="right">اسم الشارع</td>
+            <td align="left">Street Name</td>
+            <td align="left"><p align="left">${record.entity.custentity_az_spg_streetname}</p></td>
+            <td align="right"><p align="right">${record.entity.custentity_ino_einv_sa_entity_streetname}</p></td>
+            <td align="right">اسم الشارع</td>
+        </tr>
+        <tr>
+            <td align="left">District</td>
+            <td align="left"><p align="left">${record.subsidiary.custrecord_az_spg_district_name}</p></td>
+            <td align="right"><p align="right">${record.custbody_ino_einv_sa_trx_sub_subdiv}</p></td>
+            <td align="right">الحى</td>
+            <td align="left">District</td>
+            <td align="left"><p align="left">${record.entity.custentity_az_spg_districtname_eng}</p></td>
+            <td align="right"><p align="right">${record.entity.custentity_ino_einv_sa_entity_citysubdiv}</p></td>
+            <td align="right">الحى</td>
+        </tr>
+        <tr>
+            <td align="left">City</td>
+            <td align="left"><p align="left">${record.subsidiary.custrecord_az_spg_cityname}</p></td>
+            <td align="right"><p align="right">${record.custbody_ino_einv_sa_trx_sub_cityname}</p></td>
+            <td align="right">المدينة</td>
+            <td align="left">City</td>
+            <td align="left"><p align="left">${record.entity.custentity_az_spg_city_name_eng}</p></td>
+            <td align="right"><p align="right">${record.entity.custentity_ino_einv_sa_entity_cityname}</p></td>
+            <td align="right">المدينة</td>
+        </tr>
+        <tr>
+            <td align="left">Country</td>
+            <td align="left"><p align="left">${record.subsidiary.custrecord_az_spg_countryname_eng}</p></td>
+            <td align="right"><p align="right">${record.subsidiary.custrecord_az_spg_country_name}</p></td>
+            <td align="right">البلد</td>
+            <td align="left">Country</td>
+            <td align="left"><p align="left">${record.entity.custentity_ino_einv_sa_cust_countryalpha}</p></td>
+            <td align="right"><p align="right">${record.entity.custentity_az_spg_countryname}</p></td>
+            <td align="right">البلد</td>
+        </tr>
+        <tr>
+            <td align="left">Postal Code</td>
+            <td align="left"><p align="left">${record.custbody_ino_einv_sa_trx_sub_postalcod}</p></td>
+            <td align="right"><p align="right">${record.subsidiary.custrecord_az_spg_postalcode_ar}</p></td>
+            <td align="right">الرمز البريدي</td>
+            <td align="left">Postal Code</td>
+            <td align="left"><p align="left">${record.entity.custentity_ino_einv_sa_entity_postalzone}</p></td>
+            <td align="right"><p align="right">${record.entity.custentity_az_spg_postal_code_ar}</p></td>
+            <td align="right">الرمز البريدي</td>
+        </tr>
+        <tr>
+            <td align="left">Addt'l No.</td>
+            <td align="left"><p align="left">${record.custbody_ino_einv_sa_trx_sub_plotid}</p></td>
+            <td align="right"><p align="right">${record.subsidiary.custrecord_az_spg_plotidentification_ar}</p></td>
+            <td align="right">الرقم الإضافى للعنوان</td>
+            <td align="left">Addt'l No.</td>
+            <td align="left"><p align="left">${record.entity.custentity_ino_einv_sa_entity_plotidenti}</p></td>
+            <td align="right"><p align="right">${record.entity.custentity_az_spg_plot_identification_ar}</p></td>
+            <td align="right">الرقم الإضافى للعنوان</td>
+        </tr>
+        <tr>
+            <td align="left">VAT No.</td>
+            <td align="left"><p align="left">${record.custbody_ino_einv_sa_trx_sub_taxscheme}</p></td>
+            <td align="right"><p align="right">${record.subsidiary.custrecord_az_spg_partytaxschemeid_ar}</p></td>
+            <td align="right">رقم تسجيل ضريبة القيمة المضافة</td>
+            <td align="left">VAT No.</td>
+            <td align="left"><p align="left">${record.entity.custentity_ino_einv_sa_entity_companyid}</p></td>
+            <td align="right"><p align="right">${record.entity.custentity_az_spg_vat_no_ar}</p></td>
+            <td align="right">رقم تسجيل ضريبة القيمة المضافة</td>
+        </tr>
+        <tr>
+            <td align="left">Other Seller Id Type</td>
+            <td align="left"><p align="left">${record.custbody_ino_einv_sa_trx_subs_id_type}</p></td>
+            <td align="right"><p align="right">${record.subsidiary.custrecord_az_spg_other_seller_id_type}</p></td>
+            <td align="right">نوع معرف البائع الآخر</td>
+            <td align="left">Other Seller Id Type</td>
+          
+            <td align="left"><p align="left"> 
+            <#if record.entity.custentity_ino_einv_sa_entity_crm?has_content>
+              ${record.entity.custentity_az_spg_otherbuyerid_type_eng}             
+            <#else>
+              ${record.entity.custentity_ino_einv_sa_entit_custom_id_t}
+            </#if>
+            </p></td>
+          
+            <td align="right"><p align="right">  <#if record.entity.custentity_ino_einv_sa_entity_crm?has_content>
+              ${record.entity.custentity_az_spg_other_buyerid_type}          
+            <#else>
+              ${record.entity.custentity_ino_einv_sa_entity_otherid}
+            </#if></p></td>
+          
+            <td align="right">نوع معرف البائع الآخر</td>
+        </tr>
+        <tr>
+            <td align="left">Other Seller ID</td>
+            <td align="left"><p align="left">${record.custbody_ino_einv_sa_trx_sub_crm}</p></td>
+            <td align="right"><p align="right">${record.subsidiary.custrecord_az_spg_commericalregnumber_ar}</p></td>
+            <td align="right">معرف آخر</td>
+            <td align="left">Other Seller ID</td>
+            <td align="left"><p align="left">${record.entity.custentity_ino_einv_sa_entity_crm}</p></td>
+            <td align="right"><p align="right">${record.entity.custentity_az_spg_commericalregnumb_ar}</p></td>
+            <td align="right">معرف آخر</td>
+        </tr>
+    </table>
+
+<!-- Items -->
+
+<table width="100%" style="margin-bottom:20px; page-break-inside: avoid; break-inside: avoid;">
+
+    <thead>
+        <tr>
+          <td colspan="5" style="border-right:0px">Line Items</td>
+          <td colspan="4" align="right" style="border-left:0px">توصيف السلعة و الخدمة</td>
+        </tr>
+        <tr>
+            <th width="50%">Nature of goods or services <br/>
+            <p align="right">تفاصيل السلع و الخدمات</p>
+            </th>
+            <th width="10%">Unit Price<br/>
+            <p align="right">سعر الوحدة</p><br/>
+            (${record.currency})</th>
+            <th width="10%">Qty<br/>
+              <p align="right">الكمية</p></th>
+            <th width="10%">Gross Amt<br/>
+              <p align="right">القيمة الإجمالية</p><br/>
+            (${record.currency})</th>
+            <th width="10%">Discount<br/>
+              <p align="right">الخصومات</p><br/>
+            (${record.currency})</th>
+            <th width="10%">Taxable Amt<br/>
+              <p align="right">المبلغ الخاضع للضريبة</p><br/>
+            (${record.currency})</th>
+            <th width="10%">Tax %<br/>
+              <p align="right">الضريبة</p></th>
+            <th width="10%">Tax Amt<br/>
+              <p align="right">مبلغ الضريبة</p><br/>
+            (${record.currency})</th>
+            <th width="10%">Net Amt (Incl. VAT)<br/>
+              <p align="right">المبلغ الصافى شامل ضريبة القيمة المضافة</p><br/>
+            (${record.currency})</th>
+        </tr>
+    </thead>
+    <tbody>
+     <#list record.item as line>
+                <tr>
+                    <td align="right"  style = "border-left:1px;border-bottom:1px;border-right:0.5px;font-size:8px">
+                      ${line.description}
+                      <p align="right">${line.custcol_ino_einv_sa_trx_ln_itemnamear}</p>
+                    </td>
+                  
+                    <td align="right" style = "border-bottom:1px;border-right:0.5px;font-size:8px">
+                      ${line.rate?replace("^[^0-9.-]+", "", "r")?replace(",", "")?number?string["#,##0.00"]}
+                    <p align="right">
+                      <#if line.rate?has_content>
+                        ${convertToArabicNumber(line.rate?replace("^[^0-9.-]+", "", "r")?replace(",", "")?number?string["#,##0.00"])} 
+                      </#if>
+                    </p>
+                    </td>
+                  
+                    <td align="right"  style = "border-bottom:1px;border-right:0.5px;font-size:8px">
+                      ${line.quantity}
+                     <p align="right">
+                      <#if line.quantity?has_content>
+                        ${convertToArabicNumber(line.quantity?replace("^[^0-9.-]+", "", "r")?replace(",", "")?number)} 
+                      </#if>
+                    </p></td>
+                    <td align="right" style = "border-bottom:1px;border-right:0.5px;font-size:8px">${line.amount?replace("^[^0-9.-]+", "", "r")?replace(",", "")?number?string["#,##0.00"]}
+                      <p align="right">
+                      <#if line.amount?has_content>
+                        ${convertToArabicNumber(line.amount?replace("^[^0-9.-]+", "", "r")?replace(",", "")?number?string["#,##0.00"])} 
+                      </#if>
+                    </p></td>
+                  
+                    <td align="right" style = "border-bottom:1px;border-right:0.5px;font-size:8px">0<p align="right">٠</p></td>
+                  
+                    <td align="right" style = "border-bottom:1px;border-right:0.5px;font-size:8px">
+                    ${line.amount?replace("^[^0-9.-]+", "", "r")?replace(",", "")?number?string["#,##0.00"]}
+                      <p align="right">
+                      <#if line.amount?has_content>
+                        ${convertToArabicNumber(line.amount?replace("^[^0-9.-]+", "", "r")?replace(",", "")?number?string["#,##0.00"])} 
+                      </#if>
+                    </p>
+                    </td>
+                  
+                    <td align="right" style = "border-bottom:1px;border-right:0.5px;font-size:8px">${line.taxrate1?replace("%", "")?number}
+                     <p align="right">
+                      <#if line.taxrate1?has_content>
+                        ${convertToArabicNumber(line.taxrate1?replace("%", "")?number)} 
+                      </#if>
+                     </p>
+                    </td>
+                  
+                    <td align="right" style = "border-bottom:1px;border-right:0.5px;font-size:8px">${line.tax1amt?replace("^[^0-9.-]+", "", "r")?replace(",", "")?number?string["#,##0.00"]}
+                      <p align="right">
+                      <#if line.tax1amt?has_content>
+                        ${convertToArabicNumber(line.tax1amt?replace("^[^0-9.-]+", "", "r")?replace(",", "")?number?string["#,##0.00"])} 
+                      </#if>
+                    </p>
+                    </td>
+                  
+                    <td align="right" style = "border-bottom:1px;border-right:1px;font-size:8px">${line.grossamt?replace("^[^0-9.-]+", "", "r")?replace(",", "")?number?string["#,##0.00"]}
+                     <p align="right">
+                      <#if line.grossamt?has_content>
+                        ${convertToArabicNumber(line.grossamt?replace("^[^0-9.-]+", "", "r")?replace(",", "")?number?string["#,##0.00"])} 
+                      </#if>
+                    </p>
+                    </td>
+                </tr>
+        </#list>
+    </tbody>
+</table>
+ 
+   <table style="margin-top: 10px; border: none; page-break-inside: avoid; break-inside: avoid;">
+      <thead>
+        <tr>
+          <td colspan="2" align="left">Total amounts (${record.currency})</td>
+          <td colspan="2" align="right"> :(${record.currency}) إجمالى المبلغ</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+            <td width="25%" align="left">${record.subtotal?replace("^[^0-9.-]+", "", "r")?replace(",", "")?number?string["#,##0.00"]}</td>
+            <td width="25%" align="left">Total(Excluding VAT)(${record.currency})</td>
+            <td width="25%"><p align="right">الإجمالى غير شامل ضريبة القيمة المضافة(${record.currency})</p></td>
+            <td width="25%" align="right">
+               <#if record.subtotal?has_content>
+                        ${convertToArabicNumber(record.subtotal?replace("^[^0-9.-]+", "", "r")?replace(",", "")?number?string["#,##0.00"])} 
+               </#if>
+            </td>
+        </tr>
+        
+
+        <tr>
+            <td width="25%" align="left"></td>
+            <td width="25%" align="left">Discount(${record.currency})</td>
+            <td width="25%" align="right"><p align="right">الخصومات<br/>(${record.currency})</p></td>
+            <td width="25%" align="right"></td>
+        </tr>
+        <tr>
+            <td width="25%" align="left">${record.subtotal?replace("^[^0-9.-]+", "", "r")?replace(",", "")?number?string["#,##0.00"]}</td>
+            <td width="25%" align="left">Total Taxable Amount(Excluding VAT)(${record.currency})</td>
+            <td width="25%" ><p align="right">إجمالى المبلغ الخاضع للضريبة غير شامل ضريبة القيمة المضافة<br/>(${record.currency})</p></td>
+            <td width="25%" align="right">
+              <#if record.subtotal?has_content>
+                        ${convertToArabicNumber(record.subtotal?replace("^[^0-9.-]+", "", "r")?replace(",", "")?number?string["#,##0.00"])} 
+               </#if>
+            </td>
+        </tr>
+        <tr>
+            <td width="25%" align="left">${record.taxtotal?replace("^[^0-9.-]+", "", "r")?replace(",", "")?number?string["#,##0.00"]}</td>
+            <td width="25%" align="left">Total VAT(${record.currency})</td>
+            <td width="25%" align="right">مجموع ضريبة القيمة المضافة<br/>(${record.currency})</td>
+            <td width="25%" align="right">
+               <#if record.taxtotal?has_content>
+                        ${convertToArabicNumber(record.taxtotal?replace("^[^0-9.-]+", "", "r")?replace(",", "")?number?string["#,##0.00"])} 
+               </#if>
+            </td>
+        </tr>
+        <tr>
+            <td width="25%" align="left">${record.total?replace("^[^0-9.-]+", "", "r")?replace(",", "")?number?string["#,##0.00"]}</td>
+            <td width="25%" align="left">Total Amount Due(${record.currency})</td>
+            <td width="25%" ><p align="right">المبلغ الأجمالى المستحق شامل ضريبة القيمة المضافة<br/>(${record.currency})</p></td>
+            <td width="25%" align="right">
+               <#if record.total?has_content>
+                        ${convertToArabicNumber(record.total?replace("^[^0-9.-]+", "", "r")?replace(",", "")?number?string["#,##0.00"])} 
+               </#if>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table style="margin-top: 5px;">
+      <thead>
+        <tr>
+            <td class="no-border" width="50%" align="left">Amount in Words</td>
+            <td class="no-border" width="50%" align="right">المبلغ بالكلمات</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="no-border" >
+            ${record.currency} ${record.custbody_az_spg_amount_in_words}
+          </td>
+          
+          <#assign arabicAmountInWords = record.custpage_custrecord_amount_in_words_arabic?eval>
+
+          <td class="no-border" >
+            <p align="right">
+            ${arabicAmountInWords.paymentAmountInArabic}
+              </p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  <!--BANK ACCOUNTS-->
+  <#assign bankData = {}>
+
+    <#if record.custpage_custrecord_bank_details?has_content>
+
+      <#attempt>
+        <#assign bankData = record.custpage_custrecord_bank_details?eval>
+      <#recover>
+        <#assign bankData = {} />
+      </#attempt>
+
+    </#if>
+
+    <#assign banks = bankData.bankDetails![]>
+
+    <h3 style="font-size:12px">Bank Details</h3>
+
+    <table style="margin-bottom:20px;">
+
+      <thead>
+
+        <tr>
+          <th>Account No</th>
+          <th>IBAN</th>
+          <th>Beneficiary</th>
+          <th>Currency</th>
+          <th>Bank</th>
+          <th>SWIFT</th>
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <#if banks?has_content>
+
+          <#assign transactionCurrency = record.currency!"" >
+            
+          <#list banks as bank>
+
+           <#if bank.currency == transactionCurrency>
+            <tr>
+
+              <td>${bank.acctNo!""}</td>
+
+              <td>${bank.ibanNo!""}</td>
+
+              <td>${bank.benName!""}</td>
+
+              <td>${bank.currency!""}</td>
+
+              <td>${bank.bankName!""}</td>
+
+              <td>${bank.swift!""}</td>
+
+            </tr>
+           </#if>
+          </#list>
+
+        </#if>
+
+      </tbody>
+
+    </table>
+
+</body>
+</pdf>

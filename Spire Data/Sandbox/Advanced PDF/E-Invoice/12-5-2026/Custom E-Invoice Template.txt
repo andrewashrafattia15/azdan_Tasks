@@ -1,0 +1,363 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+     <link name="NotoSansArabic" type="font" subtype="truetype" src="${nsfont.NotoSansArabic_Regular}"
+      src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" />
+  
+    <style type="text/css">
+        * { font-family: sans-serif;  font-family: "NotoSansArabic", sans-serif;}
+        table { width: 100%; border-collapse: collapse; margin-top: 5px; table-layout: fixed;margin-bottom:10px }
+        th { font-weight: bold; font-size: 8px; background-color: #F0F0F0; border: 0.5px solid #000000; padding: 3px; vertical-align: middle; text-align: center; }
+        td { border: 0.5px solid #000000; padding: 3px; font-size: 8px; vertical-align: top; }
+        
+        .no-border { border: none; }
+        .title-box { font-size: 14pt; font-weight: bold; text-align: center; border: none; }
+        .rtl { direction: rtl; text-align: right; }
+        .ltr { direction: ltr; text-align: left; }
+        .center { text-align: center; }
+    </style>
+</head>
+<body padding="0.4in">
+
+    <table >
+        <tr>
+            <td class="no-border" align="center" style="font-size:12px;">فاتورة ضريبية</td>
+        </tr>    
+        <tr>
+            <td class="no-border" align="center" style="font-size:12px;"><b>Tax Invoice</b></td>
+        </tr>
+    </table>
+
+    <table>
+        <tr style="margin-bottom:10px">
+            <td align="left">Invoice Number:</td>
+            <td align="left"></td>
+            <td align="right"></td>
+            <td align="right">رقم الفاتورة</td>
+        </tr>
+        <tr>
+            <td align="left">Invoice Issue Date</td>
+            <td align="left"></td>
+            <td align="right"></td>
+            <td align="right">تاريخ إصدار الفاتورة</td>
+            <td class="no-border" rowspan="6" align="center" style="vertical-align:middle"> <barcode codetype="qrcode" showtext="false" value="${record.custbody_ino_einv_sa_trx_qr2}" height="100px" width="100px"/></td>
+        </tr>
+        <tr>
+            <td align="left">Date Of Supply</td>
+            <td align="left"></td>
+            <td align="right"></td>
+            <td align="right">تاريخ التوريد</td>
+        </tr>
+        <tr>
+            <td align="left">Acknowledgement No.</td>
+            <td align="left"></td>
+            <td align="right"></td>
+            <td align="right">رقم إقرارا الإيصال</td>
+        </tr>
+        <tr>
+            <td align="left">Contract Reference:</td>
+            <td align="left" colspan="2"></td>
+            <td align="right">مرجع الاتفاقية</td>
+        </tr>
+        <tr>
+            <td align="left">Payment Terms</td>
+            <td align="left"></td>
+            <td align="right"></td>
+            <td align="right">شروط الدفع</td>
+        </tr>
+        <tr>
+            <td align="left">IRN  الرقم المرجعى للفاتورة</td>
+            <td align="left" colspan="3"></td>
+        </tr>
+    </table>
+
+    <table style="margin-top: 10px;">
+        <tr>
+            <th width="25%" colspan="2" align="left">Seller Details</th>
+            <th width="25%" colspan="2" align="right">تفاصيل المورد</th>
+            <th width="25%" colspan="2" align="left">Buyer Details</th>
+            <th width="25%" colspan="2" align="right">تفاصيل العميل</th>
+        </tr>
+        <tr>
+            <td align="left">Name</td>
+            <td align="left"></td>
+            <td align="right"></td>
+            <td align="right">الإسم</td>
+            <td align="left">Name</td>
+            <td align="left"></td>
+            <td align="right"></td>
+            <td align="right">الإسم</td>
+        </tr>
+        <tr>
+            <td align="left">Bldg No</td>
+            <td align="left"></td>
+            <td align="right"></td>
+            <td align="right">رقم المبنى</td>
+            <td align="left">Bldg No</td>
+            <td align="left"></td>
+            <td align="right"></td>
+            <td align="right">رقم المبنى</td>
+        </tr>
+        <tr>
+            <td align="left">Street Name</td>
+            <td align="left"></td>
+            <td align="right"></td>
+            <td align="right">اسم الشارع</td>
+            <td align="left">Street Name</td>
+            <td align="left"></td>
+            <td align="right"></td>
+            <td align="right">اسم الشارع</td>
+        </tr>
+        <tr>
+            <td align="left">District</td>
+            <td align="left"></td>
+            <td align="right"></td>
+            <td align="right">الحى</td>
+            <td align="left">District</td>
+            <td align="left"></td>
+            <td align="right"></td>
+            <td align="right">الحى</td>
+        </tr>
+        <tr>
+            <td align="left">City</td>
+            <td align="left"></td>
+            <td align="right"></td>
+            <td align="right">المدينة</td>
+            <td align="left">City</td>
+            <td align="left"></td>
+            <td align="right"></td>
+            <td align="right">المدينة</td>
+        </tr>
+        <tr>
+            <td align="left">Country</td>
+            <td align="left"></td>
+            <td align="right"></td>
+            <td align="right">البلد</td>
+            <td align="left">Country</td>
+            <td align="left"></td>
+            <td align="right"></td>
+            <td align="right">البلد</td>
+        </tr>
+        <tr>
+            <td align="left">Postal Code</td>
+            <td align="left"></td>
+            <td align="right"></td>
+            <td align="right">الرمز البريدي</td>
+            <td align="left">Postal Code</td>
+            <td align="left"></td>
+            <td align="right"></td>
+            <td align="right">الرمز البريدي</td>
+        </tr>
+        <tr>
+            <td align="left">Addt'l No.</td>
+            <td align="left"></td>
+            <td align="right"></td>
+            <td align="right">الرقم الإضافى للعنوان</td>
+            <td align="left">Addt'l No.</td>
+            <td align="left"></td>
+            <td align="right"></td>
+            <td align="right">الرقم الإضافى للعنوان</td>
+        </tr>
+        <tr>
+            <td align="left">VAT No.</td>
+            <td align="left"></td>
+            <td align="right"></td>
+            <td align="right">رقم تسجيل ضريبة القيمة المضافة</td>
+            <td align="left">VAT No.</td>
+            <td align="left"></td>
+            <td align="right"></td>
+            <td align="right">رقم تسجيل ضريبة القيمة المضافة</td>
+        </tr>
+        <tr>
+            <td align="left">Other Seller Id Type</td>
+            <td align="left"></td>
+            <td align="right"></td>
+            <td align="right">نوع معرف البائع الآخر</td>
+            <td align="left">Other Seller Id Type</td>
+            <td align="left"></td>
+            <td align="right"></td>
+            <td align="right">نوع معرف البائع الآخر</td>
+        </tr>
+        <tr>
+            <td align="left">Other Seller ID</td>
+            <td align="left"></td>
+            <td align="right"></td>
+            <td align="right">معرف آخر</td>
+            <td align="left">Other Seller ID</td>
+            <td align="left"></td>
+            <td align="right"></td>
+            <td align="right">معرف آخر</td>
+        </tr>
+    </table>
+
+<!-- Items -->
+
+<#assign groupedData = []>
+
+<#if record.custpage_custrecord_items_to_print?has_content>
+    <#assign groupedData = record.custpage_custrecord_items_to_print?eval![]>
+<#else>
+    <#assign groupedData = []>
+</#if>
+
+<#assign groupCounter = 0>
+
+
+<table width="100%" style="margin-bottom:20px;">
+
+    <thead>
+        <tr>
+          <td colspan="5" style="border-right:0px">Line Items</td>
+          <td colspan="4" align="right" style="border-left:0px">توصيف السلعة و الخدمة</td>
+        </tr>
+        <tr>
+            <th width="50%">Nature of goods or services <br/>
+            <p align="right">تفاصيل السلع و الخدمات</p>
+            </th>
+            <th width="10%">Unit Price ()<br/>
+            <p align="right">() سعر الوحدة</p></th>
+            <th width="10%">Qty<br/>
+              <p align="right">الكمية</p></th>
+            <th width="10%">Gross Amt<br/>
+              <p align="right">() القيمة الإجمالية</p></th>
+            <th width="10%">Discount<br/>
+              <p align="right">() الخصومات</p></th>
+            <th width="10%">Taxable Amt<br/>
+              <p align="right">() المبلغ الخاضع للضريبة</p></th>
+            <th width="10%">Tax %<br/>
+              <p align="right">الضريبة</p></th>
+            <th width="10%">Tax Amt<br/>
+              <p align="right">() مبلغ الضريبة</p></th>
+            <th width="10%">Net Amt (Incl. VAT)<br/>
+              <p align="right">() المبلغ الصافى شامل ضريبة القيمة المضافة</p></th>
+        </tr>
+    </thead>
+</table>
+ 
+    <table style="margin-top: 10px; border: none;">
+      <thead>
+        <tr>
+          <td colspan="2" align="left">Total amounts ( )</td>
+          <td colspan="2" align="right"> ( ) إجمالى المبلغ</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+            <td width="25%" align="left"></td>
+            <td width="25%" align="left">Total(Excluding VAT)( )</td>
+            <td width="25%"><p align="right">الإجمالى غير شامل ضريبة القيمة المضافة</p></td>
+            <td width="25%" align="right"></td>
+        </tr>
+        <tr>
+            <td width="25%" align="left"></td>
+            <td width="25%" align="left">Discount ( )</td>
+            <td width="25%" align="right">الخصومات</td>
+            <td width="25%" align="right"></td>
+        </tr>
+        <tr>
+            <td width="25%" align="left"></td>
+            <td width="25%" align="left">Total Taxable Amount(Excluding VAT)( )</td>
+            <td width="25%" ><p align="right">إجمالى المبلغ الخاضع للضريبة غير شامل ضريبة القيمة المضافة</p></td>
+            <td width="25%" align="right"></td>
+        </tr>
+        <tr>
+            <td width="25%" align="left"></td>
+            <td width="25%" align="left">Total VAT( )</td>
+            <td width="25%" align="right">مجموع ضريبة القيمة المضافة</td>
+            <td width="25%" align="right"></td>
+        </tr>
+        <tr>
+            <td width="25%" align="left"></td>
+            <td width="25%" align="left">Total Amount Due( )</td>
+            <td width="25%" ><p align="right">المبلغ الأجمالى المستحق شامل ضريبة القيمة المضافة</p></td>
+            <td width="25%" align="right"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table style="margin-top: 5px;">
+      <thead>
+        <tr>
+            <td class="no-border" width="50%" align="left">Amount in Words</td>
+            <td class="no-border" width="50%" align="right">المبلغ بالكلمات</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="no-border" >
+            
+          </td>
+          <td class="no-border" >
+            
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  <!--BANK ACCOUNTS-->
+
+      <!-- <#assign bankData = {}>
+
+    <#if record.custpage_custrecord_bank_details?has_content>
+
+      <#attempt>
+        <#assign bankData = record.custpage_custrecord_bank_details?eval>
+      <#recover>
+        <#assign bankData = {} />
+      </#attempt>
+
+    </#if>
+
+    <#assign banks = bankData.bankDetails![]>
+
+
+    <table style="margin-bottom:20px;">
+
+      <thead>
+        <tr>
+          <td colspan="6">Bank Details</td>
+        </tr>
+        <tr>
+          <th style="font-size:8px">Account No</th>
+          <th style="font-size:8px">IBAN</th>
+          <th style="font-size:8px">Beneficiary</th>
+          <th style="font-size:8px">Currency</th>
+          <th style="font-size:8px">Bank</th>
+          <th style="font-size:8px">SWIFT</th>
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <#if banks?has_content>
+
+          <#list banks as bank>
+
+            <tr>
+
+              <td style="font-size:8px">${bank.acctNo!""}</td>
+
+              <td style="font-size:8px">${bank.ibanNo!""}</td>
+
+              <td style="font-size:8px">${bank.benName!""}</td>
+
+              <td style="font-size:8px">${bank.currency!""}</td>
+
+              <td style="font-size:8px">${bank.bankName!""}</td>
+
+              <td style="font-size:8px">${bank.swift!""}</td>
+
+            </tr>
+
+          </#list>
+
+        </#if>
+
+      </tbody>
+
+    </table> -->
+
+</body>
+</pdf>
