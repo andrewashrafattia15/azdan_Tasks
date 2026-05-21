@@ -107,7 +107,7 @@
 
                     <td style="font-size:9px;">
 
-                        ${subsidiaryData.subAddress!""}
+                        ${(subsidiaryData.subAddress!"")?replace("\r\n|\r|\n", "<br/>", "r")}
 
                     </td>
 
@@ -204,7 +204,7 @@
 
                     <td style="font-size:9px;">
 
-                        ${vendorData.vendorAddress!""}
+                      ${(vendorData.vendorAddress!"")?replace("\r\n|\r|\n", "<br/>", "r")}
 
                     </td>
                     <td align="right" width="50%" style="font-size:9px;">
@@ -286,9 +286,9 @@
         <td align="right" width="20%" style="${borderStyle}">
 
             <#assign lineTotal =
-                (apply.due?replace("^[^0-9.-]+", "", "r")?replace(",", "")?number)!0>
+                (apply.amount?replace("^[^0-9.-]+", "", "r")?replace(",", "")?number)!0>
 
-            <#assign totalPayment = (totalPayment!0) + lineTotal>
+            <#assign totalPayment += lineTotal>
 
             ${lineTotal?string(",##0.00")}
 

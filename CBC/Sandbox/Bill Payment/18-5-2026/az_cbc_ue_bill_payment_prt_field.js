@@ -49,8 +49,15 @@ define(['N/record','N/ui/serverWidget','N/search'], function ( record,serverWidg
                     }
                 }
                 const recID = currentRecord.id;
-                const vendorID = currentRecord.getValue('entity');
-                const subsidiaryID = currentRecord.getValue('subsidiary');
+
+                const vendorID = currentRecord.getValue({
+                    fieldId: 'entity'
+                });
+
+                const subsidiaryID = currentRecord.getValue({
+                    fieldId: 'subsidiary'
+                });
+
                 const vendorData = getVendorData(vendorID);
 
                 const billsData = getBillsData(billIds);
@@ -58,6 +65,7 @@ define(['N/record','N/ui/serverWidget','N/search'], function ( record,serverWidg
 
             
                 const subsidiaryData = getSubsidiaryData(subsidiaryID);
+
 
                 setData(vendorData, billsData, subsidiaryData, context);
             }
@@ -69,14 +77,18 @@ define(['N/record','N/ui/serverWidget','N/search'], function ( record,serverWidg
 
     const getVendorData = (vendorID) => {
         try {
-            if (!vendorID) return '';
+
+
+            if (!vendorID || isNaN(Number(vendorID))) {
+                return {};
+            }
 
             const vendorRec = record.load({
                 type: record.Type.VENDOR,
                 id: vendorID
             });
 
-            const vendorAddress = vendorRec.getText({
+            const vendorAddress = vendorRec.getValue({
                 fieldId: 'defaultaddress'
             });
 
@@ -188,11 +200,11 @@ define(['N/record','N/ui/serverWidget','N/search'], function ( record,serverWidg
                 fieldId: 'name'
             });
 
-            const subsidiaryAddress = subsidiaryRec.getText({
+            const subsidiaryAddress = subsidiaryRec.getValue({
                 fieldId: 'mainaddress_text'
             });
 
-            const vatRegNum = subsidiaryRec.getText({
+            const vatRegNum = subsidiaryRec.getValue({
                 fieldId: 'federalidnumber'
             });
 
