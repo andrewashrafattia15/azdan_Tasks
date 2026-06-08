@@ -24,7 +24,7 @@
 <body header="nlheader" header-height="10%" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
   <table width="100%">
     <tr>
-      <td width="17%" align="left" style="font-size:8px;font-weight:bold">CLIENT:</td>
+      <td width="15%" align="left" style="font-size:8px;font-weight:bold">CLIENT:</td>
       <td width="25%" align="left" style="font-size:8px;font-weight:bold">${record.entity.custentity_az_rs_customer_name}</td>
       <td width="20%"> </td>
       <td width="25%" align="right" style="font-size:8px;font-weight:bold">${record.entity.custentity_az_rs_customer_ar}</td>

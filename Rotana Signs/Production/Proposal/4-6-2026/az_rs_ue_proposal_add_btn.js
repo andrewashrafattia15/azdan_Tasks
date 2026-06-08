@@ -12,6 +12,11 @@ define(['N/log'], (log) => {
                const form = context.form;
                const recId = context.newRecord.id ; 
 
+            const proposalVersion = context.newRecord.getValue({
+                fieldId: 'custbody_az_rs_proposal_printouts'
+            });
+
+            if (proposalVersion) {
                 form.addButton({
                     id: 'custpage_print_pdf',
                     label: 'Print Proposal Version',
@@ -20,7 +25,7 @@ define(['N/log'], (log) => {
 
                 form.clientScriptModulePath =
                     'SuiteScripts/az_rs_cs_proposal_prt_btn.js';
-
+            }
         } catch (errorBeforeLoad) {
             log.debug('errorBeforeLoad',errorBeforeLoad);
         }

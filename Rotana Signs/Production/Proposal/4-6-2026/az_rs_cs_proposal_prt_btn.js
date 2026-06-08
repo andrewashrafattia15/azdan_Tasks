@@ -7,7 +7,7 @@
 
     const onButtonClick = (id) => {
         try {
-            window.open("/app/site/hosting/scriptlet.nl?script=2583&deploy=1&recId=" + id)
+            window.open("/app/site/hosting/scriptlet.nl?script=327&deploy=1&recId=" + id)
         } catch (errorOnButtonClick) {
             log.debug("errorOnButtonClick", errorOnButtonClick);
         }
