@@ -397,10 +397,194 @@
 
             <tbody>
 
+                <#assign groupedData = []>
+                <#if record.custpage_custrecord_items_to_print?has_content>
+                    <#assign groupedData = record.custpage_custrecord_items_to_print?eval![]>
+                </#if>
+                <#assign groupCounter = 0>
+
                 <#list record.item as line>
 
-                <#-- Print only actual item lines -->
-                    <#if line.item?has_content>
+                <#-- ================= GROUP HEADER ================= -->
+                <#if line.itemtype == "Group">
+
+                    <#assign currentGroup = groupedData[groupCounter]!{}>
+                    <#assign groupCounter = groupCounter + 1>
+
+                    <#-- Safely extract group totals -->
+                    <#assign grpRate   = currentGroup.totalRate!0 />
+                    <#assign grpQty    = currentGroup.totalQty!0 />
+                    <#assign grpAmount = currentGroup.totalAmount!0 />
+                    <#assign grpTax    = currentGroup.totalTax!0 />
+                    <#assign grpTaxPct = (currentGroup.taxrate!"0%")?replace("%","") ?replace(",","") ?number />
+                    <#assign grpNet    = grpAmount + grpTax />
+
+                    <tr>
+
+                        <!-- Item Description (Group) -->
+                        <td align="left" style="font-size:8px;">
+                            <b>
+                            <#if line.description?has_content>
+                                ${line.description}
+                            <#else>
+                                ${line.item!""}
+                            </#if>
+                            </b>
+                            <#if line.custcol_ino_einv_sa_trx_ln_itemnamear?has_content>
+                                <p align="right">
+                                    ${line.custcol_ino_einv_sa_trx_ln_itemnamear}
+                                </p>
+                            </#if>
+                        </td>
+
+                        <!-- Unit Price (Group) -->
+                        <td align="right" style="font-size:8px;">
+                            ${grpRate?string["#,##0.00"]}
+                            <p align="right">
+                                ${convertToArabicNumber(grpRate?string["#,##0.00"])}
+                            </p>
+                        </td>
+
+                        <!-- Quantity (Group) -->
+                        <td align="right" style="font-size:8px;">
+                            ${grpQty?string["#,##0.##"]}
+                            <p align="right">
+                                ${convertToArabicNumber(grpQty?string["#,##0.##"])}
+                            </p>
+                        </td>
+
+                        <!-- Gross Amount (Group) -->
+                        <td align="right" style="font-size:8px;">
+                            ${grpAmount?string["#,##0.00"]}
+                            <p align="right">
+                                ${convertToArabicNumber(grpAmount?string["#,##0.00"])}
+                            </p>
+                        </td>
+
+                        <!-- Discount (Group) -->
+                        <td align="right" style="font-size:8px;">
+                            0.00
+                            <p align="right">٠٫٠٠</p>
+                        </td>
+
+                        <!-- Taxable Amount (Group) -->
+                        <td align="right" style="font-size:8px;">
+                            ${grpAmount?string["#,##0.00"]}
+                            <p align="right">
+                                ${convertToArabicNumber(grpAmount?string["#,##0.00"])}
+                            </p>
+                        </td>
+
+                        <!-- Tax Rate (Group) -->
+                        <td align="right" style="font-size:8px;">
+                            ${grpTaxPct}
+                            <p align="right">
+                                ${convertToArabicNumber(grpTaxPct)}
+                            </p>
+                        </td>
+
+                        <!-- Tax Amount (Group) -->
+                        <td align="right" style="font-size:8px;">
+                            ${grpTax?string["#,##0.00"]}
+                            <p align="right">
+                                ${convertToArabicNumber(grpTax?string["#,##0.00"])}
+                            </p>
+                        </td>
+
+                        <!-- Net Amount (Group) -->
+                        <td align="right" style="font-size:8px;">
+                            ${grpNet?string["#,##0.00"]}
+                            <p align="right">
+                                ${convertToArabicNumber(grpNet?string["#,##0.00"])}
+                            </p>
+                        </td>
+
+                    </tr>
+
+                    <#-- ================= GROUP CHILD MEMBERS ================= -->
+                    <#if currentGroup.members??>
+                        <#list currentGroup.members as member>
+                            <tr>
+
+                                <!-- Item Description (Child) -->
+                                <td align="left" style="font-size:8px;">
+                                  
+                                    <#if member.itemDescription?has_content>
+                                      <p align="left">
+                                        ${member.itemDescription}
+                                        </p>
+                                    <#else>
+                                      <p align="left">
+                                        ${member.itemName!""}
+                                        </p>
+                                    </#if>
+                                  <!-- 
+                                  <#if member.custcol_ino_einv_sa_trx_ln_itemnamear?has_content>
+                                    <p align="right">
+                                        ${member.custcol_ino_einv_sa_trx_ln_itemnamear}
+                                    </p>
+                                </#if> -->
+                                </td>
+
+                                <!-- Unit Price (Child) -->
+                                <td align="right" style="font-size:8px;">
+                                    0.00
+                                    <p align="right">٠٫٠٠</p>
+                                </td>
+
+                                <!-- Quantity (Child) -->
+                                <td align="right" style="font-size:8px;">
+                                    0
+                                    <p align="right">٠</p>
+                                </td>
+
+                                <!-- Gross Amount (Child) -->
+                                <td align="right" style="font-size:8px;">
+                                    0.00
+                                    <p align="right">٠٫٠٠</p>
+                                </td>
+
+                                <!-- Discount (Child) -->
+                                <td align="right" style="font-size:8px;">
+                                    0.00
+                                    <p align="right">٠٫٠٠</p>
+                                </td>
+
+                                <!-- Taxable Amount (Child) -->
+                                <td align="right" style="font-size:8px;">
+                                    0.00
+                                    <p align="right">٠٫٠٠</p>
+                                </td>
+
+                                <!-- Tax Rate (Child) -->
+                                <td align="right" style="font-size:8px;">
+                                    0.00%
+                                    <p align="right">٠٫٠٠%</p>
+                                </td>
+
+                                <!-- Tax Amount (Child) -->
+                                <td align="right" style="font-size:8px;">
+                                    0.00
+                                    <p align="right">٠٫٠٠</p>
+                                </td>
+
+                                <!-- Net Amount (Child) -->
+                                <td align="right" style="font-size:8px;">
+                                    0.00
+                                    <p align="right">٠٫٠٠</p>
+                                </td>
+
+                            </tr>
+                        </#list>
+                    </#if>
+
+                <#-- ================= END GROUP — skip ================= -->
+                <#elseif line.itemtype == "EndGroup">
+
+                    <#-- skip EndGroup marker rows -->
+
+                <#-- ================= NORMAL ITEMS ================= -->
+                <#elseif line.item?has_content>
 
                         <tr>
 
@@ -555,7 +739,7 @@
 
                         </tr>
 
-                    </#if>
+                </#if>
 
                 </#list>
 
@@ -589,12 +773,12 @@
 
 
                 <tr>
-                    <td width="25%" align="left"></td>
+                    <td width="25%" align="left">0.00</td>
                     <td width="25%" align="left">Discount(${record.currency})</td>
                     <td width="25%" align="right">
                         <p align="right">الخصومات<br />(${record.currency})</p>
                     </td>
-                    <td width="25%" align="right"></td>
+                    <td width="25%" align="right">٠٫٠٠</td>
                 </tr>
                 <tr>
                     <td width="25%" align="left">${record.subtotal?replace("^[^0-9.-]+", "",
