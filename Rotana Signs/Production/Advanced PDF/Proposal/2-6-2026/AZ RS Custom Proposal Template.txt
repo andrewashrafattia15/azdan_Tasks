@@ -184,7 +184,8 @@
         <td width="60%"></td>
         <td width="20%" align="left" style="background-color:#0E763D;font-size:8px;font-weight:bold;color:white;border-top:0.5px;border-right:0.5px;border-left:0.5px;vertical-align:middle">Net Before VAT :</td>
         <td width="20%" align="right" style="font-size:8px;font-weight:bold;border-top:0.5px;border-right:0.5px;border-bottom:0.5px;vertical-align:middle">
-            ${(totalNetHand - discountTotal)?string["#,##0.00"]}
+          <#assign netBefVAT = totalNetHand + discountTotal>
+            ${(netBefVAT)?string["#,##0.00"]}
         </td>
     </tr>
 </#if>
@@ -197,7 +198,7 @@
         <td width="60%"></td>
         <td width="20%" align="left" style="background-color:black;font-size:8px;font-weight:bold;color:white;border-right:0.5px;border-bottom:0.5px;border-left:0.5px;vertical-align:middle">Grand Total:</td>
         <td width="20%" align="right" style="font-size:8px;font-weight:bold;border-right:0.5px;border-bottom:0.5px;vertical-align:middle">
-            <#assign grandTotal = totalNetHand - discountTotal + record.taxtotal>
+            <#assign grandTotal = netBefVAT + record.taxtotal>
             ${(grandTotal!"0")?string["#,##0.00"]}
         </td>
     </tr>

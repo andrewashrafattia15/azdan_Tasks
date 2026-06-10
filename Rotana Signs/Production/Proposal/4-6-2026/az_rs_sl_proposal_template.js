@@ -373,9 +373,9 @@ define(['N/search', 'N/record', 'N/render', 'N/log', 'N/file'], (search, record,
 
             /** ── 3rd Table: Summary (Total Net / Discount / VAT / Grand Total) */
 
-            const discountTotal = Math.abs(parseFloat(header.discounttotal) || 0);
+            const discountTotal = parseFloat(header.discounttotal) || 0;
             const vatAmount     = parseFloat(header.taxtotal) || 0;
-            const netBeforeVat  = totalNetHand - discountTotal;
+            const netBeforeVat  = totalNetHand + discountTotal;
             const grandTotal    = netBeforeVat + vatAmount;
 
             template += '<table width="100%" style="padding-top:10px">';
@@ -387,7 +387,7 @@ define(['N/search', 'N/record', 'N/render', 'N/log', 'N/file'], (search, record,
             template += '</tr>';
 
             // Conditional: Additional Discount + Net Before VAT
-            if (discountTotal > 0) {
+            if (discountTotal !== 0) {
                 template += '<tr>';
                 template += '<td width="60%"></td>';
                 template += '<td width="20%" align="left" style="background-color:#0E763D;font-size:8px;font-weight:bold;color:white;border-top:0.5px;border-right:0.5px;border-left:0.5px;vertical-align:middle">Additional Discount :</td>';
@@ -595,9 +595,9 @@ define(['N/search', 'N/record', 'N/render', 'N/log', 'N/file'], (search, record,
 
             /** ── 3rd Table: Summary (Total Net / Discount / VAT / Grand Total) */
 
-            const discountTotal = Math.abs(parseFloat(header.discounttotal) || 0);
+            const discountTotal = parseFloat(header.discounttotal) || 0;
             const vatAmount     = parseFloat(header.taxtotal) || 0;
-            const netBeforeVat  = totalNetHand - discountTotal;
+            const netBeforeVat  = totalNetHand + discountTotal;
             const grandTotal    = netBeforeVat + vatAmount;
 
             template += '<table width="100%" style="padding-top:10px">';
@@ -609,7 +609,7 @@ define(['N/search', 'N/record', 'N/render', 'N/log', 'N/file'], (search, record,
             template += '</tr>';
 
             // Conditional: Additional Discount + Net Before VAT
-            if (discountTotal > 0) {
+            if (discountTotal !== 0) {
                 template += '<tr>';
                 template += '<td width="60%"></td>';
                 template += '<td width="20%" align="left" style="background-color:#0E763D;font-size:8px;font-weight:bold;color:white;border-top:0.5px;border-right:0.5px;border-left:0.5px;vertical-align:middle">Additional Discount :</td>';
@@ -827,9 +827,9 @@ define(['N/search', 'N/record', 'N/render', 'N/log', 'N/file'], (search, record,
 
             /** ── 3rd Table: Summary (Total Net / Discount / VAT / Grand Total) */
 
-            const discountTotal = Math.abs(parseFloat(header.discounttotal) || 0);
+            const discountTotal = parseFloat(header.discounttotal) || 0;
             const vatAmount     = parseFloat(header.taxtotal) || 0;
-            const netBeforeVat  = totalNetHand - discountTotal;
+            const netBeforeVat  = totalNetHand + discountTotal;
             const grandTotal    = netBeforeVat + vatAmount;
 
             template += '<table width="100%" style="padding-top:10px">';
@@ -841,7 +841,7 @@ define(['N/search', 'N/record', 'N/render', 'N/log', 'N/file'], (search, record,
             template += '</tr>';
 
             // Conditional: Additional Discount + Net Before VAT
-            if (discountTotal > 0) {
+            if (discountTotal !== 0) {
                 template += '<tr>';
                 template += '<td width="60%"></td>';
                 template += '<td width="20%" align="left" style="background-color:#0E763D;font-size:8px;font-weight:bold;color:white;border-top:0.5px;border-right:0.5px;border-left:0.5px;vertical-align:middle">Additional Discount :</td>';
@@ -1059,9 +1059,9 @@ define(['N/search', 'N/record', 'N/render', 'N/log', 'N/file'], (search, record,
 
             /** ── 3rd Table: Summary (Total Net / Discount / VAT / Grand Total) */
 
-            const discountTotal = Math.abs(parseFloat(header.discounttotal) || 0);
+            const discountTotal = parseFloat(header.discounttotal) || 0;
             const vatAmount     = parseFloat(header.taxtotal) || 0;
-            const netBeforeVat  = totalNetHand - discountTotal;
+            const netBeforeVat  = totalNetHand + discountTotal;
             const grandTotal    = netBeforeVat + vatAmount;
 
             template += '<table width="100%" style="padding-top:10px">';
@@ -1073,7 +1073,7 @@ define(['N/search', 'N/record', 'N/render', 'N/log', 'N/file'], (search, record,
             template += '</tr>';
 
             // Conditional: Additional Discount + Net Before VAT
-            if (discountTotal > 0) {
+            if (discountTotal !== 0) {
                 template += '<tr>';
                 template += '<td width="60%"></td>';
                 template += '<td width="20%" align="left" style="background-color:#0E763D;font-size:8px;font-weight:bold;color:white;border-top:0.5px;border-right:0.5px;border-left:0.5px;vertical-align:middle">Additional Discount :</td>';
@@ -1279,9 +1279,9 @@ define(['N/search', 'N/record', 'N/render', 'N/log', 'N/file'], (search, record,
 
             /** ── 3rd Table: Summary (Total Net / Discount / VAT / Grand Total) */
 
-            const discountTotal = Math.abs(parseFloat(header.discounttotal) || 0);
+            const discountTotal = parseFloat(header.discounttotal) || 0;
             const vatAmount     = parseFloat(header.taxtotal) || 0;
-            const netBeforeVat  = totalNetHand - discountTotal;
+            const netBeforeVat  = totalNetHand + discountTotal;
             const grandTotal    = netBeforeVat + vatAmount;
 
             template += '<table width="100%" style="padding-top:10px">';
@@ -1293,7 +1293,7 @@ define(['N/search', 'N/record', 'N/render', 'N/log', 'N/file'], (search, record,
             template += '</tr>';
 
             // Conditional: Additional Discount + Net Before VAT
-            if (discountTotal > 0) {
+            if (discountTotal !== 0) {
                 template += '<tr>';
                 template += '<td width="60%"></td>';
                 template += '<td width="20%" align="left" style="background-color:#0E763D;font-size:8px;font-weight:bold;color:white;border-top:0.5px;border-right:0.5px;border-left:0.5px;vertical-align:middle">Additional Discount :</td>';
@@ -1499,9 +1499,9 @@ define(['N/search', 'N/record', 'N/render', 'N/log', 'N/file'], (search, record,
 
             /** ── 3rd Table: Summary (Total Net / Discount / VAT / Grand Total) */
 
-            const discountTotal = Math.abs(parseFloat(header.discounttotal) || 0);
+            const discountTotal = parseFloat(header.discounttotal) || 0;
             const vatAmount     = parseFloat(header.taxtotal) || 0;
-            const netBeforeVat  = totalNetHand - discountTotal;
+            const netBeforeVat  = totalNetHand + discountTotal;
             const grandTotal    = netBeforeVat + vatAmount;
 
             template += '<table width="100%" style="padding-top:10px">';
@@ -1513,7 +1513,7 @@ define(['N/search', 'N/record', 'N/render', 'N/log', 'N/file'], (search, record,
             template += '</tr>';
 
             // Conditional: Additional Discount + Net Before VAT
-            if (discountTotal > 0) {
+            if (discountTotal !== 0) {
                 template += '<tr>';
                 template += '<td width="60%"></td>';
                 template += '<td width="20%" align="left" style="background-color:#0E763D;font-size:8px;font-weight:bold;color:white;border-top:0.5px;border-right:0.5px;border-left:0.5px;vertical-align:middle">Additional Discount :</td>';
