@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+  <head>
+    <link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false" />
+    <style>
+      * { align:right; font-family: NotoSansArabic, sans-serif; direction: rtl;line-height:20px }
+    </style>
+  </head>
+  <body header="nlheader" header-height="10%" size="A4">
+
+       <#assign rawData = record.custpage_custrecord_to_print!"" />
+
+<#-- SAFE JSON parsing -->
+<#assign data = {}>
+
+<#if rawData?has_content>
+    <#attempt>
+        <#assign data = rawData?eval_json>
+    <#recover>
+        <#assign data = {}>
+    </#attempt>
+</#if>
+
+    <br/><br/>
+
+    <!-- Date -->
+    <p style="text-align: right; line-height: 2; margin-bottom: 8pt;">
+      <span style="font-size: 12pt; font-weight: 700;">القاهرة في
+        <#if record.custrecord_ino_hrms_dr_requestdate?has_content>
+          ${record.custrecord_ino_hrms_dr_requestdate?string("yyyy/MM/dd")}
+        </#if>
+      </span>
+    </p>
+
+    <!-- Bank name -->
+    <p style="text-align: right; line-height: 2; margin-bottom: 8pt;">
+      <span style="font-size: 12pt; font-weight: 700;">السادة / ${record.custrecord_ino_hrms_dr_directtoar}</span>
+    </p>
+
+    <!-- Greeting -->
+    <p style="text-align: right; line-height: 2; margin-bottom: 8pt;"> 
+      <span style="font-size: 12pt; font-weight: 700;">،،،</span> تحية طيبة وبعد
+    </p>
+
+    <!-- Body paragraph -->
+    <p style="align:right; line-height: 2; margin-bottom: 8px;line-height:25px">
+      يرجى التكرم بالعلم بأن السيد/ة الاستاذ/ة ${record.custrecord_ino_hrms_dr_employee.custentity_ino_hrms_emp_namear} ، 
+      ي/تعمل بشركة الكان لشبكات الاتصالات و المقاولات <br/>
+      ${record.custrecord_ino_hrms_dr_employee.custentity_ino_hrms_emp_jobtitle} بوظيفة <br/>
+       بموجب عقد سنوى و ان تاريخ التعيين بالشركة ${(record.custrecord_ino_hrms_dr_employee.hiredate)?string("yyyy/MM/dd")} <br/> و ان إجمالى الراتب الشهرى ${(data.payrollAssignmentData.totalSalary)!""} (فقط جنيهاً مصرياً)
+    </p>
+
+    <!-- National ID -->
+    <p style="text-align: center; line-height: 2; margin-bottom: 30pt;">
+      <span>  ${record.custrecord_ino_hrms_dr_employee.custentity_ino_hrms_emp_id} الرقم القومي </span>
+    </p>
+
+    <!-- Closing -->
+    <p style="align:right; line-height: 2; margin-bottom: 30pt;">
+      <span>وقد أعطيت له هذه الشهادة بناءً على طلبه ودون ادني مسئولية على الشركة</span>
+    </p>
+
+    <!-- Closing -->
+    <p style="align: center; line-height: 2; margin-bottom: 30pt;">
+      <span>،،،</span><b>وتفضلوا بقبول فائق الاحترام</b>
+    </p>
+
+    <br/><br/><br/>
+
+    <!-- Signature title -->
+    <p style="align: left; line-height: 2; margin-bottom: 6pt;">
+      <span style="font-size: 12pt; font-weight: 400;">مدير شئون العاملين والأجور والمزايا  </span>
+    </p>
+
+    <!-- Signature name -->
+    <p style="align: left; line-height: 2; margin-left:35px;">
+      <span style="font-size: 12pt; font-weight: 700;">حسين أحمد حسن</span>
+    </p>
+
+  </body>
+</pdf>
