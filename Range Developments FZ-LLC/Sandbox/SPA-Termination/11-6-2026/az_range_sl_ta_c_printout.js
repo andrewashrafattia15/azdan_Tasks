@@ -248,9 +248,9 @@ define(["N/search", "N/render", "N/record"], function (search, render, record) {
                           <tr>
                             <td style="vertical-align: top; font-size: 14px;">B.</td>
                             <td style="padding-bottom: 5px; font-size: 14px; padding-left: 10px; text-align: left;">
-                              The Purchaser(s) paid instalment payments for the total amount of AED ${numberWithCommas(
-                                bodyFields.paidAmount - bodyFields.amount
-                              )} ("the Payment") for Unit ${escapeXml(
+                              The Purchaser(s) paid instalment payments for the total amount of AED 
+                              ${numberWithCommas(Math.round((bodyFields.paidAmount - bodyFields.amount) * 100) / 100)} 
+                              ("the Payment") for Unit ${escapeXml(
           bodyFields.unitMaster
         )}, ${bodyFields.propertyName}.
                             </td>
@@ -281,9 +281,9 @@ define(["N/search", "N/render", "N/record"], function (search, render, record) {
                       <p style=" align: left; font-size: 14px;">2.1 The SPA will terminate immediately upon the date on which the Parties execute this Agreement ${
                         bodyFields.terDate
                       } .</p>
-                      <p style=" align: left; font-size: 14px;">2.2 It is agreed that the amount of AED ${numberWithCommas(
-                        bodyFields.paidAmount - bodyFields.amount
-                      )} shall be refunded to the Purchaser(s) within 60 days of confirmation by RAK Municipality of the cancellation and/or disposal of the unit. In the event the cancellation is delayed or rejected, the Developer shall not be liable for such delay.</p>
+                      <p style=" align: left; font-size: 14px;">2.2 It is agreed that the amount of AED 
+                      ${numberWithCommas(Math.round((bodyFields.paidAmount - bodyFields.amount) * 100) / 100)}  
+                      shall be refunded to the Purchaser(s) within 60 days of confirmation by RAK Municipality of the cancellation and/or disposal of the unit. In the event the cancellation is delayed or rejected, the Developer shall not be liable for such delay.</p>
                       <p style=" align: left; font-size: 14px;">2.3 The Purchaser(s) acknowledges and agrees that any amount withheld from the refund is forfeited and not subject to dispute.</p>
                         <p style=" align: left; font-size: 14px; padding-left: 15px;">3.  RELEASE, INDEMNITY AND NON-DISPARAGEMENT</p>
                       <p style=" align: left; font-size: 14px;">3.1 Subject to clause 2.2, each of the Parties' obligations and liabilities under the SPA, save for any obligations concerning confidentiality, will cease with effect from the Termination Date.</p>
@@ -554,15 +554,19 @@ define(["N/search", "N/render", "N/record"], function (search, render, record) {
   };
 
   const numberWithCommas = (x) => {
-    if (x != null && x != "") {
-      if (x) {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      } else {
-        return 0;
-      }
-    } else {
-      return 0;
-    }
+    if (x === null || x === undefined || x === "") return 0;
+
+    const num = Math.round(Number(x) * 100) / 100;
+    if (isNaN(num)) return 0;
+
+    // Only keep decimals if there's a meaningful fractional part
+    const hasDecimals = num % 1 !== 0;
+    const fixed = hasDecimals ? num.toFixed(2) : num.toString();
+
+    const [intPart, decPart] = fixed.split(".");
+    const formattedInt = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    
+    return decPart ? `${formattedInt}.${decPart}` : formattedInt;
   };
 
   function escapeXml(str) {
