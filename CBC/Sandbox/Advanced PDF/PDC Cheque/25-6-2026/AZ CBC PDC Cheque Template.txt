@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+    <macrolist>
+      <#assign data = {}>
+      <#if record.custpage_custrecord_to_print?has_content>
+         <#assign data = record.custpage_custrecord_to_print?eval/>
+      </#if>
+
+      <#assign subsidiaryData = (data.subsidiaryData)!{}>
+
+        <macro id="nlheader">
+            <table class="header" style="width: 100%;line-height:15px">
+                <tr>
+                    <td width="20%" align="left">
+                           <img src="https://11514133-sb1.app.netsuite.com/core/media/media.nl?id=11196&amp;c=11514133_SB1&amp;h=d8FHprrNDttjCqmrvXb-viK5oECGXZnjslS47n-Lr2tZCxxi" style="width:130px;height:100px" />
+                      </td>
+                  <td width="80%" rowspan="6"></td>
+                </tr>
+              <tr>
+                    <td align="left" style="font-size:9px;font-weight:bold"> ${record.custrecord_az_pdc_chq_subsidiary.name?split(":")?last?trim}</td>
+              </tr>
+                <tr>
+                    <td align="left" style="font-size:9px;font-weight:bold">${(subsidiaryData.subAddress)!""}</td>
+                </tr>
+                <tr>
+                    <td align="left" style="font-size:9px;font-weight:bold">Tel: ${record.custrecord_az_pdc_chq_subsidiary.custrecord_az_cbc_subsidiary_phone}</td>
+                </tr>
+                <tr>
+                    <td align="left" style="font-size:9px;font-weight:bold">Fax: ${record.custrecord_az_pdc_chq_subsidiary.fax}</td>
+                </tr>
+                <tr>
+                    <td align="left" style="font-size:9px;font-weight:bold">${record.custrecord_az_pdc_chq_subsidiary.custrecord_az_cbc_subsidiary_email}</td>
+                </tr>
+            </table>
+        </macro>
+    </macrolist>
+    <style>
+			* {
+				font-family: NotoSans, sans-serif;
+			}		
+        </style>
+</head>
+<body header="nlheader" header-height="20%" footer="nlfooter" footer-height="10pt" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+  
+   <p align="center" style="font-size:25px;font-weight:bold">Receipt</p>
+  
+  <table width="100%" style="line-height:20px">
+    <tr>
+      <td style="border-bottom:2px">${record.custrecord_az_pdc_chq_customer?split(" ")[0]}</td>
+      <td style="border-bottom:2px"></td>
+      <td style="border-bottom:2px">Receipt Number: ${record.name}</td>
+    </tr>
+    <tr>
+      <td style="font-weight:bold;border-bottom:1px">Received From:</td>
+      <td colspan="2" style="border-bottom:1px">${record.custrecord_az_pdc_chq_customer?replace("^[^ ]+\\s+", "", "r")}</td>
+    </tr>
+    <tr>
+      <td style="font-weight:bold;border-bottom:1px">Amount:</td>
+      <td colspan="2" style="border-bottom:1px">${record.custrecord_az_pdc_chq_amount}</td>
+    </tr>
+    <tr>
+      <td style="font-weight:bold;border-bottom:1px">In Words:</td>
+      <td colspan="2" style="border-bottom:1px">${data.totalInEnglishWords!""}</td>
+    </tr>
+    <tr>
+      <td style="font-weight:bold;border-bottom:1px">Mode Of Payment:</td>
+      <td colspan="2" style="border-bottom:1px">CHEQUE</td>
+    </tr>
+    <tr>
+      <td style="font-weight:bold;border-bottom:1px">Cheque Number:</td>
+      <td colspan="2" style="border-bottom:1px">${record.custrecord_az_pdc_chq_number}</td>
+    </tr>
+    <tr>
+      <td style="font-weight:bold;border-bottom:1px">Cheque Date:</td>
+      <td colspan="2" style="border-bottom:1px">${record.custrecord_az_pdc_chq_date?date?string("dd MMMM yyyy")}</td>
+    </tr>
+    <tr>
+      <td style="font-weight:bold;border-bottom:1px">Bank Name:</td>
+      <td colspan="2" style="border-bottom:1px">${record.custrecord_az_pdc_chq_bank}</td>
+    </tr>
+    <tr>
+      <td style="font-weight:bold;border-bottom:1px">Remarks:</td>
+      <td colspan="2" style="border-bottom:1px">${record.custrecord_az_pdc_chq_memo}</td>
+    </tr>
+    <tr>
+      <td style="border-bottom:1px">Collected by</td>
+      <td colspan="2" style="border-bottom:1px"></td>
+    </tr>
+  </table>
+  <table width="100%" style="margin-top:20px">
+    <tr>
+      <td style="padding-top:5px;border-top:1px double">Created By</td>
+      <td style="padding-top:5px;border-top:1px double"></td>
+      <td style="padding-top:5px;border-top:1px double">Date</td>
+    </tr>
+    <tr>
+      <td style="padding-top:20px;padding-bottom:3px;border-bottom:2px">${record.custrecord_az_cbc_pdc_tans_created_by?replace("^[^ ]*\\d[^ ]*\\s+", "", "r")}</td>
+      <td></td>
+      <td style="padding-top:20px;border-bottom:2px"></td>
+    </tr>
+  </table>
+
+  <p style="font-size:5px">*In case of cheque payment. Receipt is subject to realization. </p>
+  <p style="font-size:5px">*This is electronically verified report, No Signature required. </p>
+</body>
+</pdf>
