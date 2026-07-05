@@ -1,0 +1,227 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+  <head>
+    <macrolist>
+        <macro id="nlheader">
+            <#assign rawData = record.custpage_custrecord_to_print!"" />
+
+<#-- SAFE JSON parsing -->
+<#assign data = {}>
+
+<#if rawData?has_content>
+    <#attempt>
+        <#assign data = rawData?eval_json>
+    <#recover>
+        <#assign data = {}>
+    </#attempt>
+</#if>
+  
+            <table class="header" style="width: 100%;">
+                <tr>
+                    <td style="border-bottom:1px solid darkred;">
+                       
+                           <img src="https://11260411.app.netsuite.com/core/media/media.nl?id=4977&amp;c=11260411&amp;h=9VPukN7kNXxyFXvaAWRE_i-bjjqZ3cQYID9f3yeVusqLzlA0" style="width:160px;height:30px" />
+                      
+                    </td>
+                    <td align="right" style="vertical-align:middle;border-bottom:1px solid darkred;font-size:28px;font-weight:bold; color:darkred">
+                      PAYMENT RECEIPT
+                    </td>
+                </tr>
+            </table>
+        </macro>
+        <macro id="nlfooter">
+            <table>
+              <tr>
+                 <td width="80%" align="right" style="color:#003366">Printout Date</td><td width="20%" align="right">${.now?string("dd-MMM-yyyy")}</td>
+              </tr>
+              <tr>
+                <td colspan="2" align="center" style="font-size:9px;background-color:#003366;color:white">This is a system-generated receipt and is valid without a physical signature.   ·   Redcon Properties</td>
+              </tr>
+              <tr>
+                <td colspan="2" align="center" style="font-size:9px;color:#003366">Plot 86-89, South Teseen St,<br/>
+                                                      Fifth Settlement, New Cairo City Center</td>
+              </tr>
+            </table>
+        </macro>
+    </macrolist>
+    <style>
+      table{
+        width:100%
+      }
+      .firstrow{
+        border-top:1px;
+        border-bottom:1px;
+        border-left:1px;
+        border-right:1px;
+      }
+      .row{
+        border-bottom:1px;
+        border-left:1px;
+      }
+    </style>
+  </head>
+  <body header="nlheader" header-height="10%" footer="nlfooter" footer-height="10%" size="A4">
+    <table>
+      <tr>
+       <td align="left" colspan="5" style="font-size:14px;background-color:#003366;color:white;padding-left:10px">RECEIPT DETAILS</td>
+      </tr>
+      <tr>
+        <td align="left" width="20%" style="font-size:12px;color:#003366;background-color:#f1f3f7">Receipt Serial</td>
+        <td align="left" width="25%" style="font-size:12px">${record.custrecord_ino_re_cr_documentnumber}</td>
+        <td align="left" width="10%" style="font-size:12px"></td>
+        <td align="left" width="20%" style="font-size:12px;color:#003366;background-color:#f1f3f7">Receipt Date</td>
+        <td align="left" width="25%" style="font-size:12px">${record.custrecord_ino_re_cr_date?string("dd-MMM-yyyy")}</td>
+      </tr>
+      <tr>
+        <td align="left" style="font-size:12px;color:#003366;background-color:#f1f3f7">Client Name</td>
+        <td align="left" style="font-size:12px">${record.custrecord_ino_re_cr_customer}</td>
+        <td align="left" style="font-size:12px"></td>
+        <td align="left" style="font-size:12px;color:#003366;background-color:#f1f3f7">Client Code</td>
+        <td align="left" style="font-size:12px">${record.custrecord_ino_re_cr_customer.entityid}</td>
+      </tr>
+      <tr>
+        <td align="left" style="font-size:12px;color:#003366;background-color:#f1f3f7">Project</td>
+        <td align="left" style="font-size:12px">${record.custrecord_ino_re_cr_property}</td>
+        <td align="left" style="font-size:12px"></td>
+        <td align="left" style="font-size:12px;color:#003366;background-color:#f1f3f7">Payment Method</td>
+        <td align="left" style="font-size:12px">${record.custrecord_ino_re_cr_payment_option}</td>
+      </tr>
+      <tr>
+        <td align="left" style="font-size:12px;color:#003366;background-color:#f1f3f7">Customer Number</td>
+        <td align="left" style="font-size:12px">${record.custrecord_ino_re_cr_customer.phone}</td>
+        <td align="left" style="font-size:12px"></td>
+        <td align="left" style="font-size:12px;color:#003366;background-color:#f1f3f7">Reference No.</td>
+        <td align="left" style="font-size:12px"></td>
+      </tr>
+    </table>
+
+<table style="margin-top:20px">
+  <tr>
+   <td class="firstrow" align="left" colspan="8" style="font-size:14px;background-color:#003366;color:white;padding-left:10px">UNITS &amp; PAYMENTS</td>
+  </tr>
+    <#assign allocations = (data.paymentPlanAllocations)![] />
+    <#if record.custrecord_ino_re_cr_payment_option?? && record.custrecord_ino_re_cr_payment_option == "Cheque">
+      <tr>
+        <td class="row" width="10%" align="center" style="font-size:10px;font-weight:bold;background-color:#003366;color:white">Check #</td>
+        <td class="row" width="10%" align="center" style="font-size:10px;font-weight:bold;background-color:#003366;color:white">Unit</td>
+        <td class="row" width="10%" align="center" style="font-size:10px;font-weight:bold;background-color:#003366;color:white">Unit Type</td>
+        <td class="row" width="15%" align="center" style="font-size:10px;font-weight:bold;background-color:#003366;color:white">Installement Name</td>
+        <td class="row" width="20%" align="center" style="font-size:10px;font-weight:bold;background-color:#003366;color:white">Payment Type</td>
+        <td class="row" width="12.5%" align="center" style="font-size:10px;font-weight:bold;background-color:#003366;color:white">Receipt Type</td>
+        <td class="row" width="15%" align="center" style="font-size:10px;font-weight:bold;background-color:#003366;color:white">Installment Date</td>
+        <td class="row" width="17.5%" align="center" style="font-size:10px;font-weight:bold;background-color:#003366;color:white;border-right:1px">Paid Amount (${record.custrecord_ino_re_fx_currency})</td>  
+      </tr>
+
+  <#list allocations as alloc>
+    <tr>
+      <td class="row" align="center" style="font-size:10px">${(alloc.pdcData.chequeNumber)!""}</td>
+      <td class="row" align="center" style="font-size:10px">${(alloc.unit)!""}</td>
+      <td class="row" align="center" style="font-size:10px">${(alloc.unitType)!""}</td>
+      <td class="row" align="center" style="font-size:10px">${(alloc.installmentName)!""}</td>
+      <td class="row" align="center" style="font-size:10px">${(alloc.paymentType)!""}</td>
+      <td class="row" align="center" style="font-size:10px">${(alloc.receiptType)!""}</td>
+      <td class="row" align="center" style="font-size:10px">
+        <#if (alloc.installmentDate)?has_content>
+          ${(alloc.installmentDate)?date("yyyy-MM-dd")?string("dd-MMM-yyyy")}
+        <#else>
+        
+        </#if>
+      </td>
+      <td class="row" align="center" style="font-size:10px;border-right:1px">
+    <#if (alloc.paidAmount)?has_content>
+        ${(alloc.paidAmount)?number?string(",##0.00")}
+    <#else>
+        
+    </#if>
+    </td>
+   </tr>
+  </#list>
+    <#else>
+      <tr>
+        <td class="row" width="12.5%" align="center" style="font-size:10px;font-weight:bold;background-color:#003366;color:white">Unit</td>
+        <td class="row" width="12.5%" align="center" style="font-size:10px;font-weight:bold;background-color:#003366;color:white">Unit Type</td>
+        <td class="row" width="20%" align="center" style="font-size:10px;font-weight:bold;background-color:#003366;color:white">Installement Name</td>
+        <td class="row" width="15%" align="center" style="font-size:10px;font-weight:bold;background-color:#003366;color:white">Payment Type</td>
+        <td class="row" width="15%" align="center" style="font-size:10px;font-weight:bold;background-color:#003366;color:white">Receipt Type</td>
+        <td class="row" width="15%" align="center" style="font-size:10px;font-weight:bold;background-color:#003366;color:white">Installment Date</td>
+        <td class="row" width="20%" align="center" style="font-size:10px;font-weight:bold;background-color:#003366;color:white;border-right:1px">Paid Amount (${record.custrecord_ino_re_fx_currency})</td>  
+      </tr>
+      
+  <#list allocations as alloc>
+    <tr>
+      <td class="row" align="center" style="font-size:10px">${(alloc.unit)!""}</td>
+      <td class="row" align="center" style="font-size:10px">${(alloc.unitType)!""}</td>
+      <td class="row" align="center" style="font-size:10px">${(alloc.installmentName)!""}</td>
+      <td class="row" align="center" style="font-size:10px">${(alloc.paymentType)!""}</td>
+      <td class="row" align="center" style="font-size:10px">${(alloc.receiptType)!""}</td>
+      <td class="row" align="center" style="font-size:10px">
+        <#if (alloc.installmentDate)?has_content>
+          ${(alloc.installmentDate)?date("yyyy-MM-dd")?string("dd-MMM-yyyy")}
+        <#else>
+        
+        </#if>
+      </td>
+      <td class="row" align="center" style="font-size:10px;border-right:1px">
+    <#if (alloc.paidAmount)?has_content>
+        ${(alloc.paidAmount)?number?string(",##0.00")}
+    <#else>
+        
+    </#if>
+    </td>
+   </tr>
+  </#list>
+</#if>
+</table>
+
+      
+    <#if record.custrecord_ino_re_cr_payment_option?? && record.custrecord_ino_re_cr_payment_option == "Cheque">
+     <table style="margin-top:20px">
+      <tr>
+       <td class="firstrow" align="center" colspan="8" style="font-size:14px;background-color:#003366;color:white;padding-left:10px">POST-DATED CHEQUES (PDC)</td>
+      </tr>
+      <tr>
+        <td class="row" width="30%" align="center" style="font-size:10px;font-weight:bold;background-color:#003366;color:white">Bank Name</td>
+        <td class="row" width="20%" align="center" style="font-size:10px;font-weight:bold;background-color:#003366;color:white">Branch Name</td>
+        <td class="row" width="15%" align="center" style="font-size:10px;font-weight:bold;background-color:#003366;color:white">Cheque Date</td>
+        <td class="row" width="15%" align="center" style="font-size:10px;font-weight:bold;background-color:#003366;color:white">Cheque Number</td>
+        <td class="row" width="20%" align="center" style="font-size:10px;font-weight:bold;background-color:#003366;color:white;border-right:1px">Cheque Amount (${record.custrecord_ino_re_fx_currency})</td>
+      </tr>
+
+       <#list allocations as alloc>
+         <tr>
+           <td class="row" align="center" style="font-size:10px">${(alloc.pdcData.bankName)!""}</td>
+           <td class="row" align="center" style="font-size:10px">${(alloc.pdcData.branchName)!""}</td>
+           <td class="row" align="center" style="font-size:10px">${(alloc.pdcData.chequeDate)!""}</td>
+           <td class="row" align="center" style="font-size:10px">${(alloc.pdcData.chequeNumber)!""}</td>
+           <td class="row" align="center" style="font-size:10px;border-right:1px">
+           <#if (alloc.pdcData.chequeAmount)?has_content>
+             ${(alloc.pdcData.chequeAmount)?number?string(",##0.00")}
+           <#else>
+        
+           </#if>
+           </td>
+         </tr>
+      </#list>
+    </table>
+
+  </#if>
+
+    <table style="margin-top:20px">
+      <tr>
+        <td width="70%" align="right" style="font-size:10px;font-weight:bold;color:#003366;background-color:#f1f3f7">Total Paid (${record.custrecord_ino_re_fx_currency})</td>
+        <td width="30%" align="right" style="font-size:10px;font-weight:bold;background-color:#f1f3f7;color:red">${record.custrecord_ino_re_cr_amount?string(",##0.00")}</td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center" style="font-size:10px;font-weight:bold;color:#003366;background-color:#f1f3f7">${record.custrecord_ino_re_cr_amount_in_words_en}</td>
+      </tr>
+    </table>
+
+    <table style="margin-top:10px">
+      <tr>
+        <td width="20%" align="center" style="font-size:10px;font-weight:bold;background-color:#f1f3f7;color:#003366">Memo:</td>
+        <td width="80%" align="center" style="font-size:10px;">${record.custrecord_ino_re_cr_memo}</td>
+      </tr>
+    </table>
+  </body>
+</pdf>
