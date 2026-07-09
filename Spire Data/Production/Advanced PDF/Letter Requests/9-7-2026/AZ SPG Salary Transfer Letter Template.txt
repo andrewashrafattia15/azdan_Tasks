@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+  <head>
+    <style>table { width: 100%; }
+</style>
+  </head>
+  <body size="A4">
+
+<#assign rawData = record.custpage_custrecord_to_print!"" />
+
+<#-- SAFE JSON parsing -->
+<#assign data = {}>
+
+<#if rawData?has_content>
+    <#attempt>
+        <#assign data = rawData?eval_json>
+    <#recover>
+        <#assign data = {}>
+    </#attempt>
+</#if>
+          
+    <table>
+      <tr><td align="right">Date : ${record.custrecord_ino_hrms_dr_releasedate}</td></tr>
+      <tr><td align="left">${record.custrecord_ino_hrms_dr_directedto}</td></tr>
+      <tr><td align="left">${record.custrecord_az_sp_dr_location}</td></tr>
+    </table>
+
+    <p style="font-weight:bold;font-size:17px">Subject:  Salary Transfer Letter</p>
+
+    <p>Dear Sir / Madam,</p>
+    <p>
+      This is to certify that Mr./Mrs. ${record.custrecord_ino_hrms_dr_employee}, 
+      holder of ${record.custrecord_ino_hrms_dr_nationality} passport number ${record.custrecord_ino_hrms_dr_employee.custentity_ino_hrms_emp_passportnumber} is an employee at  ${record.custrecord_ino_hrms_dr_subsidiary} . 
+      ${record.custrecord_ino_hrms_dr_employee} has been working in the capacity of ${record.custrecord_ino_hrms_dr_employee.custentity_ino_hrms_emp_jobtitle} since ${record.custrecord_ino_hrms_dr_doj} and 
+      currently draws a monthly salary of AED ${(data.payrollAssignmentData.totalSalary)!""} /- plus benefit.
+    </p>
+
+    <p>
+      We Confirm that his monthly salary, 
+      with effect from 1 ${record.custrecord_ino_hrms_dr_releasedate?string("MMMM")}, will be transferred for the Credit of his account under the IBAN Number ${record.custrecord_ino_hrms_dr_employee.custentity_ino_hrms_emp_iban},
+       Account Number ${record.custrecord_ino_hrms_dr_employee.custentity_ino_hrms_emp_bnkaccntnmb} .
+    </p>
+
+    <p>
+      In case of his resignation, we will transfer his gratuity and final settlement of his dues for his account with your bank.
+    </p>
+
+    <p>
+      This letter has been issued upon the employee’s request and it does not constitute a financial guarantee on or on behalf of any of the authorized signatories.
+    </p>
+
+    <p>
+      Yours sincerely,
+    </p>
+
+    <table style="margin-top:50px">
+      <tr><td align="left"> ${record.custrecord_ino_hrms_dr_subsidiary.custrecord_az_sp_hr_business_partner?replace("^[^ ]+ ", "", "r")} </td></tr>
+      <tr><td align="left"> HR Business Partner</td></tr>
+    </table>
+  </body>
+</pdf>

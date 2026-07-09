@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+  <head>
+    <style>table { width: 100%; }
+</style>
+  </head>
+  <body size="A4">
+    
+<#assign rawData = record.custpage_custrecord_to_print!"" />
+
+<#-- SAFE JSON parsing -->
+<#assign data = {}>
+
+<#if rawData?has_content>
+    <#attempt>
+        <#assign data = rawData?eval_json>
+    <#recover>
+        <#assign data = {}>
+    </#attempt>
+</#if>
+          
+    <table>
+      <tr><td align="right">Date : ${record.custrecord_ino_hrms_dr_releasedate}</td></tr>
+      <tr><td align="left">${record.custrecord_ino_hrms_dr_directedto}</td></tr>
+      <tr><td align="left">${record.custrecord_az_sp_dr_location}</td></tr>
+    </table>
+
+    <p style="font-weight:bold;font-size:17px">Subject: No Objection Letter for Visa Application for  ${record.custrecord_ino_hrms_dr_employee}</p>
+
+    <p>Dear Sir / Madam,</p>
+    
+    <p>
+      This is to inform  that Mr./Mrs. ${record.custrecord_ino_hrms_dr_employee}, and
+      holder of ${record.custrecord_ino_hrms_dr_nationality} ${record.custrecord_ino_hrms_dr_employee.custentity_ino_hrms_emp_passportnumber} 
+      and ${record.custrecord_ino_hrms_dr_employee.custentity_ino_hrms_emp_id } is employed with ${record.custrecord_ino_hrms_dr_subsidiary}  
+      since ${record.custrecord_ino_hrms_dr_doj} , as ${record.custrecord_ino_hrms_dr_employee.custentity_ino_hrms_emp_jobtitle}.
+      ${record.custrecord_ino_hrms_dr_employee} is receiving a monthly salary of AED ${(data.payrollAssignmentData.totalSalary)!""} plus annual benefits.
+    </p>
+
+    <p>
+      ${record.custrecord_ino_hrms_dr_employee} is planning to travel to ${record.custrecord_ino_hrms_dr_destination} from the ${record.custrecord_az_sp_dr_travel_date} to ${record.custrecord_az_sp_dr_return_date} for business purposes.
+    </p>
+
+    
+    <p>
+      We hereby confirm that all expenses pertaining to business travel would be borne by Spire Solutions DMCC. We would be obliged if you would kindly grant ${record.custrecord_ino_hrms_dr_employee} the Business Visa at the earliest. 
+    </p>
+
+    <p>
+      Thank you.
+    </p>
+
+    <p>
+      Yours sincerely,
+    </p>
+
+    <table style="margin-top:50px">
+      <tr><td align="left"> ${record.custrecord_ino_hrms_dr_subsidiary.custrecord_az_sp_hr_business_partner?replace("^[^ ]+ ", "", "r")} </td></tr>
+      <tr><td align="left"> Human Resource Business Partner</td></tr>
+    </table>
+  </body>
+</pdf>
