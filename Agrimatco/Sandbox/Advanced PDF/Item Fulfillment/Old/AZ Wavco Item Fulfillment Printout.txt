@@ -1,0 +1,278 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+              <link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false" />
+    <macrolist>
+        <macro id="nlheader">
+          <br /><br /><br /><br />
+
+          </macro>
+      
+        <macro id="nlfooter">
+    
+              
+            <table style="width: 100%; margin-bottom : 13pt; margin-top : 0pt">
+              <tr>
+                   <td align="right">   ............................... أستلمت أنا ....................................................................   إِثبات شخصية رقم ................................... سيارة رقم   </td>
+              </tr>
+              <tr> 
+                <td align="right"> أستلمت البضاعة الموضحة عالية كاملة وسليمة واتعهد بتوصليها الي الجهة الموضحة عالية كاملة وسليمة واتحمل المسؤولية </td>
+              </tr>
+              <tr> 
+                <td align="right"> ............................................................................................................/ المدنية والجنائية في حال تبديدها او اتلافها او فققدها      التوقيع </td>
+              </tr>
+              <tr> 
+                <td align="right">   ................................................................................. المرسل إليه المستلم ......................................................................... التوقيع </td>
+              </tr>
+            </table>
+          
+          <table class="footer" style="width: 100%;">
+            <tr>
+          <#if preferences.PRINT_BARCODES>
+            <td><barcode codetype="code128" showtext="true" value="${record.tranid}"/></td>
+          </#if>
+            <td align="left" style="border: none;">
+                <p style="text-align:left;font-size:12px;">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${.now?date}
+                    <span style="float:right;">
+                        ${.now?time}
+                    </span>
+                </p>
+            </td>
+            <td align="right"><pagenumber/> of <totalpages/></td>
+         </tr>
+        </table>
+        </macro>
+    </macrolist>
+ <style type="text/css">* {
+			<#if .locale == "zh_CN">
+				font-family: NotoSans, NotoSansCJKsc, sans-serif;
+			<#elseif .locale == "zh_TW">
+				font-family: NotoSans, NotoSansCJKtc, sans-serif;
+			<#elseif .locale == "ja_JP">
+				font-family: NotoSans, NotoSansCJKjp, sans-serif;
+			<#elseif .locale == "ko_KR">
+				font-family: NotoSans, NotoSansCJKkr, sans-serif;
+			<#elseif .locale == "th_TH">
+				font-family: NotoSans, NotoSansThai, sans-serif;
+			<#else>
+				font-family: NotoSans, sans-serif;
+  				font-family: NotoSansArabic, sans-serif;
+			</#if>
+			}
+           .arabic {
+        font-family: arabic-font;
+        position: right;
+        font-size: 8px;
+        line-height: 75%;
+      }
+           .english {
+        font-family: english-font;
+        position: left;
+        font-size: 8px;
+        line-height: 110%
+      }
+
+		table {
+			font-size: 9pt;
+			table-layout: fixed;
+		}
+        th {
+            font-weight: bold;
+            font-size: 8pt;
+            vertical-align: middle;
+            padding: 5px 6px 3px;
+            background-color: #e3e3e3;
+            color: #333333;
+        }
+        td {
+            padding: 4px 6px;
+        }
+		td p { align:left }
+        b {
+            font-weight: bold;
+            color: #333333;
+        }
+        table.header td {
+            padding: 0;
+            font-size: 10pt;
+        }
+        table.footer td {
+            padding: 0;
+            font-size: 8pt;
+        }
+        table.itemtable th {
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+        table.body td {
+            padding-top: 2px;
+        }
+        td.addressheader {
+            font-size: 8pt;
+            font-weight: bold;
+            padding-top: 6px;
+            padding-bottom: 2px;
+        }
+        td.address {
+            padding-top: 0;
+        }
+        span.title {
+            font-size: 28pt;
+        }
+        span.number {
+            font-size: 16pt;
+        }
+        span.itemname {
+            font-weight: bold;
+            line-height: 150%;
+        }
+        div.returnform {
+            width: 100%;
+            /* To ensure minimal height of return form */
+            height: 200pt;
+            page-break-inside: avoid;
+            page-break-after: avoid;
+        }
+        hr {
+            border-top: 1px dashed #d3d3d3;
+            width: 100%;
+            color: #ffffff;
+            background-color: #ffffff;
+            height: 1px;
+        }
+        body{background-image: url(
+        "${record.subsidiary.custrecord_az_agri_background_url@url}"
+    );}
+</style>
+</head>
+<body header="nlheader" header-height="13%" footer="nlfooter" footer-height="110pt" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+  
+            <table style="width: 100%; margin-top : 20pt ">
+              <tr>
+                <td align="left" style="width: 60%;" >
+                   <table style="width: 100%; ">
+                      <tr>
+                         <td class="addressheader" style="width : 25%" ><strong style="font-size: 12pt;"> Ship To </strong></td>
+                        <td style="width : 75%"></td>
+                      </tr>
+                      <tr style="padding-top : 18pt">
+                        <td > <strong > Customer </strong> </td>
+                         <td >${record.entity}</td>
+                     </tr>
+                     <tr >
+                       <td>  <strong> Ship Address </strong> </td>
+                        <td >${salesorder.shipaddress}</td>
+                     </tr>
+                   </table>
+               </td>
+                
+                <td align="right" style="width: 40%;" >
+                  <table style="width: 100%; ">
+                    <tr>
+                      <td> <strong style="font-size: 12pt; " > Item Fulfillment</strong> </td>
+                      <td></td>
+                    </tr>
+                    <tr style="padding-top : 18pt">
+                      <td> <strong> Reference # </strong></td>
+                      <td>
+                        <strong style="color: blue;">
+                        ${record.tranid}
+                          </strong>
+                      </td>
+                    </tr>
+                    <tr style="padding-top : -5pt">
+                      <td> <strong> Order Date </strong></td>
+                      <td> ${record.trandate} </td>
+                    </tr>
+                    <tr style="padding-top : -5pt">
+                      <td> <strong> Order # </strong></td>
+                      <td> ${record.createdfrom.tranid} </td>
+                    </tr>
+                    <tr style="padding-top : -5pt">
+                      <td> <strong> Memo </strong></td>
+                      <td> ${record.memo} </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+  
+  <table style="width : 100%">
+      <tr>
+       <td  align="right" style="width : 85%; " > ${salesorder.location} </td>
+       <td style="width : 15%" align="right" >  من مخزن </td>
+     </tr>
+  </table>
+   <table style="width : 100%">
+
+     <tr style="margin-top : 5pt; " >
+       <td align="right" > .................................................... البضاعة الموضحة ادناه تم ارسالها اليكم سيارة نقل رقم ............................................................... اسم السائق    </td>
+     </tr>
+   </table>
+  <#if salesorder.item?has_content>
+
+   <table class="itemtable" style="width: 100%; margin-top: 10px;">
+     <thead style="border: 0.5px solid ;   background-color: #e3e3e3;">
+	   <tr align="center" style="border-top: 0.5px solid ;">
+	   <th align="center" style="width: 20% ; border-right: 0.5px solid "> الملاحظات  </th>
+	   <th align="center" style="width: 15%; border-right: 0.5px solid " > رقم اللوط</th>
+	   <th align="center" style="width: 10% ; border-right: 0.5px solid"> الكميه </th>
+	   <th align="center" style="width: 35% ; border-right: 0.5px solid"> اسم الماده </th>
+	   <th align="center" style="width: 20%;  border-right: 0.5px solid"> رقم الماده </th>
+	 </tr>
+    </thead>
+     
+      <#list salesorder.item as tranline>
+        <tr style="border: 0.5px solid ;  ">
+        <td align="center" style="border-right: 0.5px solid; border-left: 0.5px solid "></td>
+          <#assign inventorydetail = tranline.inventorydetail?keep_before("(")>
+
+        <td align="center" style="border-right: 0.5px solid">${tranline.inventorydetail}</td>
+        <td align="center" style="border-right: 0.5px solid">${tranline.quantity?string.number}</td>
+        <td align="center" style="border-right: 0.5px solid">${tranline.description}</td>
+        <td align="center" style="border-right: 0.5px solid">${tranline.custcol_az_agri_displayname}</td>
+	  </tr>
+	  </#list></table>
+   </#if>
+
+
+
+     <hr style="height:2px;border-width:0;background-color:gray"/>
+
+     <table style="border:none;width:100%">
+         <tr style="border:none">
+             <td style="border:none" align="center">اسم وتوقيع المستلم</td>
+             <td style="border:none" align="center">اسم وتوقيع مراقب
+                 المخازن</td>
+             <td style="border:none" align="center">اسم المندوب</td>
+             <td style="border:none" align="center">اسم وتوقيع المسؤول</td>
+         </tr>
+         <tr style="border:none">
+             <td style="border:none"></td>
+             <td style="border:none"></td>
+             <td style="border:none">
+                ${salesorder.salesrep.altname} 
+             </td>
+             <td style="border:none"> </td>
+         </tr>
+     </table>
+  
+
+
+
+
+</body>
+</pdf>
