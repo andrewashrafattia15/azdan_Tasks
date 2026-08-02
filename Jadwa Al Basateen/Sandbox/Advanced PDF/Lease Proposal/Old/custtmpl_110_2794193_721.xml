@@ -1,0 +1,10 @@
+<advancedpdftemplate scriptid="custtmpl_110_2794193_721" standard="STDTMPLCR_INO_PMS_LEASE_PROPOSAL">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>F</preferred>
+  <printtype>CUSTOMRECORD</printtype>
+  <recordtype>[scriptid=customrecord_ino_pms_lease_proposal]</recordtype>
+  <title>Lease Proposal Printout</title>
+  <trantype>CUSTOM</trantype>
+</advancedpdftemplate>

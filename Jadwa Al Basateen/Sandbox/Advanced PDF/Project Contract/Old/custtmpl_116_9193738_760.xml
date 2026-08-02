@@ -1,0 +1,10 @@
+<advancedpdftemplate scriptid="custtmpl_116_9193738_760" standard="STDTMPLCR_INO_PM_PROJECT_CONTRACT">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>F</preferred>
+  <printtype>CUSTOMRECORD</printtype>
+  <recordtype>[scriptid=customrecord_ino_pm_project_contract]</recordtype>
+  <title>AZ BAS Project Contract Printout</title>
+  <trantype>CUSTOM</trantype>
+</advancedpdftemplate>

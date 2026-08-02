@@ -1,0 +1,9 @@
+<advancedpdftemplate scriptid="custtmpl_104_9193738_170" standard="STDTMPLCUSTINVC">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>T</preferred>
+  <printtype>TRANSACTION</printtype>
+  <title>AZ BAS - Tax Invoice Printout</title>
+  <trantype>CUSTINVC</trantype>
+</advancedpdftemplate>

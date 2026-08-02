@@ -1,0 +1,656 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+
+<pdf>
+   <#if record.custrecord_ino_re_so_property == "Hills">
+<head>
+   <link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false" />
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+   <macrolist>
+        <macro id="nlheader">
+            <table class="header" style="width: 100%;">
+                <tr>
+                   <td align="left" style="width: 50%"> <img src="https://9193738.app.netsuite.com/core/media/media.nl?id=3308&amp;c=9193738&amp;h=bqmxMm2pvHS93MDhhKKX6vkZA3ro3bYrFLF8Dul4szjijRSd" 
+                                                          style="width: 100px; height: 50px;padding-top:-20px"  /></td>
+                  <td align="right" style="width: 50%"> <img src="https://9193738.app.netsuite.com/core/media/media.nl?id=3307&amp;c=9193738&amp;h=ozO_iDS_R25V5O0HxdFGBDAniFu8v7Jgnnb0_Vdb3pkB1DSJ" 
+                                                          style="width: 100px; height: 50px;padding-top:-20px"  /></td>
+                 
+                    
+             
+           
+                </tr> 
+
+             
+            </table>
+       
+          
+        </macro>
+        <macro id="nlfooter">
+               
+                <table class="footer" style="width: 100%;font-size:9pt; color:#afaaac; padding-top:10px ">
+                <tr style=" ">
+                    <td align="right" style="width: 40%; "> <strong> Signed by the Purchaser:</strong> ___________________________ :توقيع المشتري     </td>
+                   
+                </tr>  
+
+            </table>
+           
+        </macro>
+    </macrolist>
+   <style type="text/css">* {
+            <#if .locale == "zh_CN">
+                font-family: NotoSans, NotoSansCJKsc, sans-serif;
+            <#elseif .locale == "zh_TW">
+                font-family: NotoSans, NotoSansCJKtc, sans-serif;
+            <#elseif .locale == "ja_JP">
+                font-family: NotoSans, NotoSansCJKjp, sans-serif;
+            <#elseif .locale == "ko_KR">
+                font-family: NotoSans, NotoSansCJKkr, sans-serif;
+            <#elseif .locale == "th_TH">
+                font-family: NotoSans, NotoSansThai, sans-serif;
+            <#else>
+                font-family: NotoSans, sans-serif;
+                  font-family: NotoSansArabic, sans-serif;
+            </#if>
+            }
+      .arabic {
+        font-family: arabic-font;
+        position: right;
+        font-size: 8px;
+        line-height: 75%;
+      }
+
+        .english {
+        font-family: english-font;
+        position: left;
+        font-size: 8px;
+        line-height: 110%
+      }
+  </style>
+</head>
+<body header="nlheader" header-height="10%" footer="nlfooter" footer-height="3%" padding="0.8in 0.8in 0.5in 0.8in" size="A4">
+<table style="width:100%;padding-top:-20px" >
+  <tr>
+    <td align="center" style="text-decoration:underline; font-weight:bold; font-size:14pt;color:#474747"> Unit Reservation Form &nbsp;&nbsp; طلب حجز وحدة عقارية </td>
+  </tr>
+</table>
+
+  <table style="width:100%;margin-top:20px;font-size:9pt" >
+  <tr style="">
+    <td align="left" style="width: 50%; ">
+      <table style="width:100%">
+        <tr align="left">
+          <td style="width:50%; font-weight:bold"> Reference:</td>
+          <td align="left" style="width:50%;padding-left:-85px"> ${record.custrecord_ino_re_so_documentnumber}</td>
+        </tr>
+        <tr style="padding-top:10px">
+          <td style="font-weight:bold;"> Date:</td>
+          <td align="left" style="padding-left:-116px"> ${record.custrecord_ino_re_so_date}</td>
+        </tr>
+        <tr style="padding-top:10px">
+          <td style="font-weight:bold">Vendor:</td>
+          <td style="padding-left:-101px"> Jadwa Albasateen Real Estate Co.</td>
+        </tr>
+        <tr style="padding-top:10px">
+          <td style="font-weight:bold">Project:</td>
+          <td style="padding-left:-102px"> ${record.custrecord_ino_re_so_property}</td>
+        </tr>
+        <tr style="padding-top:10px">
+          <td style="font-weight:bold">Unit:</td>
+          <td style="padding-left:-118px"> ${record.custrecord_ino_re_so_unit}</td>
+        </tr>
+        <tr style="padding-top:10px">
+          <td style="font-weight:bold">Plot Area:</td>
+          <td style="padding-left:-94px"> ${record.custrecord_ino_re_so_unit.custrecord_az_bas_um_plot_area} m2</td>
+        </tr>
+        <tr style="padding-top:10px">
+          <td style="font-weight:bold">Approx.Unit BUA: </td>
+          <td style="padding-left:-50px"> ${record.custrecord_ino_re_so_unit.custrecord_ino_re_um_gross_area} m2 </td>
+        </tr>
+        <tr style="padding-top:10px">
+          <td style="font-weight:bold">Purchase Price:</td>
+          <td style="padding-left:-60px"> ${record.custrecord_ino_re_so_unitprice?string(",##0.00")}</td>
+        </tr>
+      </table>
+    </td>
+     <td align="right" style="width:50%;">
+      <table style="width:100%">
+        <tr>
+         <td align="right" style="width:50%; padding-right:-70px"> ${record.custrecord_ino_re_so_documentnumber}</td>
+          <td align="right" style="width:50%;font-weight:bold">:الرقم المرجعي</td>
+        </tr>
+        <tr style="padding-top:10px">
+          <td align="right" style=" padding-right:-108px"> ${record.custrecord_ino_re_so_date}</td>
+          <td align="right" style="font-weight:bold">:التاريخ</td>
+        </tr>
+        <tr style="padding-top:10px">
+          <td align="right" style=" padding-right:-115px">شركة جدوى البساتين للعقارات </td>
+          <td align="right" style="font-weight:bold">:البائع</td>
+        </tr>
+        <tr style="padding-top:10px">
+          <td align="right" style=" padding-right:-96px">  ${record.custrecord_ino_re_so_property}</td>
+          <td align="right" style="font-weight:bold">:المشروع</td>
+        </tr>
+        <tr style="padding-top:10px">
+          <td align="right" style=" padding-right:-50px">  ${record.custrecord_ino_re_so_unit}</td>
+          <td align="right" style="font-weight:bold">:رقم الوحدة العقارية</td>
+        </tr>
+         <tr style="padding-top:10px">
+          <td align="right" style=" padding-right:-70px"> ${record.custrecord_ino_re_so_unit.custrecord_az_bas_um_plot_area} m2 </td>
+          <td align="right" style="font-weight:bold">:مساحة الأرض </td>
+        </tr>
+        <tr style="padding-top:10px">
+          <td align="right" style=" padding-right:-18px">  ${record.custrecord_ino_re_so_unit.custrecord_ino_re_um_gross_area}m2</td>
+          <td align="right" style="font-weight:bold">:المساحة المبنية التقريبية </td>
+        </tr>
+        <tr style="padding-top:10px">
+          <td align="right" style=" padding-right:-86px"> ${record.custrecord_ino_re_so_unitprice?string(",##0.00")}</td>
+          <td align="right" style="font-weight:bold">:ثمن الشراء</td>
+        </tr>
+      </table>
+    </td>
+   
+   
+  </tr>
+  </table>
+  <table  style="width:100%; margin-top:20px; font-size:9pt">
+    <tr style="">
+      <td style="border-top:1px solid black;border-left:1px solid black; border-bottom:1px solid black; padding-bottom: 10px;padding-right:px"></td>
+      <td align="center" style="border-top:1px solid black;border-bottom:1px solid black; font-weight:bold; padding-bottom: 10px; padding-left:-120px">Escrow Account Details - </td>
+      <td style="border-top:1px solid black;border-right:1px solid black; border-bottom:1px solid black; padding-bottom: 10px; padding-left: -120px;color:#474747; font-weight:bold"> تفاصيل حساب الضمان</td>
+    </tr>
+    <tr>
+      <td align="left" style="width:33.33%; border-left:1px solid black; border-bottom:1px solid black;font-weight:bold"> Account Name:</td>
+      <td align="center" style="width:33.33%; border-left:1px solid black; border-bottom:1px solid black; border-right:1px solid black;color:#474747;font-size:8pt;">  ${record.custrecord_ino_re_so_property.custrecord_az_bas_prop_account_name_arab}</td>
+      <td align="right" style="width:33.33%;border-bottom:1px solid black; border-right:1px solid black; font-weight:bold;color:#474747;"> :اسم الحساب</td>
+    </tr>
+     <tr>
+      <td align="left" style="width:33.33%; border-left:1px solid black; border-bottom:1px solid black;font-weight:bold"> Bank Name:</td>
+      <td align="center" style="width:33.33%; border-left:1px solid black; border-bottom:1px solid black; border-right:1px solid black;color:#474747;font-size:8pt"> ${record.custrecord_ino_re_so_property.custrecord_ino_re_prop_bank_name}</td>
+      <td align="right" style="width:33.33%;border-bottom:1px solid black; border-right:1px solid black;font-weight:bold;color:#474747;"> :اسم البنك</td>
+    </tr>
+     <tr>
+      <td align="left" style="width:33.33%; border-left:1px solid black; border-bottom:1px solid black;font-weight:bold"> IBAN No:</td>
+      <td align="center" style="width:33.33%; border-left:1px solid black; border-bottom:1px solid black; border-right:1px solid black; color:#474747;font-size:8pt">${record.custrecord_ino_re_so_property.custrecord_ino_re_prop_iban_no}</td>
+      <td align="right" style="width:33.33%;border-bottom:1px solid black; border-right:1px solid black;font-weight:bold;color:#474747;">:رقم الايبان</td>
+    </tr>
+  </table>
+
+  <table  style="width:100%; margin-top:25px; font-size:9pt">
+    <tr>
+      <td align = "center" style="width:50%; border-left:0.3px dotted black; border-right:0.3px dotted black;border-top:0.3px dotted black;border-bottom:0.3px dotted black; font-weight:bold"> Purchaser 1 Details</td>
+      <td align = "center" style="width:50%; border-right:0.3px dotted black;border-top:0.3px dotted black;border-bottom:0.3px dotted black; font-weight:bold"> معلومات المشتري 1</td>
+    </tr>
+  </table>
+  <table style="width:100%; margin-top:0px; font-size:9pt">
+     <tr>
+      <td align = "left" style="width:25%;border-left:0.3px dotted black; font-weight:bold;"> Name:</td>
+      <td align = "left" style="width:25%;border-right:0.3px dotted black;padding-left:-113px"><#if record.custrecord_ino_re_so_customer.isperson>
+            ${record.custrecord_ino_re_so_customer.firstname} ${record.custrecord_ino_re_so_customer.lastname}
+        <#else>
+            ${record.custrecord_ino_re_so_customer.companyname}
+        </#if></td>
+      <td align = "right" style="width:25%;padding-right:-113px">  <#if record.custrecord_ino_re_so_customer.isperson>
+            ${record.custrecord_ino_re_so_customer.firstname} ${record.custrecord_ino_re_so_customer.lastname}
+        <#else>
+            ${record.custrecord_ino_re_so_customer.companyname}
+        </#if> </td>
+      <td align = "right" style="width:25%; border-right:0.3px dotted black;font-weight:bold"> :الاسم</td>
+      
+    </tr>
+    <tr>
+      <td align = "left" style="width:25%;border-left:0.3px dotted black;font-weight:bold "> Nationality: </td>
+      <td style="width:25%;border-right:0.3px dotted black;padding-left:-85px"> ${record.custrecord_ino_re_so_customer.custentity_ino_re_nationality}</td>
+      <td align = "right" style="width:25%;padding-right:-100px">  ${record.custrecord_ino_re_so_customer.custentity_ino_re_nationality}</td>
+      <td align="right" style="width:25%; border-right:0.3px dotted black;font-weight:bold"> :الجنسية</td>
+    </tr>
+
+    <tr>
+      <td align = "left" style="border-left:0.3px dotted black;font-weight:bold "> National ID No: </td>
+      <td style="border-right:0.3px dotted black;padding-left:-65px"> ${record.custrecord_ino_re_so_customer.custentity_ino_re_passport_id}</td>
+      <td align = "right" style="padding-right:-53px">  ${record.custrecord_ino_re_so_customer.custentity_ino_re_passport_id}</td>
+      <td align="right" style=" border-right:0.3px dotted black;font-weight:bold">  :رقم الهوية الوطنية </td>
+    </tr>
+
+    <tr>
+      <td align = "left" style="border-left:0.3px dotted black;font-weight:bold "> Phone: </td>
+      <td style="border-right:0.3px dotted black;padding-left:-108px"> ${record.custrecord_ino_re_so_customer.phone}</td>
+      <td align = "right" style="padding-right:-110px;">  ${record.custrecord_ino_re_so_customer.phone}</td>
+      <td align="right" style=" border-right:0.3px dotted black;font-weight:bold">  :الجوال </td>
+    </tr> 
+     <tr>
+      <td align = "left" style="border-left:0.3px dotted black;border-bottom:0.3px dotted black;font-weight:bold "> Email: </td>
+      <td style="border-right:0.3px dotted black;border-bottom:0.3px dotted black;padding-left:-110px"> ${record.custrecord_ino_re_so_customer.email}</td>
+      <td align = "right" style="padding-right:-65px;border-bottom:0.3px dotted black;">  ${record.custrecord_ino_re_so_customer.email}</td>
+      <td align="right" style=" border-right:0.3px dotted black;border-bottom:0.3px dotted black;font-weight:bold"> :البريد الالكتروني </td>
+    </tr> 
+    </table>
+    <table style="width:100%">
+       <tr>
+      <td align = "left" style="width:50%; border-left:0.3px dotted black; border-right:0.3px dotted black;font-size:6pt"> <strong>Note:</strong>  The address and contact details provided will be considered the primary address </td>
+      <td align = "right" style="width:50%; border-right:0.3px dotted black;font-size:6pt">  تعتبر بيانات الاتصال أعلاه العنوان الأساسي والمختار للمشتري وسيتم طباعتها على  <strong>:ملاحظة</strong></td>
+    </tr>
+     <tr style="padding-top:px">
+      <td align = "left" style="width:%;border-left:0.3px dotted black;border-right:0.3px dotted black;font-size:6pt;padding-top:-4px">  and chosen domicile for the Purchaser. This information will be printed on the</td>
+      <td align = "right" style=" width:%; border-right:0.3px dotted black;font-size:6pt;padding-top:-4px">  . اتفاقية البيع والشراء الخاصة بالبائع واعتمادها في جميع الاتصالات / المراسلات مع المشتري </td>
+    </tr>
+    <tr style="padding-top:px">
+      <td align = "left" style="width:%;font-size:6pt;border-left:0.3px dotted black;border-right:0.3px dotted black;padding-top:-5px"> Vendor's Sales and Purchase Agreement and used for all communications </td>
+      <td align = "right" style=" width:%;border-right:0.3px dotted black "></td>
+    </tr>
+    <tr style="padding-top:px">
+      <td align = "left" style="width:%;border-bottom:0.3px dotted black;border-left:0.3px dotted black; border-right:0.3px dotted black;font-size:6pt;padding-top:-4px"> and correspondences with the Purchaser.</td>
+      <td align = "right" style=" width:%; border-right:0.3px dotted black;border-bottom:0.3px dotted black;font-size:6pt"></td>
+    </tr>
+    </table>      
+  
+  <table style="width:100%;margin-top:px;font-size:6.5pt; padding-top:-50px">
+    <tr>
+      <td align="left" style="width: 50%; ">
+        <table style="width:90%">
+          <tr >
+            <td style="width:2%"> 1. &nbsp;&nbsp;&nbsp;</td>
+            <td style="width:88%; text-indent:px; text-align:justify;"> This offer is valid for (2)  working days from the date of sending it to the buyer by e-mail to the buyer’s address registered in this form and provided by the buyer.</td>
+          </tr>
+          <tr style="padding-top:5px">
+            <td>  2. &nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td style="text-align:justify;">The seller does not bear responsibility for failure to receive this reservation request by the buyer and sent to the buyer’s e-mail address indicated in this request. Buyer must provide complete and accurate contact information as prompted by this order.</td>
+          </tr>
+          <tr style="padding-top:5px">
+            <td>  3. &nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td style="text-align:justify;">The purchase of this real estate unit is activated after receiving an amount of 20% of the price of the purchase price in the project’s escrow account, the details of which are shown at the top of this form, within a period of (2) working days from sending this reservation form to the buyer via email.</td>
+          </tr>
+           <tr style="padding-top:5px">
+            <td>  4. &nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td style="text-align:justify;"> The buyer agrees unconditionally to purchase the real estate unit from the seller in exchange for the above-mentioned purchase price in accordance with the attached payment schedule approved by the Real Estate General Authority in the Kingdom of Saudi Arabia. </td>
+          </tr>
+           <tr style="padding-top:3px">
+            <td>  5. &nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td style="text-align:justify;">The buyer must sign this reservation form and transfer the down payment mentioned in the table above within a period not exceeding (2) working days from the date of receiving this form via email, and to avoid doubt, if the buyer fails to sign the request and provide us with a copy of the transfer within the specified period, for any reason, the reservation of this unit will end upon the expiry of the aforementioned period without the need for notification or any additional procedures, whether legal or otherwise.</td>
+          </tr>
+           <tr style="padding-top:5px">
+            <td>  6. &nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td style="text-align:justify;">The Buyer declares and confirms its full, final and irrevocable responsibility that it has complied with all laws, regulations and requirements and has obtained all licenses, approvals and permissions required to sign and perform its obligations under this reservation request and/or under a document that has been drawn up or will be drawn up in accordance with this reservation request.</td>
+          </tr>
+           <tr style="padding-top:5px">
+            <td>  7. &nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td style="text-align:justify;">This reservation request is subject to and interpreted in accordance with the laws of the Kingdom of Saudi Arabia. All disputes between the two parties regarding or related to this reservation request are referred to the courts of the Kingdom of Saudi Arabia.</td>
+          </tr>
+           <tr style="padding-top:5px">
+            <td>  8. &nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td style="text-align:justify;">This reservation request was originally drafted in Arabic and has been translated into English. In the event of any conflict or inconsistency between the Arabic version and the English translation, the terms written in Arabic shall prevail and be applicable.</td>
+          </tr>
+           <tr style="padding-top:5px">
+            <td>  9. &nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td style="text-align:justify;"> In addition to the unit price, the buyer agrees to pay all tax fees (5% transaction tax) or title fees and any other relevant tax that may be imposed by the Saudi Government in future. </td>
+          </tr>
+           <tr style="padding-top:23px">
+            <td>  10. &nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td style="text-align:justify;">All payments made by the buyer are to be in (Saudi Riyals), the legal currency of the Kingdom of Saudi Arabia. If the value of any payment is paid in any other currency, the amount is transferred to the seller’s account in Saudi Riyals. Accordingly, any decrease/surplus in the value of the unit price resulting from the difference in the exchange rate or any bank transfer fees will be added/deducted from the value of the next payment.</td>
+          </tr>
+          
+        </table>
+      </td>
+      <td align="right" style="width: 50%; ">
+        <table style="width:100%">
+           <tr>
+            <td align="right" style="width:98%; text-align:left;"> تسري صلاحية هذا العرض لمدة (2) يوم عمل من تاريخ ارساله لي المشتري </td>
+            <td style="width:2%"> &nbsp;&nbsp;&nbsp;.1</td>
+          </tr>
+           <tr>
+            <td align="right" style="; text-align:left;padding-top:-0.5px"> بواسطة البريد الالكتروني على العنوان الخاص بالمشتري المعتمد </td>
+            <td style=""></td>
+          </tr>
+          <tr>
+            <td align="right" style=" text-align:left;padding-top:-0.5px"> .  في هذا النموذج والمزود من قبل المشتري</td>
+            <td style=""></td>
+          </tr>
+       
+           <tr style="padding-top:2px">
+            <td align="right" style=" text-align:left;">لا يتحمل البائع مسئولية عدم استلام طلب الحجز هذا من قبل المشتري   </td>
+            <td style=""> &nbsp;&nbsp;&nbsp;.2</td>
+          </tr>
+           <tr>
+            <td align="right" style="; text-align:left;padding-top:-0.5x"> والمرسل الى عنوان البريد الالكتروني الخاص بالمشتري والمشار اليه </td>
+            <td style=""></td>
+          </tr>
+          <tr>
+            <td align="right" style="; text-align:left;padding-top:-0.5px">   في هذا الطلب يجب على المشتري توفير معلومات كاملة ودقيقة للاتصال</td>
+            <td style=""></td>
+          </tr>
+          <tr>
+            <td align="right" style=" text-align:left;padding-top:-0.5px"> .به كما هو مطلوب في هذا الطلب</td>
+            <td style=""></td>
+          </tr>
+          
+          <tr style="padding-top:5px">
+            <td align="right" style=" text-align:left; "> 	يتم تفعيل شراء الوحدة العقارية بعد استلام مبلغ 20% من ثمن الوحدة  </td>
+            <td style=""> &nbsp;&nbsp;&nbsp;.3</td>
+          </tr>
+          <tr>
+           <td align="right" style="; text-align:left;padding-top:-0.5px"> العقارية في حساب الضمان الخاص بالمشروع والمبينة تفاصيله اعلي</td>
+            <td style=""></td>
+          </tr>
+          <tr>
+           <td align="right" style="; text-align:left;padding-top:-0.5px"> الطلب وذلك خلال مدة (2) يوم عمل من ارسال طلب الحجز هذا الى  </td>
+            <td style=""></td>
+          </tr>
+          <tr>
+           <td align="right" style="; text-align:left;padding-top:-0.5px">  .المشتري من خلال البريد الالكتروني</td>
+            <td style=""></td>
+          </tr>
+         
+          
+          <tr style="padding-top:13px">
+            <td align="right" style=" text-align:left;">يوافق المشتري دون قيد او شرط على شراء الوحدة العقارية من البائع   </td>
+            <td style=""> &nbsp;&nbsp;&nbsp;.4</td>
+          </tr>
+           <tr>
+           <td align="right" style="; text-align:left;padding-top:-0.5px"> مقابل ثمن الشراء المذكور أعلاه وفقاً لجدول الدفع المرفق المعتمد من </td>
+            <td style=""></td>
+          </tr>
+          <tr>
+           <td align="right" style="; text-align:left;padding-top:-0.5px"> .الهيئة العامة للعقار في المملكة العربية السعودية </td>
+            <td style=""></td>
+          </tr>
+          
+          <tr style="padding-top:23px">
+            <td align="right" style=" text-align:left;">عند إصدار طلب حجز وحدة عقارية، يجب على المشتري توقيعها وتحويل </td>
+            <td style=""> &nbsp;&nbsp;&nbsp;.5</td>
+          </tr>
+           <tr>
+           <td align="right" style="; text-align:left;padding-top:-0.5px">  الدفعة الأولى المذكورة في الجدول أعلاه في خلال فترة لا تتجاوز (2) يوم  </td>
+            <td style=""></td>
+          </tr>
+          <tr>
+           <td align="right" style="; text-align:left;padding-top:-0.5px">عمل من تاريخ هذا الطلب، ومنعاً للشك، إذا تخلف المشتري عن توقيع    </td>
+            <td style=""></td>
+          </tr>
+          <tr>
+           <td align="right" style="; text-align:left;padding-top:-0.5px">الطلب وتزويدنا بنسخة من الحوالة خلال المهلة المحددة لأي سبب كان،  </td>
+            <td style=""></td>
+          </tr>
+          <tr>
+           <td align="right" style="; text-align:left;padding-top:-0.5px">ينتهي حجز الوحدة العقارية عند انتهاء المهلة المذكورة دون الحاجة إلى    </td>
+            <td style=""></td>
+          </tr>
+          <tr>
+           <td align="right" style="; text-align:left;padding-top:-0.5px"> .إخطار أو أي إجراءات إضافية، سواءً قانونية أو غير ذلك     </td>
+            <td style=""></td>
+          </tr>
+         
+          <tr style="padding-top:34px">
+            <td align="right" style=" text-align:left;"> يصرح المشتري ويؤكد على مسئوليته الكاملة وبشكل نهائي غير قابل  </td>
+            <td style=""> &nbsp;&nbsp;&nbsp;.6</td>
+          </tr>
+          <tr>
+           <td align="right" style="; text-align:left;padding-top:-0.5px"> للرجوع عنه بانه امتثل لجميع القوانين والأنظمة والمتطلبات واستحصل  </td>
+            <td style=""></td>
+          </tr>
+          <tr>
+           <td align="right" style="; text-align:left;padding-top:-0.5px"> على جميع التراخيص والموافقات والاذونات المطلوبة للتوقيع على ولأداء    </td>
+            <td style=""></td>
+          </tr>
+          <tr>
+           <td align="right" style="; text-align:left;padding-top:-0.5px">التزاماته بموجب طلب الحجز هذا و/او بموجب وثيقة حررت او ستحرر   </td>
+            <td style=""></td>
+          </tr>
+          <tr>
+           <td align="right" style="; text-align:left;padding-top:-0.5px"> .وفقاً لطلب الحجز هذا   </td>
+            <td style=""></td>
+          </tr>
+          <tr style="padding-top:22px">
+            <td align="right" style=" text-align:left;"> يخضع طلب الحجز هذا ويفسر وفقاً لقوانين المملكة العربية السعودية  </td>
+            <td style=""> &nbsp;&nbsp;&nbsp;.7</td>
+          </tr>
+          <tr>
+           <td align="right" style="; text-align:left;padding-top:-0.5px">وتحال جميع المنازعات بين الطرفين فيما يختص او يتعلق بطلب الحجز  </td>
+            <td style=""></td>
+          </tr>
+          <tr>
+           <td align="right" style="; text-align:left;padding-top:-0.5px"> .هذا لمحاكم المملكة العربية السعودية   </td>
+            <td style=""></td>
+          </tr>
+          <tr style="padding-top:25px">
+            <td align="right" style=" text-align:left;"> تمت صياغة طلب الحجز هذا اصلاً باللغة العربية وتمت ترجمته الى اللغة  </td>
+            <td style=""> &nbsp;&nbsp;&nbsp;.8</td>
+          </tr>
+          <tr>
+           <td align="right" style="; text-align:left;padding-top:-0.5px"> الإنكليزية وفي حال وجود أي تعارض او تناقض فيما بين النسخة العربية   </td>
+           <td style=""></td>
+          </tr>
+          <tr>
+            <td align="right" style="; text-align:left;padding-top:-0.5px"> والترجمة الإنكليزية لطلب الحجز هذا، فإن البنود المكتوبة باللغة العربية   </td>
+            <td style=""></td>
+          </tr>
+          <tr>
+            <td align="right" style="; text-align:left;padding-top:-0.5px"> .ترجح وتكون واجبة التطبيق  </td>
+            <td style=""></td>
+          </tr>
+          <tr style="padding-top:15px">
+            <td align="right" style=" text-align:left;"> بالإضافة إلى سعر الوحدة، يوافق المشتري على دفع كافة الرسوم </td>
+            <td style=""> &nbsp;&nbsp;&nbsp;.9</td>
+          </tr>
+            <tr>
+            <td align="right" style="; text-align:left;padding-top:-0.5px"> الضريبية (ضريبة التصرفات 5%) أو رسوم إفراغ الصك ونقل الملكية وأي  </td>
+            <td style=""></td>
+          </tr>
+            <tr>
+            <td align="right" style="; text-align:left;padding-top:-0.5px"> مبالغ أخرى ذات الصلة قد تفرضها الحكومة السعودية من وقت إلى آخر  </td>
+            <td style=""></td>
+          </tr>
+            <tr>
+            <td align="right" style="; text-align:left;padding-top:-0.5px"> لنقل ملكية وتسجيل الوحدة العقارية. ويتعهد المشتري بدفع أي رسوم </td>
+            <td style=""></td>
+          </tr>
+            <tr>
+            <td align="right" style="; text-align:left;padding-top:-0.5px"> .إضافية أو مُعدلة قد تفرضها الحكومة السعودية  </td>
+            <td style=""></td>
+          </tr>
+          <tr style="padding-top:4px">
+            <td align="right" style=" text-align:left;"> إن كافة الدفعات التي يقوم بها المشتري تتم (بالريال السعودي) العملة</td>
+            <td style=""> &nbsp;&nbsp;&nbsp;.10</td>
+          </tr>
+          <tr>
+            <td align="right" style="; text-align:left;padding-top:-0.5px">القانونية للمملكة العربية السعودية، وفي حال تم سداد قيمة أي دفعة  </td>
+            <td style=""></td>
+          </tr>
+          <tr>
+            <td align="right" style="; text-align:left;padding-top:-0.5px">بأي عملة أخرى، فيتم تحويل المبلغ في حساب البائع بالريال السعودي  </td>
+            <td style=""></td>
+          </tr>
+          <tr>
+            <td align="right" style="; text-align:left;padding-top:-0.5px"> وعليه، فإن أي نقص\فائض في قيمة سعر الوحدة التي تنجم عن الفارق </td>
+            <td style=""></td>
+          </tr>
+          <tr>
+            <td align="right" style="; text-align:left;padding-top:-0.5px"> .في سعر الصرف أو أي رسوم تحويل بنكي يتم إضافته\خصمه من قيمة الدفعة التالية  </td>
+            <td style=""></td>
+          </tr>
+         
+        
+        </table>
+      </td>
+    </tr>
+  </table>
+
+  <table style=" width:100%; margin-top:20px">
+    <tr>
+      <td align="center" style=""> Payment Schedule - جدول الدفعات</td>
+    </tr>
+  </table>
+  <table style="width:100%; margin-top: 8px; font-size:8pt">
+    <tr style=" font-weight: bold"> 
+      <td align="center" style="width:60%; border-top:3px solid #b8b2b2; border-left: 1px solid #868686; border-right:1px solid #868686; border-bottom:1px solid #868686">  Due Course وقت الاستحقاق</td>
+      <td align="center" style="width:40%; border-top:3px solid #b8b2b2; border-right:1px solid #868686; border-bottom:1px solid #868686">  Amount (SR) القيمة (ر.س)   </td>
+      <td align="center" style="width:40%; border-top:3px solid #b8b2b2; border-right:1px solid #868686; border-bottom:1px solid #868686">   Payment Plan الدفعات</td>
+    </tr>
+    <tr>
+      <td align="center" style="border-left:1px solid #868686; border-right:1px solid #868686; border-bottom:1px solid #868686"> عند اصدار عقد بيع وحدة عقارية بموجب ترخيص الهيئة العامة للعقار</td>
+      <td align="center" style="border-right:1px solid #868686; border-bottom:1px solid #868686">${(record.custrecord_ino_re_so_unitprice * 0.20)?string["#,##0.00"]}</td>
+      <td align="center" style="border-right:1px solid #868686; border-bottom:1px solid #868686"> 20%</td>
+    </tr>
+     <tr>
+      <td align="center" style="border-left:1px solid #868686; border-right:1px solid #868686; border-bottom:1px solid #868686"> نسبة انجاز %20</td>
+      <td align="center" style="border-right:1px solid #868686; border-bottom:1px solid #868686"> ${(record.custrecord_ino_re_so_unitprice * 0.10)?string["#,##0.00"]}</td>
+      <td align="center" style="border-right:1px solid #868686; border-bottom:1px solid #868686">10%</td>
+    </tr>
+     <tr>
+      <td align="center" style="border-left:1px solid #868686; border-right:1px solid #868686; border-bottom:1px solid #868686"> نسبة انجاز %40</td>
+      <td align="center" style="border-right:1px solid #868686; border-bottom:1px solid #868686">${(record.custrecord_ino_re_so_unitprice * 0.20)?string["#,##0.00"]}</td>
+      <td align="center" style="border-right:1px solid #868686; border-bottom:1px solid #868686">20%</td>
+    </tr>
+     <tr>
+      <td align="center" style="border-left:1px solid #868686; border-right:1px solid #868686; border-bottom:1px solid #868686"> نسبة انجاز %60</td>
+      <td align="center" style="border-right:1px solid #868686; border-bottom:1px solid #868686"> ${(record.custrecord_ino_re_so_unitprice * 0.20)?string["#,##0.00"]}</td>
+      <td align="center" style="border-right:1px solid #868686; border-bottom:1px solid #868686">20%</td>
+    </tr>
+     <tr>
+      <td align="center" style="border-left:1px solid #868686; border-right:1px solid #868686; border-bottom:1px solid #868686"> نسبة انجاز %80</td>
+      <td align="center" style="border-right:1px solid #868686; border-bottom:1px solid #868686"> ${(record.custrecord_ino_re_so_unitprice * 0.20)?string["#,##0.00"]}</td>
+      <td align="center" style="border-right:1px solid #868686; border-bottom:1px solid #868686">20%</td>
+    </tr>
+     <tr>
+      <td align="center" style="border-left:1px solid #868686; border-right:1px solid #868686; border-bottom:1px solid #868686"> نسبة انجاز %100</td>
+      <td align="center" style="border-right:1px solid #868686; border-bottom:1px solid #868686">${(record.custrecord_ino_re_so_unitprice * 0.05)?string["#,##0.00"]}</td>
+      <td align="center" style="border-right:1px solid #868686; border-bottom:1px solid #868686">5%</td>
+    </tr>
+     <tr>
+      <td align="center" style="border-left:1px solid #868686; border-right:1px solid #868686; border-bottom:1px solid #868686"> عند الاستلام والإفراغ</td>
+      <td align="center" style="border-right:1px solid #868686; border-bottom:1px solid #868686"> ${(record.custrecord_ino_re_so_unitprice * 0.05)?string["#,##0.00"]}</td>
+      <td align="center" style="border-right:1px solid #868686; border-bottom:1px solid #868686">5%</td>
+    </tr>
+  </table>
+ <pbr/>
+  <table style="width:100%; margin-top:10px">
+    <tr style="padding-top:-10px">
+      <td align="center">  Unit Location -  موقع الفيلا في المخطط عام </td>
+    </tr>
+    <tr style="padding-top:30px">
+      <td align="center"><img src="${record.custrecord_ino_re_so_unit.custrecord_ino_re_so_unit.custrecord_az_bas_um_unit_location@Url}" style="width:700px; height:500px" /></td>
+    </tr>
+  </table>
+
+      <pbr />
+    <table>
+    <tr style="padding-top:-30px">
+      <td align="center">   Unit Floor Plans - مخططات الوحدة</td>
+    </tr>
+
+   
+    <tr style="padding-top:30px">
+      <td align="center"> <img src="${record.custrecord_ino_re_so_unit.custrecord_ino_re_um_layout@Url}" style="width:600px; height:400px" /></td>
+    </tr>
+
+   
+    <tr style="padding-top:30px">
+      <td align="right" style="font-size:8pt"> .تعتبر الخرائط المرفقة غير نهائية وقد تخضع لتعديل بسيط لاعتبارات تصميمية وإدارية بحت <strong style="text-decoration:underline"> :ملاحظة هامة</strong> </td>
+    </tr>
+
+    <tr style="padding-top:30px">
+      <td align="left" style="font-size:8pt"> <strong style="text-decoration:underline">Important Note: </strong> The attached maps are not final and may be subject to minor modification for purely design and administrative considerations. </td>
+    </tr>
+      
+  </table>
+
+  
+</body>
+
+       <#else>
+
+         <head>
+   <link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false" />
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+   <macrolist>
+        <macro id="nlheader">
+            <table class="header" style="width: 100%;">
+                <tr>
+                   <td align="left" style="width: 50%"> </td>
+                  <td align="right" style="width: 50%"> <img src="https://9193738.app.netsuite.com/core/media/media.nl?id=3307&amp;c=9193738&amp;h=ozO_iDS_R25V5O0HxdFGBDAniFu8v7Jgnnb0_Vdb3pkB1DSJ" 
+                                                          style="width: 100px; height: 50px;padding-top:-20px"  /></td>
+                 
+                    
+             
+           
+                </tr> 
+
+             
+            </table>
+       
+          
+        </macro>
+        <macro id="nlfooter">
+               
+                <table class="footer" style="width: 100%;font-size:9pt; color:#afaaac; padding-top:10px ">
+                <tr style=" ">
+                    <td align="right" style="width: 40%; "> <strong> Signed by the Purchaser:</strong> ___________________________ :توقيع المشتري     </td>
+                   
+                </tr>  
+
+            </table>
+           
+        </macro>
+    </macrolist>
+   <style type="text/css">* {
+            <#if .locale == "zh_CN">
+                font-family: NotoSans, NotoSansCJKsc, sans-serif;
+            <#elseif .locale == "zh_TW">
+                font-family: NotoSans, NotoSansCJKtc, sans-serif;
+            <#elseif .locale == "ja_JP">
+                font-family: NotoSans, NotoSansCJKjp, sans-serif;
+            <#elseif .locale == "ko_KR">
+                font-family: NotoSans, NotoSansCJKkr, sans-serif;
+            <#elseif .locale == "th_TH">
+                font-family: NotoSans, NotoSansThai, sans-serif;
+            <#else>
+                font-family: NotoSans, sans-serif;
+                  font-family: NotoSansArabic, sans-serif;
+            </#if>
+            }
+      .arabic {
+        font-family: arabic-font;
+        position: right;
+        font-size: 8px;
+        line-height: 75%;
+      }
+
+        .english {
+        font-family: english-font;
+        position: left;
+        font-size: 8px;
+        line-height: 110%
+      }
+  </style>
+</head>
+<body header="nlheader" header-height="10%" footer="nlfooter" footer-height="3%" padding="0.8in 0.8in 0.5in 0.8in" size="A4">
+<table style="width:100%;padding-top:-20px" >
+  <tr>
+    <td align="center" style="text-decoration:underline; font-weight:bold; font-size:14pt"> Unit Reservation Form &nbsp;&nbsp; طلب حجز وحدة عقارية </td>
+  </tr>
+</table>
+  </body>
+     </#if>
+
+</pdf>

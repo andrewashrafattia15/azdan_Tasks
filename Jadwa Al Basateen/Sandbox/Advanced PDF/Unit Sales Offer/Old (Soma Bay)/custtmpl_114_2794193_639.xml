@@ -1,0 +1,10 @@
+<advancedpdftemplate scriptid="custtmpl_114_2794193_639" standard="STDTMPLCR_INO_RE_SALESOFFER">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>F</preferred>
+  <printtype>CUSTOMRECORD</printtype>
+  <recordtype>[scriptid=customrecord_ino_re_salesoffer]</recordtype>
+  <title>Unit Sales Offer Printout (Soma Bay)</title>
+  <trantype>CUSTOM</trantype>
+</advancedpdftemplate>

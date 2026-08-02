@@ -1,0 +1,281 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <style>table { font-size: 9pt; table-layout: fixed; width: 100%; }
+th { font-weight: bold; font-size: 8pt; vertical-align: middle; padding: 5px 6px 3px; background-color: #e3e3e3; color: #333333; padding-bottom: 10px; padding-top: 10px; }
+td { padding: 4px 6px; }
+b { font-weight: bold; color: #333333; }
+</style>
+</head>
+<body padding="0.0in 0.0in 0.0in 0.0in" size="A4">
+
+  <!--page01-->
+   <table style="width: 100%; padding-top:-5px ">
+             <tr>
+               <td align="center" style="width: 100%">
+                    <img src="https://2794193.app.netsuite.com/core/media/media.nl?id=2078&amp;c=2794193&amp;h=hcpYVtqoho6UHBXHnk_dzdvsOm75n35iYK0Ns33XjBgsFrEx"
+                     style="width: 900px; height: 1140px;"  /> 
+               </td>
+             </tr>
+
+            <tr>
+             <td align="center" style =" font-weight:bold;color:#ffffff; font-size: 34pt; padding-top:-860px"> TENANCY </td>
+           </tr>
+     
+          <tr>
+            <td align="center" style =" font-weight:bold;color:#ffffff; font-size: 34pt; padding-top:-820px ;"> CONTRACT </td>
+          </tr>
+     
+         <tr>
+           <td align="center" style = "font-weight:bold;color:#ffffff; font-size: 20pt; padding-top:-540px ;"> Prepared For </td>
+         </tr>
+
+         <tr>
+            <td align="center" style = "font-weight:bold;color:#ffffff; font-size: 20pt; padding-top:-500px ;">${record.custrecord_ino_pms_tc_tenant.custentity_ino_re_customer_name}</td>
+        </tr>
+
+        <tr>
+            <td align="center" style = "font-weight:bold;color:#ffffff; font-size: 20pt; padding-top:-400px ;"> Prepared By </td>
+        </tr>
+
+        <tr>
+            <td align="center" style = "font-weight:bold;color:#ffffff; font-size: 20pt; padding-top:-360px ;"> ${record.custrecord_ino_pms_tc_subs}</td>
+        </tr>
+
+        <tr>
+           <td align="center" style = "font-weight:bold;color:#ffffff; font-size: 20pt; padding-top:-320px ;"> ${record.custrecord_ino_pms_tc_subs.email}</td>
+         </tr>
+
+         <tr <#assign today =.now?string ('MMM dd, yyyy')>>
+           <td align="center" style = "font-weight:bold;color:#ffffff; font-size: 20pt; padding-top:-260px ;"> ${today}</td>
+         </tr>
+
+     
+    </table>
+
+    <pbr />
+
+      <#assign SubsidiaryAdress = record.custrecord_ino_pms_tc_subs.addressee/>
+  <!--page 02-->
+      <table style="width: 100%; padding-top:-8px ">
+             <tr>
+               <td align="center" style="width: 100%">
+                    <img src="https://2794193.app.netsuite.com/core/media/media.nl?id=2079&amp;c=2794193&amp;h=tlTb46KScxljxSoXg3zCo0Bgw3wJExK1JMNy83vD-HMeP2KJ"
+                     style="width: 900px; height: 1140px;"  /> 
+               </td>
+             </tr>
+        <tr style="padding-top: -1000 px">
+           <td align="center" style="width: 100%">
+                    <img src="https://2794193.app.netsuite.com/core/media/media.nl?id=2080&amp;c=2794193&amp;h=6Tl9BMQ2-K1dBT-NOnuVmiI9OTsy_RN1_vfxMxe0WzPeDHls"
+                     style="width: 540px; height: 760px;" /> 
+            </td>
+        </tr>
+
+        <tr>
+          <td align="left" style="font-weight:bold; font-size:11pt; padding-top:-950px; padding-left:150px"> PARTIES</td>
+        </tr>
+
+        <tr>
+          <td align="left" style=" width: 50%; font-size:11pt; padding-top:-910px; padding-left:150px; padding-right: 150px"> This Tenancy Contract" "${record.name}", created on ${record.custrecord_ino_pms_tc_date?string("MMM dd, yyyy")}, is executed between <b> ${record.custrecord_ino_pms_tc_subs} </b>
+            with a principal address at KSA - Saudi Arabia,
+            and <b>${record.custrecord_ino_pms_tc_tenant.custentity_ino_re_customer_name}</b> with a principal address at ${record.custrecord_ino_pms_tc_tenant.address} ("Tenant"). </td>
+          
+        </tr>
+
+        <tr>
+          <td align="left" style=" width: 50%; font-size:11pt; padding-top:-820px; padding-left:150px; padding-right: 150px"> This Contract serves as the official tenancy contract between the Parties and outlines the terms and conditions for leasing the property. 
+            The Landlord and the Tenant, each referred to individually as a "Party" and collectively as the "Parties," hereby agree to the following terms and obligations: </td>
+        </tr>
+
+        <tr>
+          <td  align="left" style="font-weight:bold; font-size:11pt; padding-top:-730px; padding-left:150px"> SCOPE OF RENT</td>
+        </tr>
+
+       <tr>
+         <td align="left" style=" width: 50%; font-size:11pt; padding-top:-690px; padding-left:150px; padding-right: 150px"> The Tenant desires to rent the apartment owned by the Landlord which is located at <b>${record.custrecord_ino_pms_tc_subs}, ${record.custrecord_ino_pms_tc_property}, ${record.custrecord_ino_pms_tc_unit} </b>("Apartment"). 
+           The Tenant shall use and occupy the Apartment starting ${record.custrecord_ino_pms_tc_effective_sd?string("MMM dd, yyyy")}, until ${record.custrecord_ino_pms_tc_effective_ed?string("MMM dd, yyyy")}, including the Apartment's facilities. </td>
+       </tr>
+
+        <tr>
+          <td align="left" style="font-weight:bold; font-size:11pt; padding-top:-600px; padding-left:150px"> OWNERSHIPS &amp; RIGHTS</td>
+        </tr>
+
+        <tr>
+          <td align="left" style=" width: 50%; font-size:11pt; padding-top:-560px; padding-left:150px; padding-right: 150px"> The Landlord shall have full rights to enter the Apartment at any time and perform his duties hereunder.</td>
+        </tr>
+
+        <tr>
+          <td align="left" style="font-weight:bold; font-size:11pt; padding-top:-500px; padding-left:150px"> WARRANTIES</td>
+        </tr>
+
+        <tr>
+          <td align="left" style=" width: 50%; font-size:10pt; padding-top:-460px; padding-left:150px; padding-right: 150px"> &bull; The Landlord warrants to the Tenant that the Apartment is owned by the Landlord.</td>
+        </tr>
+
+        <tr>
+          <td align="left" style=" width: 50%; font-size:10pt; padding-top:-420px; padding-left:150px; padding-right: 150px">  &bull; The Tenant warrants that the Apartment shall be used for residential purposes only.</td>
+        </tr>
+      </table>
+
+         <pbr/>
+
+        <!--page03-->
+         <table style="width: 100%; padding-top:-8px ">
+             <tr>
+               <td align="center" style="width: 100%">
+                    <img src="https://2794193.app.netsuite.com/core/media/media.nl?id=2079&amp;c=2794193&amp;h=tlTb46KScxljxSoXg3zCo0Bgw3wJExK1JMNy83vD-HMeP2KJ"
+                     style="width: 900px; height: 1140px;"  /> </td>
+             </tr>
+        <tr style="padding-top: -1000px">
+           <td align="center" style="width: 100%">
+                    <img src="https://2794193.app.netsuite.com/core/media/media.nl?id=2080&amp;c=2794193&amp;h=6Tl9BMQ2-K1dBT-NOnuVmiI9OTsy_RN1_vfxMxe0WzPeDHls"
+                     style="width: 540px; height: 760px;" /> 
+            </td>
+        </tr>
+        
+        <tr>
+          <td align="left" style="font-weight:bold; font-size:13pt; padding-top:-950px; padding-left:150px"> TERMS &amp; CONDITIONS</td>
+        </tr>
+
+        <tr>
+          <td align="left" style="font-weight:bold; font-size:10pt; padding-top:-910px; padding-left:150px"> DEPOSIT REQUIRED</td>
+        </tr>
+
+      
+        <tr>
+          <td align="left" style=" width: 50%; font-size:10pt; padding-top:-870px; padding-left:150px; padding-right: 150px"> The Tenant paid the security deposit fee of ${record.custrecord_ino_pms_tc_security_deposit?string(",##0.00")} to the Landlord upon signing of this Agreement. </td>
+          
+        </tr>
+
+        <tr>
+          <td  align="left" style="font-weight:bold; font-size:10pt; padding-top:-800px; padding-left:150px"> PAYMENT </td>
+        </tr>
+
+         <tr>
+         <td align="left" style=" width: 50%; font-size:10pt; padding-top:-760px; padding-left:150px; padding-right: 150px"> Upon execution of this Agreement, the Tenant is required to pay to the Landlord in the amount of ${record.custrecord_ino_pms_tc_annual_rent?string(",##0.00")} for renting the Apartment on ${record.custrecord_ino_pms_tc_effective_sd?string("MMM dd, yyyy")}.
+         </td>
+       </tr>
+
+        <tr>
+          <td align="left" style="font-weight:bold; font-size:10pt; padding-top:-700px; padding-left:150px"> TERM &amp;TERMINATION</td>
+        </tr>
+
+           <tr>
+             <td align="left" style=" width: 50%; font-size:10pt; padding-top:-660px; padding-left:150px; padding-right: 150px"> This Contract's term starts on ${record.custrecord_ino_pms_tc_effective_sd?string("MMM dd, yyyy")}, and ceases on ${record.custrecord_ino_pms_tc_effective_ed?string("MMM dd, yyyy")}. </td>
+        </tr>
+
+        <tr>
+          <td align="left" style="font-weight:bold; font-size:10pt; padding-top:-620px; padding-left:150px"> DAMAGE &amp; LOSS </td>
+        </tr>
+
+           <tr>
+          <td align="left" style=" width: 50%; font-size:10pt; padding-top:-580px; padding-left:150px; padding-right: 150px"> The Tenant shall be liable for any and all losses and damages occurring to the Apartment.</td>
+        </tr>
+        <tr>
+          <td align="left" style="font-weight:bold; font-size:10pt; padding-top:-520px; padding-left:150px">  CONFIDENTIALITY </td>
+        </tr>
+
+        <tr>
+          <td align="left" style=" width: 50%; font-size:10pt; padding-top:-480px; padding-left:150px; padding-right: 150px"> The terms of this Contract shall be deemed confidential in all respects.</td>
+        </tr>
+
+        <tr>
+          <td  align="left" style="font-weight:bold; font-size:13pt; padding-top:-420px; padding-left:150px"> GENERAL PROVISIONS </td>
+        </tr>
+
+        <tr>
+          <td  align="left" style=" width: 50%; font-size:10pt; padding-top:-380px; padding-left:165px; padding-right: 150px;text-indent: -16px; text-align: justify;"> &bull;&nbsp;&nbsp;&nbsp;This Contract shall be final and any modification or amendment to this shall be made in writing and signed by either of the Parties.</td>
+        </tr>
+
+        <tr>
+          <td align="left" style=" width: 50%; font-size:10pt; padding-top:-340px; padding-left:165px; padding-right: 150px;text-indent: -16px;  text-align: justify;"> &bull; &nbsp;This Contract shall be binding upon and inure to the benefit of the Parties and their respective legal representatives and successors. </td>
+        </tr>
+      
+     </table>
+
+     <pbr/>
+
+    <!--page04-->
+       
+    <table style="width: 100%; padding-top:-8px ">
+        <tr>
+            <td align="center" style="width: 100%">
+               <img src="https://2794193.app.netsuite.com/core/media/media.nl?id=2079&amp;c=2794193&amp;h=tlTb46KScxljxSoXg3zCo0Bgw3wJExK1JMNy83vD-HMeP2KJ"
+               style="width: 900px; height: 1140px;"  /> </td>
+        </tr>
+      
+        <tr style="padding-top: -1000px">
+           <td align="center" style="width: 100%">
+                    <img src="https://2794193.app.netsuite.com/core/media/media.nl?id=2080&amp;c=2794193&amp;h=6Tl9BMQ2-K1dBT-NOnuVmiI9OTsy_RN1_vfxMxe0WzPeDHls"
+                     style="width: 540px; height: 760px;" /> 
+            </td>
+        </tr>
+        
+        <tr>
+          <td align="left" style="font-weight:bold; font-size:11pt; padding-top:-950px; padding-left:150px"> APPLICABLE LAW</td>
+        </tr>
+
+
+      <tr>
+        <td align="left" style=" font-size:11pt; padding-top:-910px; padding-left:150px; padding-right: 150px"> This Tenancy Contract and its interpretation shall be governed by the laws of Saudi Arabia and subject to the exclusive jurisdiction of the courts of Saudi Arabia.</td>
+      </tr>
+
+      <tr>
+        <td align="left" style=" font-size:11pt; padding-top:-800px; padding-left:150px; padding-right: 150px"> __________________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      __________________________</td>
+      </tr>
+
+      <tr>
+        <td  align="left" style=" font-size:11pt; padding-top:-780px; padding-left:150px; padding-right: 150px">Signature* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Signature*</td>
+      </tr>
+
+      <tr>
+        <td  align="left" style=" font-size:11pt; padding-top:-740px; padding-left:150px; padding-right: 150px"> __________________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      __________________________</td>
+      </tr>
+
+       <tr>
+        <td  align="left" style=" font-size:11pt; padding-top:-720px; padding-left:150px; padding-right: 150px">Name* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name*</td>
+      </tr>
+      
+    </table>
+
+   <pbr/>
+
+    <!--page05-->
+
+      <table style="width: 100%; padding-top:-8px ">
+        <tr>
+            <td align="center" style="width: 100%">
+               <img src="https://2794193.app.netsuite.com/core/media/media.nl?id=2096&amp;c=2794193&amp;h=QI8RrQUTWm3qD66IOVvSxKMOTnSE-GXWjx_2jGpQ47C22Dfb"
+               style="width: 700px; height: 900px;"  /> </td>
+        </tr>
+     <#if record.custrecord_ino_pms_tc_unit.custrecord_ino_re_um_layout !="">
+       <tr style="padding-top: -1000px">
+          <td style="width: 100%;">
+          <img src="${record.custrecord_ino_pms_tc_unit.custrecord_ino_re_um_layout@url}" style="width:630px; height:760px;padding-left:100px " /> </td>
+       </tr>
+    </#if>
+    </table>
+
+  
+  
+
+  
+</body>
+</pdf>

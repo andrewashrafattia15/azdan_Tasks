@@ -1,0 +1,10 @@
+<advancedpdftemplate scriptid="custtmpl_ino_re_customer_receipt_print" standard="STDTMPLCR_INO_RE_CUSTOMER_RECEIPTS">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>F</preferred>
+  <printtype>CUSTOMRECORD</printtype>
+  <recordtype>[scriptid=customrecord_ino_re_customer_receipts]</recordtype>
+  <title>Ino Customer Receipts Print</title>
+  <trantype>CUSTOM</trantype>
+</advancedpdftemplate>

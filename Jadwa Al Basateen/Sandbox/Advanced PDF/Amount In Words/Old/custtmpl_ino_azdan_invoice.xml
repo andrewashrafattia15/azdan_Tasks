@@ -1,0 +1,9 @@
+<advancedpdftemplate scriptid="custtmpl_ino_azdan_invoice" standard="STDTMPLEMPTY">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>F</preferred>
+  <printtype>TRANSACTION</printtype>
+  <title>Azdan Invoice Amount in Words</title>
+  <trantype>CUSTINVC</trantype>
+</advancedpdftemplate>

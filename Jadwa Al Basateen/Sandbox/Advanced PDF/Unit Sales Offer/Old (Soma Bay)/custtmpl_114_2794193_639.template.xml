@@ -1,0 +1,313 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<#if record.custrecord_ino_re_so_approval_status == "Approved">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+      	</#if>
+
+      <macrolist>
+        <macro id="nlfooter">
+        <table class="footer" style="width: 100%; ">
+          <tr style="">
+            <td style="padding-left: 1px; padding-right: -15px; padding-bottom: 0px">      
+              <img src="https://2794193.app.netsuite.com/core/media/media.nl?id=2526&amp;c=2794193&amp;h=1t6-w_32H8-Tju7P6873JGICqzva8XUwfoTvIicBfQSeKVnI"
+                     style=" width: 748px; height: 43px;"  /></td>
+          </tr>
+        </table>
+        </macro>
+      </macrolist>
+   <style type="text/css">
+     
+      table { font-size: 9pt; table-layout: fixed; width: 100%; }
+      th { font-weight: bold; font-size: 8pt; vertical-align: middle; padding: 5px 6px 3px; background-color: #e3e3e3; color: #333333; padding-bottom: 10px; padding-top: 10px; }
+      td { padding: 4px 6px; }
+      b { font-weight: bold; color: #333333; }
+      .HaloHandletter {
+        font-family: HaloHandletter, sans-serif;
+        font-size: 54 pt;
+        font-weight: bold;
+        color: #71a8af;
+        text-shadow: 2px 2px 8px #71a8af;
+      }
+      .shruti {
+        font-family: shruti, sans-serif;
+        color: #5e9ca5;
+
+      }
+     .shrutibold {
+        font-family: shruti, sans-serif;
+        color: #5e9ca5;  
+       font-weight: bold;
+
+      }
+       .Brevia {
+        font-family: Brevia, sans-serif;
+        color: #5e9ca5;
+
+      }
+      .Breviabold {
+        font-family: Breviabold, sans-serif;
+        color: #5e9ca5;
+        font-weight: bold;        
+      }
+     
+.text-shadow {
+  box-shadow: 10px 10px 5px lightblue;
+}
+</style>
+</head>
+<body footer="nlfooter" footer-height="6%" padding="0.0in 0.0in 0.0in 0.0in" size="A4">
+
+    <table style="width: 100%">
+    <tr>
+      <td style=" padding-left: -10px; padding-top: -10px"> 
+         <img src="https://2794193.app.netsuite.com/core/media/media.nl?id=2525&amp;c=2794193&amp;h=DJbjUtzm9WaxdJbX6s8R0W_L1HU2zSdWGx_tQbvXT8W8xELn"
+                     style=" width:760px; height:440px;"  /></td>  
+    </tr>
+      <tr style="padding-top: -20px">
+        <td align="center"  style="background-color: #E6DED0; color:black; font-family: 'Times New Roman', Times, serif; font-size: 46pt; padding-left: 100px"> Sales Offer</td>
+      </tr>
+  </table>
+
+  
+  <table style="width: 100%; background-color : #ffffff">
+     <tr>
+       <td  align="left" style="width: 38%; padding-left: 30px; ">
+         <table style="width: 100%">
+           <tr style="padding-top : -200px">
+            <td>      
+              <img src="https://2794193.app.netsuite.com/core/media/media.nl?id=2531&amp;c=2794193&amp;h=4T3EmuvvLrj7doBSXqvDDtEDonpdEyKFTKqVSAmUSO7m9mGM"
+                     style="float: right; width: 220px; height: 220px;"  /></td>
+          </tr>
+
+           <tr>
+            <td>      
+              <img src="https://2794193.app.netsuite.com/core/media/media.nl?id=2527&amp;c=2794193&amp;h=DqFPerPkwMiy3Q-P6ZevPNWF9FgMtxQfT7CA7sJEK7Mxb8lu"
+                     style="float: right; width: 220px; height: 220px;"  /></td>
+          </tr>
+           <tr>
+            <td>      
+              <img src="https://2794193.app.netsuite.com/core/media/media.nl?id=2528&amp;c=2794193&amp;h=byhvAPcSDuyemqGUWgqjL7GsTmAAyjclEI5vOXRNsRso6_pQ"
+                     style="float: right; width: 220px; height: 220px;"  /></td>
+          </tr>
+         </table>
+       </td>
+
+
+        <td style="width: 62%">
+           <#assign totalareabym2=(record.custrecord_ino_re_so_gross_area * 0.092903)>
+    <#assign groupbalconyareabysqft=(record.custrecord_ino_re_so_unit.custrecord_ino_re_um_gross_area - record.custrecord_ino_re_so_unit.custrecord_ino_re_um_net_area )>
+    <#assign groupbalconyareabym2=(groupbalconyareabysqft * 0.092903)>
+   <#assign grouptotalareabym2=(record.custrecord_ino_re_so_unit.custrecord_ino_re_um_gross_area * 0.092903)> 
+   <#assign groupnetareabym2=(record.custrecord_ino_re_so_unit.custrecord_ino_re_um_net_area * 0.092903)>  
+   <#assign ListPrice=(record.custrecord_ino_re_so_unitprice )>
+   <#assign SellingPrice=(record.custrecord_ino_re_so_sellingprice )>
+   
+   <#if record.custrecord_ino_re_so_unit !=""> 
+    <table style="width: 100%">
+    <tr>         
+            <td style="width : 56%; padding-left: -2px"> 
+              <table>
+                <tr>              
+                  <td class="TimesNewRoman" style="font-size: 25pt; font-weight:bold; color:#8f8275;"> UNIT ${record.custrecord_ino_re_so_unit} </td>
+                </tr>
+              </table>
+            </td>
+   <td align="left"> 
+   <table style="font-size: 12pt; color:#93867e">
+                <tr> 
+                  <td align="left"> Type: ${record.custrecord_ino_re_so_unit.custrecord_ino_re_um_model} </td>
+                </tr>
+           
+                    <tr> 
+                      <td align="left" style="padding-top: -2px"> Total Area: ${record.custrecord_ino_re_so_gross_area?string(",##0.00")} Sq.ft </td>
+                    </tr>  
+            <tr>
+              <td align="left" style="padding-top: -2px"> View: ${record.custrecord_ino_re_so_unit.custrecord_ino_re_um_view} </td> 
+            </tr>
+   </table>
+          </td>
+      
+    </tr>
+    </table> 
+     <hr style="width:100%;  "/>
+ </#if>
+
+     <table>
+     <tr>
+       <td class="TimesNewRoman" style="font-size: 20.5px; width: 76%; color:#93867e"> OFFERED AT   <span style="font-weight:bold; color: #8f8275; font-size: 33px"> ${SellingPrice?string(",##0.00")} </span>  </td>
+       <td align="left" class="TimesNewRoman" style="font-size: 19px; padding-top: -1px; color: #8f8275" >${record.custrecord_ino_re_so_currency} </td>
+     </tr>
+     </table>
+<hr style="width:100%; "/>
+
+<table style="width: 100%; padding-top: 2px; padding-left: -6px">
+          <tr><td class="TimesNewRoman" style="font-size: 10pt; font-weight:bold; color:#8f8275;">Payment Plan </td></tr>
+        </table>
+   <#assign Reservation=(SellingPrice * 0.05)>
+   <#assign DownPayment=(SellingPrice * 0.15)>
+   <#assign Installment=(SellingPrice * 0.0625)>
+   <#assign Handover=(SellingPrice * 0.30)>   
+  <#assign Maintenance=(SellingPrice * record.custrecord_ino_re_so_maintenance_fees)>   
+
+     
+   <#assign Deposit_Percentage=((record.custrecord_ino_re_so_deposit) *100 / 100)>
+   <#assign DownPayment_Percentage=((record.custrecord_ino_re_so_down_payment) *100 / 100)>
+   <#assign Installment_Percentage=((record.custrecord_ino_re_so_installment) *100 / 100)>
+   <#assign Handover_Percentage=((record.custrecord_ino_re_so_completion) *100 / 100)>  
+      
+   <#assign Custom_Deposit=(SellingPrice * Deposit_Percentage)>
+   <#assign Custom_DownPayment=(SellingPrice * DownPayment_Percentage)>
+   <#assign Custom_Installment=(SellingPrice * Installment_Percentage)>
+   <#assign Custom_Handover=(SellingPrice * Handover_Percentage)>  
+       
+<#if record.custrecord_ino_re_so_paymentplan == "5% + 15% DP + 30% HO + 6.25% Every 3 Months">
+        <table style="width: 100%; padding-top: 2px; padding-left: 0px; ">
+          <tr>
+            <td align="left" class="TimesNewRoman" 
+                style="background-color: #E6DED0; width: 45%; font-size: 8.5pt; border-right: 2px solid white; padding-top:10px; padding-bottom:10px">Upon Reservation</td>
+            <td align="center" class="TimesNewRoman" style="background-color:  #E6DED0; width: 35%; font-size: 8.5pt; border-right: 2px solid white;padding-top:10px; padding-bottom:10px;color:#3c3b33">
+              ${Reservation?string(",##0.00")}
+              <span align="center" class="TimesNewRoman"
+                    style="background-color: #E6DED0; width: 40px; font-size: 4.5pt; padding-top:10px; padding-bottom:10px;color:#3c3b33">${record.custrecord_ino_re_so_currency}</span> </td>
+            <td align="center" class="TimesNewRoman" style="background-color: #E6DED0; width: 20%; font-size: 8.5pt;padding-top:10px; padding-bottom:10px;color:#3c3b33">5%</td>
+          </tr>
+          <tr style="border-top: 2px solid white">
+            <td align="left" class="TimesNewRoman" 
+                style="background-color:  #E6DED0; width: 45%; font-size: 8.5pt; border-right: 2px solid white; padding-top:10px; padding-bottom:10px;color:#3c3b33">Upon signing Contract</td>
+            <td align="center" class="TimesNewRoman" style="background-color:  #E6DED0; width: 35%;  font-size: 8.5pt; border-right: 2px solid white;padding-top:10px; padding-bottom:10px;color:#3c3b33">
+              ${DownPayment?string(",##0.00")}
+              <span align="center" class="TimesNewRoman"
+                    style="background-color: #E6DED0; width: 40px; font-size: 4.5pt; padding-top:10px; padding-bottom:10px;color:#3c3b33">${record.custrecord_ino_re_so_currency}</span> </td>
+            <td align="center" class="TimesNewRoman" style="background-color: #E6DED0; width: 20%;  font-size: 8.5pt;padding-top:10px; padding-bottom:10px;color:#3c3b33">15%</td>
+          </tr>
+          <tr style="border-top: 2px solid white">
+            <td align="left" class="TimesNewRoman" 
+                style="background-color:  #E6DED0; width: 45%; font-size: 8.5pt; border-right: 2px solid white; padding-top:10px; padding-bottom:10px;color:#3c3b33">Every 3 months (x8) </td>
+            <td align="center" class="TimesNewRoman" style="background-color:  #E6DED0 width: 35%; font-size: 8.5pt; border-right: 2px solid white;padding-top:10px; padding-bottom:10px;color:#3c3b33">
+              ${Installment?string(",##0.00")}
+              <span align="center" class="TimesNewRoman"
+                    style="background-color: #E6DED0; width: 40px;  font-size: 4.5pt; padding-top:10px; padding-bottom:10px;color:#3c3b33">${record.custrecord_ino_re_so_currency}</span> </td>
+            <td align="center" class="TimesNewRoman" style="background-color:  #E6DED0; width: 20%; font-size: 8.5pt;padding-top:10px; padding-bottom:10px;color:#3c3b33">6.25%</td>
+          </tr>
+          <tr style="border-top: 2px solid white">
+            <td align="left" class="TimesNewRoman" 
+                style="background-color:  #E6DED0; width: 45%;font-size: 8.5pt; border-right: 2px solid white; padding-top:10px; padding-bottom:10px;color:#3c3b33">Upon Completion</td>
+            <td align="center" class="TimesNewRoman" style="background-color: #E6DED0; width: 35%; font-size: 8.5pt; border-right: 2px solid white;padding-top:10px; padding-bottom:10px;color:#3c3b33">
+              ${Handover?string(",##0.00")}
+              <span align="center" class="TimesNewRoman"
+                    style="background-color: #E6DED0; width: 40px; font-size: 4.5pt; padding-top:10px; padding-bottom:10px;color:#3c3b33">${record.custrecord_ino_re_so_currency}</span> </td>
+            <td align="center" class="TimesNewRoman" style="background-color: #E6DED0; width: 20%; font-size: 8.5pt;padding-top:10px; padding-bottom:10px;color:#3c3b33">30%</td>
+          </tr>
+          
+        </table>
+     <#else>
+         <table style="width: 100%; padding-top: 5px; padding-left: 0px; color: #353026">
+          <tr>
+            <td align="left" class="TimesNewRoman" 
+                style="background-color: #E6DED0; width: 45%;  font-size: 12.5pt; border-right: 2px solid white; padding-top:10px; padding-bottom:10px;color:#3c3b33">Upon Reservation</td>
+            <td align="center" class="TimesNewRoman" style="background-color:#E6DED0; width: 35%;  font-size: 12.5pt; border-right: 2px solid white;padding-top:10px; padding-bottom:10px;color:#3c3b33">
+              ${Custom_Deposit?string(",##0.00")}
+              <span align="center" class="TimesNewRoman"
+                    style="background-color: #E6DED0; width: 40px; font-size: 7.5pt; padding-top:10px; padding-bottom:10px;color:#3c3b33">${record.custrecord_ino_re_so_currency}</span> </td>
+            <td align="center" class="TimesNewRoman"
+                style="background-color: #E6DED0; width: 20%;  font-size: 12.5pt;padding-top:10px; padding-bottom:10px;color:#3c3b33">${record.custrecord_ino_re_so_deposit}</td>
+          </tr>
+          <tr style="border-top: 2px solid white">
+            <td align="left" class="TimesNewRoman" 
+                style="background-color:#E6DED0; width: 45%;  font-size: 12.5pt; border-right: 2px solid white; padding-top:10px; padding-bottom:10px;color:#3c3b33">Upon signing SPA</td>
+            <td align="center" class="TimesNewRoman" style="background-color: #E6DED0; width: 35%; font-size: 12.5pt; border-right: 2px solid white;padding-top:10px; padding-bottom:10px;color:#3c3b33">
+              ${Custom_DownPayment?string(",##0.00")}
+              <span align="center" class="TimesNewRoman"
+                    style="background-color: #E6DED0; width: 40px; font-size: 7.5pt; padding-top:10px; padding-bottom:10px;color:#3c3b33">${record.custrecord_ino_re_so_currency}</span> </td>
+            <td align="center" class="TimesNewRoman"
+                style="background-color: #E6DED0; width: 20%; font-size: 12.5pt;padding-top:10px; padding-bottom:10px;color:#3c3b33">${record.custrecord_ino_re_so_down_payment}</td>
+          </tr>
+          <tr style="border-top: 2px solid white">
+            <td align="left" class="TimesNewRoman" 
+                style="background-color:#E6DED0; width: 45%;  font-size: 12.5pt; border-right: 2px solid white; padding-top:10px; padding-bottom:10px;color:#3c3b33">
+              Every ${record.custrecord_az_rng_so_duration} months </td>
+            <td align="center" class="TimesNewRoman" style="background-color: #E6DED0; width: 35%; font-size: 12.5pt; border-right: 2px solid white;padding-top:10px; padding-bottom:10px;color:#3c3b33">
+              ${Custom_Installment?string(",##0.00")}
+              <span align="center" class="TimesNewRoman"
+                    style="background-color: #E6DED0; width: 40px; font-size: 7.5pt; padding-top:10px; padding-bottom:10px;color:#3c3b33">${record.custrecord_ino_re_so_currency}</span> </td>
+            <td align="center" class="TimesNewRoman" 
+                style="background-color: #E6DED0; width: 20%;  font-size: 12.5pt;padding-top:10px; padding-bottom:10px;color:#3c3b33">${record.custrecord_ino_re_so_installment}</td>
+          </tr>
+          <tr style="border-top: 2px solid white">
+            <td align="left" class="TimesNewRoman" 
+                style="background-color: #E6DED0; width: 45%; font-size: 12.5pt; border-right: 2px solid white; padding-top:10px; padding-bottom:10px;color:#3c3b33">Upon Completion</td>
+            <td align="center" class="TimesNewRoman" style="background-color: #E6DED0; width: 35%; font-size: 12.5pt; border-right: 2px solid white;padding-top:10px; padding-bottom:10px;color:#3c3b33">
+              ${Custom_Handover?string(",##0.00")}
+              <span align="center" class="TimesNewRoman"
+                    style="background-color: #E6DED0; width: 40px; font-size: 7.5pt; padding-top:10px; padding-bottom:10px;color:#3c3b33">${record.custrecord_ino_re_so_currency}</span> </td>
+            <td align="center" class="TimesNewRoman" 
+                style="background-color:#E6DED0; width: 20%; font-size: 12.5pt;padding-top:10px; padding-bottom:10px;color:#3c3b33">${record.custrecord_ino_re_so_completion}</td>
+          </tr>
+          
+        </table>
+      </#if>  
+
+       <table style="width: 100%; padding-top: 2px; padding-left: -6px">
+          <tr><td class="TimesNewRoman" style="font-size: 10pt; font-weight:bold; color:#8f8275;"> Maintenance Plan </td></tr>
+        </table>
+       
+
+               <table style="width: 100%; padding-top: 2px; padding-left: 0px; ">
+          <tr>
+            <td align="left" class="TimesNewRoman" 
+                style="background-color: #E6DED0; width: 45%; font-size: 8.5pt; border-right: 2px solid white; padding-top:10px; padding-bottom:10px">Upon Completion</td>
+            <td align="center" class="TimesNewRoman" style="background-color:  #E6DED0; width: 35%; font-size: 8.5pt; border-right: 2px solid white;padding-top:10px; padding-bottom:10px;color:#3c3b33">
+              ${Maintenance?string(",##0.00")}
+              <span align="center" class="TimesNewRoman"
+                    style="background-color: #E6DED0; width: 40px; font-size: 4.5pt; padding-top:10px; padding-bottom:10px;color:#3c3b33">${record.custrecord_ino_re_so_currency}</span> </td>
+            <td align="center" class="TimesNewRoman" style="background-color: #E6DED0; width: 20%; font-size: 8.5pt;padding-top:10px; padding-bottom:10px;color:#3c3b33">${record.custrecord_ino_re_so_maintenance_fees}</td>
+          </tr>
+               </table>
+
+  
+        
+      <table style="width: 100%; padding-top: 5px; padding-left: -6px">
+          <tr><td  style="font-size:10pt; font-weight:bold; color:#8f8275;">Estimated Completion Date Q4 2027 </td></tr>
+        </table>
+        
+      <table style="width: 100%; padding-top: 0px; padding-left: -6px">
+          <tr><td  style="font-size:8pt;color:#93867e">
+            This Sale Offer Letter is shared for information and consideration only and does not constitute  a<br/> 
+            legal binding offer or contract. &nbsp;Any sale and purchase of a property shall be subject to a written<br/>
+            sale and purchase agreement signed between the parties. Final area will be confirmed in the SPA <br/>
+            and the price will be adjusted accordingly.
+ </td></tr>
+        </table>
+
+       
+      </td>    
+    </tr>
+  </table>
+      
+
+ 
+    <#if record.custrecord_ino_re_so_unit.custrecord_ino_re_um_layout !="">
+      
+          <pbr />
+     <table style="width: 100%; padding-top: 150px; ">
+       <tr>
+         <td align="center" style="width: 100%;"><img src="${record.custrecord_ino_re_so_unit.custrecord_ino_re_um_layout@Url}" style="width:700px; height:300px" /> </td>
+       </tr>
+     </table>
+  </#if>
+  
+
+ </body>
+ </pdf>
+</#if>

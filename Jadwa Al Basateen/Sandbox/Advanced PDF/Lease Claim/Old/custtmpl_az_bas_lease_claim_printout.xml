@@ -1,0 +1,10 @@
+<advancedpdftemplate scriptid="custtmpl_az_bas_lease_claim_printout" standard="STDTMPLCR_INO_PMS_LEASE_CHARGE_CLAIM">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>F</preferred>
+  <printtype>CUSTOMRECORD</printtype>
+  <recordtype>[scriptid=customrecord_ino_pms_lease_charge_claim]</recordtype>
+  <title>AZ BAS Lease Claim Printout</title>
+  <trantype>CUSTOM</trantype>
+</advancedpdftemplate>

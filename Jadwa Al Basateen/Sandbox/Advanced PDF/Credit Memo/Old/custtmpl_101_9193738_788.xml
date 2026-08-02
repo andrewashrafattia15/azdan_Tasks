@@ -1,0 +1,9 @@
+<advancedpdftemplate scriptid="custtmpl_101_9193738_788" standard="STDTMPLCUSTCRED">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>T</preferred>
+  <printtype>TRANSACTION</printtype>
+  <title>AZ BAS - Credit Memo Printout</title>
+  <trantype>CUSTCRED</trantype>
+</advancedpdftemplate>

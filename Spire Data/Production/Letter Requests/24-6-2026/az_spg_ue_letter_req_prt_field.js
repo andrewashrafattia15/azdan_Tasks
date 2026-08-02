@@ -12,12 +12,12 @@ define(['N/search', 'N/ui/serverWidget', 'N/record'], function (search, serverWi
 
             const employeeID = context.newRecord.getValue('custrecord_ino_hrms_dr_employee');
 
-            const payrollAssignmentID = getEmployeeData(employeeID);
+            const employeeData = getEmployeeData(employeeID);
 
-            const payrollAssignmentData = getPayrollAssignmentData(payrollAssignmentID);
+            const payrollAssignmentData = getPayrollAssignmentData(employeeData.payrollAssignmentID);
 
 
-            setData(payrollAssignmentData,context);
+            setData(employeeData,payrollAssignmentData,context);
 
         } catch (e) {
             log.debug('beforeLoad error', e);
@@ -34,8 +34,12 @@ define(['N/search', 'N/ui/serverWidget', 'N/record'], function (search, serverWi
             });
 
             const payrollAssignmentID = employeeRecord.getValue('custentity_ino_hrms_emp_payrollassignmen');
+            const subsidiaryID = employeeRecord.getValue('subsidiary');
 
-            return payrollAssignmentID;
+            return {
+                payrollAssignmentID: payrollAssignmentID,
+                subsidiaryID: subsidiaryID
+            };
         } catch (e) {
             log.debug('getEmployeeData error', e);
             return null;
@@ -68,7 +72,7 @@ define(['N/search', 'N/ui/serverWidget', 'N/record'], function (search, serverWi
 
     };
 
-    const setData = (payrollAssignmentData, context) => {
+    const setData = (employeeData,payrollAssignmentData, context) => {
 
         const custrecord = context.form.addField({
             id: 'custpage_custrecord_to_print',
@@ -78,8 +82,11 @@ define(['N/search', 'N/ui/serverWidget', 'N/record'], function (search, serverWi
 
 
         const data = {
+            employeeData: employeeData,
             payrollAssignmentData: payrollAssignmentData
         };
+
+
 
         custrecord.defaultValue = JSON.stringify(data);
 

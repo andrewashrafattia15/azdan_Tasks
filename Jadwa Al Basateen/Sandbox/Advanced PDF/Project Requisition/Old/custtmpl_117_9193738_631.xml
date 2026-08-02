@@ -1,0 +1,10 @@
+<advancedpdftemplate scriptid="custtmpl_117_9193738_631" standard="STDTMPLCR_INO_PM_PROJECT_REQUISITION">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>F</preferred>
+  <printtype>CUSTOMRECORD</printtype>
+  <recordtype>[scriptid=customrecord_ino_pm_project_requisition]</recordtype>
+  <title>AZ BAS Project Requisition Printout</title>
+  <trantype>CUSTOM</trantype>
+</advancedpdftemplate>

@@ -1,0 +1,9 @@
+<advancedpdftemplate scriptid="custtmpl_102_9193738_288" standard="STDTMPLCUSTDEP">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>T</preferred>
+  <printtype>TRANSACTION</printtype>
+  <title>Customer Deposit</title>
+  <trantype>CUSTDEP</trantype>
+</advancedpdftemplate>

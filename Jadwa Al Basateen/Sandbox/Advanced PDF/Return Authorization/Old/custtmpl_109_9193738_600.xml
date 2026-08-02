@@ -1,0 +1,9 @@
+<advancedpdftemplate scriptid="custtmpl_109_9193738_600" standard="STDTMPLRTNAUTH">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>T</preferred>
+  <printtype>TRANSACTION</printtype>
+  <title>Return Authorization</title>
+  <trantype>RTNAUTH</trantype>
+</advancedpdftemplate>

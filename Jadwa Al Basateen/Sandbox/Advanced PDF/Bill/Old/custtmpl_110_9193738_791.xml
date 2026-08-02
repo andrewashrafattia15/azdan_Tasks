@@ -1,0 +1,9 @@
+<advancedpdftemplate scriptid="custtmpl_110_9193738_791" standard="STDTMPLSVENDBILL">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>T</preferred>
+  <printtype>TRANSACTION</printtype>
+  <title>Vendor Bill</title>
+  <trantype>VENDBILL</trantype>
+</advancedpdftemplate>

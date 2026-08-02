@@ -1,0 +1,184 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+  <head>
+    <link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+    <#if .locale == "zh_CN">
+      <link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+    <#elseif .locale == "zh_TW">
+      <link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+    <#elseif .locale == "ja_JP">
+      <link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+    <#elseif .locale == "ko_KR">
+      <link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+    <#elseif .locale == "th_TH">
+      <link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+    </#if>
+
+    <style>
+      table { font-size: 9pt; table-layout: fixed; width: 100%; }
+      th { font-weight: bold; font-size: 8pt; vertical-align: middle; padding: 5px 6px 3px; background-color: #e3e3e3; color: #333333; padding-bottom: 10px; padding-top: 10px; }
+      td { padding: 4px 6px; }
+      b { font-weight: bold; color: #333333; }
+    </style>
+  </head>
+      
+                      
+<body padding="0.0in 0.0in 0.0in 0.0in" size="Letter-LANDSCAPE">
+  <!--page 01-->
+    <table style="width: 100%;">
+      <tr>
+        <td style="width: 65%; padding-top:-3px; padding-left: -6px">
+          <table style="width: 100%">
+            <tr>
+              <td> <img src="https://2794193.app.netsuite.com/core/media/media.nl?id=2081&amp;c=2794193&amp;h=quw3jG1gDDzFS9Liv7TRjY9nPHvdTJMxNfl_IEPlmi5lhxdI" style="width: 120%; height: 165%;" /> </td>
+            </tr>
+          </table>
+        </td>
+        <td style="width: 35%">
+          <table style="width: 100%; padding-top: 400px">
+            <tr>
+              <td align="center" style="font-size: 18pt; font-weight:bold; color:#ad6e26;"> Price Proposal For "${record.custrecord_ino_pms_lp_unit}" </td>
+            </tr>
+          </table>
+          <hr style="height:3px; border-width:0; width: 90%; color:#9e6d4b; background-color:#9e6d4b"/>
+        </td>
+      </tr>
+   </table>
+  
+      <pbr />
+        
+       <!-- Page 02-->
+        
+       <table style="width: 100%; ">
+        <tr>    
+          
+          
+          <td  style="width: 45%; color: #ad6e26;">      
+            <table  style="width: 100%; padding-top: 100px; font-weight: bold;" >
+              <tr>
+                <td align="center" style="font-size: 16pt;  "> Financial Details For "${record.custrecord_ino_pms_lp_unit}" </td>                                                                                         
+              </tr>
+            </table>
+           
+
+            <table  style="width: 100%; padding-top: 20px;padding-left: 5px; font-size: 12pt; ">
+
+              <tr >
+                <td align="left" style=" width: 65%; "> Tenant:  </td>
+                <td align="center" style=" width: 35%;font-size:9pt">  ${record.custrecord_ino_pms_lp_tenant.custentity_ino_re_customer_name}  </td>      
+              </tr>
+
+              
+              
+              <tr style="padding-top: 3px">
+                 <td align="left" style=" "> Annual Rent: </td>  
+                 <td align="center" style="  "> ${record.custrecord_ino_pms_lp_annual_rent?string(",##0.00")}   </td>      
+              </tr>
+          
+             <tr style="padding-top: 3px">
+                <td align="left" style=" ">  Security Deposit:   </td>
+                <td align="center" style=" ">  ${record.custrecord_ino_pms_lp_security_deposit?string(",##0.00")}  </td>      
+             </tr>
+          
+            <tr style="padding-top: 3px">
+               <td align="left" style=" "> Contract Amount:   </td>
+               <td align="center" style=" ">  ${record.custrecord_ino_pms_lp_lease_amount?string(",##0.00")}  </td>      
+           </tr>
+          
+        
+          <tr style="padding-top: 3px">
+             <td align="left" style=" "> The Contract Terms "${record.custrecord_ino_pms_lp_term}" Months, Starts From:  </td>
+             <td align="center" style=" "> ${record.custrecord_ino_pms_lp_start_date}  </td>      
+          </tr>
+
+         <tr style="padding-top: 3px">
+           <td  align="left" style=" "> End Date:</td>
+           <td align="center" style=" "> ${record.custrecord_ino_pms_lp_end_date}</td>
+         </tr>
+
+        <tr style="padding-top: 3px">
+          <td align="left" style=" "> Charges Schedule:</td>
+          <td  align="center" style=" "> ${record.custrecord_ino_pms_lp_charges_sche}</td>
+        </tr>
+
+       <tr style="padding-top: 3px">
+         <td  align="left" style=" ">The Tenant will be billed for charges every :</td>
+         <td align="center" style=" "> ${record.custrecord_ino_pms_lp_billing_freq} Months</td>
+       </tr>
+        </table>
+                      
+       <table  style="width: 100%; padding-top: 50px;  font-weight: bold;  ">
+         <tr>
+           <td align="center" style="font-size: 16pt;  "> Internal Details For "${record.custrecord_ino_pms_lp_unit}"  </td>                                                                                         
+          </tr>
+       </table>
+
+        <table  style="width: 100%; padding-top: 20px; padding-left: 5px; font-size: 12pt; ">
+           <tr style= "padding-top:3px">
+                <td align="left" style= "width:60%"> Property: </td>
+                <td align="center" style="width:40%"> ${record.custrecord_ino_pms_lp_property}</td>
+              </tr>
+
+              <tr style="padding-top:3px">
+                <td align="left"> Unit Type: </td>
+                <td align="center"> ${record.custrecord_ino_pms_lp_unit.custrecord_ino_re_um_unittype}</td>
+              </tr>
+
+              <tr style="padding-top:3px">
+                <td align="left"> Unit Model: </td>
+                <td align="center"> ${record.custrecord_ino_pms_lp_unit.custrecord_ino_re_um_model}</td>
+              </tr>
+          <tr>
+            <td align="left" style="  "> The Unit is in:  </td>
+            <td align="center" style=" "> ${record.custrecord_ino_pms_lp_unit.custrecord_ino_re_um_floor}   </td>      
+          </tr>
+            
+        <tr style="padding-top: 3px">
+           <td align="left" style=" "> Total Area:   </td>
+           <td align="center" style=" ">  ${record.custrecord_ino_pms_lp_total_are}  </td>      
+         </tr>
+       </table>
+          
+      <hr style="height:3px; border-width:0;  width: 90%; color:#9e6d4b; background-color:#9e6d4b"/> 
+          
+      </td>
+
+          <td  style="width: 55%; padding-top: -3px; padding-right: -10px"> 
+            <table  style="width: 100%">
+              <tr>
+                 <td> <img src="https://2794193.app.netsuite.com/core/media/media.nl?id=2075&amp;c=2794193&amp;h=mpTHDT04_pFAK_4RLfLE6g4IxtGw08h910bfbuZzCep_vxY_" style="width: 100%; height: 140%;"  />  </td>
+              </tr>      
+            </table>
+           </td>
+    </tr>
+ </table>
+
+ <!-- Page 03 
+  <pbr />
+
+ <table style="width: 100%;">
+      <tr>
+        <td style="width: 70%; padding-top:-5px; padding-left: -6px">
+          <table style="width: 100%">
+            <tr>
+              <td> <img src="https://2794193.app.netsuite.com/core/media/media.nl?id=2061&amp;c=2794193&amp;h=lgYyGFA5heSk5N_2OU9G415t3cni6MDzlyViBHe6Li_ETv-h&amp;fcts=20241118014201&amp;whence="  style="width: 100%; height: 120%;"  /> </td>
+            </tr>
+          </table>
+        </td>
+        <td style="width: 30%">
+          <table style="width: 100%; padding-top: 600px">
+            <tr>
+              <td align="right" style="font-size: 45pt; color:#ad6e26;"> ThankYou.. </td>
+            </tr>
+          </table>
+          <hr align="right" style="height:3px; border-width:0; width: 100%; color:#9e6d4b; background-color:#9e6d4b"/>
+        </td>
+      </tr>
+   </table>
+      -->  
+       
+
+  
+</body>
+</pdf>

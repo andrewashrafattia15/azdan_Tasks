@@ -1,0 +1,9 @@
+<advancedpdftemplate scriptid="custtmpl_106_9193738_197" standard="STDTMPLSVENDCRED">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>T</preferred>
+  <printtype>TRANSACTION</printtype>
+  <title>Bill Credit</title>
+  <trantype>VENDCRED</trantype>
+</advancedpdftemplate>

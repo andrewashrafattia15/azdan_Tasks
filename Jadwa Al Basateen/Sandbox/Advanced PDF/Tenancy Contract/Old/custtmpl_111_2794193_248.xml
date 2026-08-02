@@ -1,0 +1,10 @@
+<advancedpdftemplate scriptid="custtmpl_111_2794193_248" standard="STDTMPLCR_INO_PMS_TENANCY_CONTRACT">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>F</preferred>
+  <printtype>CUSTOMRECORD</printtype>
+  <recordtype>[scriptid=customrecord_ino_pms_tenancy_contract]</recordtype>
+  <title>Tenancy Contract Printout</title>
+  <trantype>CUSTOM</trantype>
+</advancedpdftemplate>

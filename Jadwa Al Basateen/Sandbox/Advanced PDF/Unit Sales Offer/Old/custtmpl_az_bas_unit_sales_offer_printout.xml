@@ -1,0 +1,10 @@
+<advancedpdftemplate scriptid="custtmpl_az_bas_unit_sales_offer_printout" standard="STDTMPLCR_INO_RE_SALESOFFER">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>F</preferred>
+  <printtype>CUSTOMRECORD</printtype>
+  <recordtype>[scriptid=customrecord_ino_re_salesoffer]</recordtype>
+  <title>AZ BAS Unit Sales Offer Printout</title>
+  <trantype>CUSTOM</trantype>
+</advancedpdftemplate>
