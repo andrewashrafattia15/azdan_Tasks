@@ -1,0 +1,451 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+    <link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+    <#if .locale == "zh_CN">
+        <link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+    </#if>
+    <#if .locale == "zh_TW">
+        <link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+    </#if>
+    <#if .locale == "ja_JP">
+        <link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+    </#if>
+    <#if .locale == "ko_KR">
+        <link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+    </#if>
+    <#if .locale == "th_TH">
+        <link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+    </#if>
+    
+    <style type="text/css">
+        * {
+            <#if .locale == "zh_CN">
+                font-family: NotoSans, NotoSansCJKsc, sans-serif;
+            <#elseif .locale == "zh_TW">
+                font-family: NotoSans, NotoSansCJKtc, sans-serif;
+            <#elseif .locale == "ja_JP">
+                font-family: NotoSans, NotoSansCJKjp, sans-serif;
+            <#elseif .locale == "ko_KR">
+                font-family: NotoSans, NotoSansCJKkr, sans-serif;
+            <#elseif .locale == "th_TH">
+                font-family: NotoSans, NotoSansThai, sans-serif;
+            <#else>
+                font-family: NotoSans, sans-serif;
+            </#if>
+        }
+        
+        table {
+            font-size: 8pt;
+            table-layout: fixed;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        .main-container {
+            border: 1px solid #000;
+          margin-top:2px;
+          width:100%;
+          min-height:100%;
+
+        }
+        
+        .header-section {
+            width: 100%;
+        }
+        
+        .company-name-cell {
+            font-size:  16pt;
+            font-weight: bold;
+            padding: 8px;
+            vertical-align: top;
+            width: 50%;
+        }
+        
+        .logo-cell {
+            vertical-align: top;
+            padding: 8px;
+            width: 50%;
+        }
+        
+        .tax-invoice-title {
+            
+            font-size: 16pt;
+            font-weight: bold;
+            padding: 10px;
+            background-color: #fff;
+            
+        }
+        
+        .invoice-type-header {
+            background-color: #103a5f;
+            color: #fff;
+            text-align: center;
+            font-weight: bold;
+            padding: 8px;
+            font-size: 11pt;
+        }
+        
+        .info-section {
+            width: 100%;
+            border-top: 1px solid #000;
+        }
+        
+        .customer-details {
+            vertical-align: top;
+            padding: 10px;
+            width: 50%;
+            border-right: 1px solid #000;
+        }
+        
+        .invoice-details {
+            vertical-align: top;
+            padding: 10px;
+            width: 50%;
+        }
+        
+        .detail-label {
+            font-weight: bold;
+            font-size:  8pt;
+            margin-bottom: 3px;
+        }
+        
+        .detail-value {
+            font-size: 8pt;
+            margin-bottom: 8px;
+        }
+        
+        .line-items-header {
+            background-color: #103a5f;
+            color: #fff;
+            font-weight: bold;
+            padding: 8px;
+            font-size: 8pt;
+            border: 1px solid #000;
+        }
+        
+        .line-items-row {
+            border: 0.2px solid #gray;
+            padding: 5px;
+            font-size: 8pt;
+            
+        }
+        
+        .amount-words-section {
+            border:0.2px solid #gray;
+             padding: 5px;
+           padding-bottom: 15px;
+            font-size: 10pt;
+          font-weight:bold;
+            
+        }
+        
+        .additional-info-section {
+            
+           padding-top: 15px;
+            font-size: 10pt;
+            min-height: 60px;
+        }
+        
+        .payment-info-header {
+            background-color: #103a5f;
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
+            padding: 8px;
+            font-size: 8pt;
+        }
+        
+        .payment-details {
+            padding: 10px;
+            font-size: 8pt;
+            vertical-align: top;
+        }
+        
+        .bank-label {
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+        
+        .bank-value {
+            margin-bottom: 6px;
+        }
+        
+        .footer-company {
+          
+            font-size: 10pt;
+            font-weight: bold;
+            border-bottom: 1px solid #000;
+          
+        }
+    </style>
+</head>
+
+<body padding="8px" size="Letter">
+
+       <#assign remainingHeight = 100 />
+
+<#-- Default logo dimensions (used for every subsidiary except those overridden below) -->
+<#assign logoWidth = 250 />
+<#assign logoHeight = 50 />
+
+<#-- Per-subsidiary overrides -->
+<#if subsidiary.id == "60">
+    <#assign logoWidth = 180 />
+    <#assign logoHeight = 130 />
+</#if>
+
+    <!-- Main Container Table -->
+    <table class="main-container">
+
+        <!-- Header Section -->
+        <tr>
+            <td colspan="2" class="tax-invoice-title" align="center">TAX INVOICE</td>
+        </tr>
+        <tr>
+    <td class="company-name-cell">
+        ${subsidiary.name}<br/>
+        <span style="font-size:10pt; font-weight:normal;">${subsidiary.mainaddress_text}</span><br/><br/>
+        <span style="font-weight: bold; font-size: 8pt;">TRN:</span> <span style="font-size:10pt; font-weight:normal;">${subsidiary.federalidnumber}</span>
+    </td>
+    <td class="logo-cell" align="right" valign="top">
+        <#if subsidiary.logo@url?length != 0>
+           <img src="${subsidiary.logo@url}" style="width: ${logoWidth}px; height: ${logoHeight}px; vertical-align: top; margin-top: -30px;" />
+        <#else>
+            <strong style="font-size: 14pt;">HEA ENERGY</strong>
+            <#assign remainingHeight = 253 />
+        </#if>
+    </td>
+</tr>
+      </table>
+        <table class="main-container">
+<#assign class = record.class?split(":")?last?trim />
+        
+        
+        <!-- Invoice Type Header -->
+        <tr>
+            <td colspan="2" class="invoice-type-header" align="center">${record.custbody_az_inv_service_type}</td>
+        </tr>
+        
+        <!-- Customer and Invoice Details Section -->
+        <tr>
+            <td class="customer-details">
+                <table style="width: 100%; border: none;">
+                    <tr>
+                        <td>
+                            <table style="width: 100%; border: none;">
+                                <tr><td><span class="detail-label"> Customer name: </span><span class="detail-value"> ${record.entity.altname}</span></td></tr>
+                                
+                                <tr><td class="detail-label">Customer address:</td></tr>
+                                <tr><td class="detail-value">${record.billaddress}</td></tr>
+                                <tr><td><span class="detail-label"> TRN: </span><span class="detail-value"> ${record.entity.vatregnumber} </span></td></tr>
+                                <tr><td><span class="detail-label"> Vessel: </span><span class="detail-value">${class!""}</span> </td></tr>
+                               
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td class="invoice-details">
+                <table style="width: 100%; border: none;">
+                    <tr>
+                        <td>
+                            <table style="width: 100%; border: none;">
+                                <tr><td><span class="detail-label"> Invoice Number: </span><span class="detail-value"> ${record.tranid} </span></td></tr>
+                                
+                                <tr><td><span class="detail-label"> Invoice Date: </span><span class="detail-value">${record.trandate?string("dd/MM/yyyy")}</span></td></tr>
+                                
+                                <tr><td><span class="detail-label"> Currency: </span><span class="detail-value"> ${record.currency} </span></td></tr>
+                                
+                                <tr><td><span class="detail-label"> Contract number: </span><span class="detail-value"> ${record.custbodycustbody_az_hea_contractsnumbe}</span></td></tr>
+                                
+                                <tr><td><span class="detail-label"> PO Reference: </span><span class="detail-value"> ${record.otherrefnum!""} </span></td></tr>
+                                
+                                <tr><td><span class="detail-label"> Terms of payment: </span><span class="detail-value"> ${record.terms} </span></td></tr>
+                                
+                                <tr><td><span class="detail-label"> Due Date: </span><span class="detail-value"> ${record.duedate?has_content?then(record.duedate?string("dd/MM/yyyy"), "")}
+ </span></td></tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+         </table>
+        <table style="padding-top: 10px;" >
+
+          
+                    <tr>
+                        <td class="line-items-header" style="width: 110px;">Nature of Service</td>
+                        <td class="line-items-header" style="width: 88px;">Period From</td>
+                        <td class="line-items-header" style="width: 75px;">Period To</td>
+                        <td class="line-items-header" style="width: 70px;">Rate</td>
+                        <td class="line-items-header" style="width: 75px;">Days/QTY</td>
+                        <td class="line-items-header" style="width: 100px;"  align="left" ><p style="text-align: left;">Amount Before VAT</p></td>
+                        <td class="line-items-header" style="width: 60px;"><P style="text-align: left;">VAT Rate</P></td>
+                        <td class="line-items-header" style="width: 69px;"  align="left"><P style="text-align: left;">VAT Amount</P></td>
+                        <td class="line-items-header" style="width: 100px;" align="left"><p style="text-align: left;">Amount After VAT </p></td>
+                    </tr>
+<#-- initialize totals -->
+<#assign totalAmountBeforeVat = 0>
+<#assign totalVatAmount = 0>
+<#assign totalAmountAfterVat = 0>
+
+                   <#list record.item as item>
+                    <#if item.item?has_content>
+                    <tr>
+                        <td class="line-items-row" style="text-align: left; padding-left: 5px;">
+                          <p  style="text-align: left"> ${item.description}</p>
+                           
+                        </td>
+                       <td class="line-items-row">${item.custcol_az_hea_inv_date_from}<br/><#if item.custcol_az_hea_invc_time_from?has_content>${item.custcol_az_hea_invc_time_from?time?string("HH:mm")}</#if></td>
+                  <td class="line-items-row">${item.custcol_az_hea_inv_date_to}<br/><#if item.custcol_az_hea_invc_time_to?has_content>${item.custcol_az_hea_invc_time_to?time?string("HH:mm")}</#if></td>
+                        <td class="line-items-row" >${item.rate?string["#,##0.00"]}</td>
+                        <td class="line-items-row" >${item.quantity}</td>
+                        <td class="line-items-row" >${item.amount?string["#,##0.00"]}</td>
+                        <td class="line-items-row" ><#if item.taxrate1?has_content>${item.taxrate1}</#if></td>
+                          <td class="line-items-row" ><#if item.tax1amt?has_content>${item.tax1amt?string["#,##0.00"]}</#if></td>
+
+                        <td class="line-items-row" >${item.grossamt?string["#,##0.00"]}</td>
+                    </tr>
+                          <#assign remainingHeight = remainingHeight - 20 />
+    <#assign totalAmountBeforeVat = totalAmountBeforeVat + (item.amount?replace("[^0-9.]", "", "r")?number) >
+    <#assign totalVatAmount = totalVatAmount + (item.tax1amt?replace("[^0-9.]", "", "r")?number) >
+    <#assign totalAmountAfterVat = totalAmountAfterVat + (item.grossamt?replace("[^0-9.]", "", "r")?number) >
+
+                    </#if>
+                    </#list>
+                    <tr>
+                  <td class="line-items-row"></td>
+                  <td class="line-items-row"></td>
+                        <td class="line-items-row" ></td>
+                        <td class="line-items-row" ><b>Total </b></td>
+                        <td class="line-items-row" > <b>${record.currency}</b></td>
+                        <td class="line-items-row" ><b>${record.subtotal?string["#,##0.00"]}</b></td>
+                        <td class="line-items-row" ></td>
+                        <td class="line-items-row" > <b>${record.taxtotal?string["#,##0.00"]}</b></td>
+                        <td class="line-items-row" ><b>${record.total?string["#,##0.00"]}</b></td>
+
+                    </tr>
+                    <tr>
+            <td colspan="9" class="amount-words-section">
+                (${record.currency}): *** Amount in words: ${record.custbody_az_hea_amoount_in_words!""}
+            </td>
+        </tr>
+        <tr style="border:none; padding-top: 10 px;">
+         
+              <td colspan="4" class="additional-info-section">
+                <strong>Additional Information:</strong><br/><br/>
+                              ${record.custbody_az_hea_add_info!""}
+
+            </td>
+          <#if (subsidiary.country == "AE") || (subsidiary.country == "United Arab Emirates") || (subsidiary.id == "56")>
+<td colspan="8" style="">
+    <#assign aedMultiplier = 3.6725 />
+    <#if record.currency == "AED">
+        <#assign aedMultiplier = 1 />
+    </#if>
+    <table width="100%">
+      <tr>
+        <td colspan="2" class="detail-label">
+            <#if record.currency == "AED">
+                Exchange Rate AED to AED @ 1.00
+            <#else>
+                NOTE: Exchange Rate USD to AED @ 3.6725
+            </#if>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2"></td>
+      </tr>
+      <tr>
+        <td class="detail-label">Total amount before VAT (AED) :</td>
+        <td> <p style="text-align:right;"> ${(record.subtotal * aedMultiplier)?string("#,##0.00")}</p> </td>
+      </tr>
+      <tr>
+        <td class="detail-label">VAT amount (AED) :</td>
+        <td> <p style="text-align:right;"> ${(record.taxtotal * aedMultiplier)?string("#,##0.00")}</p> </td>
+      </tr>
+      <tr>
+        <td class="detail-label">Total amount after VAT (AED) :</td>
+        <td> <p style="text-align:right;"> ${(record.total * aedMultiplier)?string("#,##0.00")}</p> </td>
+      </tr>
+    </table>
+</td>
+<#else>
+    <td colspan="8"></td>
+</#if>
+        </tr>
+        <tr>
+          <td colspan="4"> <table width="100%">
+            <tr> <td colspan="4" style="height:110px;"></td> </tr>
+           
+           
+             </table>  </td>              
+         <td colspan="8" style="padding-top: 70px; vertical-align: top;">
+      <table width="100%" align="right" style="border: 1px solid #000; border-collapse: collapse;">
+              <tr>
+                  <td class="payment-info-header"> Kindly remit the amount to :</td>
+                      </tr>
+                <tr>
+           <td class="payment-details" style="width: 100%;">
+                <table style="width: 100%; border: none;">
+                    <tr><td><span class="bank-label">Company Name: </span> <span class="bank-value">${subsidiary.name}</span></td></tr>
+                    <tr><td><span class="bank-label">Bank: </span> <span class="bank-value">${record.custbody_az_hea_invs_bank_acco.custrecord_az_hea_accnt_beneficiary_bank}</span></td></tr>
+                    <tr><td><span class="bank-label">Bank Address: </span> <span class="bank-value"></span></td></tr>
+                    <tr><td><span class="bank-label">IBAN no: </span> <span class="bank-value">${record.custbody_az_hea_iban!""}</span></td></tr>
+                    <tr><td><span class="bank-label">SWIFT no: </span> <span class="bank-value">${record.custbody_az_hea_swift!""}</span></td></tr>
+                    <tr><td><span class="bank-label">Currency: </span> <span class="bank-value">${record.currency}</span></td></tr>
+                </table>
+            </td> 
+                  
+        </tr></table>
+          </td>
+        </tr>
+        <!-- <tr>
+                <td colspan="4" class="additional-info-section">
+                    
+                </td>
+                <td colspan="8" class="additional-info-section">
+                  <table width="100%" style="margin-bottom:30pt;">
+                    <tr>
+                      <td style="text-align:left;" colspan="6"><strong> NOTE : Exchange Rate USD to AED @3.6725</strong></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:left;" colspan="6"><strong>  Total amount before VAT (AED):</strong> </td>
+                      <td> <p style="text-align:right;"> ${record.subtotal?string("###,###.##")}</p> </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:left;" colspan="6"> <strong>  VAT Amount (AED):</strong> </td>
+                      <td> <p style="text-align:right;"> ${record.taxtotal?string("###,###.##")}</p> </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:left;" colspan="6"> <strong>  Total Amount after VAT(AED):</strong></td>
+                      <td> <p style="text-align:right;">  ${record.total?string("###,###.##")}</p> </td>
+                    </tr>
+                  </table>
+                </td>
+        </tr>
+         -->
+        <tr>
+            <td colspan="4">
+              
+          <#assign footerPadTop = 150 />
+<#if subsidiary.id == "60">
+    <#assign footerPadTop = 100 />
+</#if>
+<table width="100%" style="padding-top: ${footerPadTop}px;">
+    <tr>
+       <td colspan="3" class="footer-company">
+    ${subsidiary.name}
+</td>
+    </tr>
+</table>
+            </td>
+        </tr>
+
+    </table>
+</body>
+</pdf>

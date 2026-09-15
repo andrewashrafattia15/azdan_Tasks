@@ -1,0 +1,259 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+	<link name="NotoSansArabic" type="font" subtype="opentype" src="${nsfont.NotoSansArabic_Regular}" src-bold="${nsfont.NotoSansArabic_Bold}" bytes="2" subset="false" />
+	<macrolist>
+		<macro id="nlheader">
+			<#-- QR code on the left, title block centered, tax registration number below -->
+			<table style="width: 100%;">
+				<tr>
+					<td style="width: 22%;" align="left" valign="top">
+						<#-- QR code placeholder — reserved for future implementation -->
+
+
+
+
+                          
+
+  <#if record.custbody_ino_einv_jo_resp_qr_code?length != 0>
+                  <table  style="width: 100%;">
+                    <tr>
+                      <td align="righ" style="margin-left:-18px;margin-top:-10px;"><barcode codetype="qrcode" showtext="true" height ="110" width="110" value="${record.custbody_ino_einv_jo_resp_qr_code}" /></td>
+                    </tr>
+                    </table>
+                </#if>
+
+
+
+
+                  
+
+
+                          
+					</td>
+					<td style="width: 56%;" align="center" valign="top">
+						<table style="width: 70%; border: 1px solid #000000;" align="center">
+							<tr>
+								<td align="center" style="padding: 6px;"><strong style="font-size: 13pt;">فاتورة مبيعات نقدية</strong></td>
+							</tr>
+							<tr>
+								<td align="center" style="padding: 6px; border-top: 1px solid #000000;"><strong style="font-size: 13pt;">${record.tranid}</strong></td>
+							</tr>
+						</table>
+						<table style="width: 45%; margin-top: 4pt; border: 1px solid #000000;" align="center">
+							<tr>
+								<td align="center" style="width: 55%; padding: 3px; font-size: 8pt;"><strong>${record.custbody_ino_einv_jo_sub_tin}</strong></td>
+								<td align="center" style="width: 45%; padding: 3px; font-size: 8pt; border-right: 1px solid #000000;"><strong>الرقم الضريبي</strong></td>
+							</tr>
+						</table>
+					</td>
+					<td style="width: 22%;"></td>
+				</tr>
+			</table>
+		</macro>
+		<macro id="nlfooter">
+			<table style="width: 100%; font-size: 7pt;">
+				<tr>
+					<td align="center"><pagenumber/> / <totalpages/></td>
+				</tr>
+			</table>
+		</macro>
+	</macrolist>
+	<style type="text/css">
+		* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+			font-family: NotoSansArabic, sans-serif;
+		</#if>
+		}
+		table {
+			font-size: 8pt;
+			table-layout: fixed;
+		}
+		th {
+			font-weight: bold;
+			font-size: 7pt;
+			vertical-align: middle;
+			padding: 4px 4px 3px;
+			color: #333333;
+		}
+		td {
+			padding: 3px 5px;
+		}
+		b, strong {
+			color: #333333;
+		}
+		hr {
+			width: 100%;
+			color: #c9c9c9;
+			background-color: #c9c9c9;
+			height: 1px;
+		}
+		body {
+			background-image: url("${record.subsidiary.custrecord_az_agri_background_url@url}");
+		}
+	</style>
+</head>
+<body header="nlheader" header-height="20%" footer="nlfooter" footer-height="20pt" padding="2in 0.4in 0.4in 0.4in" size="Letter">
+
+	<#-- Customer / movement header block: two separate side-by-side tables -->
+	<table style="width: 100%; margin-top: 5pt; font-size: 8pt;">
+		<tr>
+			<#-- LEFT: movement / warehouse / currency box (small): 5 rows @ ~16pt = 80pt -->
+			<td style="width: 30%; vertical-align: top; padding: 0 4pt 0 0;">
+				<table style="width: 100%; border: 1px solid #000000; font-size: 8pt;">
+					<tr>
+						<td align="center" style="width: 50%; height: 16pt;"><strong>${record.id}</strong></td>
+						<td align="center" style="width: 50%; height: 16pt;"><strong>رقم الحركة</strong></td>
+					</tr>
+					<tr>
+						<td align="center" style="height: 16pt;"><strong>${record.trandate}</strong></td>
+						<td align="center" style="height: 16pt;"><strong>التاريخ</strong></td>
+					</tr>
+					<tr>
+						<td align="center" style="height: 16pt;"><strong><#if record.item?has_content>${record.item[0].location!""}</#if></strong></td>
+						<td align="center" style="height: 16pt;"><strong>المستودع</strong></td>
+					</tr>
+					<tr>
+						<td align="center" style="height: 16pt;"><strong>${record.currencyname!record.currency!""}</strong></td>
+						<td align="center" style="height: 16pt;"><strong>العملة</strong></td>
+					</tr>
+					<tr>
+						<td align="center" style="height: 16pt;"><strong><#if record.exchangerate?has_content>${record.exchangerate?string?replace("[^0-9.\\-]", "", "r")}<#else></#if></strong></td>
+						<td align="center" style="height: 16pt;"><strong>سعر التحويل</strong></td>
+					</tr>
+				</table>
+			</td>
+			<#-- spacer -->
+			<td style="width: 2%;"></td>
+			<#-- RIGHT: customer / notes box (large): 3 rows totalling 80pt → 16 + 48 + 16 -->
+			<td style="width: 68%; vertical-align: top; padding: 0;">
+				<table style="width: 100%; border: 1px solid #000000; font-size: 8pt;">
+					<tr>
+						<td align="right" style="height: 16pt;"><strong>${record.entity.entityid}</strong></td>
+						<td align="center" style="width: 20%; height: 16pt;"><strong>رقم العميل</strong></td>
+					</tr>
+					<tr>
+						<td align="right" valign="middle" style="height: 48pt;">
+							<strong>${record.entity.companyname!record.entity.altname!record.entity}</strong>
+							<#if record.entity.altname?has_content && record.entity.companyname?has_content && record.entity.altname != record.entity.companyname>
+								<br /><strong>${record.entity.altname}</strong>
+							</#if>
+						</td>
+						<td align="center" valign="middle" style="height: 48pt;"><strong>إسم العميل</strong></td>
+					</tr>
+					<tr>
+						<td align="right" style="height: 16pt;"><strong>${record.memo!""}</strong></td>
+						<td align="center" style="height: 16pt;"><strong>ملاحظات</strong></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+
+	<#-- Items table -->
+	<table dir="rtl" style="width: 100%; border: 1px solid #000000; font-size: 7pt; margin-top: 8pt; direction: rtl;">
+		<tr>
+			<td align="center" style="width: 10%; border-right: 1px solid #000000;"><strong>رقم المادة</strong></td>
+			<td align="center" style="width: 20%; border-right: 1px solid #000000;"><strong>بيان المادة</strong></td>
+			<td align="center" style="width: 9%; border-right: 1px solid #000000;"><strong>رقم التشغيلة</strong></td>
+			<td align="center" style="width: 7%; border-right: 1px solid #000000;"><strong>الوحدة</strong></td>
+			<td align="center" style="width: 7%; border-right: 1px solid #000000;"><strong>الكمية</strong></td>
+			<td align="center" style="width: 9%; border-right: 1px solid #000000;"><strong>سعر الوحدة</strong></td>
+			<td align="center" style="width: 9%; border-right: 1px solid #000000;"><strong>إجمالي المبلغ</strong></td>
+			<td align="center" style="width: 6%; border-right: 1px solid #000000;"><strong>بونص</strong></td>
+			<td align="center" style="width: 7%; border-right: 1px solid #000000; font-size: 8px"><strong>نسبة الخصم</strong></td>
+			<td align="center" style="width: 7%; border-right: 1px solid #000000; font-size: 8px"><strong>نسبة الضريبة</strong></td>
+			<td align="center" style="width: 9%; border-right: 1px solid #000000;"><strong>صافي المبلغ</strong></td>
+		</tr>
+		<#if record.item?has_content>
+			<#list record.item as item>
+				<tr style="border-top: 1px solid #000000;">
+					<td align="right" style="border-right: 1px solid #000000;"><strong>${item.displayname!""}</strong></td>
+					<td align="center" style="border-right: 1px solid #000000;"><strong>${item.item}</strong></td>
+					<td align="center" style="border-right: 1px solid #000000;"><strong>${item.inventorydetail?split("(")[0]}</strong></td>
+					<td align="center" style="border-right: 1px solid #000000;"><strong>${item.units!""}</strong></td>
+					<td align="center" style="border-right: 1px solid #000000;"><strong>${item.quantity?string(",##0.00")}</strong></td>
+					<td align="center" style="border-right: 1px solid #000000;"><strong>${item.rate?string(",##0.000")}</strong></td>
+					<td align="center" style="border-right: 1px solid #000000;"><strong>${item.grossamt?string(",##0.00")}</strong></td>
+					<td align="center" style="border-right: 1px solid #000000;"><strong><#if (item.custcol_az_agri_bonus_qty!"")?string?trim?length gt 0>${item.custcol_az_agri_bonus_qty}<#else>0</#if></strong></td>
+					<td align="center" style="border-right: 1px solid #000000;"><strong><#if (item.custcol_az_agri_discount_rate!"")?string?trim?length gt 0>${item.custcol_az_agri_discount_rate}<#else>0.00</#if></strong></td>
+					<td align="center" style="border-right: 1px solid #000000;"><strong><#if (item.taxrate1!"")?string?trim?length gt 0>${item.taxrate1}<#else>0.00</#if></strong></td>
+					<td align="center" style="border-right: 1px solid #000000;"><strong>${item.amount?string(",##0.00")}</strong></td>
+				</tr>
+			</#list>
+		</#if>
+	</table>
+
+	<#-- Totals block + amount in words -->
+	<table style="width: 100%; font-size: 8pt; margin-top: 8pt; border: 1px solid #000000;">
+		<tr>
+			<td style="width: 30%; vertical-align: top; border-right: 1px solid #000000; padding: 4pt;">
+				<table style="width: 100%; font-size: 8pt;">
+					<tr>
+						<td align="right" style="padding: 1px 4px;"><strong>${record.subtotal?string(",##0.000")}</strong></td>
+						<td align="right" style="width: 50%; padding: 1px 4px;"><strong>اجمالي المبلغ</strong></td>
+					</tr>
+					<tr>
+						<td align="right" style="padding: 1px 4px;"><strong>${record.discounttotal?string(",##0.000")}</strong></td>
+						<td align="right" style="padding: 1px 4px;"><strong>اجمالي الخصم</strong></td>
+					</tr>
+					<tr>
+						<td align="right" style="padding: 1px 4px;"><strong>${record.taxtotal?string(",##0.000")}</strong></td>
+						<td align="right" style="padding: 1px 4px;"><strong>قيمة الضريبة</strong></td>
+					</tr>
+					<tr>
+						<td align="right" style="padding: 1px 4px;"><strong>${record.total?string(",##0.000")}</strong></td>
+						<td align="right" style="padding: 1px 4px;"><strong>صافي المبلغ</strong></td>
+					</tr>
+				</table>
+			</td>
+			<td style="width: 70%; vertical-align: middle; padding: 4pt;" align="right">
+				<strong style="font-size: 9pt;">${record.custbody_azs_amount_punct_ar!""}</strong>
+			</td>
+		</tr>
+	</table>
+
+	<#-- Salesperson / recipient signatures -->
+	<table style="width: 100%; font-size: 8pt; margin-top: 25pt;">
+		<tr>
+			<td align="right" style="width: 35%;"><strong>${record.salesrep.altname!record.salesrep!""}</strong></td>
+			<td style="width: 15%;"><strong> :إسم البائع</strong></td>
+			<td align="right" style="width: 35%;"></td>
+			<td style="width: 15%;"><strong> :إسم المستلم</strong></td>
+		</tr>
+	</table>
+
+	<table style="width: 100%; font-size: 8pt; margin-top: 25pt;">
+		<tr>
+			<td align="right" style="width: 35%;"></td>
+			<td style="width: 15%;"><strong> :توقيع البائع</strong></td>
+			<td align="right" style="width: 35%;"></td>
+			<td style="width: 15%;"><strong> :توقيع المستلم</strong></td>
+		</tr>
+	</table>
+
+</body>
+</pdf>
